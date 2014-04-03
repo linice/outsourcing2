@@ -1,0 +1,171 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<div id="left">
+	<form id="dynForm" name="dynForm" method="post" action="">
+	<div class="case_search">
+		<span class="search_t"><img src="/img/default/front/<?=$auth->locale?>/search_t.jpg" width="107" height="43" /></span>
+		<select name="range" id="range" class="search_sort_select">
+			<option value="case_id"><?=$this->tr("case_id")?></option>
+			<option value="case_name"><?=$this->tr("case_name")?></option>
+			<!--<option value="lp_id"><?=$this->tr("LPID")?></option>-->
+		</select>
+		<input type="text" id="casename" name="casename" class="myinput" />
+		<input alt="Search" type="image" id="btn_search" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" class="mybtn" />
+	</div>
+	<div class="c_case_search">
+		<!-- 请选择案件种类 -->
+		<h4 class="case_search_title"><?=$this->tr("please_choice_case_type")?></h4>
+		<div class="case_search_con">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+			<tr><td>
+				<input type="radio" name="casetype" value="cases_all" checked/>
+			 <?=$this->tr("cases_all")?></td>
+			<td>
+                <input type="radio" name="casetype" value="cases_new" />
+			 <?=$this->tr("cases_new")?></td>
+			<td>
+				<input type="radio" name="casetype" value="cases_recommend" />
+			 <?=$this->tr("cases_recommend")?></td></tr>
+		</table>
+		</div>
+		
+		<!-- 选择职种 -->
+		<h4 class="case_search_title"> <input type="checkbox" name="careersAll" /> <?=$this->tr("please_choice_careers")?></h4>
+		<div class="case_search_con">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+			<tr>
+			<?php $idx = 1; if (isset($this->careers)) : foreach ($this->careers as $careerName => $careerValue):?>
+				<td width="33%">
+          		<input type="checkbox" name="careers[]" value="<?=$careerName?>" class="careerslist"/>
+				<?=$careerValue?></td>
+	          	<?php if ($idx++%3 == 0) :?>
+	          		</tr><tr>
+				<?php endif;?>
+			<?php endforeach;endif;?>
+			</tr>
+		</table></div>
+		<div style="clear: both;"></div>
+		
+		<!-- 选择经验语言 -->
+		<div class="fl w01">
+		<h4 class="case_search_title"> <input type="checkbox" name="languagesAll" /> <?=$this->tr("please_choice_languages")?></h4>
+		<div class="case_search_con">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+			<tr>
+			<?php $idx = 1; if (!empty($this->languages)) : foreach ($this->languages as $languagesName => $languagesValue):?>
+				<td width="50%">
+          		<input type="checkbox" name="languages[]" value="<?=$languagesName?>" class="languageslist"/>
+	          	<?=$languagesValue?></td>
+	          	<?php if ($idx++%2 == 0) :?>
+	          		</tr><tr>
+	          	<?php endif;?>
+			<?php endforeach;endif;?>
+			</tr>
+		</table></div></div>
+		
+		<!-- 选择业务领域 -->
+		<div class="fr w02">
+		<h4 class="case_search_title"> <input type="checkbox" name="industriesAll" /> <?=$this->tr("please_choice_industries")?></h4>
+		<div class="case_search_con">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+			<tr>
+            <?php $idx = 1; if (isset($this->industries)) : foreach ($this->industries as $industriesName => $industriesValue):?>
+	          	<td width="50%">
+	          		<input type="checkbox" name="industries[]" value="<?=$industriesName?>" class="industrieslist"/>
+	          	<?=$industriesValue?></td>
+	          	<?php if ($idx++%2 == 0) :?>
+	          		</tr><tr>
+	          	<?php endif;?>
+			<?php endforeach;endif;?>
+			</tr>
+		</table></div></div>
+		<div style="clear: both;"></div>
+		
+		<!-- 选择勤务地 -->		
+		<h4 class="case_search_title"> <!-- <input type="checkbox" name="checkbox2" value="checkbox" /> --> <?=$this->tr("please_choice_workingplace")?></h4>
+		<div class="address_t">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+			<tr><td>
+				<input type="checkbox" name="japans" value="all" class="japan" />
+				<?=$this->tr("Japan")?>
+			</td></tr></table>
+		</div>
+		<div class="address_con">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+		  	<tr>
+			<?php $idx = 1; if (isset($this->japan)) : foreach ($this->japan as $name => $value):?>
+				<td width="20%">
+				<input type="checkbox" name="workplace[]" class="japanlist" value="<?=$name;?>" />
+				<?=$value?></td>
+	          	<?php if ($idx++%5 == 0) :?>
+	          		</tr>
+			<tr>
+				<?php endif;?>
+			<?php endforeach;endif;?>
+			</tr></table>
+		</div>
+		<div class="address_t">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+            <tr><td>
+            	<input type="checkbox" name="overseas" value="all" class="over" />
+              	<?=$this->tr("OVERSEA")?>
+			</td></tr></table>
+		</div>
+		<div class="address_con">
+			<table width="45%" border="0" cellpadding="0" cellspacing="0" class="tab_case_search">
+            <tr>
+			<?php $idx = 1; if (isset($this->oversea)) : foreach ($this->oversea as $name => $value):?>
+				<td>
+				<input type="checkbox" name="workplace[]" class="overlist" value="<?=$name;?>" />
+				<?=$value?></td>
+	          	<?php if ($idx++%5 == 0) :?>
+	          		</tr><tr>
+				<?php endif;?>
+			<?php endforeach;endif;?>
+			</tr></table>
+		</div>
+		<!-- <h4 class="case_search_title"> <input type="checkbox" name="checkbox2" value="checkbox" /> <?=$this->tr("case_startdate")?></h4>
+		<div class="case_search_con">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search">
+            <tr><td width="22%">
+                <input type="radio" name="radiobutton" value="1" checked/>
+				<?=$this->tr("case_current_date")?>
+			</td><td>
+                <input type="radio" name="radiobutton" value="2" />
+				<input class="Wdate" type="text" name="startDate" readonly> ～ <input class="Wdate" type="text" name="endDate" readonly></td>
+            </tr>
+          </table>
+		</div>
+		<h4 class="case_search_title"> <input type="checkbox" name="checkbox2" value="checkbox" /> <?=$this->tr("case_unit_price")?></h4>
+		<div class="case_search_con">
+			<input type="text" name="unitprice" class="price" " />
+			<?=$this->tr("unit_price_above")?>
+		</div>
+		<div class="case_search_lie">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search">
+            <tr><td>
+                <input type="checkbox" name="checkbox" value="checkbox" />
+ 				<?=$this->tr("interview_has_long")?>
+ 			</td></tr></table>
+		</div> -->
+		<div class="btn_search">
+			<input alt="Search" id="btn_search_advanced" src="/img/default/front/<?=$auth->locale?>/btn_search.jpg" type="image" width="191" height="38" border="0" />
+		</div>
+	</div></form>
+</div>
+	<div id="right">
+	<div class="marB" style="height:200px; background-color:#e9e9e9;"></div>
+	<div class="marB" style="height:200px; background-color:#e9e9e9;"></div>
+	<div class="marB" style="height:200px; background-color:#e9e9e9;"></div>
+	<div class="marB" style="height:200px; background-color:#e9e9e9;"></div>
+	<div style="height:160px; background-color:#e9e9e9;"></div>
+	</div>
+<div style="clear: both;"></div>
+</div>
+<script type="text/javascript">
+var orgSearchFields = <?=json_encode($this->orgSearchFields)?>
+</script>
+<script type="text/javascript" src="/js/default/front/case/case.js"></script>

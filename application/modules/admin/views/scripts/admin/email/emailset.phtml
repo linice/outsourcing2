@@ -1,0 +1,50 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top"><?=$this->tr('EMAIL_TPL_SET')?></h3>
+	<div id="tip_setEmailTpl" class="tip"></div>
+	<form id="form_setEmailTpl" name="form_setEmailTpl" method="post" action="">
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_msg">
+			<tr>
+				<th align="right" bgcolor="#FFFFFF">
+					<span style="color: red;">*</span>
+					<span id="label_name" class="label"><?=$this->tr('EMAIL_NAME')?></span>
+				</th>
+				<td bgcolor="#FFFFFF">
+					<input type="text" id="name" name="name" size="64" value="<?=$this->mailTpl['name']?>" style="height: 24px;" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF">
+					<span style="color: red;">*</span>
+					<span id="label_title" class="label"><?=$this->tr('EMAIL_TITLE')?></span>
+				</th>
+				<td bgcolor="#FFFFFF">
+					<input type="text" id="title" name="title" size="64" value="<?=$this->mailTpl['title']?>" style="height: 24px;" />
+				</td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF">
+					<span style="color: red;">*</span>
+					<span id="label_content" class="label"><?=$this->tr('EMAIL_CONTENT')?></span>
+				</th>
+				<td bgcolor="#FFFFFF">
+					<textarea id="content" name="content" class="mytextarea"><?=$this->mailTpl['content']?></textarea>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" id="etId" name="etId" value="<?=$this->etId?>" />
+	</form>
+
+	<div class="btn_center">
+		<a href="javascript:void(0);" id="btn_setEmailTpl">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" class="marR" />
+		</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var emailTpl = <?=$this->jsEmailTpl?>;
+</script>
+<script language="javascript" type="text/javascript" src="/js/admin/admin/email/emailset.js"></script>

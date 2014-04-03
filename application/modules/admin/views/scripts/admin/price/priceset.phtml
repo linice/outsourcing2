@@ -1,0 +1,35 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+	<h3 class="t_top">价格浮动</h3>	
+	<form id="form1" name="form1" method="post" action="">
+  	<div class="info_modify">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_info_modify">
+        <tr>
+          <td width="137" align="right">人员上限价格浮动：</td>
+          <td width="313"><input type="text" name="textfield" class="myinput" /></td>
+        </tr>
+        <tr>
+          <td align="right">人员下限价格浮动：</td>
+          <td><input type="text" name="textfield" class="myinput" /></td>
+        </tr>
+        <tr>
+          <td align="right">案件上限价格浮动：</td>
+          <td><input type="text" name="textfield" class="myinput" /></td>
+        </tr>
+		<tr>
+          <td align="right">案件下限价格浮动：</td>
+          <td><input type="text" name="textfield" class="myinput" /></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <img src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" class="marR" />
+          </td>
+        </tr>
+      </table>
+	</div>  
+</form>
+</div>

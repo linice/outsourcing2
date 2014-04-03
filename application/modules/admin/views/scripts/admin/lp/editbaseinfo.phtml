@@ -1,0 +1,65 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+	<h3 class="t_top"><span class="fr"><img src="/img/default/front/<?=$auth->locale?>/link_assistant.jpg" width="99" height="24" /></span>法人基本情报编辑</h3>
+	<div class="marB">
+	<form id="form1" name="form1" method="post" action="">
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_edit_case">
+      <tr>
+        <td width="41%" align="right" bgcolor="#FFFFFF"> <span class="fred">*</span> 公司名称：</td>
+        <td width="59%" bgcolor="#FFFFFF"><label><input name="textfield" type="text" class="myinput" size="40" /></label></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF">地址：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><input name="textfield" type="text" class="myinput" size="40" /></label></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF">网站：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><input name="textfield" type="text" class="myinput" size="40" /></label></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> 联系人：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><input type="text" name="textfield" class="myinput" /></label></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> 电话：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><input type="text" name="textfield" class="myinput" /></label></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> 邮箱：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><input type="text" name="textfield" class="myinput" /></label></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> 登陆密码：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><input type="text" name="textfield" class="myinput" /></label><span class="input_info_ok">此用户名可用</span>   </td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> 确认密码：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><input type="text" name="textfield" class="myinput" /></label><span class="input_info_error">此用户名可用</span></td>
+      </tr>
+	  <tr>
+        <td align="right" bgcolor="#FFFFFF">提案服务提供与否：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><select name="select" class="myselect"></select></label><span class="input_info_error">此用户名可用</span></td>
+      </tr>
+	  <tr>
+        <td align="right" bgcolor="#FFFFFF">服务月数：</td>
+        <td bgcolor="#FFFFFF" class="fblue"><label><select name="select" class="myselect"></select></label><span class="input_info_error">此用户名可用</span></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF">&nbsp;</td>
+        <td bgcolor="#FFFFFF" class="fred">提示:我们将会审核您的注册信息，并且用邮件通知您审核的结果</td>
+      </tr>
+    </table>
+	</form>
+	</div>	
+	<div class="btn_os">
+  <label>
+  <input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_qd.jpg" class="marR" />
+  </label>
+  <label>
+  <input type="image" name="imageField2" src="/img/default/front/<?=$auth->locale?>/btn_dis.jpg" />
+  </label>    
+</div>
+</div>

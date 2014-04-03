@@ -1,0 +1,73 @@
+<SCRIPT LANGUAGE="JavaScript">
+window.onload = function() {
+    doubleBgColor(document.getElementById("tab_list"),"#f3f3f3","#FFFFFF");
+	doubleBgColor(document.getElementById("tab_list_end"),"#f3f3f3","#FFFFFF");
+}
+
+function doubleBgColor(Table,Bg1,Bg2) {
+    for (var i=0;i<Table.rows.length;i++) Table.rows[i].bgColor=i%2?Bg2:Bg1;
+}
+</SCRIPT>
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<form id="form1" name="form1" method="post" action="">
+	<div id="tab1">
+	<ul>
+	<li><a href="/lp_caselist/applycaselist" target="_blank">应聘一览</a></li>
+	<li><a href="/lp_caselist/collectcaselist" target="_blank">募集一览</a></li>
+	<li class="now">应聘历史</li>
+	</ul>
+	</div>
+		<div class="case_search"><div class="search_left"><img src="/img/default/lp/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" /><select name="select" class="myselect">
+     <option>全部</option>
+   </select>
+   <label>
+   <input type="text" name="textfield" class="myinput" />
+   </label>
+   <label>
+   <input type="checkbox" name="checkbox" value="checkbox" />
+   应聘有
+   <input type="image" name="imageField4" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+   </label></div>
+  </div>
+  
+  <!--search end-->
+  
+  <!--search list-->
+  <div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_search_list">
+    <tr>
+      <th width="6%" align="center">操作</th>
+      <th width="9%" align="center">案件ID</th>
+      <th width="17%" align="center">案件名</th>
+      <th width="11%">应聘时间</th>
+      <th width="11%">开始时间</th>
+      <th width="6%" align="center">期间</th>
+      <th width="13%" align="center">勤务地</th>
+      <th width="10%" align="center">单价/月</th>
+      <th width="10%" align="center">案件状态</th>
+      <th width="7%" align="center"> 备考</th>
+      </tr>
+    <tr>
+      <td align="center"><label>
+      <input type="checkbox" name="checkbox" value="checkbox" />
+      </label></td>
+      <td align="center">0001</td>
+      <td align="center" class="case_name">JAVA人员募集</td>
+      <td align="center">2012-1-2</td>
+      <td align="center">2012-1-2</td>
+      <td align="center">3个月</td>
+      <td align="center">东京，木场</td>
+      <td align="center">40万</td>
+      <td align="center">入场决定</td>
+      <td align="center">&nbsp;</td>
+      </tr>
+  </table>
+</div>
+<div class="btn_os">  
+  <div class="page"><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+
+<!--search list end-->
+  </form>
+</div>

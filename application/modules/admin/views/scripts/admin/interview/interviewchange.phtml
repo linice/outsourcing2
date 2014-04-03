@@ -1,0 +1,94 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+<h3 class="t_top"><?=$this->tr("apply_mgt")?></h3>
+<!--start-->
+<div class="apply_detail">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><?=$this->case['viewers']?><?=$this->tr("unit_person")?></span><?=$this->case['name']?></h2>
+<ul class="case_lie02_time">
+	<li><?=$this->tr("case_release_date")?>：<?=substr($this->case["release_date"],0,10)?></li>
+	<li><?=$this->tr("case_timeliness")?>：<?=$this->case["timeliness"]?></li>
+	<li><?=$this->tr("case_lp_code")?>：<?=$this->case["lp_code"]?></li>
+	<li><?=$this->tr("case_lp_name")?>：<?=$this->case["lp_name"]?></li>
+</ul>
+<div class="case_lie02_con">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr valign="top">
+		<td>【<?=$this->tr("case_business_req")?>】</td><td colspan="3"><?=nl2br($this->case["business_req"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_technical_req")?>】</td><td colspan="3"><?=nl2br($this->case["technical_req"])?></td>
+	</tr><tr>
+		<td width="9%">【<?=$this->tr("case_jpl")?>】</td><td width="31%"><?=$this->case["jplValue"]?></td>
+		<td width="9%">【<?=$this->tr("case_interview")?>】</td><td width="51%"><?=$this->case["interviewerValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><?=$this->case["caseRangeValue"]?></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><?=$this->case["ageReqValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><?=$this->case["period"]?></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><?=$this->case["countryReqValue"]?> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><?=$this->case["delayValue"]?></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><?=$this->case["unitPriceValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><?=$this->case["workingPlaceValue"]?> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><?=$this->case["overtimePayValue"]?></td>
+	</tr>
+</table>
+</div></div>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="interview_info">
+	<tr>
+		<td width="24%" align="center"><?=$this->tr("linkman")?>：<label>
+			<input type="text" name="linkman" id="linkman" class="cancel_input" value='<?=$this->usr["lp_linkman"]?>'/>
+		</label></td>
+		<td width="24%"><?=$this->tr("telephone")?>：<label>
+			<input type="text" name="telephone" id="telephone" class="cancel_input" value='<?=$this->usr["tel"]?>'/>
+		</label></td>
+		<td width="52%"><?=$this->tr("interview_place")?>：<label>
+			<input type="text" name="interviewPlace" id="interviewPlace" class="cancel_input" value='<?=$this->usr["lp_address"]?>'/>
+		</label></td>
+	</tr>
+</table>
+<div class="judge_t">
+	<span class="fr"><label>
+		<input type="checkbox" name="chkAll" id="chkAll" value="checkbox" />
+	</label> <?=$this->tr("time_same_with_first")?></span>
+	<strong><?=$this->tr("interview_explain_info")?></strong>
+</div>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_judge">
+	<thead><tr>
+		<th width="55%" align="left"><?=$this->tr("base_info")?></th>
+		<th width="15%" style="text-align: center"><?=$this->tr("except_interview_time_1")?></th>
+		<th width="15%" style="text-align: center"><?=$this->tr("except_interview_time_2")?></th>
+		<th width="15%" style="text-align: center"><?=$this->tr("except_interview_time_3")?></th>
+	</tr></thead>
+	<tbody>
+		<?if (isset($this->usrInfoList)) : foreach ($this->usrInfoList as $usr) : ?>
+			<tr>
+			<td align="left"><?=$usr["baseinfo"]?></td>
+			<td align="center"><input class="Wdate" type="text" name="interviewTime1" value="<?=isset($usr['interviewTime1'])?$usr['interviewTime1']:''?>"></td>
+			<td align="center"><input class="Wdate" type="text" name="interviewTime2" value="<?=isset($usr['interviewTime2'])?$usr['interviewTime2']:''?>"></td>
+			<td align="center">
+				<input class="Wdate" type="text" name="interviewTime3"  value="<?=isset($usr['interviewTime3'])?$usr['interviewTime3']:''?>">
+				<input type="hidden" name="applyId" value="<?=$usr['apply_id']?>"/>
+			</td>
+			</tr>
+		<?endforeach;endif;?>
+	</tbody>
+</table>
+<div class="btn_os">
+	<input type="image" id="btn_confirm" src="/img/default/front/<?=$auth->locale?>/btn_qd.jpg" class="btn_marR" />
+</div>
+</div>
+
+<form id="dynForm" name="dynForm" method="post" action="" style="display: none;">
+<input type="text" name="linkman" class="cancel_input" />
+<input type="text" name="telephone" class="cancel_input" />
+<input type="text" name="interviewPlace" class="cancel_input" />
+<input id="usrInfoList" name="usrInfoList"/>
+<input id="usrList" name="usrList" value='<?=$this->usrList?>'/>
+<input type="hidden" id="case" name="case" value='<?=json_encode($this->case)?>'/>
+</form>
+<script src="/js/admin/admin/caseapply/interviewchange.js" type="text/javascript"></script>

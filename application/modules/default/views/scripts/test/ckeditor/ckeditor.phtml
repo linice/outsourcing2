@@ -1,0 +1,25 @@
+<!-- Ckeditor输入框 -->
+<div>
+	<textarea id="ta_test" rows="30" cols="80" ></textarea>
+	<p><button id="btn_test" type="button">提交</button></p>
+</div>
+
+<!-- Ckeditor结果展示 -->
+<div id="ckeditor_result"></div>
+
+
+<script src="/js/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+CKEDITOR.replace('ta_test');
+
+$('#btn_test').click(function(){
+	$('#ta_test').val(CKEDITOR.instances.ta_test.getData());
+	var result = $('#ta_test').val();
+	$('#ckeditor_result').html(result);
+});
+//-->
+</script>
+
+
+

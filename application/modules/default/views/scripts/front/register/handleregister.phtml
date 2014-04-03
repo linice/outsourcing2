@@ -1,0 +1,16 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<div class="register_successful">
+	<h3 class="register_successful_t">
+		<img src="/img/default/front/<?=$auth->locale?>/register_successful_t.gif" width="257" height="44" />
+	</h3>
+	<div class="register_successful_c">
+		<p>请到注册邮箱完成确认操作。</p>
+		<p><a href="/" target="_blank" class="aback">&lt;&lt;返回首页</a></p>
+	</div>
+</div>
+</div>
+

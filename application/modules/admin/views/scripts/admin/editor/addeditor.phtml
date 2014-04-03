@@ -1,0 +1,77 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top" id="title"><?=$this->title?></h3>
+	<div id="tip_edt" class="tip"></div>
+	<form id="form_edt" name="form_edt" method="post" action="">
+		<div class="info_modify">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_info_modify">
+				<tr>
+					<td align="right"><?=$this->tr('editor_name')?>：</td>
+					<td><input type="text" id="nickname" name="nickname" value="" class="myinput" /></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td align="right"><?=$this->tr('editor_password')?>：</td>
+					<td><input type="password" id="passwd" name="passwd" value="" class="myinput" /></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<a href='javascript:void(0)' id='btn_submit'>
+							<img src="/img/default/front/<?=$auth->locale?>/btn_keep.jpg" class="marR" />
+						</a>
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		<!-- Editor的编号 -->
+		<input id="code" name="code" type="hidden" value="" />
+	</form>
+</div>
+
+
+<script type="text/javascript">
+var edt = <?=$this->jsEdt?>;
+
+$(document).ready(function() {
+	//如果是修改Editor，则初始化
+	$(function() {
+		if (edt) {
+			$.each(edt, function(k, v) {
+				if (k != 'passwd') {
+					$('#' + k).val(v);
+				}
+			});
+		}
+	});
+
+
+	//保存Editor
+	$("#btn_submit").click(function() {
+		$.ajax({
+			url: '/admin/admin_editor/saveeditor',
+			type: 'post',
+			async: false,
+			dataType: 'json',
+			data: $('#form_edt').serializeArray(),
+			success: function(data, textStatus, jqXHR) {
+				if (data['err'] == 0) {
+					$('#tip_edt').html(data['msg']);
+					setTimeout("$('#tip_edt').html('')", 5000);
+				} else {
+					if (!!data["errField"] && $("#"+data["errField"]).length > 0) {
+						$("#"+data["errField"]).focus();
+						$("#"+data["errField"]).showError(data['msg']);
+					} else {
+						$('#tip_edt').html(data['msg']);
+					}
+				}
+			}
+		});
+	});
+}); //End: $(document).ready
+</script>

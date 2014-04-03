@@ -1,0 +1,136 @@
+<script type="text/javascript">
+var PROMPT = '<?=$this->tr('PROMPT')?>';
+var SURE = '<?=$this->tr('SURE')?>';
+var CONFIRM = '<?=$this->tr('CONFIRM')?>';
+var CANCEL = '<?=$this->tr('CANCEL')?>';
+var RECOMMEND = '<?=$this->tr('RECOMMEND')?>';
+var OP_SUCCESS = '<?=$this->tr('op_success')?>';
+var currUserCode = '<?=isset($auth->usr) ? $auth->usr["code"] : ""?>';
+var currUserRole = '<?=isset($auth->usr) ? $auth->usr["role_code"] : ""?>';
+
+var EVENT_TIME = "<?=$this->tr('EVENT_DATE_RANGE')?>";
+var EVENT_SUBJECT = "<?=$this->tr('EVENT_SUBJECT')?>";
+var EVENT_NUMBER = "<?=$this->tr('EVENT_NUMBER')?>";
+var EVENT_ORGANIZER = "<?=$this->tr('EVENT_ORGANIZER')?>";
+var EVENT_PLACE = "<?=$this->tr('EVENT_PLACE')?>";
+
+var PAGING_NEXT_PAGE = '<?=$this->tr('PAGING_NEXT_PAGE')?>';//下一页
+var PAGING_PREV_PAGE = '<?=$this->tr('PAGING_PREV_PAGE')?>';//上一页
+var PAGING_FIRST_PAGE = '<?=$this->tr('PAGING_FIRST_PAGE')?>';//首页
+var PAGING_LAST_PAGE = '<?=$this->tr('PAGING_LAST_PAGE')?>';//尾页
+var USR_CODE = '<?=$this->tr('USR_CODE')?>';//用户ID
+var USR_NAME = '<?=$this->tr('USR_NAME')?>';//用户名
+var SEX = '<?=$this->tr('SEX')?>';//性别
+var AGE = '<?=$this->tr('AGE')?>';//年龄
+var TEL_NUM = '<?=$this->tr('TEL_NUM')?>';//联系电话
+var UPDATE_DATE = '<?=$this->tr('UPDATE_DATE')?>';//更新日期
+var EMP_CODE = '<?=$this->tr('EMP_CODE')?>';//员工ID
+var EMP_NAME = '<?=$this->tr('EMP_NAME')?>';//员工姓名
+var LPID = '<?=$this->tr('LPID')?>';//法人ID
+var CASE_ID = '<?=$this->tr('case_id')?>';//案件ID
+var CASE_NAME = '<?=$this->tr('case_name')?>';//案件名
+var case_business_req = '<?=$this->tr('case_business_req')?>';//业务要求
+var case_technical_req = '<?=$this->tr('case_technical_req')?>';//技术要求
+var case_startdate = '<?=$this->tr('case_startdate')?>';//开始日期
+var case_end_range = '<?=$this->tr('case_end_range')?>';//期间
+var WORKPLACE = '<?=$this->tr('WORKPLACE')?>';//'勤务地'
+var PRICE_UNIT_MONTHLY = '<?=$this->tr('PRICE_UNIT_MONTHLY')?>';//'单价/月'
+var case_timeliness = '<?=$this->tr('case_timeliness')?>';//'时效性'
+var RELATION_OPERATE = '<?=$this->tr('RELATION_OPERATE')?>';//相关操作
+var TOGETHER = '<?=$this->tr('TOGETHER')?>';//总共
+var UNIT_ITEM = '<?=$this->tr('UNIT_ITEM')?>';//条
+var PAGING_PRE_PAGE = '<?=$this->tr('PAGING_PRE_PAGE')?>';//每页
+
+var ALERT_TO_MORE_INPUT = '<?=$this->tr('ALERT_TO_MORE_INPUT')?>';//太多了
+var COL_A_SORT_PRICE_YEN = '<?=$this->tr('COL_A_SORT_PRICE_YEN')?>';//排序价格
+var viewers = '<?=$this->tr('viewers')?>';//浏览人数
+var COUNT_APPLY_TOTAL = '<?=$this->tr('COUNT_APPLY_TOTAL')?>';//应聘总数
+var COUNT_NO_VOTE = '<?=$this->tr('COUNT_NO_VOTE')?>';//未处理数
+var COUNT_PROCESS = '<?=$this->tr('COUNT_PROCESS')?>';//处理中
+var COUNT_OK = '<?=$this->tr('COUNT_OK')?>';//面试合格
+var COUNT_LOSE = '<?=$this->tr('COUNT_LOSE')?>';//面试不合格
+var COUNT_INVITE = '<?=$this->tr('COUNT_INVITE')?>';//被募集数
+var COUNT_INTERVIEW_ADJUST = '<?=$this->tr('COUNT_INTERVIEW_ADJUST')?>';//面试调整
+
+var COL_A_COMPANY_ID = '<?=$this->tr('COL_A_COMPANY_ID')?>';//发布公司ID
+var COL_A_CASE_EDIT = '<?=$this->tr('COL_A_CASE_EDIT')?>';//案件编辑
+var COL_A_CASE_DELETE = '<?=$this->tr('COL_A_CASE_DELETE')?>';//删除
+var COL_A_APPLY_TIME = '<?=$this->tr('COL_A_APPLY_TIME')?>';//应聘时间
+var COL_A_CASE_STATE = '<?=$this->tr('COL_A_CASE_STATE')?>';//案件状态
+var COL_A_REMARK = '<?=$this->tr('COL_A_REMARK')?>';//案件状态
+var COL_A_INVITE_TIME = '<?=$this->tr('COL_A_INVITE_TIME')?>';//募集时间
+var COL_A_BASEINFO = '<?=$this->tr('baseinfo')?>';//基本信息
+var COL_A_STATUS = '<?=$this->tr('STATUS')?>';//状态
+var COL_A_REASON = '<?=$this->tr('reason')?>';//理由
+var COL_A_COMPANYNAME = '<?=$this->tr('lp_companyName')?>';//公司名称
+var COL_A_CREATE_TIME = '<?=$this->tr('COL_A_CREATE_TIME')?>';//创建时间
+var COL_A_LAST_LOGIN_TIME = '<?=$this->tr('COL_A_LAST_LOGIN_TIME')?>';//最后登陆时间
+var COL_A_HIGHLIGHT_DATE = '<?=$this->tr('COL_A_HIGHLIGHT_DATE')?>';//高亮日期
+var COL_A_APPLY_VIEW_DATE = '<?=$this->tr('COL_A_APPLY_VIEW_DATE')?>';//应聘查看日期
+var COL_A_BALANCE = '<?=$this->tr('COL_A_BALANCE')?>';//余额
+var COL_A_OPERATION = '<?=$this->tr('OPERATION')?>';//操作
+var COL_A_CASE_NUM = '<?=$this->tr('COL_A_CASE_NUM')?>';//发布案件
+var COL_A_EMP_NUM = '<?=$this->tr('COL_A_EMP_NUM')?>';//员工数
+var COL_A_VIEW = '<?=$this->tr('VIEW')?>';//查看
+var COL_A_ADMIT = '<?=$this->tr('ADMIT')?>';//承认
+var COL_A_STOP = '<?=$this->tr('STOP')?>';//停止
+
+var TITLE_CANCEL_INTEREST = '<?=$this->tr('TITLE_CANCEL_INTEREST')?>';//'取消关注案件',
+var TITLE_INTEREST = '<?=$this->tr('TITLE_INTEREST')?>';//'关注案件',
+var TITLE_INVITE = '<?=$this->tr('TITLE_INVITE')?>';//募集邀请
+var TITLE_APPLY_CASE = '<?=$this->tr('TITLE_APPLY_CASE')?>';//应聘案件
+var TITLE_APPLY = '<?=$this->tr('TITLE_APPLY')?>';//应聘
+var TITLE_LP_DELETE_CASE = '<?=$this->tr('TITLE_LP_DELETE_CASE')?>';//法人删除案件
+var TITLE_CANCEL_APPLY_CASE = '<?=$this->tr('TITLE_CANCEL_APPLY_CASE')?>';//取消应聘案件
+var TITLE_CANCEL_INVITE = '<?=$this->tr('TITLE_CANCEL_INVITE')?>';//募集拒绝
+var TITLE_PROPOSAL_EMP = '<?=$this->tr('TITLE_PROPOSAL_EMP')?>';//人员提案
+var TITLE_CLOSE_CASE = '<?=$this->tr('close_case')?>';//关闭案件
+
+var PLEASE_CHOISE_A_LP = '<?=$this->tr('PLEASE_CHOISE_A_LP')?>';//请选择法人
+var PLEASE_CHOISE_INVITE_CASE = '<?=$this->tr('PLEASE_CHOISE_INVITE_CASE')?>';//请选择需要进行邀请的案件!
+var PLEASE_CHOISE_INVITE_EMP = '<?=$this->tr('PLEASE_CHOISE_INVITE_EMP')?>';//请选择需要邀请的员工!
+var PLEASE_CHOISE_APPLY_CASE = '<?=$this->tr('PLEASE_CHOISE_APPLY_CASE')?>';//请选择需要应聘的案件!
+var PLEASE_CHOISE_CANCEL_APPLY_CASE = '<?=$this->tr('PLEASE_CHOISE_CANCEL_APPLY_CASE')?>';//请选择需要取消应聘的案件!
+var PLEASE_CHOISE_CANCEL_APPLY_EMP = '<?=$this->tr('PLEASE_CHOISE_CANCEL_APPLY_EMP')?>';//请选择需要取消应聘的人员!
+var PLEASE_CHOISE_CANCEL_INVITE_CASE = '<?=$this->tr('PLEASE_CHOISE_CANCEL_INVITE_CASE')?>';//请选择需要募集拒绝的案件!
+var PLEASE_CHOISE_PROPOSAL_EMP = '<?=$this->tr('PLEASE_CHOISE_PROPOSAL_EMP')?>';//请选择需要提案的人员!
+var PLEASE_CHOISE_ADJUST_EMP = '<?=$this->tr('PLEASE_CHOISE_ADJUST_EMP')?>';//请选择需要面试调整的人员!
+var PLEASE_CHOISE_INTERVIEW_EMP = '<?=$this->tr('PLEASE_CHOISE_INTERVIEW_EMP')?>';//请选择需要通知面试结果的人员!
+var PLEASE_CHOISE_INTERVIEWEDIT_EMP = '<?=$this->tr('PLEASE_CHOISE_INTERVIEWEDIT_EMP')?>';//请选择需要进行面试情报编辑的人员!
+var case_delete_selected_null = '<?=$this->tr('case_delete_selected_null')?>';//请选择需要删除的案件!
+var cancel_attention_selected_null = '<?=$this->tr('cancel_attention_selected_null')?>';//请选择需要取消关注的案件!
+var attention_selected_null = '<?=$this->tr('attention_selected_null')?>';//请选择需要关注的案件!
+var case_close_selected_null = '<?=$this->tr('case_close_selected_null')?>';//请选择需要关闭的案件!
+var PLEASE_CHOISE_APPLY_EMP = '<?=$this->tr('PLEASE_CHOISE_APPLY_EMP')?>';//请选择需要应聘的员工!
+var PLEASE_CHOISE_DELETE_EVENT = '<?=$this->tr('PLEASE_CHOISE_DELETE_EVENT')?>';//请选择需要删除的活动!
+
+var SURE_APPLY_CHOOSE_CASE = '<?=$this->tr('SURE_APPLY_CHOOSE_CASE')?>';//确定要应聘以下案件?
+var SURE_CANCEL_APPLY_CHOOSE_CASE = '<?=$this->tr('SURE_CANCEL_APPLY_CHOOSE_CASE')?>';//确定要取消应聘以下案件?
+var SURE_CANCEL_INVITE_CHOOSE_CASE = '<?=$this->tr('SURE_CANCEL_INVITE_CHOOSE_CASE')?>';//确定要募集拒绝以下案件?
+var SURE_PROPOSAL_CHOOSE_EMP = '<?=$this->tr('SURE_PROPOSAL_CHOOSE_EMP')?>';//确定对选中人员进行提案?
+var SURE_DELETE_CHOOSE_CASE = '<?=$this->tr('SURE_DELETE_CHOOSE_CASE')?>';//确定删除以下案件
+var SURE_CHOISE_INVITE_CASE = '<?=$this->tr('SURE_CHOISE_INVITE_CASE')?>';//确定对选中的案件进行邀请?
+var SURE_CANCEL_INTEREST_CHOOSE_CASE = '<?=$this->tr('SURE_CANCEL_INTEREST_CHOOSE_CASE')?>';//确定要取消关注以下案件?
+var SURE_INTEREST_CHOOSE_CASE = '<?=$this->tr('SURE_INTEREST_CHOOSE_CASE')?>';//确定要关注以下案件?
+var SURE_CHOISE_APPLE_CASE = '<?=$this->tr('SURE_CHOISE_APPLE_CASE')?>';//确定对选中的案件进行应聘?
+var SURE_CLOSE_CHOOSE_CASE = '<?=$this->tr('SURE_CLOSE_CHOOSE_CASE')?>';//确定要关闭以下案件?
+var SURE_CHOISE_INVITE_EMP = '<?=$this->tr('SURE_CHOISE_INVITE_EMP')?>';//确定邀请选中的员工?
+
+var interview_talent_status_error = '<?=$this->tr('interview_talent_status_error')?>';//只能选择未处理人员进行面试调整!
+var interviewresult_talent_status_error = '<?=$this->tr('interviewresult_talent_status_error')?>';//只能选择调整中人员进行面试结果通知!
+var interviewedit_talent_status_error = '<?=$this->tr('interviewedit_talent_status_error')?>';//只能选择调整中人员进行面试信息调整!
+var cancel_talent_has_result_error = '<?=$this->tr('cancel_talent_has_result_error')?>';//不能选择取消&不合格人员进行应聘取消操作!
+var cancel_talent_is_proccess_error = '<?=$this->tr('cancel_talent_is_proccess_error')?>';//不能选择处理中人员进行应聘取消操作!
+
+var CONTACT_IS_REQUIRED = '<?=$this->tr('CONTACT_IS_REQUIRED')?>';//联系人不能为空!
+var PHONE_IS_REQUIRED = '<?=$this->tr('PHONE_IS_REQUIRED')?>';//联系电话不能为空!
+var INTERVIEWPLACE_IS_REQUIRED = '<?=$this->tr('INTERVIEWPLACE_IS_REQUIRED')?>';//面试地点不能为空!
+var EXPECT_INTERVIEW_IS_REQUIRED = '<?=$this->tr('EXPECT_INTERVIEW_IS_REQUIRED')?>';//希望面试时间不能为空!
+var ADMISSION_TIME_IS_REQUIRED = '<?=$this->tr('ADMISSION_TIME_IS_REQUIRED')?>';//入场时间不能为空!
+var ERROR_CHOOSE_INTEREST_CASE = '<?=$this->tr('ERROR_CHOOSE_INTEREST_CASE')?>';//请选择已关注的案件进行取消关注操作!
+var ERROR_CHOOSE_UNINTEREST_CASE = '<?=$this->tr('ERROR_CHOOSE_UNINTEREST_CASE')?>';//请选择未关注的案件进行案件关注操作!
+var ERROR_CHOOSE_UNCLOSED_CASE = '<?=$this->tr('ERROR_CHOOSE_UNCLOSED_CASE')?>';//请选择未关闭的案件进行关闭操作!
+var ERROR_CREATE_CASE_RANGE = '<?=$this->tr('ERROR_CREATE_CASE_RANGE')?>';//
+</script>
+<?php 
+$auth = new Zend_Session_Namespace('AUTH');

@@ -1,0 +1,71 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<!-- tip -->
+	<div id="tip_msg" class="tip"></div>
+	<div id="tabs">
+		<ul>
+			<li><a href="#tab_msgRecv">收件箱</a></li>
+			<li><a href="#tab_msgSend">发件箱</a></li>
+		</ul>
+		
+		<!-- 收到的消息列表 -->
+		<div id="tab_msgRecv">
+			<h3 class="notice_t">
+				<span></span>
+			</h3>
+			
+			<div id="msgList"></div>
+			
+			<div style="margin-top: 20px; text-align: center;">
+				<a href="javascript:void(0);" id="btn_delMsg">
+					<img src="/img/default/front/<?=$auth->locale?>/btn_msg_del.jpg" width="48" height="25" />
+				</a>
+			</div>
+		</div>
+		
+		<!-- 发送的消息列表 -->
+		<div id="tab_msgSend">
+			<h3 class="notice_t">
+				<span id="msgBox" style="color: red; margin: 0 30px 0 0;"><?=$this->tr('HAVE_SENT')?></span>
+				<span style="margin: 0 20px 0 0;">
+					<a href="javascript:void(0);" id="btn_sent"><?=$this->tr('HAVE_SENT')?></a>
+				</span>
+				<span>
+					<a href="javascript:void(0);" id="btn_draft"><?=$this->tr('DRAFT_BOX')?></a>
+				</span>
+			</h3>
+		
+			<div id="msgSendList"></div>
+			
+			<div style="margin-top: 20px; text-align: center;">
+				<a href="javascript:void(0);" id="btn_delMsgSend">
+					<img src="/img/default/front/<?=$auth->locale?>/btn_msg_del.jpg" width="48" height="25" />
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+	var SENDER = '<?=$this->tr('SENDER')?>';
+	var RECEIVE_TIME = '<?=$this->tr('RECEIVE_TIME')?>';
+	var HAVE_SENT = '<?=$this->tr('HAVE_SENT')?>';
+	var DRAFT_BOX = '<?=$this->tr('DRAFT_BOX')?>';
+	var TITLE = '<?=$this->tr('TITLE')?>';
+	var SEND_TIME = '<?=$this->tr('SEND_TIME')?>';
+	var SAVE_TIME = '<?=$this->tr('SAVE_TIME')?>';
+	var LP = '<?=$this->tr('LP')?>';
+	var MEMBER = '<?=$this->tr('MEMBER')?>';
+	var ASSIST = '<?=$this->tr('ASSIST')?>';
+	var RECVER = '<?=$this->tr('RECVER')?>';
+	var Y = '<?=$this->tr('Y')?>';
+	var N = '<?=$this->tr('N')?>';
+	var CONFIRM_DEL = '<?=$this->tr('CONFIRM_DEL')?>';
+	var tr = {'LP': LP, 'MEMBER': MEMBER, 'ASSIST': ASSIST};
+</script>
+<script src="/js/admin/msg/msglist.js" type="text/javascript"></script>

@@ -1,0 +1,96 @@
+<div class="resume_t"><?//=$this->tr('PRJ_EXPERIENCE')?></div>
+<div class="resume_base_info">
+  <table id="tbl_prj" width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_resume03" align="center">
+    <tr>
+      <td width="35" rowspan="2" align="center" bgcolor="#ccffff">&nbsp;<?=$this->tr('NUM')?></td>
+      <td width="81" rowspan="2" align="center" bgcolor="#ccffff">&nbsp;<?=$this->tr('TIME_PERIOD')?></td>
+      <td width="430" rowspan="2" align="center" bgcolor="#ccffff">&nbsp;<?=$this->tr('BIZ_CONTENT')?></td>
+      <td width="89" rowspan="2" align="center" bgcolor="#ccffff">&nbsp;<?=$this->tr('MACHINE_OS')?></td>
+      <td width="87" rowspan="2" align="center" bgcolor="#ccffff">&nbsp;<?=$this->tr('LANG_DB')?></td>
+      <td width="70" rowspan="2" align="center" bgcolor="#ccffff">&nbsp;<?=$this->tr('POSITION')?></td>
+      <td colspan="12" align="center" bgcolor="#ccffff">&nbsp;<?=$this->tr('JOB_RANGE')?></td>
+    </tr>
+    <tr>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_MGT')?></td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_BIZ_ANALY')?></td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_CMPNT_DEF')?></td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_PRELIMINARY_DESIGN')?></td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_DB_DESIGN')?>
+      </td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_DETAIL_DESIGN')?>
+      </td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_CODING')?>
+      </td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_UNIT_TEST')?>
+      </td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_MODULE_TEST')?>
+      </td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_INTEGRATION_TEST')?>
+      </td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_ADVISORY')?></td>
+      <td width="20" align="center" valign="top" bgcolor="#ccffff" class="w20" style="padding-top:5px;"><?=$this->tr('SEG_MAINTENANCE')?>
+      </td>
+    </tr>
+    <?php
+    	$i = 0; 
+    	foreach ($this->resumePrjs as $resumePrj):?>
+    <tr>
+      <td height="80" align="center" ><?=++$i?></td>
+      <td align="center" >
+	  <p id="prjDateBegin"><?=$resumePrj['date_begin']?></p>
+	  <p align="center">～</p>
+	  <p id="prjDateEnd"><?=$resumePrj['date_end']?></p>
+	  <p class="day_num"><?=$this->tr('TOGETHER')?><span id="prjMonthCnt" style="color: red;"></span><?=$this->tr('GE')?><?=$this->tr('MONTH')?></p>
+	  </td>
+      <td align="left" >
+      	<?=$resumePrj['content']?>
+      </td>
+      <td align="center" >
+	    <?=$resumePrj['machine_os']?>
+	  </td>
+      <td align="center" >
+	    <?=$resumePrj['lang_db']?>
+	  </td>
+      <td >
+		<?=$resumePrj['pos']?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_mgt'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_biz_analy'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_cmpnt_def'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_preliminary_design'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_db_design'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_detail_design'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_coding'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_unit_test'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_module_test'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_integration_test'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_advisory'] == 'Y') ? '●' : ''?>
+	  </td>
+      <td align="center" valign="middle" >
+      	<?=($resumePrj['seg_maintaince'] == 'Y') ? '●' : ''?>
+	  </td>
+    </tr>
+    <?php endforeach;?>
+  </table>
+</div>

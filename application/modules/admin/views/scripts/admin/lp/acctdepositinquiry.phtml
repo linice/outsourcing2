@@ -1,0 +1,148 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+	<h3 class="t_top">入金查询界面</h3>
+	<div class="top_search_nobg">
+	<form id="form2" name="form2" method="post" action="">
+	<ul>
+	<li>区间：</li>
+	<li><label><input type="text" name="textfield" class="myinput" /></label></li>
+	<li> ～</li>
+	<li><label><input type="text" name="textfield" class="myinput" /></label></li>
+	<li>服务：</li>
+	<li><label><select name="select" class="myselect">
+	  <option>用户信息查看服务</option>
+	  <option>点数购买</option>
+	</select></label></li>
+	<li><label><input type="image" name="imageField3" src="/img/default/front/<?=$auth->locale?>/btn_cx.gif" /></label></li>
+	<li><img src="/img/default/front/<?=$auth->locale?>/btn_rujin.jpg" width="84" height="26" /></li>
+	</ul>
+	</form>
+	<div class="floatdiv" id="rujin">
+  <form id="form1" name="form1" method="post" action="">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_rujin">
+      <tr>
+        <td width="34%" align="right">入金日期：</td>
+        <td width="66%" align="left"><label><input type="text" name="textfield2" class="myinput" /></label></td>
+      </tr>
+      <tr>
+        <td align="right">入金金额：</td>
+        <td align="left"><label><input type="text" name="textfield2" class="myinput" /></label></td>
+      </tr>
+      <tr>
+        <td align="right">用途：</td>
+        <td align="left"><label>
+          <select name="select2" class="myselect">
+          </select>
+        </label></td>
+      </tr>
+      <tr>
+        <td align="right">服务生效日期：</td>
+        <td align="left"><input type="text" class="Wdate" onClick="WdatePicker()" value="2012-12-06" ></td>
+      </tr>
+      <tr>
+        <td align="right">服务截止日期：</td>
+        <td align="left"><input type="text" class="Wdate" onClick="WdatePicker()" value="2012-12-06" ></td>
+      </tr>
+      <tr>
+        <td align="right">购买点数：</td>
+        <td align="left"><label><input type="text" name="textfield2" class="myinput" /></label></td>
+      </tr>
+      <tr>
+        <td align="right">&nbsp;</td>
+        <td align="left"><label><input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_keep.jpg" class="marR" /></label><label><input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_dis.jpg" /></label></td>
+      </tr>
+    </table>
+	</form>
+  </div>
+  </div>
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_list">
+    <tr>
+      <th width="6%" align="center">日期</th>
+      <th width="10%" align="center">入金金额</th>
+      <th width="8%" align="left">用途</th>
+      <th width="7%">服务生效日期</th>
+      <th width="10%">服务截至日期</th>
+      <th width="8%">购买点数</th>
+      <th width="10%">操作</th>
+    </tr>
+    <tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">用户信息查看服务</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+	<tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">点数购买</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+	<tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">用户信息查看服务</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+	<tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">点数购买</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+	<tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">用户信息查看服务</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+	<tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">点数购买</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+	<tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">用户信息查看服务</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+	<tr>
+      <td align="center">2011/1/1</td>
+      <td align="center"> 30000 </td>
+      <td align="left">点数购买</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/12/2</td>
+      <td align="center">300</td>
+      <td align="center"><a href="#" target="_blank">修改</a> | <a href="#" target="_blank">删除</a></td>
+    </tr>
+  </table>
+  <div class="btn_os">
+<div class="page"><span class="page_num">总共 880条记录   2/20</span><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+</div>

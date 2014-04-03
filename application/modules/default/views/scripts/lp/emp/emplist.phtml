@@ -1,0 +1,135 @@
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml'; ?>
+	<div id="tablist1">
+		<div class="case_search">
+			<div class="search_left" style="padding:10px 0 0 0;">
+				<span style="float: left;">
+					<img src="/img/default/lp/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" />
+				</span>
+				<span style="float: left; padding:6px 3px;">
+					<select id="searchKey" name="searchKey" style="width:128px; height:24px;">
+						<option value="talent_code"><?=$this->tr("EMP_CODE")?></option>
+						<option value="fullname"><?=$this->tr("EMP_NAME")?></option>
+					</select>
+				</span>
+				<span style="float: left; padding:0 3px;">
+					<input type="text" id="searchVal" name="searchVal" class="myinput" value="" style="height: 24px;" />
+				</span>
+				<span style="float: left; padding:0 3px;">
+					<input type="checkbox" name="hasApply" value="Y" /> <?=$this->tr("interview_has")?>
+				</span>
+				<span style="float: left; padding:3px 3px;">
+					<a href="javascript:void(0);" id="searchBtn" style="margin-top: 20px;">
+						<img alt="Search" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+					</a>
+				</span>
+			</div>
+			<div class="search_right">
+				<a href="javascript:void(0);" id="cases_expend">
+				<span class="case_lie_list"><?=$this->tr("EXPAND_ALL")?></span></a>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	
+	<div id="empList"></div>
+	
+	<div class="btn_os">
+		<a href="javascript:void(0);" id="btn_proposal"> 
+			<img alt="" src="/img/default/front/<?=$auth->locale?>/btn_tian.jpg" class="btn_marR" /> 
+		</a> <a href="javascript:void(0);" id="btn_delEmps"> 
+			<img alt="" src="/img/default/front/<?=$auth->locale?>/btn_select_del.jpg" /> 
+		</a>
+	</div>
+	
+	<!-- 隐藏信息 -->
+	<input id="lpCode" type="hidden" value="<?=$this->lpCode?>" />
+</div><!-- <div id="wraper"> -->
+
+
+<form id="dynForm" style="display: none" method="post">
+	<input name="code" /> 
+	<input name="ids" />
+</form>
+
+
+<!-- 员工详情 -->
+<div id="empDetail" style="display: none;">
+	<div class="search_result_lie02">
+		<ul class="case_lie02_time">
+			<li><?=$this->tr('USR_NAME')?>：<span class="fblue" id='fullname'></span></li>
+			<li><?=$this->tr('SEX__')?>：<span class="fblue" id='tr_sex'></span></li>
+			<li><?=$this->tr('AGE')?>：<span class="fblue" id='age'></span></li>
+			<li><?=$this->tr('CONTACT_WAY')?>：<span class="fblue" id='tel'></span></li>
+			<li><?=$this->tr('UPDATE_DATE')?>：<span class="fblue" id='update_date'></span></li>
+		</ul>
+		<div class="case_lie02_con">
+			<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_case">
+				<tr>
+					<td width="36%">
+						<strong><?=$this->tr('EXPERIENCE_AND_JP_EXPERIENCE')?>：</strong>
+						<?=$this->tr('PREFIX_NUM')?><span id="experience_age"></span><?=$this->tr('YEAR')?>
+						(<?=$this->tr('PREFIX_NUM')?><span id="ja_experience_age"></span><? echo $this->tr('YEAR') ,  ' ' , $this->tr('JP')?>)
+					</td>
+					<td width="28%"><strong><?=$this->tr('BIZ')?>：</strong><span id='biz'></span></td>
+					<td width="36%"><strong><?=$this->tr('SKILL')?>：</strong><span id='skill'></span></td>
+				</tr>
+				<tr>
+					<td><strong><?=$this->tr('JPL')?>：</strong><span id='ja_ability'></span></td>
+					<td><strong><?=$this->tr('able_work_status')?>：</strong>
+						<span id='adjust_able_work_date'></span>
+					</td>
+					<td><strong><?=$this->tr('ACCEPT_UNIT_PRICE_RANGE')?>：</strong>
+						<span id="salary_min"></span> ~ <span id="salary_exp"></span>
+						<? echo $this->tr('TEN_THOUSAND'), $this->tr('YEN')?>/<? echo $this->tr('MONTH')?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"><strong><?=$this->tr('REMARK')?>：</strong><span id=remark_lp></span></td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<a href="javascript:void(0);" id="btn_preview">
+							<img src="/img/default/lp/<?=$auth->locale?>/btn_preview.jpg" width="80" height="30" class="marR" />
+						</a>
+						<a href="javascript:void(0);" id="btn_edit">
+							<img src="/img/default/lp/<?=$auth->locale?>/btn_edit.jpg" width="80" height="30" class="marR" />
+						</a>
+						<a href="javascript:void(0);" id="btn_del">
+							<img  src="/img/default/lp/<?=$auth->locale?>/btn_del01.jpg" width="80" height="30" class="marR" />
+						</a>
+						<a href="javascript:void(0);" id="btn_viewApply">
+							<img  src="/img/default/lp/<?=$auth->locale?>/btn_look.jpg" width="110" height="30" />
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var EMP_CODE  = "<?=$this->tr ( 'EMP_CODE' )?>";
+	var EMP_NAME  = "<?=$this->tr ( 'EMP_NAME' )?>";
+	var SEX  = "<?=$this->tr ( 'SEX' )?>";
+	var AGE  = "<?=$this->tr ( 'AGE' )?>";
+	var TEL  = "<?=$this->tr ( 'TEL' )?>";
+	var UPDATE_DATE  = "<?=$this->tr ( 'UPDATE_DATE' )?>";
+	
+	var YEAR = "<?=$this->tr ( 'YEAR' )?>";
+	var JP = "<?=$this->tr ( 'JP' )?>";
+	var EXPERIENCE_AND_JP_EXPERIENCE = "<?=$this->tr ( 'EXPERIENCE_AND_JP_EXPERIENCE' )?>";
+	var BIZ = "<?=$this->tr ( 'BIZ' )?>";
+	var SKILL = "<?=$this->tr ( 'SKILL' )?>";
+	var JAPANESE = "<?=$this->tr ( 'JAPANESE' )?>";
+	var ABLE_WORK_DATE = "<?=$this->tr ( 'ABLE_WORK_DATE' )?>";
+	var ACCEPT_UNIT_PRICE_RANGE = "<?=$this->tr ( 'ACCEPT_UNIT_PRICE_RANGE' )?>";
+	var REMARK = "<?=$this->tr ( 'REMARK' )?>";
+	
+	var PLEASE_SELECT_ROW = "<?=$this->tr ( 'PLEASE_SELECT_ROW' )?>";
+	var CONFIRM_DEL = "<?=$this->tr ( 'CONFIRM_DEL' )?>";
+</script>
+<script src="/js/default/lp/emp/emplist.js" type="text/javascript"></script>
+

@@ -1,0 +1,61 @@
+<div>
+	<div><input id="dt" type="text" value="" /></div>
+	<div><button id="btn_del" type="button">delete</button></div>
+	<div><button id="btn_test" type="button">test</button></div>
+</div>
+
+
+
+<script type="text/javascript">
+var today = new Date();
+var yearEnd = today.getFullYear();
+var yearBegin = yearEnd - 100;
+
+
+$(document).ready(function(){
+	/**
+	 *日期时间选择
+	 */
+	$('#dt').datetimepicker({
+		changeYear: true,
+		changeMonth: true,
+		dateFormat: 'yy-mm-dd',
+		yearRange: yearBegin + ':' + yearEnd
+	});
+
+
+	/**
+	 * 弹出确认框
+	 */
+	 $('#btn_del').click(function(){
+		var result = $.ligerDialog.confirm('Are you sure?');
+//		if (result == true) {
+//			alert('sure');
+//		} else {
+//			alert('Oh, no.');
+//		}
+		console.log(result);
+	 });
+	
+
+	/**
+	 * 测试按钮
+	 */
+	$('#btn_test').click(function(){
+		var dateBegin = '2011-10-14';
+//		var dateEnd = '2012-09-14';
+		var dateEnd = '2011-10-14';
+		var monthCnt = calcMonthCnt(dateBegin, dateEnd);
+
+		console.log(monthCnt);
+	});
+	
+}); //$(document).ready
+
+</script>
+
+
+
+
+
+

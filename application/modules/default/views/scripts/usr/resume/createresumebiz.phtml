@@ -1,0 +1,288 @@
+<form id="form_resumeBiz" name="form_resumeBiz" method="post" action="">
+ <div class="resume_t"><?=$this->tr('BIZ_EXPERIENCE')?></div>
+<div class="resume_base_info">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#000000" class="tab_resume">
+    <tr>
+      <th width="7%" align="center" bgcolor="#d9ffff"><?=$this->tr('BIZ_YEARS')?></th>
+      <td colspan="10" style="background-color: white; text-align: center;"><?=$this->tr('SOFTWARE_RELATIONAL_BIZ')?>
+      	（<?=$this->tr('BIZ_LEVEL_A')?>：<?=$this->tr('DIRECT')?>　　<?=$this->tr('BIZ_LEVEL_B')?>：<?=$this->tr('PROFICIENT')?>　　
+      		<?=$this->tr('BIZ_LEVEL_C')?>：<?=$this->tr('INDICATE')?>　　<?=$this->tr('BIZ_LEVEL_D')?>：<?=$this->tr('STUDYING')?>）</td>
+	</tr>
+    <tr>
+      <th rowspan="2" align="center" bgcolor="#d9ffff">
+      	<span id="label_os"><?=$this->tr('OS')?></span>
+      </th>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86"><?=$this->tr('WIN_NT_2K')?></td>
+      <td width="10%" align="center" bgcolor="#d9ffff" class="w86"><?=$this->tr('WIN_XP')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86"><?=$this->tr('LINUX_UNIX')?></td>
+      <td width="10%" align="center" bgcolor="#d9ffff" class="w86"><?=$this->tr('OS390')?></td>
+      <td width="10%" align="center" bgcolor="#d9ffff" class="w86"><?=$this->tr('WEB_SPHERE')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86"><?=$this->tr('ANDROID')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86"><?=$this->tr('IPHONE')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">
+        <select id="os_other1" name="os_other1" class="select_w76">
+        	<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+        	<?php if (!empty($this->osOthers)): foreach ($this->osOthers as $osOther):?>
+        		<option value="<?=$osOther?>"><?=$osOther?></option>
+        	<?php endforeach; endif;?>
+        </select>
+      </td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">
+        <select id="os_other2" name="os_other2" class="select_w76">
+        	<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+        	<?php if (!empty($this->osOthers)): foreach ($this->osOthers as $osOther):?>
+        		<option value="<?=$osOther?>"><?=$osOther?></option>
+        	<?php endforeach; endif;?>
+        </select>
+      </td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">
+        <input type="text" id="os_other3" name="os_other3" class="myinput_w76" value="" />
+      </td>
+    </tr>
+    <tr>
+    	<?php foreach ($this->oss as $os):?>
+	      <td height="28" align="center" bgcolor="#FFFFFF">
+	        <select id="<?=$os?>_level" name="<?=$os?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="<?=$os?>_age" name="<?=$os?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>
+	      </td>
+    	<?php endforeach;?>
+    	<?php for ($i = 0; $i < 3; $i++):?>
+	      <td align="center" bgcolor="#FFFFFF">
+	      	<select id="os_other<?=$i+1?>_level" name="os_other<?=$i+1?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="os_other<?=$i+1?>_age" name="os_other<?=$i+1?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>
+	       </td>
+    	<?php endfor;?>
+    </tr>
+    <tr>
+      <th rowspan="2" align="center" bgcolor="#d9ffff">
+      	<span id="label_db"><?=$this->tr('DB')?></span>
+      </th>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('ORACLE')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('SQL_SERVER')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('ACCESS')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('DB2')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('HIRDB')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('MYSQL')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('PL_SQL')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('SYBASE')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('INFORMIX')?></td>
+      <td align="center" bgcolor="#d9ffff">
+	  	<input type="text" id="db_other" name="db_other" class="myinput_w76" value="" />
+	  </td>
+    </tr>
+    <tr>
+    	<?php foreach ($this->dbs as $db):?>
+	      <td height="43" align="center" bgcolor="#FFFFFF">
+	        <select id="<?=$db?>_level" name="<?=$db?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="<?=$db?>_age" name="<?=$db?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>    
+		  </td>
+		<?php endforeach;?>    	
+      <td align="center" bgcolor="#FFFFFF">
+		<select id="db_other_level" name="db_other_level" class="select_w38">
+        	<option value=""></option>
+        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+        </select>
+		<select id="db_other_age" name="db_other_age" class="select_w38">
+		  <?php foreach ($this->experienceYears as $experienceYear):?>
+			<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+          <?php endforeach;?>
+        </select>    
+      </td>
+    </tr>
+    <tr>
+      <th rowspan="4" align="center" bgcolor="#d9ffff">
+      	<span id="label_framework"><?=$this->tr('LANGUAGE_FRAMEWORK')?></span>
+      </th>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('JAVA')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('C')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('CPP')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('DOT_NET')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('V_CPP')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('VB')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('DOT_NET')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('ASP')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('COBOL')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('PHP')?></td>
+    </tr>
+    <tr>
+    	<?php for ($i = 0; $i < 10; $i++):?>
+		  <?php $fw = $this->frameworks[$i];?>
+	      <td height="28" align="center" bgcolor="#FFFFFF">
+	        <select id="<?=$fw?>_level" name="<?=$fw?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="<?=$fw?>_age" name="<?=$fw?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>    
+		  </td>
+    	<?php endfor;?>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('SAP')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('ABAP')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('SHELL')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('STRUTS')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('EJB')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('INTRA-MART')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('TERASORUNA')?></td>
+      <td align="center" bgcolor="#d9ffff">
+        <select id="framework_other1" name="framework_other1" class="select_w76">
+        	<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+        	<?php if (!empty($this->fwOthers)): foreach ($this->fwOthers as $fwOther):?>
+        		<option value="<?=$fwOther?>"><?=$fwOther?></option>
+        	<?php endforeach; endif;?>
+        </select>
+      </td>
+      <td align="center" bgcolor="#d9ffff">
+        <select id="framework_other2" name="framework_other2" class="select_w76">
+        	<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+        	<?php if (!empty($this->fwOthers)): foreach ($this->fwOthers as $fwOther):?>
+        		<option value="<?=$fwOther?>"><?=$fwOther?></option>
+        	<?php endforeach; endif;?>
+        </select>
+	  </td>
+      <td align="center" bgcolor="#d9ffff">
+        <input type="text" id="framework_other3" name="framework_other3" class="myinput_w76" />
+      </td>
+    </tr>
+    <tr>
+      <?php for ($i = 10; $i < count($this->frameworks); $i++):?>
+		  <?php $fw = $this->frameworks[$i];?>
+	      <td height="28" align="center" bgcolor="#FFFFFF">
+	        <select id="<?=$fw?>_level" name="<?=$fw?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="<?=$fw?>_age" name="<?=$fw?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>    
+		  </td>
+	  <?php endfor;?>
+	  <?php for ($i = 0; $i < 3; $i++):?>
+	      <td align="center" bgcolor="#FFFFFF">
+		    <select id="framework_other<?=$i+1?>_level" name="framework_other<?=$i+1?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="framework_other<?=$i+1?>_age" name="framework_other<?=$i+1?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>    
+	      </td>
+      <?php endfor;?>
+    </tr>
+    <tr>
+      <th rowspan="2" align="center" bgcolor="#d9ffff">
+      	<span id="label_biz"><?=$this->tr('BIZ')?></span>
+      </th>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('SECURITY')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('BANK')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('INSURANCE')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('SHIPPING')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('PERSONNEL')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('MANAGER')?></td>
+      <td align="center" bgcolor="#d9ffff"><?=$this->tr('MOBILE')?></td>
+      <td align="center" bgcolor="#d9ffff">
+        <select id="biz_other1" name="biz_other1" class="select_w76">
+        	<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+        	<?php if (!empty($this->bizOthers)): foreach ($this->bizOthers as $bizOther):?>
+        		<option value="<?=$bizOther?>"><?=$bizOther?></option>
+        	<?php endforeach; endif;?>
+        </select>
+      </td>
+      <td align="center" bgcolor="#d9ffff">
+        <select id="biz_other2" name="biz_other2" class="select_w76">
+        	<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+        	<?php if (!empty($this->bizOthers)): foreach ($this->bizOthers as $bizOther):?>
+        		<option value="<?=$bizOther?>"><?=$bizOther?></option>
+        	<?php endforeach; endif;?>
+        </select>
+	  </td>
+      <td align="center" bgcolor="#d9ffff">
+        <input type="text" id="biz_other3" name="biz_other3" class="myinput_w76" />
+      </td>
+    </tr>
+    <tr>
+      <?php foreach ($this->bizs as $biz):?>
+	      <td height="28" align="center" bgcolor="#FFFFFF">
+	        <select id="<?=$biz?>_level" name="<?=$biz?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="<?=$biz?>_age" name="<?=$biz?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>    
+		  </td>
+      <?php endforeach;?>
+      <?php for ($i = 0; $i < 3; $i++):?>
+	      <td align="center" bgcolor="#FFFFFF">
+		  	<select id="biz_other<?=$i+1?>_level" name="biz_other<?=$i+1?>_level" class="select_w38">
+	        	<option value=""></option>
+	        	<?php foreach ($this->bizLevels as $bizLevel):?>
+		        	<option value="<?=$bizLevel?>"><?=$this->tr('BIZ_LEVEL_' . $bizLevel)?></option>
+	        	<?php endforeach;?>
+	        </select>
+			<select id="biz_other<?=$i+1?>_age" name="biz_other<?=$i+1?>_age" class="select_w38">
+			  <?php foreach ($this->experienceYears as $experienceYear):?>
+				<option value="<?=$experienceYear?>"><?=$this->tr($experienceYear . '_YEAR')?></option>
+	          <?php endforeach;?>
+	        </select>    
+	      </td>
+      <?php endfor;?>
+    </tr>
+  </table>
+</div>
+
+<div id="tip_resumeBiz" class="tip"></div>
+
+<div class="btn_center">
+	<a href="javascript:void(0);" id="btn_saveResumeBiz">
+  		<img src="/img/default/front/<?=$auth->locale?>/btn_keep.jpg" width="79" height="28" class="btn_marR" />
+  	</a>
+</div>
+</form>

@@ -1,0 +1,63 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<h3 class="tbg_grey marB"><span class="fr">
+		<a href="/front_register/register" target="_blank">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_register_person.jpg" width="99" height="24" />
+		</a>
+	</span><?=$this->tr("lp_register")?></h3>
+	<div class="faren_register_c">
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_companyName")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['companyName']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_adress")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['address']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_website")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['website']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_linkman")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['linkman']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_telephone")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['telephone']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_email")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['email']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_passwd")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['passwd']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t"><?=$this->tr("lp_passwd2")?>：</label>			
+			    <input name="textfield" type="text" class="input_c" value="<?=$this->registerInfo['passwd2']?>" />
+	  </div>
+	  <div class="item">
+			<label class="input_t">&nbsp;</label>			
+			<div class="fc30"><?=$this->tr("lpreg_nodify")?>  </div> 
+	  </div>
+	  <div class="item">
+			<label class="input_t">&nbsp;</label>			
+			<div>
+			  <input alt="Confirm" type="image" id="btn_confirm" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" class="btn_marR" />
+			  <input alt="Cancel" type="image" id="btn_back" src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" />
+			</div> 
+	  </div>
+	</div>
+</div>
+
+<!-- 用户注册信息，用于用户注册确认页面 -->
+<form id="form_confirm" name="form_confirm" action="" method="post" style="display:none;" target="_blank">
+	<input id="registerInfo" name="registerInfo" type="hidden" value='<?=json_encode($this->registerInfo);?>' />
+</form>
+
+<script type="text/javascript" src="/js/default/front/lpreg/regconfirm.js"></script>

@@ -1,0 +1,241 @@
+<form id="form_resumeBaseInfo" name="form_resumeBaseInfo" method="post" action="">
+	<div class="resume_t"><?=$this->tr('base_info')?>
+		<div class="resume_date">
+			<div style="text-align: right; margin-right: 10px;"><?=$this->tr('DATE')?>：<?=date('Y-m-d')?></div>
+		</div>
+	<?php if ($auth->usr['role_code'] == 'ADMIN'):?>
+		<div class="talent_select">
+			<!-- usr_code：被直接代理创建简历的用户，如管理员A代理管理员B创建创建，则此为管理员B的编码；如管理员A代替法人C创建员工简历，则为法人C的编码 -->
+			<input id="usr_code" name="usr_code" type="hidden" value="" /> 
+			<!-- roleCode：管理员所要代替创建简历的用户角色：LP，MEMBER -->
+			<input id="roleCode" name="roleCode" type="hidden" value="" /> 
+			<button id="btn_member" type="button"><?=$this->tr('INVIDIDUAL')?></button>
+			<button id="btn_lp" type="button"><?=$this->tr('LP')?></button>
+			<button id="btn_admin" type="button"><?=$this->tr('admin')?></button>
+			<input id="username" readonly="readonly" type="text" value="" style="width: 180px;" />
+			<span id="roleName" style="width: 30px;"></span>
+		</div>
+	<?php endif;?>
+	</div>
+	<div class="resume_base_info">
+	  <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#000000" class="tab_resume">
+        <!-- 全名拼音 -->
+        <tr>
+          <th width="8%" align="center" bgcolor="#d9ffff">
+          	<span style="color: red;">*&nbsp;</span><label id="label_pFullname"><?=$this->tr('FULLNAME_PINYIN')?></label>
+          </th>
+          <td width="15%" bgcolor="#FFFFFF">
+          	<input class="myinput" id="fullname_p" name="fullname_p" type="text" value="" style="width: 95%;" />
+          </td>
+          <th width="8%" align="center" bgcolor="#d9ffff"><?=$this->tr('SEX__')?></th>
+          <th width="15%" bgcolor="#d9ffff">
+          	<span style="color: red;">*&nbsp;</span><label id="label_birthday"><?=$this->tr('BIRTHDAY')?></label>
+          </th>
+          <th width="8%" bgcolor="#d9ffff"><?=$this->tr('LANG_ABILITY')?>(<span class="fred"><?=$this->tr('NOTE')?>１</span>)</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">A</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">B</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">C</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">D</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">E</th>
+          <th width="8%" align="center" bgcolor="#d9ffff"><?=$this->tr('QUALIFICATION')?></th>
+        </tr>
+        <!-- 氏　名 -->
+        <tr>
+          <th rowspan="2" align="center" bgcolor="#d9ffff">
+          	<span style="color: red;">*&nbsp;</span><label id="label_fullname"><?=$this->tr('NAME')?></label>
+          </th>
+          <td rowspan="2" bgcolor="#FFFFFF">
+          	<input type="text" id="fullname" name="fullname" class="myinput" value="" style="width: 95%;" />
+          </td>
+          <td rowspan="2" align="center" bgcolor="#FFFFFF">
+	            <select id="sex" name="sex" class="input_select" style="width: 95%;">
+	              <option value="M"><?=$this->tr('M')?></option>
+	              <option value="F"><?=$this->tr('F')?></option>
+	            </select>
+          </td>
+          <td align="left" bgcolor="#FFFFFF">
+			<input id="birthday" name="birthday" type="text" style="width:95%; margin-left:2px;" value="" />
+          </td>
+          <th align="center" bgcolor="#D9FFFF">
+          	<span style="color: red;">*&nbsp;</span><label id="label_jaAbility"><?=$this->tr('JAPANESE')?></label>
+          </th>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="ja_ability" type="radio" value="A" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="ja_ability" type="radio" value="B" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="ja_ability" type="radio" value="C" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="ja_ability" type="radio" value="D" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="ja_ability" type="radio" value="E" /></td>
+          <td bgcolor="#FFFFFF">
+			  <select id="ja_qualification" name="ja_qualification" style="width: 100%;">
+			    <option value="0"><?=$this->tr('PLEASE_SELECT')?></option>
+			    <option value="1"><?=$this->tr('ABOVE_LEVEL_1')?></option>
+			    <option value="2"><?=$this->tr('ABOVE_LEVEL_2')?></option>
+			    <option value="3"><?=$this->tr('ABOVE_LEVEL_3')?></option>
+	          </select>
+          </td>
+        </tr>
+        <!-- 出身地，英语 -->
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">
+          	<?=$this->tr('FULL')?><span id="fullAge" style="color: red;"></span><?=$this->tr('YEARS_OLD')?>
+          </td>
+          <th align="center" bgcolor="#D9FFFF"><?=$this->tr('ENGLISH')?></th>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="en_ability" type="radio" value="A" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="en_ability" type="radio" value="B" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="en_ability" type="radio" value="C" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="en_ability" type="radio" value="D" /></td>
+          <td bgcolor="#FFFFFF" style="text-align: center;"><input name="en_ability" type="radio" value="E" /></td>
+          <td bgcolor="#FFFFFF">
+			  <select id="en_qualification" name="en_qualification" style="width: 100%;">
+			  	<option value="0"><?=$this->tr('PLEASE_SELECT')?></option>
+			    <option value="3"><?=$this->tr('ABOVE_LEVEL_3')?></option>
+			    <option value="4"><?=$this->tr('ABOVE_LEVEL_4')?></option>
+			    <option value="6"><?=$this->tr('ABOVE_LEVEL_6')?></option>
+	          </select>
+          </td>
+        </tr>
+        <!-- 出身地 -->
+        <tr>
+          <th align="center" bgcolor="#d9ffff"><?=$this->tr('BIRTHPLACE')?></th>
+          <td bgcolor="#FFFFFF">
+          	<input type="text" id="birthplace" name="birthplace" class="myinput" value="" style="width: 95%;" />
+          </td>
+          <th align="center" bgcolor="#D9FFFF"><?=$this->tr('MARRIAGE_STATUS')?></th>
+          <td align="center" bgcolor="#FFFFFF">
+          	<input type="radio" name="marital" value="Y" /><?=$this->tr('MARRIED')?> &nbsp;&nbsp;&nbsp;&nbsp;
+          	<input type="radio" name="marital" value="N" /><?=$this->tr('UNMARRIED')?>
+          </td>
+          <th align="center" bgcolor="#D9FFFF">
+          	<span style="color: red;">*&nbsp;</span><label id="label_tel"><?=$this->tr('TEL')?></label>
+          </th>
+          <td colspan="6" align="center" bgcolor="#FFFFFF">
+          	<input type="text" id="tel" name="tel" class="myinput_center" style="width:99%" value="" />
+          </td>
+        </tr>
+        <!-- 現住所 -->
+        <tr>
+          <th align="center" bgcolor="#d9ffff"><span style="color: red;">*&nbsp;</span><?=$this->tr('ACTUAL_RESIDENCE')?></th>
+          <td colspan="3" bgcolor="#FFFFFF">
+            <select id="actual_residence_cntry" name="actual_residence_cntry" class="input_select">
+              <?php foreach ($this->countries as $countryCode => $countryName):?>
+	              <option value="<?=$countryCode?>"><?=$countryName?></option>
+              <?php endforeach;?>
+            </select>
+             &nbsp;
+            <select id="actual_residence_province" name="actual_residence_province" style="width: 160px;">
+              <?php foreach ($this->provinces as $provinceCode => $provinceName):?>
+	              <option value="<?=$provinceCode?>"><?=$provinceName?></option>
+              <?php endforeach;?>
+            </select>
+		  	<input type="text" id="actual_residence" name="actual_residence" class="myinput" style="width:97%;" value="" />
+		  </td>
+          <th align="center" bgcolor="#D9FFFF"><span style="color: red;">*&nbsp;</span><label id="label_email">E-Mail</label></th>
+          <td colspan="6" align="center" bgcolor="#FFFFFF">
+          	<?php if (in_array($auth->usr['role_code'], array('LP', 'MEMBER'))):?>
+          		<input type="text" id="email" name="email" class="myinput_center" readonly="readonly" style="width:99%" value="" />
+          	<?php else:?>
+          		<input type="text" id="email" name="email" class="myinput_center"  style="width:95%" value="" />
+          	<?php endif;?>
+          </td>
+        </tr>
+        <!-- 最寄駅 -->
+        <tr>
+          <th align="center" bgcolor="#d9ffff"><?=$this->tr('NEAREST_STATION')?></th>
+          <td bgcolor="#FFFFFF">
+          	<input type="text" id="nearest_station" name="nearest_station" class="myinput" value="" style="width: 95%;" />
+          </td>
+          <th align="center" bgcolor="#D9FFFF">
+          	<span style="color: red;">*&nbsp;</span><label id="label_nationality"><?=$this->tr('NATIONALITY')?></label>
+          </th>
+          <td align="center" bgcolor="#FFFFFF">
+            <select id="nationality" name="nationality" style="width:95%">
+              <option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+              <option value="JP"><?=$this->tr('JP')?></option>
+              <option value="CN"><?=$this->tr('CN')?></option>
+            </select>
+          </td>
+          <th align="center" bgcolor="#D9FFFF"><?=$this->tr('YEAR_ARRIVE_JP')?></th>
+          <td colspan="6" align="center" bgcolor="#FFFFFF">
+          	<input type="text" id="date_arrive_jp" name="date_arrive_jp" class="myinput_center" style="width:99%" value="" />
+          </td>
+        </tr>
+        <tr>
+          <th align="center" bgcolor="#d9ffff"><?=$this->tr('FINAL_DEGREE')?></th>
+          <td bgcolor="#FFFFFF">
+          	<input type="text" id="final_degree" name="final_degree" class="myinput" value="" style="width: 95%;" />
+          </td>
+          <th align="center" bgcolor="#D9FFFF"><?=$this->tr('SUBJECT')?></th>
+          <td align="center" bgcolor="#FFFFFF">
+          	<input type="text" id="major" name="major" class="myinput_center" style="width:95%" value="" />
+          </td>
+          <th align="center" bgcolor="#D9FFFF">
+          	<span style="color: red;">*&nbsp;</span>
+          	<label id="label_dateGraduate"><?=$this->tr('GRADUATE_YEAR')?></label>
+          </th>
+          <td colspan="6" align="center" bgcolor="#FFFFFF">
+          	<input type="text" id="date_graduate" name="date_graduate" class="myinput_center" style="width:99%" value="" />
+          </td>
+        </tr>
+        <tr>
+          <th align="center" bgcolor="#d9ffff"><?=$this->tr('KINDS_OF_SKILLS')?></th>
+          <td colspan="10" bgcolor="#FFFFFF">
+          	<input type="text" id="skill" name="skill" class="myinput" style="width:99%" value="" />
+          </td>
+        </tr>
+        <tr>
+          <th align="center" valign="top" bgcolor="#d9ffff"><?=$this->tr('PERSONAL_PR')?></th>
+          <td colspan="10" style="width: 100%; background-color: white;">
+            <textarea id="pr" name="pr" class="mytextarea" style="width: 99%;"></textarea>
+          </td>
+        </tr>
+      </table>
+	</div>
+	<div class="conU"><span class="fred"><?=$this->tr('NOTE')?>１：</span><?=$this->tr('LANG_ABILITY')?>　
+		A:<?=$this->tr('NATIVE_LANG_EQUAL')?>　　B:<?=$this->tr('BIZ_EXCHANGE')?>　　
+		C:<?=$this->tr('EVERYDAY_CONVERSATION')?>　　D:<?=$this->tr('NECESSARY_CONVERSATION')?>　　
+		E:<?=$this->tr('UNKNOWN')?>
+	</div>
+	<div id="tip_resumeBaseInfo" class="tip"></div>
+	<div class="btn_center">
+		<span id="sp_saveResumeBaseInfo">
+			<a href="javascript:void(0);" id="btn_saveResumeBaseInfo" class="ENABLED_Y">
+				<img src="/img/default/front/<?=$auth->locale?>/btn_keep.jpg" width="79" height="28" class="btn_marR" />
+			</a>
+		</span>
+	</div>
+</form>
+
+
+<!-- dlg：选择个人，同时设置usr_code -->
+<div id="dlg_memberList" title="<?=$this->tr('INVIDIDUAL')?>" style="display: none;">
+	<div id="tip_memberList" class="tip"></div>
+	<div>
+		<?=$this->tr('NAME')?>：
+		<input id="s_fullname" type="text" value="" />
+		<button id="btn_searchMember" type="button"><?=$this->tr('SEARCH')?></button>
+	</div>
+	<div id="memberList"></div>
+</div>
+
+
+<!-- dlg：选择法人，同时设置usr_code -->
+<div id="dlg_lpList" title="<?=$this->tr('LP')?>" style="display: none;">
+	<div id="tip_lpList" class="tip"></div>
+	<div>
+		<?=$this->tr('LP_NAME')?>：
+		<input id="s_lpName" type="text" value="" />
+		<button id="btn_searchLp" type="button"><?=$this->tr('SEARCH')?></button>
+	</div>
+	<div id="lpList"></div>
+</div>
+
+
+<!-- dlg：选择管理员，同时设置usr_code -->
+<div id="dlg_adminList" title="<?=$this->tr('admin')?>" style="display: none;">
+	<div id="tip_adminList" class="tip"></div>
+	<div>
+		<?=$this->tr('ADMIN_NAME')?>：
+		<input id="s_adminName" type="text" value="" />
+		<button id="btn_searchAdmin" type="button"><?=$this->tr('SEARCH')?></button>
+	</div>
+	<div id="adminList"></div>
+</div>

@@ -1,0 +1,21 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<div class="register_successful">
+		<h3 class="register_successful_t">
+			<?php if (!empty($this->opResultImgUrl)):?>
+				<img src="<?=$this->opResultImgUrl?>" width="257" height="44" />
+			<?php else:?>
+				<?=$this->opResultName?>
+			<?php endif;?>
+		</h3>
+		<div class="register_successful_c">
+			<p><a href="/?pwd=10" class="aback">
+					&lt;&lt;<?=$this->tr('back_to_homepage')?>
+				</a>
+			</p>
+		</div>
+	</div>
+</div>

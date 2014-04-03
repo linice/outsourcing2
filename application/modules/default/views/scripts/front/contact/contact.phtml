@@ -1,0 +1,63 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<form id="form_contact" name="form_contact" method="post" action="/front/contact/contactverify">
+		<div class="contactus_con">
+			<p><?=$this->tr('CONTACT_US_NOTIFICATION')?></p>
+			<p><?=$this->tr('CONTACT_US_PRIVACY_POLICY_NOTIFICATION')?><a href="#" target="_blank"><?=$this->tr('HERE')?></a>。</p>
+			<div id="tip_contact" class="tip"></div>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+			<tr>
+				<td width="22%" align="right" bgcolor="#f7f7ff"></td>
+				<td width="78%" align="left" bgcolor="#f7f7ff"><input type="checkbox" id="isAgree" name="isAgree" value="Y" />
+				<?=$this->tr('I_AGREE_WITH_PRIVACY_POLICY')?></td>
+			</tr>
+			<tr>
+				<td width="22%" align="right" bgcolor="#f7f7ff"><span class="fred">*</span> <?=$this->tr('YOUR_NAME')?>：</td>
+				<td width="78%" align="left" bgcolor="#f7f7ff"><input type="text" id="fullname" name="fullname" class="input_c w200" /></td>
+			</tr>
+			<tr>
+				<td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr('TEL_NUMBER')?>：</td>
+				<td width="78%" align="left" bgcolor="#f7f7ff"><input type="text" id="tel" name="tel" class="input_c w200" /></td>
+			</tr>
+			<tr>
+				<td width="22%" align="right" bgcolor="#f7f7ff"><span class="fred">*</span> E-mail<?=$this->tr('ADDR')?>：</td>
+				<td width="78%" align="left" bgcolor="#f7f7ff"><input type="text" id="email" name="email" class="input_c w200" /></td>
+			</tr>
+			<tr>
+				<td width="22%" align="right" bgcolor="#f7f7ff"><span class="fred">*</span> <?=$this->tr('CONTENT')?>：</td>
+				<td width="78%" align="left" bgcolor="#f7f7ff">
+				<!-- 这里的textarea的ID取为content2，是因为和layout里的div的id为content冲突了 -->
+				<textarea id="content2" name="content" class="input_msg"></textarea>
+				</td>
+			</tr>
+			<!--
+			<tr>
+				<td width="22%" align="right" bgcolor="#f7f7ff"><span class="fred">*</span> <?=$this->tr('IDENTIFYING_CODE')?>：</td>
+				<td width="78%" align="left" bgcolor="#f7f7ff"><input type="text" name="textfield" class="input_c w80" />
+				<img src="/img/default/front/<?=$auth->locale?>/code01.jpg" width="58" height="22" /></td>
+			</tr>
+			-->
+		</table>
+			<!-- 按钮 -->
+			<div class="item">
+				<label class="input_t">&nbsp;</label>
+				<a href="javascript:void(0);" id="btn_submit">
+					<img alt="Submit" src="/img/default/front/<?=$auth->locale?>/btn_send.jpg" />
+				</a>
+			</div>
+		</div>
+	</form>
+</div>
+
+<!-- 用户注册信息，用于用户注册确认页面 -->
+<form id="form_contact_verify" name="form_contact_verify" action="/front_contact/contactconfirm" method="post" style="display:none;" target="_blank">
+	<input id="contactInfo" name="contactInfo" type="hidden" value="" />
+</form>
+
+<script type="text/javascript">
+	var contactInfo = '<?=!empty($this->contactInfo) ? json_encode($this->contactInfo) : null?>';
+</script>
+<script language="javascript" type="text/javascript" src="/js/default/front/contact/contact.js"></script>

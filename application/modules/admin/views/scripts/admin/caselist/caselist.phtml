@@ -1,0 +1,90 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top">应聘一览</h3>
+	<div class="srcoll_case_search">
+		<div class="search_left">
+			<img src="/img/admin/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" />
+			<select name="select" class="myselect">
+				<option>全部</option>
+			</select>
+			<input type="image" name="imageField4" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+		</div>
+		<div class="search_right">共 <span class="fred">10</span> 个案件</div>
+		<br class="cls" />
+	</div>
+	<div id="tabs_caselist">
+	<ul>
+		<li><a href="#tab_applycaselist">应聘一览</a></li>
+		<li><a href="#tab_collectcaselist">募集一览</a></li>
+		<li><a href="#tab_historyapplycaselist">应聘历史</a></li>
+	</ul>
+	<div id="tab_applycaselist">
+  
+  <!--search list-->
+  <div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_lie01">
+    <tr>
+      <th width="53" align="center">操作</th>
+      
+      <th width="53" align="center">案件ID</th>
+      <th width="110" align="center">案件名</th>
+      <th width="77" align="center">应聘时间</th>
+      <th width="157" align="center">开始时间</th>
+      <th width="65" align="center">期间</th>
+      <th width="84" align="center">勤务地</th>
+      <th width="88" align="center">单价/月</th>
+      <th width="88" align="center">案件状态</th>
+      <th width="88" align="center">备考</th>
+    </tr>
+    <tr>
+      <td align="center"><input type="checkbox" name="checkbox" value="checkbox" /></td>      
+      <td align="center">0001</td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">20120101</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">入场决定</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+	<tr>
+      <td align="center"><input type="checkbox" name="checkbox" value="checkbox" /></td>      
+      <td align="center">0001</td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">20120101</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">入场决定</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+  </table>
+  
+</div>
+<div class="btn_os">
+	<a href="/admin/admin_caseapply/applycancel" target="_blank">
+		<img src="/img/default/usr/<?=$auth->locale?>/btn_apply_dis.jpg" class="marR" />
+	</a>
+<div class="page"><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+<!--search list end-->
+	</div>
+	
+	<!-- 募集一览 -->
+	<div id="tab_collectcaselist">
+		<?php include_once 'collectcaselist.phtml';?>
+	</div>
+	
+	<!-- 应聘历史一览 -->
+	<div id="tab_historyapplycaselist">
+		<?php include_once 'historyapplycaselist.phtml';?>
+	</div>
+	
+	</div>
+</div>
+
+<script type="text/javascript" src="/js/admin/admin/caselist/caselist.js"></script>

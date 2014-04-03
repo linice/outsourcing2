@@ -1,0 +1,31 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<div class="user_apply_process">
+	<?if(!empty($this->errs)): foreach ($this->errs as $errName=>$errValue):?>
+		<div class="item"><label><?=$this->tr($errValue)?></label>
+		<?if ($errName == 'hasresume'):?>
+			<a href="/usr_resume/createresume">创建简历</a>
+		<?elseif ($errName == 'enabled' || $errName == 'base'):?>
+			<a href="/usr_resume/modifyresume/resumeCode/<?=$this->resume['code']?>/anchor/baseinfo">进入修改</a>
+		<?elseif ($errName == 'biz' || $errName == 'prj' || $errName == 'other'):?>
+			<a href="/usr_resume/modifyresume/resumeCode/<?=$this->resume['code']?>/anchor/<?=$errName?>">进入修改</a>
+		<?endif;?></div>
+	<?endforeach;endif;?>
+	<p class="btn_back01"><input type="image" src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" width="80" height="30" /></p>
+</div>
+</div>
+
+<form id="dynForm" style="display:none;" method="post" action="/front_case/casesearchresult">
+<input id="searchFields" name="searchFields" value='<?=json_encode($this->searchFields)?>'/>
+</form>
+
+<script>
+$(function() {
+	$("p.btn_back01").click(function() {
+		$("#dynForm").submit();
+	})
+})
+</script>

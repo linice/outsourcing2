@@ -1,0 +1,148 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+	<h3 class="t_top">法人服务统计</h3>
+	<div class="top_search_nobg">
+	<form id="form2" name="form2" method="post" action="">
+	<ul>
+	<li><img src="/img/admin/<?=$auth->locale?>/icon_search.gif" width="28" height="23" /></li>
+	<li><label><select name="select" class="myselect100"><option>法人当前服务</option><option>法人剩余点数</option><option>法人入金记录</option></select></label></li>
+	<li>时间段搜索 <label><input type="text" class="Wdate" onClick="WdatePicker()" style="width:110px;margin-top:-2px;"></label></li>
+	<li>到 <label><input type="text" class="Wdate" onClick="WdatePicker()" style="width:110px;margin-top:-2px;"></label></li>
+	<li>服务分类</li>
+	<li><label><select name="select" class="myselect80">	<option>高亮服务</option><option>用户查看服务</option></select></label></li>
+	<li><label><select name="select" class="myselect80"><option>法人ID</option><option>法人名</option></select></label></li>
+	<li><label><input name="textfield6" type="text" class="myinput" size="15"  /></label></li>
+	<li><label><input type="image" name="imageField3" src="/img/default/front/<?=$auth->locale?>/btn_cx.gif" /></label></li>
+	</ul>
+	</form>
+  </div>
+  <div class="marB">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_list">
+    <tr>
+      <th width="12%" align="center">法人ID</th>
+      <th width="23%" align="center">公司名</th>
+      <th width="33%">用途</th>
+      <th width="16%">服务生效日期</th>
+      <th width="16%">服务截止日期</th>
+      </tr>
+    <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">2012-10-20 </td>
+      <td align="center">2010-2-1</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">2012-10-20 </td>
+      <td align="center">2010-2-1</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">2012-10-20 </td>
+      <td align="center">2010-2-1</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">2012-10-20 </td>
+      <td align="center">2010-2-1</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">2012-10-20 </td>
+      <td align="center">2010-2-1</td>
+      </tr>
+  </table>
+  </div>
+  <div class="marB">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_list">
+    <tr>
+      <th width="12%" align="center">法人ID</th>
+      <th width="23%" align="center">公司名</th>
+      <th width="33%">剩余点数</th>
+      </tr>
+    <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">1000</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">1000</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">1000</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">1000</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>X001</label></td>
+      <td align="center"> 永和不动产公司</td>
+      <td align="center">1000</td>
+      </tr>
+  </table>
+  </div>
+  <div class="marB">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_list">
+    <tr>
+      <th width="12%" align="center">入金日期</th>
+      <th width="23%" align="center">法人ID</th>
+      <th width="33%"> 公司名</th>
+      <th width="16%">用途</th>
+      <th width="16%">入金金额</th>
+      </tr>
+    <tr>
+      <td align="center"><label>2012-10-20 </label></td>
+      <td align="center">  X001</td>
+      <td align="center">永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">100</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>2012-10-20 </label></td>
+      <td align="center">X001</td>
+      <td align="center">永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">100</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>2012-10-20 </label></td>
+      <td align="center">X001</td>
+      <td align="center">永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">100</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>2012-10-20 </label></td>
+      <td align="center">X001</td>
+      <td align="center">永和不动产公司</td>
+      <td align="center">用户信息查看服务</td>
+      <td align="center">100</td>
+      </tr>
+	  <tr>
+      <td align="center"><label>2012-10-20</label></td>
+      <td align="center">X001</td>
+      <td align="center">永和不动产公司</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">100</td>
+      </tr>
+  </table>
+</div>
+</div>

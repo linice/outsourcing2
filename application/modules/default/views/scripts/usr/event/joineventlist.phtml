@@ -1,0 +1,106 @@
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<div id="tab1">
+	<ul><li class="now"><a href="javascript:void(0);" id="tb1">
+			<?=$this->tr("EVENT")?>
+	</a></li><li><a href="javascript:void(0);" id="tb2">
+		<?=$this->tr("EVENT_HISTORY")?>
+	</a></li></ul>
+</div>
+<!--<div id="tablist1">-->
+<!--	<div class="case_search">-->
+<!--	<div class="search_left">-->
+<!--		<img src="/img/default/lp/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" />-->
+<!--		<label><input type="text" id="subject" class="myinput" /></label>-->
+<!--		<input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />-->
+<!--	</div>-->
+<!--	<br class="cls" />-->
+<!--	</div>-->
+<!--</div>-->
+
+<div id="tbl1" class="search_result_lie01">
+	<div id="eventlist"></div>
+</div>
+
+<div id="tbl2" style="display:none" class="search_result_lie01">
+	<div id="historyeventlist"></div>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+var eventManager, historyEventManager;
+$(function() {
+	$("#tb1").click(function() {
+		if ($(this).parent().attr("class") == 'now') return false;
+		$(this).parent().addClass("now");
+		$(this).parent().next().removeClass("now");
+		$("#tbl1").show();
+		$("#tbl2").hide();
+		if (!$("#eventlist").text()) {
+			loadTab1();
+		}
+	})
+	$("#tb2").click(function() {
+		if ($(this).parent().attr("class") == 'now') return false;
+		$(this).parent().addClass("now");
+		$(this).parent().prev().removeClass("now");
+		$("#tbl2").show();
+		$("#tbl1").hide();
+		if (!$("#historyeventlist").text()) {
+			loadTab2();
+		}
+	})
+	
+	var url1 = "/front_event/searchsingleactiveeventlist";
+	var url2 = "/front_event/searchsinglehistoryeventlist";
+
+	function loadTab1() {
+	    $("#eventlist").ligerGrid({
+	    	checkbox: true,
+			columns: [{display: EVENT_TIME, name: 'deadline', width:75},
+					  {display: EVENT_SUBJECT, name: 'subject', render: EventFunction},
+					  {display: EVENT_NUMBER, name: 'num', width: 71},
+					  {display: EVENT_ORGANIZER, name: 'fullname', width: 150},
+					  {display: EVENT_PLACE, name: 'place', width: 179}],
+			url: url1,
+			//height: "auto", 
+			width: "100%",
+			columnWidth: 450,
+			isScroll: false, frozen:false,
+			//rowHeight: 
+			//headerRowHeight: 
+			//detail: {onShowDetail: showDetail, height: "auto"},
+			pageSize: 20
+	    });
+	    inmanager = $("#eventlist").ligerGetGridManager();
+	}
+	loadTab1();
+
+	function loadTab2() {
+	    $("#historyeventlist").ligerGrid({
+	    	checkbox: true,
+			columns: [{display: EVENT_TIME, name: 'deadline', width:75},
+					  {display: EVENT_SUBJECT, name: 'subject', render: EventFunction},
+					  {display: EVENT_NUMBER, name: 'num', width: 71},
+					  {display: EVENT_ORGANIZER, name: 'fullname', width: 150},
+					  {display: EVENT_PLACE, name: 'place', width: 179}],
+			url: url1,
+			//height: "auto", 
+			width: "100%",
+			columnWidth: 450,
+			isScroll: false, frozen:false,
+			//rowHeight: 
+			//headerRowHeight: 
+			//detail: {onShowDetail: showDetail, height: "auto"},
+			pageSize: 20
+	    });
+	    endmanager = $("#historyeventlist").ligerGetGridManager();
+	}
+
+	function EventFunction(rowData) {
+		return "<a href='/front_event/eventdetail/fid/"+rowData['id']+"'>"+rowData['subject']+"</a>";
+	}
+});
+//-->
+</script>

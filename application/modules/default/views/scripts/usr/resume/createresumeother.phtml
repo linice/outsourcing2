@@ -1,0 +1,276 @@
+<form id="form_resumeOther" name="form_resumeOther" method="post" action="">
+<div class="resume_t"><?=$this->tr('OTHER')?></div>
+<div class="resume_base_info">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#000000" class="tab_resume">
+    <!-- 可开始工作日 -->
+    <tr>
+      <td width="15%" height="30" align="right" bgcolor="#ccffff">
+      	<span style="color: red;">*&nbsp;</span>
+      	<label id="label_ableWorkDateChoice"><?=$this->tr('ABLE_WORK_DATE')?>&nbsp;</label>
+      </td>
+      <td width="85%" bgcolor="#FFFFFF">&nbsp;
+	      <select id="able_work_date_choice" name="able_work_date_choice" class="myinput_w100" style="width: 150px;">
+	        <option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+			<?php foreach ($this->ableWorkDateChoices as $ableWorkDateChoice):?>
+				<option value="<?=$ableWorkDateChoice?>"><?=$this->tr($ableWorkDateChoice)?></option>
+			<?php endforeach;?>
+		  </select>
+		  <input id="able_work_date" name="able_work_date" type="text" value="" readonly="readonly" style="visibility: hidden;" />
+	  </td>
+    </tr>
+    <!-- 当前营业状态 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">
+		<label id="label_isApplyPrj"><?=$this->tr('current_biz_state')?>&nbsp;</label>
+	  </td>
+      <td bgcolor="#FFFFFF">&nbsp;
+        <select id="is_apply_prj" name="is_apply_prj" class="myinput_w100">
+            <option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+            <option value="N"><?=$this->tr('not_biz')?></option>
+        	<option value="Y"><?=$this->tr('in_biz')?></option>
+        </select>
+        <span id="span_interview_wait" style="visibility: hidden;">
+	      <span style="padding-left: 10px;"><?echo $this->tr('INTERVIEW_WAIT')?>&nbsp;</span>
+	      <span>
+	      	<select id="interview_wait" name="interview_wait">
+	      	<?foreach ($this->interviewWaits as $interviewWait):?>
+	      		<option value="<?=$interviewWait?>"><?=$this->tr('INTERVIEW_WAIT_' . $interviewWait)?></option>
+	      	<?endforeach;?>
+	      	</select>
+	      </span>
+	      <span style="padding-left: 10px;"><?echo $this->tr('INTERVIEW_RESULT_WAIT')?>&nbsp;</span>
+	      <span>
+	      	<select id="interview_result_wait" name="interview_result_wait" >
+	      	<?foreach ($this->interviewWaits as $interviewWait):?>
+	      		<option value="<?=$interviewWait?>"><?=$this->tr('INTERVIEW_WAIT_' . $interviewWait)?></option>
+	      	<?endforeach;?>
+	      	</select>
+	      </span>
+        </span>
+      </td>
+    </tr>
+    <!-- 希望单价 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">
+      	<span style="color: red;">*&nbsp;</span><label id="label_salaryExp"><?=$this->tr('exp_unit_price')?>&nbsp;</label>
+      </td>
+      <td bgcolor="#FFFFFF">&nbsp;
+        <input type="text" id="salary_exp" name="salary_exp" class="myinput_w100" />
+        <? echo $this->tr('TEN_THOUSAND'), $this->tr('YEN')?>/<? echo $this->tr('MONTH')?>
+      </td>
+    </tr>
+    <!-- 最低提案单价 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">
+      	<span style="color: red;">*&nbsp;</span><label id="label_salaryMin"><?=$this->tr('min_propose_price')?>&nbsp;</label>
+      </td>
+      <td bgcolor="#FFFFFF">&nbsp;
+        <input type="text" id="salary_min" name="salary_min" class="myinput_w100" />
+        <? echo $this->tr('TEN_THOUSAND'), $this->tr('YEN')?>/<? echo $this->tr('MONTH')?>
+      </td>
+    </tr>
+    <!-- 交通费 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">
+      	<?=$this->tr('CAR_FEE')?>&nbsp;
+      </td>
+      <td bgcolor="#FFFFFF">&nbsp;
+      	<span style="padding-right: 20px;">
+			<input name="car_fee" type="radio" value="Y" /><? echo $this->tr('INCLUDE'), $this->tr('CAR_FEE')?>
+		</span>
+		<input name="car_fee" type="radio" value="N" checked="checked" /><? echo $this->tr('EXCLUDE'), $this->tr('CAR_FEE')?>
+	  </td>
+    </tr>
+    <!-- 各种保险 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">
+      	<? echo $this->tr('VARIOUS_KINDS_OF') . $this->tr('INSURANCE')?>&nbsp;
+      </td>
+      <td bgcolor="#FFFFFF">&nbsp;
+      <?php foreach ($this->insurances as $insurance):?>
+      	<span style="padding-right: 20px;">
+	        <input type="checkbox" name="insurance[]" value="<?=$insurance?>" />
+	        <?=$this->tr($insurance)?>
+      	</span>
+      <?php endforeach;?>
+      </td>
+    </tr>
+    <!-- 期望工作地点 -->
+    <tr>
+      <td align="right" bgcolor="#ccffff"><?=$this->tr('exp_workplace')?>&nbsp;</td>
+      <td bgcolor="#FFFFFF">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_disc">
+        <tr>
+          <th rowspan="2" valign="top" style="width: 6%; text-align: left; font-weight: bold;">&nbsp;<?=$this->tr('JP')?>：</th>
+          <?php for ($i = 0; $i < 5; $i++): ?>
+          	<td>
+          		<input type="checkbox" name="exp_workplace[]" value="<?=$this->expWorkplaces_jp[$i]?>" />
+          		<?=$this->tr($this->expWorkplaces_jp[$i])?>
+          	</td>
+          <?php endfor;?>
+        </tr>
+        <tr>
+          <?php for ($i = 5; $i < count($this->expWorkplaces_jp); $i++): ?>
+          	<td>
+          		<input type="checkbox" name="exp_workplace[]" value="<?=$this->expWorkplaces_jp[$i]?>" />
+          		<?=$this->tr($this->expWorkplaces_jp[$i])?>
+          	</td>
+          <?php endfor;?>
+        </tr>
+        <tr>
+          <th style="text-align: left; font-weight: bold;">&nbsp;<?=$this->tr('OVERSEA')?>：</th>
+          <?php for ($i = 0; $i < count($this->expWorkplaces_oversea); $i++): ?>
+          	<td>
+          		<input type="checkbox" name="exp_workplace[]" value="<?=$this->expWorkplaces_oversea[$i]?>" />
+          		<?=$this->tr($this->expWorkplaces_oversea[$i])?>
+          	</td>
+          <?php endfor;?>
+        </tr>
+      </table></td>
+    </tr>
+    <!-- 期望项目形态 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff"><?=$this->tr('exp_prj_form')?>&nbsp;</td>
+      <td bgcolor="#FFFFFF">&nbsp;
+        <select id="exp_prj_form" name="exp_prj_form" class="myinput_w100">
+          <option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+          <?php foreach ($this->expPrjForms as $expPrjForm):?>
+          	<option value="<?=$expPrjForm?>"><?=$this->tr($expPrjForm)?></option>
+          <?php endforeach;?>
+        </select>
+      </td>
+    </tr>
+    <?php if ($this->usr['role_code'] == 'ADMIN'):?>
+    <!-- 显示希望单价 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">
+      	<span style="color: red;">*&nbsp;</span>
+      	<label id="label_salaryExp_display"><?=$this->tr('display_exp_unit_price')?>&nbsp;</label>
+      </td>
+      <td bgcolor="#FFFFFF">&nbsp;
+        <input type="text" id="salary_exp_display" name="salary_exp_display" class="myinput_w100" />
+        <? echo $this->tr('TEN_THOUSAND'), $this->tr('YEN')?>/<? echo $this->tr('MONTH')?>
+      </td>
+    </tr>
+    <!-- 显示最低提案单价 -->
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">
+      	<span style="color: red;">*&nbsp;</span>
+      	<label id="label_salaryMin_display"><?=$this->tr('display_min_propose_price')?>&nbsp;</label>
+      </td>
+      <td bgcolor="#FFFFFF">&nbsp;
+        <input type="text" id="salary_min_display" name="salary_min_display" class="myinput_w100" />
+        <? echo $this->tr('TEN_THOUSAND'), $this->tr('YEN')?>/<? echo $this->tr('MONTH')?>
+      </td>
+    </tr>
+    <?php endif;?>
+    <?php if ($this->usr['role_code'] == 'MEMBER'):?>
+	    <!-- 签证形态 -->
+	    <tr>
+	      <td height="30" align="right" bgcolor="#ccffff"><?=$this->tr('visa_form')?>&nbsp;</td>
+	      <td bgcolor="#FFFFFF">&nbsp;
+	        <select id="visa_form" name="visa_form" class="myinput_w100">
+	          <option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+	          <?php foreach ($this->visaForms as $visaForm):?>
+	          	<option value="<?=$visaForm?>"><?=$this->tr($visaForm)?></option>
+	          <?php endforeach;?>
+	        </select>
+	      </td>
+	    </tr>
+	    <!-- 不可见公司 -->
+	    <tr>
+	      <td height="30" align="right" bgcolor="#ccffff"><?=$this->tr('unseen_com')?>&nbsp;</td>
+	      <td bgcolor="#FFFFFF" id="td_unseenComs">&nbsp;
+	        <input name="unseen_coms[]" type="text" value="" />
+			<?=$this->tr('companies_you_set_can_not_view_your_info')?>
+			<a href="javascript:void(0);" id="btn_addUnseenComs"><?=$this->tr('continue_add')?></a>
+			<br />
+	      </td>
+	    </tr>
+	<?php endif;?>
+	<?php if ($this->usr['role_code'] == 'LP' || $this->usr['role_code'] == 'ADMIN'):?>
+		<!-- 推荐度 -->
+		<tr>
+			<td height="30" align="right" bgcolor="#ccffff"><?=$this->tr('RECOMMENDATION_LEVEL')?>&nbsp;</td>
+			<td bgcolor="#FFFFFF">&nbsp;
+				<input id="bid_points" name="bid_points" type="text" class="myinput_w100" readonly="readonly" />
+				<a href="javascript:void(0);" id="btn_set">
+					<img src="/img/default/front/<?=$auth->locale?>/btn_sd.gif" width="43" height="20" border="0" class="btn_v_center" />
+				</a>
+				<span class="fgrey"><?=$this->tr('cur_remain_points')?>:<?=$auth->usr['balance']?><?=$this->tr('POINT')?></span>
+				&nbsp;&nbsp;
+				<span><?=$this->tr('bid_end_date')?>：
+					<?php if ($this->usr['role_code'] == 'LP'):?>
+						<?=date('Y-m-d', strtotime('+1 week', time()))?>
+					<?php elseif ($this->usr['role_code'] == 'ADMIN'):?>
+						<input id="bid_date_end" name="bid_date_end" type="text" value="<?=date('Y-m-d', strtotime('+1 week', time()))?>" />
+					<?php endif;?>
+				</span>
+			</td>
+		</tr>
+		<!-- 法人给员工的备注 -->
+		<tr>
+			<td height="100" align="right" valign="top" bgcolor="#ccffff"><?=$this->tr('LP_REMARK')?>&nbsp;</td>
+			<td valign="top" bgcolor="#FFFFFF">
+				<textarea id="remark_lp" name="remark_lp" class="else_detail"></textarea>
+			</td>
+		</tr>
+	<?php endif;?>
+	<?php if ($this->usr['role_code'] == 'ADMIN'):?>
+		<!-- 管理员给人才的备注 -->
+		<tr>
+			<td height="100" align="right" valign="top" bgcolor="#ccffff"><?=$this->tr('ADMIN_REMARK')?>&nbsp;</td>
+			<td valign="top" bgcolor="#FFFFFF">
+				<textarea id="remark_admin" name="remark_admin" class="else_detail"></textarea>
+			</td>
+		</tr>
+	<?php endif;?>
+	<!-- 是否公开简历 -->
+	<tr>
+		<td height="30" align="right" bgcolor="#ccffff"><?=$this->tr('IS_OPEN_RESUME')?>&nbsp;</td>
+		<td bgcolor="#FFFFFF">&nbsp;
+			<input name="is_open" type="radio" value="Y" checked="checked" /><?=$this->tr('YES')?>
+			<input name="is_open" type="radio" value="N" /><?=$this->tr('NO')?>
+		</td>
+	</tr>
+  </table>
+</div>
+	<div id="tip_resumeOther" class="tip"></div>
+	<div class="btn_center">
+	  <a href="javascript:void(0);" id="btn_saveResumeOther">
+	  	<img src="/img/default/front/<?=$auth->locale?>/btn_keep.jpg" width="79" height="28" class="btn_marR" />
+	  </a>
+	</div>
+	<!-- 隐藏信息：剩余点数 -->
+	<input id="balance" name="balance" type="hidden" value="<?=$this->usr['balance']?>" />
+</form>
+
+
+<!-- 推荐度设定 -->
+<div id="dlg_recmdEmp" style="display: none;" title="<?=$this->tr('recmd_level_setting')?>">
+	<h3 class="msg_title"><?=$this->tr('recmd_emp_bidding_rank_protocol')?>:</h3>
+	<div class="recommdation_info">
+		<dl>
+			<dt><?=$this->tr('setting_method')?>：</dt>
+			<dd><?=$this->tr('setting_method_1')?></dd>
+			<dd><?=$this->tr('setting_method_2')?></dd>
+		</dl>
+		<dl>
+			<dt><?=$this->tr('matters_need_attention')?>：</dt>
+			<dd><?=$this->tr('matters_need_attention_1')?></dd>
+			<dd><?=$this->tr('matters_need_attention_2')?></dd>
+			<dd><?=$this->tr('matters_need_attention_3')?></dd>
+		</dl>
+	</div>
+	<div class="recommdation_set">
+		<div id="tip_recmdEmp" class="tip"></div>
+		<h4><span class="money"><?=$this->tr('BALANCE')?>：<?=$this->usr['balance']?><?=$this->tr('POINT')?></span></h4>
+		<div class="item"><span class="mytitle"><?=$this->tr('set_points')?>：</span>
+			<input type="text" id="point" class="myinput" /><?=$this->tr('POINT')?>
+		</div>
+	</div>
+	<br class="cls" />
+	<div class="tab_recommdation" id="recmdEmpList"></div>
+</div>
+
+

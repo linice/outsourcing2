@@ -1,0 +1,234 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#form_register table {border-collapse: collapse; width: 100%;}
+	#form_register table tr th {background-color: lightgray; border: 1px solid lightgray; font-weight: bold; height: 30px; padding: 0;}
+	#form_register table tr td {background-color: whitesmoke; border: 1px solid lightgray; height: 30px; padding: 0;}
+	#form_register #td_experiences table tr th {text-align: center;}
+	#form_register #td_experiences table tr td {border:0;}
+</style>
+<div id="wraper">
+	<h3 class="tbg_grey">
+		<span class="fr">
+			<a href="/front_lpreg/lpreg" target="_blank">
+				<img src="/img/default/front/<?=$auth->locale?>/btn_register_faren.jpg" width="99" height="24" />
+			</a>
+		</span>
+		<?=$this->tr('MEMBER_LOGIN')?>
+	</h3>
+	<div class="register_intr_c">
+	  <p><?=$this->tr('REGISTER_ILLUSTRATE_1')?></p>
+	  <p><?=$this->tr('REGISTER_ILLUSTRATE_2')?></p>
+	  <p><?=$this->tr('REGISTER_ILLUSTRATE_3')?></p>
+	  <p><?=$this->tr('REGISTER_ILLUSTRATE_4')?></p>
+	  <p><?=$this->tr('REGISTER_ILLUSTRATE_5')?></p>
+	</div>
+  <!--利用規約-->
+	<div class="register_left">
+		<h3 class="tbg_grey"><?=$this->tr('USAGE_TERMS')?></h3>
+	    <textarea name="textarea" class="register_convention" style="background-color:#f3f3f3;">
+	    	<?php include_once 'protocol.phtml';?>
+	    </textarea>
+	</div>
+  <!--会員登録-->
+  <div class="register_right">
+	<form id="form_register" name="form_register" method="post" action="">
+		<h3 class="tbg_grey"><?=$this->tr('MEMBER_LOGIN')?></h3>
+	    <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd" class="tab_register">
+          <tr>
+            <th width="12%" align="right" bgcolor="#FFFFFF"> <span class="fred">*</span> <?=$this->tr('EMAIL_ADDR')?></th>
+            <td width="88%" bgcolor="#FFFFFF"> 
+			<p class="fgrey"><?=$this->tr('REG_EMAIL_ILLUSTRATION_1')?></p>
+            <p><?=$this->tr('REG_EMAIL_ILLUSTRATION_2')?></p>			
+			<p><input type="text" id="email" name="email" class="myinput" style="width:200px;" /></p></td>
+          </tr>
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <span class="fred">*</span> <?=$this->tr('PASSWORD')?></th>
+            <td bgcolor="#FFFFFF">
+				<p class="fgrey"><?=$this->tr('REG_PASSWD_ILLUSTRATION_1')?></p>
+				<p class="fgrey"><?=$this->tr('REG_PASSWD_ILLUSTRATION_2')?></p>
+				<p><input type="password" id="passwd" name="passwd" class="myinput" style="width:200px;" /></p>
+				<p class="fgrey"><?=$this->tr('REG_PASSWD_ILLUSTRATION_3')?></p>
+				<p><input type="password" id="passwd2" name="passwd2" class="myinput" style="width:200px;" /></p>
+			</td>
+          </tr>
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('NICKNAME')?></th>
+            <td bgcolor="#FFFFFF"><input type="text" id="nickname" name="nickname" class="myinput" style="width:200px;" /></td>
+          </tr>
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('PRONOUNCE')?></th>
+            <td bgcolor="#FFFFFF">
+            	<?=$this->tr('LASTNAME')?><input type="text" id="lastname_p" name="lastname_p" class="myinput" style="width:100px;" />
+            	<?=$this->tr('FIRSTNAME')?><input type="text" id="firstname_p" name="firstname_p" class="myinput" style="width:100px;" />
+            </td>
+          </tr>
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('NAME')?></th>
+            <td bgcolor="#FFFFFF">
+            	<?=$this->tr('LASTNAME')?> <input type="text" id="lastname" name="lastname" class="myinput" style="width:100px;" /> 
+            	<?=$this->tr('FIRSTNAME')?> <input type="text" id="firstname" name="firstname" class="myinput" style="width:100px;" />
+            </td>
+          </tr>
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('TEL')?></th>
+            <td bgcolor="#FFFFFF"><input type="text" id="tel" name="tel" class="myinput" style="width:200px;" /></td>
+          </tr>
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('BIRTHDAY')?></th>
+            <td bgcolor="#FFFFFF"><?=$this->tr('GREGORIAN_CALENDAR')?>
+            	<input id="birthday" name="birthday"  type="text" value="" />
+            </td>
+          </tr>
+          <!-- 性　別 -->
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('SEX__')?></th>
+            <td bgcolor="#FFFFFF">
+             	<input type="radio" name="sex" value="M" /><?=$this->tr('M')?>
+            	<input type="radio" name="sex" value="F" /><?=$this->tr('F')?>
+            </td>
+          </tr>
+          <!-- 現住所 -->
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('ACTUAL_RESIDENCE')?></th>
+            <td bgcolor="#FFFFFF">
+	            <select id="country" name="country" style="width:80px;">
+	              <?php foreach ($this->countries as $countryCode => $countryName):?>
+		              <option value="<?=$countryCode?>"><?=$countryName?></option>
+	              <?php endforeach;?>
+	            </select>
+				&nbsp;
+				<select id="province" name="province" style="width:80px;">
+				<?php foreach ($this->provinces as $provinceCode => $provinceName):?>
+	              <option value="<?=$provinceCode?>"><?=$provinceName?></option>
+				<?php endforeach;?>
+				</select>
+			</td>
+          </tr>
+          <!-- 职种和技术 -->
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"> <?=$this->tr('CAREER_AND_SKILL')?></th>
+            <td bgcolor="#FFFFFF" id="td_experiences">
+            <table id="experiences" style="width:100%; border:0; cellspacing:0; cellpadding:0;">
+              <tr>
+                <th align="center"><?=$this->tr('PROUD_OS')?></th>
+                <th align="center"><?=$this->tr('YEARS')?></th>
+                <th align="center"><?=$this->tr('PROUD_INDUSTRY')?></th>
+                <th align="center"><?=$this->tr('YEARS')?></th>
+                <th align="center"><?=$this->tr('PROUD_LANG')?></th>
+                <th align="center"><?=$this->tr('YEARS')?></th>
+              </tr>
+            </table>
+            <div>
+            	<a href="javascript:void(0);" id="btn_addExperience">
+            		<img alt="" src="/img/default/front/<?=$auth->locale?>/btn_add.jpg" />
+            	</a>
+            </div>
+            </td>
+          </tr>
+          <!-- 是否邮件通知 -->
+          <tr>
+            <th align="right" bgcolor="#FFFFFF"><?=$this->tr('MSG_EMAIL')?></th>
+            <td bgcolor="#FFFFFF">
+				<input type="checkbox" id="isReceiveNews" name="isReceiveNews" value="Y" />
+            	<?=$this->tr('ACCEPT')?>
+            </td>
+          </tr>
+          <!-- 推荐人 -->
+          <tr id="tr_referee">
+            <th align="right" bgcolor="#FFFFFF"><?=$this->tr('REFEREE')?></th>
+            <td bgcolor="#FFFFFF">
+            	<input type="text" id="refereeEmail" name="refereeEmail" value="<?=$this->refereeEmail?>" class="myinput" readonly="readonly" style="width:200px;" />
+            	<input type="hidden" id="refereePasswd" name="refereePasswd" value="<?=$this->refereePasswd?>" />
+            </td>
+          </tr>
+        </table>
+		<div class="btn_os">
+			<a href="javascript:void(0);" id="btn_register"><img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_register.jpg"></a>
+		</div>
+		</form>	
+	</div>
+	
+	<br class="cls" />
+</div> <!-- <div id="wraper"> -->
+
+
+<!-- 职种和技术——之一行 -->
+<table id="tr_experience" style="display: none;">
+	<tr>
+		<td align="center">
+			<select name="oss[]" style="width:70px;">
+				<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+			<?php foreach ($this->oss as $osCode => $osName):?>
+				<option value="<?=$osCode?>"><?=$osName?></option>
+			<?php endforeach;?>
+			</select>
+		</td>
+		<td align="center">
+			<select name="ossYears[]" style="width:40px;">
+				<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+			<?php foreach ($this->experienceYears as $ey):?>
+				<option value="<?=$ey?>"><?=$ey?></option>
+			<?php endforeach;?>
+			</select> 
+			<?=$this->tr('YEAR')?>
+		</td>
+		<td align="center">
+			<select name="bizs[]" style="width:70px;">
+				<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+			<?php foreach ($this->bizs as $bizCode => $bizName):?>
+				<option value="<?=$bizCode?>"><?=$bizName?></option>
+			<?php endforeach;?>
+			</select>
+		</td>
+		<td align="center">
+			<select name="bizsYears[]" style="width:40px;">
+				<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+			<?php foreach ($this->experienceYears as $ey):?>
+				<option value="<?=$ey?>"><?=$ey?></option>
+			<?php endforeach;?>
+			</select> 
+			<?=$this->tr('YEAR')?>
+		</td>
+		<td align="center">
+			<select name="fws[]" style="width:70px;">
+				<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+			<?php foreach ($this->fws as $fwCode => $fwName):?>
+				<option value="<?=$fwCode?>"><?=$fwName?></option>
+			<?php endforeach;?>
+			</select>
+		</td>
+		<td align="center">
+			<select name="fwsYears[]" style="width:40px;">
+				<option value=""><?=$this->tr('PLEASE_SELECT')?></option>
+			<?php foreach ($this->experienceYears as $ey):?>
+				<option value="<?=$ey?>"><?=$ey?></option>
+			<?php endforeach;?>
+			</select>
+		  <?=$this->tr('YEAR')?>
+		</td>
+	</tr>
+</table>
+
+
+<!-- 用户注册信息，用于用户注册确认页面 -->
+<form id="c_form_register" action="/front_register/registerconfirm" method="post" style="display:none;" target="_blank">
+	<input id="registerInfo" name="registerInfo" type="hidden" value="" />
+</form>
+
+
+<script type="text/javascript">
+	var provinces = <?=json_encode($this->provinces)?>;
+	var counties = <?=json_encode($this->counties)?>;
+	var oss = <?=json_encode($this->oss)?>;
+	var bizs = <?=json_encode($this->bizs)?>;
+	var fws = <?=json_encode($this->fws)?>;
+	var experienceYears = <?=json_encode($this->experienceYears)?>;
+	var PLEASE_SELECT = '<?=$this->tr('PLEASE_SELECT')?>';
+	var YEAR = '<?=$this->tr('YEAR')?>';
+	var registerInfo = <?=$this->jsRegInfo?>;
+</script>
+<script type="text/javascript" src="/js/default/front/register/register.js"></script>

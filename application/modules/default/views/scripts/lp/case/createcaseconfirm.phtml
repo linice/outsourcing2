@@ -1,0 +1,86 @@
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<h3 class="msg_title"><?=$this->tr("add_new_case")?></h3>
+<div class="notice_con"><?=$this->tr("createcase_confirm_info")?></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_edit_case" style="border-collapse:separate;border-spacing: 1px;">
+	<tr>
+		<th width="22%" align="right" bgcolor="#FFFFFF"> <?=$this->tr("please_choice_careers")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["careersValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("please_choice_languages")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["languagesValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("please_choice_industries")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["industriesValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("case_name")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["name"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_business_req")?></th>
+		<td bgcolor="#FFFFFF"><?=nl2br($this->case["business_req"])?></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_technical_req")?></th>
+        <td bgcolor="#FFFFFF"><?=nl2br($this->case["technical_req"])?></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("case_jpl")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["jplValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_case_range")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["caseRangeValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("case_startdate")?></th>
+		<td bgcolor="#FFFFFF"><?=$this->case["startDateValue"]?></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("case_enddate")?></th>
+		<td bgcolor="#FFFFFF"><?=$this->case["endDateValue"]?></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_delay")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["delayValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("case_working_place")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["workingPlaceValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_unit_price")?> </th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["unitPriceValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_over_pay")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["overtimePayValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_interview")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["interviewerValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_age_reg")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["ageReqValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_country_req")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["countryReqValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"> <?=$this->tr("case_timeliness")?></th>
+		<td bgcolor="#FFFFFF"><?=$this->case["timeliness"]?></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_visibility")?></th>
+		<td bgcolor="#FFFFFF"><label><?=$this->case["visibilityValue"]?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_remark")?></th>
+		<td bgcolor="#FFFFFF"><?=nl2br($this->case["remark"])?></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_recommend")?></th>
+		<td bgcolor="#FFFFFF"><?=$this->case["akb"]?></td>
+	</tr>
+</table>
+<div class="btn_center">
+	<label>
+		<input type="image" id="btn_publish" src="/img/default/front/<?=$auth->locale?>/btn_release.jpg" class="marR" />
+	</label><label>
+		<input type="image" id="btn_back" src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" />
+	</label>
+</div>
+</div>
+
+<form id="form_confirm" name="form_confirm" method="post" action="">
+	<input type="hidden" id="caseId" name="caseId" value="<?=$this->caseId?>"/>
+	<input id="case" name="case" type="hidden" value='<?=json_encode($this->saveCase)?>' />
+	<input id="orgCase" name="orgCase" type="hidden" value='<?=json_encode($this->orgCase)?>' />
+</form>
+
+<script type="text/javascript" src="/js/default/lp/case/createcaseconfirm.js"></script>

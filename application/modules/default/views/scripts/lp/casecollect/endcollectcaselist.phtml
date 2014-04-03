@@ -1,0 +1,231 @@
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<div id="tab1">
+	<ul><li><a href="/lp_casecollect/incollectcaselist" target="_self"><?=$this->tr("in_collect_case_list")?></a></li>
+	<li class="now"><?=$this->tr("end_collect_case_list")?></li></ul>
+</div>
+<div id="tablist1">
+	<div class="case_search">
+		<div class="search_left">
+			<img src="/img/default/lp/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" />
+			<select name="select" class="myselect">
+				<option value="all"><?=$this->tr("case_all")?></option>
+				<option value="code"><?=$this->tr("case_id")?></option>
+				<option value="name"><?=$this->tr("case_name")?></option>
+			</select>
+			<label><input type="text" id="caseName" class="myinput" /></label>
+			<label><input type="checkbox" name="checkbox" value="checkbox" /></label>
+			<?=$this->tr("interview_has")?><input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+   		</div>
+		<div class="search_right">
+			<a href="/lp_case/endcollectcaselistex" target="_blank">
+				<span class="case_lie_list"><?=$this->tr("cases_expend")?></span></a>
+		</div>
+		<br class="cls" />
+	</div>
+</div>
+  
+<div class="search_result_lie01">
+	<div id="caselist"></div>  
+</div>
+
+<div class="btn_os">
+<a href="javascript:void(0)" id="closeBtn"> <img
+	src="/img/default/lp/<?=$auth->locale?>/btn_close.jpg" width="80" height="30"
+	class="btn_marR" /> </a></div>
+</div>
+
+<div id="detail" style="display: none;">
+<div class="case_search_expand">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><span id="viewers"></span><?=$this->tr("unit_person")?></span><span id="name"></span></h2>
+<ul class="case_lie02_time">
+<li><?=$this->tr("case_release_date")?>：<span id="release_date"></span></li>
+<li><?=$this->tr("case_timeliness")?>：<span id="timeliness"></span></li>
+<li><?=$this->tr("case_lp_code")?>：<span id="lp_code"></span></li>
+<li><?=$this->tr("case_lp_name")?>：<span id="lp_name"></span></li>
+</ul>
+<div class="case_lie02_con">
+	<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr><td colspan="3" >【<?=$this->tr("case_business_req")?>】<span id="business_req"></span></td>
+	</tr>
+	<tr><td colspan="3" >【<?=$this->tr("case_technical_req")?>】<span id="technical_req"></span></td>
+	</tr>
+    <tr><td width="36%" >【<?=$this->tr("case_jpl")?>】<span id="jplValue"></span></td>
+		<td width="28%" >【<?=$this->tr("case_interview")?>】<span id="interviewerValue"></span></td>
+		<td width="36%" rowspan="5" align="center" >
+		<a href="javascript:void(0)" id="viewDetail">
+			<img src="/img/default/lp/<?=$auth->locale?>/btn_defend.jpg" width="80" height="30" border="0" class="marB" />
+		</a><br />
+		<a href="javascript:void(0)" id="applyManager">
+			<img src="/img/default/lp/<?=$auth->locale?>/btn_manage.jpg" width="80" height="30" border="0" />
+		</a>
+		</td>
+	</tr>
+	<tr><td >【<?=$this->tr("case_case_range")?>】<span id="caseRangeValue"></span></td>
+		<td >【<?=$this->tr("case_age_reg")?>】<span id="ageReqValue"></span></td>
+	</tr>
+	<tr><td >【<?=$this->tr("case_end_range")?>　　】<span id="endDateValue"></span></td>
+		<td >【<?=$this->tr("case_country_req")?>】<span id="countryReqValue"></span> </td>
+	</tr>
+	<tr><td >【<?=$this->tr("case_delay")?>】<span id="delayValue"></span></td>
+		<td >【<?=$this->tr("case_unit_price")?>　　】<span id="interviewerValue"></span></td>
+	</tr>
+	<tr><td >【<?=$this->tr("case_working_place")?>】<span id="workingPlaceValue"></span> </td>
+		<td >【<?=$this->tr("case_overtime_pay")?>　　】<span id="overtimePayValue"></span></td>
+	</tr>
+</table>
+</div>
+</div>
+</div>
+
+<form id="dynForm" style="display:none;" method="post" target="_self">
+<input id="caseId" name="caseId"/>
+<input id="caseType" name="caseType"/>
+</form>
+<script>
+$(function() {
+	var url = "/lp_casecollect/searchendcases";
+	
+	$("#caselist").ligerGrid({
+		checkbox: true,
+		checkboxColWidth: 30,
+        columns: [{display: '案件ID', name: 'code'},
+                  {display: '案件名', name: 'name'},
+                  {display: '业务要求', name: 'businessReqValue'},
+                  {display: '技术要求', name: 'technicalReqValue'},
+                  {display: '开始时间', name: 'startDateValue'},
+                  {display: '期间', name: 'endDateValue'},
+                  {display: '勤务地', name: 'workingPlaceValue'},
+                  {display: '单价/月', name: 'unitPriceValue'},
+                  {display: '时效性', name: 'timeliness'},
+                  {display: '相关操作', render: opFunction, align: "center", width:80}],
+        url: url,
+        //height: "auto", 
+        width: "100%",
+        columnWidth: 90,
+        isScroll: false, frozen:false,
+        //rowHeight: 
+        detail: {onShowDetail: showDetail, height: "auto"},
+        pageSize: 20
+    });
+
+	var manager = $("#caselist").ligerGetGridManager(); 
+
+    $("#searchBtn").click(function() {
+    	var caseName = $("#caseName").val();
+		var range = $("#range").val();
+		manager.loadServerData({"casename": caseName, "range": range});
+    });
+
+    function opFunction(rowData, rowIndex) {
+    	return '<a href="javascript:void(0)" onclick="managerCase('+rowData.id+')">应聘管理</a>';
+    }
+
+    function showDetail(rowData, detailPanel) {
+		$("#detail").find("span[id]").each(function() {
+			$(this).text(rowData[$(this).attr("id")]);
+		});
+		$(detailPanel).append($("#detail").html());
+		$(detailPanel).find("#viewDetail").click(function() {
+			editCase(rowData.id);
+		});
+		$(detailPanel).find("#applyManager").click(function() {
+			managerCase(rowData.id);
+		});
+	}
+
+    $("#cancelAttention").click(function() {
+    	var row = manager.getSelecteds();
+    	if (!!row && row.length > 0) {
+			if (confirm("确定要取消关注选中的案件?")) {
+				var ids = "";
+				$.each(row, function(i, v) {
+					ids += v.id;
+					ids += ",";
+				});
+				ids = ids.substring(0, ids.length-1);
+				$.ajax({
+					url: '/lp_case/cancelattention',
+					type: 'post',
+					async: false,
+					dataType: 'json', //xml, json, script or html
+					data: {ids: ids},
+					success: function(data, textStatus, jqXHR) {
+						if (data['err'] == 0) {
+							alert(data['msg']);
+							$("#searchBtn").click();
+						} else {
+							alert(data['msg']);
+						}
+					}
+				});
+			}
+		} else 
+	    	alert("请选择需要取消关注的案件!");
+    	return false;
+    });
+
+    $("#closeBtn").click(function() {
+    	var rows = manager.getSelecteds();
+    	closeCase(rows);
+    });
+});
+function editCase(id) {///lp_case/casedetail
+	$("#dynForm").attr("action", "/lp_case/casedetail");
+	$("#dynForm").find("#caseId").val(id);
+	$("#dynForm").find("#caseType").val("noButton");
+	$("#dynForm").submit();
+}
+
+function managerCase(id) {
+	$("#dynForm").attr("action", "/lp_caseapply/caseapplymgt");
+	$("#dynForm").find("#caseId").val(id);
+	$("#dynForm").submit();
+}
+
+function closeCase(rows) {
+	if (!rows || rows.length == 0) {
+		alert("请选择需要关闭的案件!");
+		return false;
+	}
+	rows = rows || [{code: caseCode, name: caseName, id: caseId}];
+	var html = ['<div style="width:500px;"><div class="notice_con">你确定是否关闭下面的案件？</div>'];
+	html.push('<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_del">');
+	html.push('<tr>');
+	html.push('<th width="25%">案件ID</th>');
+	html.push('<th width="75%" align="left"> 案件名 </th>');
+	html.push('</tr>');
+	$.each(rows, function(i, v) {
+		html.push('<tr>');
+		html.push('<th width="25%">'+v.code+'</th>');
+		html.push('<th width="75%" align="left"> '+v.name+' </th>');
+		html.push('</tr>');
+	});
+	html.push('</table>');
+	html.push('</div>');
+	html = html.join("");
+	ligerConfirm("法人关闭案件", html, {width: 550}, function() {
+		var ids = "";
+		$.each(rows, function(i, v) {
+			ids += v.id;
+			ids += ",";
+		});
+		ids = ids.substring(0, ids.length-1);
+		$.ajax({
+			url: '/lp_case/closecaseinjson',
+			type: 'post',
+			async: false,
+			dataType: 'json', //xml, json, script or html
+			data: {ids: ids},
+			success: function(data, textStatus, jqXHR) {
+				if (data['err'] == 0) {
+					alert(data['msg']);
+					$("#searchBtn").click();
+				} else {
+					alert(data['msg']);
+				} 
+			}
+		});
+	});
+}
+</script>

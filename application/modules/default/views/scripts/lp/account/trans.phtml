@@ -1,0 +1,68 @@
+<SCRIPT LANGUAGE="JavaScript">
+window.onload = function() {
+    doubleBgColor(document.getElementById("tab_list"),"#f3f3f3","#FFFFFF");
+	doubleBgColor(document.getElementById("tab_list_end"),"#f3f3f3","#FFFFFF");
+}
+
+function doubleBgColor(Table,Bg1,Bg2) {
+    for (var i=0;i<Table.rows.length;i++) Table.rows[i].bgColor=i%2?Bg2:Bg1;
+}
+</SCRIPT>
+
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<h3 class="msg_title_bg">法人点数历史查询</h3>
+	<form id="form1" name="form1" method="post" action="">
+	<div class="rujin_info_search">
+	<ul>
+	<li class="w01">区间：</li>
+	<li class="w02"><label><input type="text" name="textfield" class="myinput" /></label></li>
+	<li> ～</li>
+	<li class="w02"><label><input type="text" name="textfield" class="myinput" /></label></li>
+	<li class="w01">分类：</li>
+	<li class="w02">
+	<label>
+	  <select name="select" class="myselect">
+	    </select>
+	  </label>
+	</li>
+	<li>
+	  <label>
+	  <input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_cx.gif" />
+	  </label>
+	</li>
+	</ul>
+  </div>
+  <div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_search_list">
+    <tr>
+      <th width="7%" align="center">日期</th>
+      <th width="19%" align="center">分类</th>
+      <th width="12%" align="center">点数</th>
+      <th width="12%" align="center">剩余</th>
+      <th width="12%" align="center">用途</th>
+      <th width="14%" align="center">备考 </th>
+      <th width="12%" align="center"> 操作人员</th>
+      </tr>
+    <tr>
+      <td align="center">2011/1/1</td>
+      <td align="center">入</td>
+      <td align="center">300</td>
+      <td align="center">300</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+      </tr>
+	  <tr>
+      <td align="center">2011/1/1</td>
+      <td align="center">出 </td>
+      <td align="center">10</td>
+      <td align="center">290</td>
+      <td align="center">案件竞价</td>
+      <td align="center">案件ID</td>
+      <td align="center">管理员</td>
+      </tr>
+	</table>
+	</div>
+  </form>
+</div>

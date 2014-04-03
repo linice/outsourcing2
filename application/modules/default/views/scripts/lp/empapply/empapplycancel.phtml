@@ -1,0 +1,76 @@
+<SCRIPT LANGUAGE="JavaScript">
+window.onload = function() {
+    doubleBgColor(document.getElementById("tab_list"),"#f3f3f3","#FFFFFF");
+	doubleBgColor(document.getElementById("tab_list_end"),"#f3f3f3","#FFFFFF");
+}
+
+function doubleBgColor(Table,Bg1,Bg2) {
+    for (var i=0;i<Table.rows.length;i++) Table.rows[i].bgColor=i%2?Bg2:Bg1;
+}
+</SCRIPT>
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<form id="form1" name="form1" method="post" action="">
+	<div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_search_list">
+    <tr>
+      <th width="10%" align="center">案件ID</th>
+      <th width="21%" align="center">案件名</th>
+      <th width="11%" align="center">取消者</th>
+      <th width="11%">取消阶段</th>
+      <th width="17%">理由选择（必须）</th>
+      <th width="30%" align="left">其他（可不填写）</th>
+      </tr>
+    <tr>
+      <td align="center">A000001 </td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">法人集</td>
+      <td align="center">应聘中</td>
+      <td align="center">
+        <label>
+          <select name="select" class="cancel_select">
+            <option>技术不足</option>
+            <option>日语不足</option>
+            <option>经验不足</option>
+            <option>其它</option>
+          </select>
+          </label>
+     
+      </td>
+      <td align="left"><label>
+        <input type="text" name="textfield" class="cancel_input" />
+      </label></td>
+      </tr>
+   <tr>
+      <td align="center">A000001 </td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">法人集</td>
+      <td align="center">应聘中</td>
+      <td align="center">
+        <label>
+          <select name="select" class="cancel_select">
+            <option>技术不足</option>
+            <option>日语不足</option>
+            <option>经验不足</option>
+            <option>其它</option>
+          </select>
+          </label>
+     
+      </td>
+      <td align="left"><label>
+        <input type="text" name="textfield" class="cancel_input" />
+      </label></td>
+      </tr>
+  </table>
+  
+</div>
+
+<div class="btn_os">
+  <label>
+  <input type="image" id="btn_confirm" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" class="btn_marR" />
+  </label>
+</div>
+ </form>
+</div>
+
+<script src="/js/default/lp/empapply/empapplycancel.js" type="text/javascript"></script>

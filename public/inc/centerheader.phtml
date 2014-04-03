@@ -1,0 +1,7 @@
+<?php 
+$auth = new Zend_Session_Namespace('AUTH');
+if ($auth->usr['role_code'] == 'LP') {
+	include_once 'inc/lpcenterheader.phtml';
+} else if ($auth->usr['role_code'] == 'MEMBER') {
+	include_once 'inc/usrcenterheader.phtml';
+}

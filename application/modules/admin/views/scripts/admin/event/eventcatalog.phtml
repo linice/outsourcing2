@@ -1,0 +1,71 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+<h3 class="t_top"><?=$this->tr('event_catalog')?></h3>
+<div id="cataloglist"></div>
+  
+<div class="btn_os">
+	<img id="addBtn" src="/img/default/front/<?=$auth->locale?>/btn_add.gif" />
+	<img id="editBtn" src="/img/default/front/<?=$auth->locale?>/btn_edit.jpg" class="marR" />
+	<img id="delBtn" src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" class="marR" />
+</div>
+</div>
+
+<div class="floatdiv_event" id="catalog_panel" style="display: none">
+<form id="form1" name="form1" method="post" action="" class="divForm">
+<h3 class="floatdiv_event_t">
+	<span class="fr">
+	<a href="javascript:void(0);" name="cancelDiv">
+		<img src="/img/default/front/<?=$auth->locale?>/icon_close.jpg" width="18" height="18" border="0" />
+	</a></span><?=$this->tr('EVENT_JOIN')?>
+</h3>
+<div class="input_line">
+	<label class="float_input_title"><?=$this->tr('EVENT_JOIN_NUMBER')?>：</label> 
+	<input type="hidden" name="event_id" value="<?=$this->detail['id']?>"/>
+	<input type="hidden" name="type" value="regist"/>
+	<label><input type="text" name="regist_num" class="float_input" format="int"/></label>
+</div>
+<div class="input_line">
+	<label class="float_input_title"><?=$this->tr('EVENT_MESSAGE')?>：</label> 
+	<label><input type="text" name="content" class="float_input" /></label>
+</div>
+</form>
+<div class="input_line">
+	<label class="float_input_title">&nbsp;</label>
+	<label> <input type="image" name="imageField2" src="/img/default/front/<?=$auth->locale?>/btn_tj.jpg" /> </label>
+</div></div>
+
+<script>
+var eventType = <?=json_encode($this->eventType)?>;
+var EVENT_CATALOG = '<?=$this->tr('event_catalog')?>';
+$(function() {
+	$("#cataloglist").ligerGrid({
+		checkbox: true,
+		columns: [{display: EVENT_CATALOG, name: "name", width: '95%'}],
+		pageSize: eventType.length,
+		usePager: false,
+		columnWidth: 280,
+		data: {"Total": eventType.length, "Rows": eventType}
+	});
+	manager = $("#cataloglist").ligerGetGridManager();
+	
+	$("#addBtn").click(function() {
+		window.location.href="/admin/admin_event/addeventcatalog"
+	})
+	
+	$("#editBtn").click(function() {
+		var rows = manager.getSelecteds();
+		if (!rows || rows.length != 1) {
+			alert("必须选择一条记录!");
+			return false;
+		}
+		window.location.href="/admin/admin_event/addeventcatalog/fid/"+rows[0].id
+	})
+	
+	
+
+	
+})
+</script>

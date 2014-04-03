@@ -1,0 +1,310 @@
+<link href="/css/default/lp/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<div class="con_faren_center">
+	<div class="news_note_num"><?=$this->tr("has_new_notice")?>
+		<span class="fred">
+			(<a href="/msg_msg/msg"><?=$this->msgsCnt?><?=$this->tr("unit_piece")?></a>)
+		</span>
+	</div>
+	
+	<h3 class="note_t"><?=$this->tr('LOGIN_EMAIL')?></h3>	
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+      <tr>
+        <td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr('EMAIL')?>：</td>
+        <td width="78%" bgcolor="#f7f7ff" class="fgrey">
+        	<?=$auth->usr['email']?>
+        	<span class="btn_bg">
+        		<a href="/usr_usr/chgemail"><?=$this->tr('MODIFY')?></a>
+        	</span>
+        </td>
+      </tr>
+    </table>    
+	
+	<!-- 会员基本情报设定 -->
+	<h3 class="note_t"><?=$this->tr('MEMBER_BASEINFO_SETTING')?></h3>
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+		<tr>
+			<td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr('USR_ID')?>：</td>
+			<td width="78%" bgcolor="#f7f7ff" class="fblue">
+				<?=$auth->usr["code"]?>
+				<span class="fgrey"><?=$this->tr("usr_id_cannot_modify")?></span>
+			</td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("member_baseinfo")?>：</td>
+			<td bgcolor="#f7f7ff" class="fgrey">
+				<span class="btn_bg"><a href="/lp_lp/baseinfo"><?=$this->tr('MODIFY')?></a></span>
+			<?=$this->tr("baseinfo_modify_detail")?></td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("last_login_time")?>：</td>
+			<td bgcolor="#f7f7ff" class="fblue"><?=substr($auth->usr["last_login_time"], 0, 10) ?></td>
+		</tr>
+	</table>
+
+	<!-- 人员案件管理设定 -->
+	<h3 class="note_t"><?=$this->tr("member_case_manager")?></h3>
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+		<tr>
+			<td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr("release_case_count")?>：</td>
+			<td width="78%" bgcolor="#f7f7ff">
+				<span class="fred">
+					<a href="/lp_casecollect/incollectcaselist">
+						<?=$this->caseCount?><?=$this->tr("unit_piece")?>
+					</a>
+				</span>
+				<?=$this->tr("please_click")?>
+				<a href="/lp_case/createcase" ><?=$this->tr("add_new_case")?></a>
+			</td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("reg_emp_count")?>：</td>
+			<td bgcolor="#f7f7ff">
+				<span class="fred">
+					<a href="/lp_emp/emplist" ><?=$this->empCount?><?=$this->tr("unit_person")?></a>
+				</span> 
+				<?=$this->tr("please_click")?> 
+				<a href="/usr_resume/createresume" ><?=$this->tr("add_new_emp")?></a> 
+				<?=$this->tr("please_click")?> 
+				<a href="/file_resume/uploadresume" ><?=$this->tr("upload_emp_resume")?></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<?=$this->tr('RESUME_DRAFT')?>
+				<span class="fblue"><?=$this->unabledResumeCount;?></span>
+				<?=$this->tr('unit_piece')?>
+			</td>
+		</tr>
+	</table>
+	
+	<!-- 通知邮件设定 -->
+	<h3 class="note_t"><?=$this->tr("notice_email_setting")?></h3>
+	<form id="lpsettingform" method="post">
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+		<?
+		$ls5 = NULL; $ls6 = NULL; $ls7 = NULL;
+		if(!empty($this->lpSetting) && count($this->lpSetting) > 0) {
+			$ls5 = $this->lpSetting['Ls5'];
+			$ls6 = $this->lpSetting['Ls6'];
+			$ls7 = $this->lpSetting['Ls7'];
+		}?>
+		<tr>
+			<td width="22%" align="right" bgcolor="#f7f7ff">
+				<?=$this->tr("notice_email_list_setting")?>：
+			</td><td width="39%" bgcolor="#f7f7ff">
+				 <input type="radio" name="ls5OnOrOff" value="Y" <?if(empty($ls5) || empty($ls5['on_or_off']) || $ls5['on_or_off']=='Y'):?>checked<?endif;?>/> 
+				<?=$this->tr("Y")?>&nbsp;&nbsp; 
+				<input type="radio" name="ls5OnOrOff" value="N" <?if(!empty($ls5) && $ls5['on_or_off']=='N'):?>checked<?endif;?>/>
+				<?=$this->tr("N")?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<?=$this->tr("notice_rate_setting")?> 
+				<select name="ls5Rete" class="input_select">
+					<option value="1" <?if(empty($ls5) || $ls5['rete']=='1'):?>selected<?endif;?>><?=$this->tr("day_one")?></option>
+					<option value="10" <?if(!empty($ls5) && $ls5['rete']=='10'):?>selected<?endif;?>><?=$this->tr("day_ten")?></option>
+				</select> 
+			</td>
+			<td width="39%" rowspan="2" bgcolor="#f7f7ff">
+				<span class="btn_bg" id="lpsettingmodifyBtn">
+					<a href="javascript:void(0);" ><?=$this->tr('MODIFY')?></a>
+				</span>
+			</td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("new_case_notice_setting")?>：</td>
+			<td bgcolor="#f7f7ff">
+				<input type="radio" name="ls6OnOrOff" value="Y" <?if(empty($ls6) || empty($ls6['on_or_off']) ||$ls6['on_or_off']=='Y'):?>checked<?endif;?>/> 
+				<?=$this->tr("Y")?>&nbsp;&nbsp;
+			 
+				<input type="radio"name="ls6OnOrOff" value="N" <?if(!empty($ls6) && $ls6['on_or_off']=='N'):?>checked<?endif;?>/>
+				<?=$this->tr("N")?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<?=$this->tr("notice_rate_setting")?> 
+			 
+				<select name="ls6Rete" class="input_select">
+					<option value="1" <?if(empty($ls6) || $ls6['rete']=='1'):?>selected<?endif;?>><?=$this->tr("day_one")?></option>
+					<option value="10" <?if(!empty($ls6) && $ls6['rete']=='10'):?>selected<?endif;?>><?=$this->tr("day_ten")?></option>
+				</select>
+			</td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("new_emp_notice_setting")?>：</td>
+			<td bgcolor="#f7f7ff">
+				<input type="radio" name="ls7OnOrOff" value="Y" <?if(empty($ls7) || empty($ls7['on_or_off']) ||$ls7['on_or_off']=='Y'):?>checked<?endif;?>/> 
+				<?=$this->tr("Y")?>&nbsp;&nbsp;
+			 
+				<input type="radio" name="ls7OnOrOff" value="N" <?if(!empty($ls7) && $ls7['on_or_off']=='N'):?>checked<?endif;?>/>
+				<?=$this->tr("N")?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<?=$this->tr("notice_rate_setting")?> 
+			
+				<select name="ls7Rete" class="input_select">
+					<option value="1" <?if(empty($ls7) || $ls7['rete']=='1'):?>selected<?endif;?>><?=$this->tr("day_one")?></option>
+					<option value="10" <?if(!empty($ls7) && $ls7['rete']=='10'):?>selected<?endif;?>><?=$this->tr("day_ten")?></option>
+				</select>
+			</td>
+			<td bgcolor="#f7f7ff">&nbsp;</td>
+		</tr>
+	</table>
+	</form>
+	
+	<!-- 服务一览设定 -->
+	<h3 class="note_t"><?=$this->tr("service_setting")?></h3>
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+		<tr>
+			<td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr("usr_baseinfo_view_service")?>：</td>
+			<?$eff1 = !empty($auth->usr['services']) ? $auth->usr['services']['Ls1']['effective'] : 'N';?>
+			<td width="78%" bgcolor="#f7f7ff"  id="Ls1">
+			<?if(empty($eff1)):?><span class="fred"><?=$this->tr("service_off")?></span>
+			<?elseif ($eff1=='N'):?><span class="fred"><?=$this->tr("service_is_over_time")?><!-- <?=$this->tr("turn_on_the_service")?> --></span>
+			<?else:?>
+			<span class="fblue"><?=$this->tr("service_on").'   '.$this->tr("service_effective_limit_date").' '.$auth->usr['services']['Ls1']['end_date']?></span>
+			<?endif;?></td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("casename_lightheight_service")?>：</td>
+			<?$eff2 = !empty($auth->usr['services']) ? $auth->usr['services']['Ls2']['effective'] : 'N';?>
+			<td width="78%" bgcolor="#f7f7ff"  id="Ls2">
+			<?if(empty($eff2)):?><span class="fred"><?=$this->tr("service_off")?></span>
+			<?elseif ($eff2=='N'):?><span class="fred"><?=$this->tr("service_is_over_time")?><!-- <?=$this->tr("turn_on_the_service")?> --></span>
+			<?else:?>
+			<span class="fblue"><?=$this->tr("service_on").'   '.$this->tr("service_effective_limit_date").' '.$auth->usr['services']['Ls2']['end_date']?></span>
+			<?endif;?></td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("proposal_external_service")?>：</td>
+			<?$eff3 = !empty($auth->usr['services']) ? $auth->usr['services']['Ls3']['effective'] : 'N';?>
+			<td width="78%" bgcolor="#f7f7ff"  id="Ls3">
+			<?if(empty($eff3)):?><span class="fred"><?=$this->tr("service_off")?></span>
+			<?elseif ($eff3=='N'):?><span class="fred"><?=$this->tr("service_is_over_time")?><!-- <?=$this->tr("turn_on_the_service")?> --></span>
+			<?else:?>
+			<span class="fblue"><?=$this->tr("service_on").'   '.$this->tr("service_effective_limit_date").' '.$auth->usr['services']['Ls3']['end_date']?></span>
+			<?endif;?></td>
+		</tr><tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("recommend_case_competitive_service")?>：</td>
+			<td bgcolor="#f7f7ff" class="fblue"><?=$this->tr('current_akb_count')?>:<?=$auth->usr['balance']?> <?=$this->tr('unit_point')?></td>
+		</tr>
+	</table>
+	
+	<!-- 提案模板设定 -->
+	<h3 class="note_t"><?=$this->tr("proposal_layout_setting")?></h3>
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+		<tr>
+			<td align="left" bgcolor="#f7f7ff">
+				<input type="radio" name="lp_propose_temp" value="temp1" />
+				<?=$this->tr("layout_1")?>：&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:void(0);" name="preview"><?=$this->tr('preview')?></a>
+				<!-- 模板1 -->
+				<div id="mould1" class="floatdiv" style="display:none;">
+					<h3 class="floatdiv_t mould1">
+						<span class="fr">
+							<input name="closeBtn" type="image" src="/img/default/front/<?=$auth->locale?>/close.gif" width="17" height="17" />
+						</span>
+						<?=$this->tr("email_notice_layout")?><!-- 您提案的人员信息将以以下形式表现 -->
+					</h3>
+					<div class="conU">
+						<P class="marB">ID，性别,年龄，经验（日本经验），技术的前三种，日语，稼动日，单价</P>
+						<p class="marB fblue">备注：</p>
+						<P class="marB">
+							Usr0001，男，29，经验8年（日本5年），java 3年，cobol 2年，c
+							0.5年，日语1级相当，稼动日：4月1日开始 预定，单价：20万日元<br />
+							备注：性格开朗，做事认真
+						</P>
+					</div>
+				</div>
+			</td>
+			<td width="39%" rowspan="3" bgcolor="#f7f7ff">
+				<span class="btn_bg">
+					<a href="javascript:void(0)" id="updTempBtn"><?=$this->tr('MODIFY')?></a>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" bgcolor="#f7f7ff">
+				<input type="radio" name="lp_propose_temp" value="temp2" /> 
+				<?=$this->tr("layout_2")?>：&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:void(0);" name="preview"><?=$this->tr("preview")?></a>
+				<!-- 模板2 -->
+				<div class="floatdiv" id="mould2" style="display:none;">
+					<h3 class="floatdiv_t mould2">
+						<span class="fr">
+							<input name="closeBtn" type="image" src="/img/default/front/<?=$auth->locale?>/close.gif" width="17" height="17" />
+						</span>
+						<?=$this->tr("email_notice_layout")?><!-- 您提案的人员信息将以以下形式表现 -->
+					</h3>
+					<div class="conU">
+						【员工ID】Usr0001<br />
+						【性 别】男<br />
+						【年 龄】29<br />
+						【经 验】8年（日本5年）<br />
+						【技 术】java 3年，cobol 2年，c 0.5年<br />
+						【日 语】日语1级相当<br />
+						【稼动日】4月1日开始 预定<br />
+						【单 价】20万日元<br />
+						【其 他】性格开朗，做事认真
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" bgcolor="#f7f7ff">
+				<input type="checkbox" name="checkbox" value="checkbox" />
+				<?=$this->tr("append_info")?>：&nbsp;&nbsp;
+				<a href="javascript:void(0);" name="preview" id="emailOption"><?=$this->tr("preview")?></a>
+				<!-- 附加信息 -->
+				<div class="floatdiv" id="info_set" style="display: none;">
+					<h3 class="floatdiv_t">
+						<span class="fr">
+							<input name="closeBtn" type="image" src="/img/default/front/<?=$auth->locale?>/close.gif" width="17" height="17" />
+						</span>
+						<?=$this->tr("email_notice_layout")?><!-- 您提案的人员信息将以以下形式表现 -->
+					</h3>
+					<div class="conU">
+						<form id="form1" name="form1" method="post" action="">
+							<p><?=$this->tr("email_header_setting")?>：</p>
+							<p class="marB">
+								<textarea name="layoutHeader" class="mytextarea"></textarea>
+							</p>
+							<p>
+								<input type="radio" name="layout" value="temp1" />
+								<?=$this->tr("layout_1")?>
+							 	&nbsp;&nbsp; 
+								<input type="radio" name="layout" value="temp2" />
+								<?=$this->tr("layout_2")?>
+							</p>
+							<p><?=$this->tr("email_footer_setting")?>：</p>
+							<p class="marB">
+								<textarea name="layoutFooter" class="mytextarea"></textarea>
+							</p>
+						</form>
+						<P>
+							<a href="javascript:void(0);" id="layoutSubmitBtn">
+								<img src="/img/default/lp/<?=$auth->locale?>/btn_green_ok.jpg" class="btn_marR" />
+							</a>
+							<a href="javascript:void(0);" id="layoutCancelBtn">
+								<img src="/img/default/lp/<?=$auth->locale?>/btn_dis_grey.jpg" />
+							</a>
+						</P>
+					</div>
+				</div>
+				<div class="floatdiv" id="info_preview" style="display: none;">
+					<input id="temp1Header" type="text" value="" />
+					<input id="temp1Footer" type="text" value="" />
+					<input id="temp2Header" type="text" value="" />
+					<input id="temp2Footer" type="text" value="" />
+				</div>
+			</td>
+		</tr>
+	</table>
+	
+	
+	<!-- 退会设定 -->
+	<!--<h3 class="note_t"><?=$this->tr("quit_setting")?></h3>
+	<div class="tip" id="tip_unsubscribe"></div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+		<tr>
+			<td width="22%" align="left" bgcolor="#f7f7ff">
+				<?=$this->tr("quit_explain")?>
+				<span class="btn_bg">
+					<a href="javascript:void(0)" id="btn_unsubscribe"><?=$this->tr("quit_procedure")?></a>
+				</span>
+			</td>
+		</tr>
+	</table>
+--></div>
+</div> <!-- <div id="wraper"> -->
+
+
+<script type="text/javascript">
+	var lp_propose_temp = '<?=$auth->usr['lp_propose_temp']?>';
+	var CONFIRM_UNSUBSCRIBE = '<?=$this->tr('CONFIRM_UNSUBSCRIBE')?>';
+</script>
+<script src="/js/default/lp/lp/lp.js" type="text/javascript"></script>

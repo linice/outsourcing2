@@ -1,0 +1,184 @@
+<form id="form_resumeBiz" name="form_resumeBiz" method="post" action="">
+<div style="font-size: 20px; font-weight: bold; padding-top: 10px;">【<?=$this->tr('BIZ_EXPERIENCE')?>】</div>
+<div class="resume_base_info">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_resume" align="center">
+    <tr>
+      <th width="7%" style="border-style: none none double none; background-color: #d9ffff; text-align: center;"><?=$this->tr('BIZ_YEARS')?></th>
+      <td colspan="10" style="border-style: none none double none; background-color: white; text-align: center;">
+      	<?=$this->tr('SOFTWARE_RELATIONAL_BIZ')?>
+      	（<?=$this->tr('BIZ_LEVEL_A')?>：<?=$this->tr('DIRECT')?>　　<?=$this->tr('BIZ_LEVEL_B')?>：<?=$this->tr('PROFICIENT')?>　　
+      		<?=$this->tr('BIZ_LEVEL_C')?>：<?=$this->tr('INDICATE')?>　　<?=$this->tr('BIZ_LEVEL_D')?>：<?=$this->tr('STUDYING')?>）
+      </td>
+    </tr>
+    <tr>
+      <th rowspan="2" align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('OS')?></th>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;<?=$this->tr('WIN_NT_2K')?></td>
+      <td width="10%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;<?=$this->tr('WIN_XP')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;<?=$this->tr('LINUX_UNIX')?></td>
+      <td width="10%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;<?=$this->tr('OS390')?></td>
+      <td width="10%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;<?=$this->tr('WEB_SPHERE')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;<?=$this->tr('ANDROID')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;<?=$this->tr('IPHONE')?></td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;
+		<?php if (isset($this->bizResumeBizs['os_other1']['biz_name'])) {
+			echo $this->bizResumeBizs['os_other1']['biz_name'];
+		}?>
+      </td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;
+        <?php if (isset($this->bizResumeBizs['os_other2']['biz_name'])) {
+			echo $this->bizResumeBizs['os_other2']['biz_name'];
+		}?>
+      </td>
+      <td width="9%" align="center" bgcolor="#d9ffff" class="w86">&nbsp;
+	  	<?php if (isset($this->bizResumeBizs['os_other3']['biz_name'])) {
+			echo $this->bizResumeBizs['os_other3']['biz_name'];
+		}?>
+      </td>
+    </tr>
+	<tr>      
+		<?php foreach ($this->oss as $os):?>
+	      <td height="28" align="center" >&nbsp;
+	        <span id="<?=$os?>_level"></span>
+			<span id="<?=$os?>_age"></span>
+	      </td>
+    	<?php endforeach;?>
+    	<?php for ($i = 0; $i < 3; $i++):?>
+	      <td align="center" >&nbsp;
+	      	<span id="os_other<?=$i+1?>_level"></span>
+			<span id="os_other<?=$i+1?>_age"></span>
+	       </td>
+    	<?php endfor;?>
+    </tr>
+    <tr>
+      <th rowspan="2" align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('DB')?></th>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('ORACLE')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('SQL_SERVER')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('ACCESS')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('DB2')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('HIRDB')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('MYSQL')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('PL_SQL')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('SYBASE')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('INFORMIX')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;
+      	<?php if (isset($this->bizResumeBizs['db_other']['biz_name'])) {
+			echo $this->bizResumeBizs['db_other']['biz_name'];
+		}?>
+	  </td>
+    </tr>
+    <tr>
+    	<?php foreach ($this->dbs as $db):?>
+	      <td height="28" align="center" >&nbsp;
+	        <span id="<?=$db?>_level"></span>
+			<span id="<?=$db?>_age"></span>    
+		  </td>
+		<?php endforeach;?>    	
+      <td align="center" >&nbsp;
+		<span id="db_other_level"></span>
+		<span id="db_other_age"></span>    
+      </td>
+    </tr>
+    
+    <tr>
+      <th rowspan="4" align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('LANGUAGE_FRAMEWORK')?></th>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('JAVA')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('C')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('CPP')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('DOT_NET')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('V_CPP')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('VB')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('DOT_NET')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('ASP')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('COBOL')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('PHP')?></td>
+    </tr>
+    <tr>
+    	<?php for ($i = 0; $i < 10; $i++):?>
+		  <?php $fw = $this->frameworks[$i];?>
+	      <td height="28" align="center" >&nbsp;
+	        <span id="<?=$fw?>_level"></span>
+			<span id="<?=$fw?>_age"></span>    
+		  </td>
+    	<?php endfor;?>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('SAP')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('ABAP')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('SHELL')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('STRUTS')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('EJB')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('INTRA-MART')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('TERASORUNA')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;
+		<?php if (isset($this->bizResumeBizs['framework_other1']['biz_name'])) {
+			echo $this->bizResumeBizs['framework_other1']['biz_name'];
+		}?>      
+	  </td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;
+      	<?php if (isset($this->bizResumeBizs['framework_other2']['biz_name'])) {
+			echo $this->bizResumeBizs['framework_other2']['biz_name'];
+		}?> 
+	  </td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;
+      	<?php if (isset($this->bizResumeBizs['framework_other3']['biz_name'])) {
+			echo $this->bizResumeBizs['framework_other3']['biz_name'];
+		}?> 
+	  </td>
+    </tr>
+    <tr>
+      <?php for ($i = 10; $i < count($this->frameworks); $i++):?>
+		  <?php $fw = $this->frameworks[$i];?>
+	      <td height="28" align="center" >&nbsp;
+	        <span id="<?=$fw?>_level"></span>
+			<span id="<?=$fw?>_age"></span>    
+		  </td>
+	  <?php endfor;?>
+	  <?php for ($i = 0; $i < 3; $i++):?>
+	      <td align="center" >&nbsp;
+		    <span id="framework_other<?=$i+1?>_level"></span>
+			<span id="framework_other<?=$i+1?>_age"></span>    
+	      </td>
+      <?php endfor;?>
+    </tr>
+    <tr>
+      <th rowspan="2" align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('BIZ')?></th>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('SECURITY')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('BANK')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('INSURANCE')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('SHIPPING')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('PERSONNEL')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('MANAGER')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;<?=$this->tr('MOBILE')?></td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;
+      	<?php if (isset($this->bizResumeBizs['biz_other1']['biz_name'])) {
+			echo $this->bizResumeBizs['biz_other1']['biz_name'];
+		}?>
+	  </td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;
+	  	<?php if (isset($this->bizResumeBizs['biz_other2']['biz_name'])) {
+			echo $this->bizResumeBizs['biz_other2']['biz_name'];
+		}?>
+	  </td>
+      <td align="center" bgcolor="#d9ffff">&nbsp;
+	  	<?php if (isset($this->bizResumeBizs['biz_other3']['biz_name'])) {
+			echo $this->bizResumeBizs['biz_other3']['biz_name'];
+		}?>
+	  </td>
+    </tr>
+    <tr>
+      <?php foreach ($this->bizs as $biz):?>
+	      <td height="28" align="center" >&nbsp;
+	        <span id="<?=$biz?>_level"></span>
+			<span id="<?=$biz?>_age"></span>    
+		  </td>
+      <?php endforeach;?>
+      <?php for ($i = 0; $i < 3; $i++):?>
+	      <td align="center" >&nbsp;
+		  	<span id="biz_other<?=$i+1?>_level"></span>
+			<span id="biz_other<?=$i+1?>_age"></span>    
+	      </td>
+      <?php endfor;?>
+    </tr>
+  </table>
+</div>
+</form>

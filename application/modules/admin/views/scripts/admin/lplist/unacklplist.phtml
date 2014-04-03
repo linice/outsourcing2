@@ -1,0 +1,123 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<script type="text/javascript">
+
+//对未承认法人进行承认操作
+function chec(id,cmd)
+{
+	$.ajax({
+	         type: 'POST',
+		  url: "/admin/admin_index/lpEdit",
+		  data: {id:id},
+		  dataType: "json",
+		  success: function(data){
+		       if(data['err']==0){
+				alert(data['msg']);
+				tr.remove();
+				$(cmd).remove();
+
+		       }else{
+				alert(data['msg']);
+		       }
+		  }
+	   });
+}
+
+
+function stop(id,cmd)
+{
+	$.ajax({
+	         type: 'POST',
+		  url: "/admin/admin_lp/lpEdit",
+		  data: {id:id},
+		  dataType: "json",
+		  success: function(data){
+		       if(data['err']==0){
+				alert(data['msg']);
+				//tr.remove();
+				$(cmd).remove();
+		       }else{
+				alert(data['msg']);
+		       }
+		  }
+	   });
+}
+</script>
+
+
+<div id="wraper">
+	<h3 class="t_top">未承认法人用户列表</h3>
+	<div class="top_search_nobg">
+	<form id="lplist" name="form2" method="post" action="/admin/admin_lp/">
+		<ul>
+			<li><img src="/img/admin/<?=$auth->locale?>/icon_search.gif" width="28" height="23" /></li>
+			<li><label><select name="select" class="myselect">
+				<option name="lpID" value="code">法人ID</option>
+				<option name="lpName" value="lp_name">公司名称</option>
+				</select></label>
+			</li>
+			<li><label><input type="text" name="textfield" class="myinput" /></label></li>
+			<li><label><input type="image" name="imageField3" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" onclick="jiansuo()" /></label>
+			</li>
+		</ul>
+	</form>
+  </div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_list">
+    <tr>
+      <th width="6%" align="center">法人ID</th>
+      <th width="12%" align="center">公司名</th>
+      <th width="9%" align="center">创建时间<img src="/img/default/front/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></th>
+      <th width="10%" align="center">最后登陆时间<img src="/img/default/front/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></th>
+      <th width="9%" align="center">高亮日期</th>
+	  <th width="10%" align="center">应聘查看日期</th>
+      <th width="7%" align="center">余额</th>
+      <th width="16%" align="center">操作</th>
+      <th width="6%" align="center">发布案件</th>
+      <th width="6%" align="center">员工数</th>
+    </tr>
+    <? if (!empty($this->lpList)): foreach($this->lpList as $lps):?>
+    <tr>
+      <td align="center"><?=$lps['code'];?></td>
+      <td align="center"> <?=$lps['lp_name'];?></td>
+      <td align="center"><?=substr($lps['create_time'],0,10);?></td>
+      <td align="center"><?=substr($lps['last_login_time'],0,10);?></td>
+      <td align="center"><?=$lps['highlightdate'];?></td>
+      <td align="center"><?=$lps['applydate'];?></td>
+	  <td align="center"><?=$lps['balance'];?></td>
+
+      <td align="center">
+      <!--查看法人详细信息-->
+		<input type="hidden" name="usrid" value="<?=$lps['id'];?>" />
+      	<a href="/admin/admin_lp/baseinfo/id/<?=$lps['id'];?>" target="_blank">
+      		<img src="/img/admin/<?=$auth->locale?>/btn_ck.jpg" width="39" height="20" class="mar5" />
+      	</a>
+      	<!--承认法人操作-->
+      	<? if($lps['enabled']==''): ?>
+      	<a href="javascript:void(0);" id="lpEdit"
+      	onclick="chec('<?=$lps['id'];?>','#<?=$lps['id'];?>');">
+      	<img src="/img/admin/<?=$auth->locale?>/btn_cr.jpg" id="<?=$lps['id'];?>" width="39" height="20" class="mar5" />
+      	</a>
+      	<? else:?>
+      	<img src="/img/admin/<?=$auth->locale?>/btn_cr.jpg" width="39" height="20" class="mar5" />
+      	<? endif; ?>
+      	<!--停止使用此法人-->
+      	<? if($lps['enabled']!='N'): ?>
+      	<a href="javascript:void(0);" onclick="stop('<?=$lps['id'];?>','.<?=$lps['id'];?>');">
+      	<img src="/img/admin/<?=$auth->locale?>/btn_stop.jpg" class="<?=$lps['id'];?>" width="39" height="20" />
+      	</a>
+      	<? else:?>
+      	<img src="/img/admin/<?=$auth->locale?>/btn_stop.jpg" width="39" height="20" />
+      	<? endif; ?>
+      </td>
+      <td align="center"><?=$lps['caseCnt'];?></td>
+      <td align="center"><?=$lps['employcount'];?></td>
+    </tr>
+	<?endforeach; endif;?>
+  </table>
+  <div class="btn_os">
+<div class="page"><span class="page_num">总共 <?=$this->lpCnt?>条记录</span><span class="current">1</span>|<a href="javascript:void(0);">2</a>|
+<a href="javascript:void(0);">3</a>|<a href="javascript:void(0);">4</a>|<a href="javascript:void(0);">5</a>|<a href="javascript:void(0);">次へ→</a></div>
+</div>
+</div>

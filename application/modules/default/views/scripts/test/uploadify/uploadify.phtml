@@ -1,0 +1,56 @@
+<link rel="stylesheet" type="text/css" href="/js/jquery/uploadify/uploadify.css" />
+<div>
+    <div>
+        <input type="file" name="file_upload" id="file_upload" />
+    </div>
+    <div>
+    	<button id="btn_upload" type="button">Upload</button>
+    	<button id="btn_cancel_upload" type="button">Cancel Upload</button>
+    </div>
+
+</div>
+
+
+<script src="/js/jquery/uploadify/jquery.uploadify.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	/**
+	 * 初始化uploadify上传
+	 */
+    $('#file_upload').uploadify({
+        swf: '/js/jquery/uploadify/uploadify.swf',
+        uploader: '/test_uploadify/handleuploadify',
+        auto: false,
+        fileObjName: 'resumeFile',
+    	height: 30,
+    	width: 120,
+    	buttonText: '浏览',
+        fileTypeExts: '*.*',
+        formData : {'<?=session_name();?>': '<?=session_id();?>'},
+		fileSizeLimit: '10MB',
+		removeCompleted: false,
+		onUploadSuccess: function(file, data, response) {
+			alert('The file was saved to: ' + data);
+		}
+    });
+
+
+    /**
+	 * 开始上传
+	 */
+	$('#btn_upload').click(function() {
+		$('#file_upload').uploadify('upload', '*');
+	});
+
+	
+	/**
+	 * 取消所有上传
+	 */
+	$('#btn_cancel_upload').click(function() {
+		$('#file_upload').uploadify('cancel', '*');
+	});
+	
+	
+}); //$(document).ready
+
+</script>

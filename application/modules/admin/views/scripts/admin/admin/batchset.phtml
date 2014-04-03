@@ -1,0 +1,61 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<style type="text/css">
+	table tr {height: 32px;}
+</style>
+
+
+<div id="wraper">
+	<h3 class="t_top">Batch设定</h3>
+	<div id="tip_batchset" class="tip"></div>
+	<form id="form_batchset" method="post" action="">
+	<div class="marB">
+	  <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_event">
+        <tr>
+          <td width="24%" align="right" bgcolor="#FFFFFF">BT提供时间：</td>
+          <td width="76%" bgcolor="#FFFFFF">
+          	<input id="period" name="period" type="text" value="<?=$this->period?>" class="myinput" size="30" />
+          	<span id="tip_period" class="tip"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">BT状态发送邮箱：</td>
+          <td bgcolor="#FFFFFF">
+          	<input id="email" name="email" type="text" value="<?=$this->email?>" class="myinput" size="30" />
+          	<span id="tip_email" class="tip"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">Dbbackup路径设定：</td>
+          <td bgcolor="#FFFFFF">
+          	<input id="dir" name="dir" type="text" value="<?=$this->dir?>" class="myinput" size="30" />
+          	<span id="tip_dir" class="tip"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">
+          	<a href="javascript: void(0);" id="btn_save" class="DISABLED_Y">
+	          	<img src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" class="marR" />
+          	</a>
+          </td>
+        </tr>
+      </table>
+	 </div>
+	</form>
+
+	<!-- BT状态一览 -->
+	<h3 class="t_top">BT状态一览</h3>	
+	<div id="dbDumpList"></div>
+</div>
+
+
+<script type="text/javascript">
+	var NO_CHANGE = '<? echo $this->tr('NO_CHANGE')?>';
+	var PATH = '<? echo $this->tr('PATH')?>';
+	var BEGIN_TIME = '<? echo $this->tr('BEGIN_TIME')?>';
+	var END_TIME = '<? echo $this->tr('END_TIME')?>';
+	var RESULT = '<? echo $this->tr('RESULT')?>';
+</script>
+<script type="text/javascript" src="/js/admin/admin/admin/batchset.js"></script>

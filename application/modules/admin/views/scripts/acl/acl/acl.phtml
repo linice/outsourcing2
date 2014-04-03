@@ -1,0 +1,77 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/admin/acl/acl/acl.css" rel="stylesheet" type="text/css" />
+<link href="/css/jquery/jquery.pagination.css" rel="stylesheet" type="text/css" />
+
+
+<div id="content">
+<!-- 按名称搜索与添加 资源 -->
+<div>
+<input id="resourceName" name="resourceName" size="32" type="text" value="请输入资源名称" />
+<button id="searchResource">搜索</button>
+<button id="addResource">添加</button>
+</div>
+
+
+<!-- 按模块，控制器与方法过滤资源 -->
+<div>
+<span class="title4">过滤：</span>
+<select id="module">
+	<option value="all">所有模块</option>
+	<?php foreach ($this->resources as $module => $controllers):?>
+	<option value="<?=$module?>"><?=$module?></option>
+	<?php endforeach;?>
+</select>
+<select id="controller">
+	<!-- disabled="disabled"  -->
+	<option id="controllerAll" value="all">所有控制器</option>
+	<?php foreach ($this->resources as $module => $controllers):?>
+	<?php foreach ($controllers as $controller => $actions):?>
+	<option style="display: none;" class="<?=$module?>" value="<?=$controller?>"><?=$controller?></option>
+	<?php endforeach;?>
+	<?php endforeach;?>
+</select>
+<!-- 
+<select id="action">
+	<option id="actionAll" value="all">所有方法</option>
+	<php foreach ($this->resources as $module => $controllers):?>
+	<php foreach ($controllers as $controller => $actions):?>
+	<php foreach ($actions as $action):?>
+	<option style="display: none;" class="<=$module.' '.$controller?>" value="<=$action?>"><=$action?></option>
+	<php endforeach;?>
+	<php endforeach;?>
+	<php endforeach;?>
+</select>
+ -->
+</div>
+
+
+<!-- 资源列表 -->
+<div>
+	<ul id="resources_head"><li class="column1">资源名称</li><li class="column2">模块</li>
+		<li class="column3">控制器</li><li class="column4">方法</li>
+	</ul>
+</div>
+<div id="div_resources">
+	<?php foreach ($this->resourcesOrigin as $r):?>
+	<ul class="<?=$r['module'].' '.$r['controller'].' '.$r['action']?>">
+		<li class="column1"><?=$r['name']?></li>
+		<li class="column2"><?=$r['module']?></li>
+		<li class="column3"><?=$r['controller']?></li>
+		<li class="column4"><?=$r['action']?></li>
+	</ul>
+	<?php endforeach;?>
+	<div style="clear: both;"></div>
+	<!-- 分页标签 -->
+	<div class="pagination" id="div_pagination"></div>
+</div>
+
+
+</div> <!-- <div id="content"> -->
+
+
+<script src="/js/admin/acl/acl/acl.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/jquery/jquery.pagination.js"></script>
+

@@ -1,0 +1,41 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<!-- 登陆框 -->
+	<form id="form_login" style="text-align:center; font-size:14px;">
+		<div id="tip_login" class="tip"></div>
+		<div style="margin:10px 0 10px 0;"><?=$this->tr('EMAIL')?>：<input name="email" id="email" type="text"></div>
+		<div><?=$this->tr('PASSWORD')?>：<input name="passwd" id="passwd" type="password"></div>
+		<div style="margin:10px 0 10px 0;">
+			<button id="btn_login_login" type="button"><?=$this->tr('LOGIN')?></button>
+		</div>
+	</form>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn_login_login').click(function(){
+		$.ajax({
+			url: '/login/login',
+			type: 'post',
+			async: false,
+			dataType: 'json', //xml, json, script or html
+			data: $('#form_login').serializeArray(),
+			success: function(data, textStatus, jqXHR) {
+				if (data['err'] == 0) {
+					location.href = '/?pwd=10';
+				} else {
+					$('#tip_login').html(data['msg']);
+				}
+			}
+		});
+	}); //End: $('#btn_login').click
+
+
+
+}); //End: $(document).ready
+</script>
+
+

@@ -1,0 +1,369 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+  <form id="form1" name="form1" method="post" action="">
+	<div class="resume">
+		<h3>状态信息</h3>
+		<p>稼动状态：稼动可  即日<br />当前营业状态 ：并行营业</p>
+	</div>
+	<!--職務経歴書-->
+	<div class="resume_t">職務経歴書
+	<div class="resume_date">
+	<div>日付：2012/04/25</div>
+	<div>XXXXXXXXX　株式会社</div>
+	</div>
+	</div>
+	<div class="resume_base_info">
+	  <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#000000" class="tab_resume">
+        <tr>
+          <th width="14%" align="center" bgcolor="#d9ffff">フリガナ</th>
+          <td width="9%" bgcolor="#FFFFFF">&nbsp;</td>
+          <th width="12%" align="center" bgcolor="#d9ffff">性別</th>
+          <th width="23%" bgcolor="#d9ffff">生年月日</th>
+          <th width="14%" bgcolor="#d9ffff">语言能力(<span class="fred">注１</span>)</th>
+          <th width="5%" align="center" bgcolor="#d9ffff">A</th>
+          <th width="5%" align="center" bgcolor="#d9ffff">B</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">C</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">D</th>
+          <th width="4%" align="center" bgcolor="#d9ffff">E</th>
+          <th width="6%" align="center" bgcolor="#d9ffff">资格</th>
+        </tr>
+        <tr>
+          <th rowspan="2" align="center" bgcolor="#d9ffff">氏名</th>
+          <td rowspan="2" bgcolor="#FFFFFF">&nbsp;</td>
+          <td rowspan="2" align="center" bgcolor="#FFFFFF">男</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <th align="center" bgcolor="#D9FFFF">日本語</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">満</td>
+          <th align="center" bgcolor="#D9FFFF">英語</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th align="center" bgcolor="#d9ffff">出身地</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <th align="center" bgcolor="#D9FFFF">婚姻状況</th>
+          <td align="center" bgcolor="#FFFFFF"><label><input type="radio" name="radiobutton" value="radiobutton" onclick="JavaScrirpt: return false;"
+ /></label> 已婚 <label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="radiobutton" value="radiobutton" onclick="JavaScrirpt: return false;"
+ /></label> 未婚</td>
+          <th align="center" bgcolor="#D9FFFF">電話</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th align="center" bgcolor="#d9ffff">現住所</th>
+          <td colspan="3" bgcolor="#FFFFFF">日本</td>
+          <th align="center" bgcolor="#D9FFFF">E-Mail</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th align="center" bgcolor="#d9ffff">最寄駅</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <th align="center" bgcolor="#D9FFFF">国籍</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <th align="center" bgcolor="#D9FFFF">来日年度</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th align="center" bgcolor="#d9ffff">最終学歴</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <th align="center" bgcolor="#D9FFFF">学科</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <th align="center" bgcolor="#D9FFFF">卒業年度</th>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th align="center" bgcolor="#d9ffff">各種技術資格</th>
+          <td colspan="10" bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th align="center" valign="top" bgcolor="#d9ffff">個人PR</th>
+          <td height="100" colspan="10" bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+      </table>
+	</div>
+	<div class="resume_note">注１：言語能力　A:母語相当　　B:業務打合可　　C:日常会話可　　D:必要最低限会話可　　E:不可</div>
+	<!--業務経歴-->
+	<div class="resume_t">業務経歴</div>
+	<div class="resume_base_info">
+	  <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#000000" class="tab_resume">
+        <tr>
+          <td width="10%" align="center" bgcolor="#FFFFFF">実務年数</td>
+          <td colspan="10" bgcolor="#FFFFFF">コンピュータソフトウエア関連業務（◎：指導できる　　○：精通している　　★：指示通りできる　　△：研修中）</td>
+        </tr>
+        <tr>
+          <th rowspan="2" align="center" bgcolor="#D9FFFF">OS</th>
+          <td width="9%" align="center" bgcolor="#D9FFFF">WinNT/2K</td>
+          <td width="8%" align="center" bgcolor="#D9FFFF">WinXP</td>
+          <td width="9%" align="center" bgcolor="#D9FFFF">LINUX,Unix</td>
+          <td width="9%" align="center" bgcolor="#D9FFFF">OS390</td>
+          <td width="10%" align="center" bgcolor="#D9FFFF">WebSphere</td>
+          <td width="9%" align="center" bgcolor="#D9FFFF">Android</td>
+          <td width="10%" align="center" bgcolor="#D9FFFF">Iphone</td>
+          <td width="8%" align="center" bgcolor="#D9FFFF">&nbsp;</td>
+          <td width="8%" align="center" bgcolor="#D9FFFF">&nbsp;</td>
+          <td width="10%" align="center" bgcolor="#D9FFFF">その他</td>
+        </tr>
+        <tr>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th rowspan="2" align="center" bgcolor="#D9FFFF">DB</th>
+          <td align="center" bgcolor="#D9FFFF">Oracle</td>
+          <td align="center" bgcolor="#D9FFFF">SqlServer</td>
+          <td align="center" bgcolor="#D9FFFF"> Access</td>
+          <td align="center" bgcolor="#D9FFFF">DB2</td>
+          <td align="center" bgcolor="#D9FFFF">Hirdb</td>
+          <td align="center" bgcolor="#D9FFFF">MySQL</td>
+          <td align="center" bgcolor="#D9FFFF">PL/SQL</td>
+          <td align="center" bgcolor="#D9FFFF">Sybase</td>
+          <td align="center" bgcolor="#D9FFFF">INFORMIX</td>
+          <td align="center" bgcolor="#D9FFFF">その他</td>
+        </tr>
+        <tr>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th rowspan="4" align="center" bgcolor="#D9FFFF">言語<br />
+          FrameWork</th>
+          <td align="center" bgcolor="#D9FFFF">Java</td>
+          <td align="center" bgcolor="#D9FFFF">C</td>
+          <td align="center" bgcolor="#D9FFFF">C++</td>
+          <td align="center" bgcolor="#D9FFFF">C# </td>
+          <td align="center" bgcolor="#D9FFFF">VC++</td>
+          <td align="center" bgcolor="#D9FFFF">VB</td>
+          <td align="center" bgcolor="#D9FFFF">.NET</td>
+          <td align="center" bgcolor="#D9FFFF">ASP</td>
+          <td align="center" bgcolor="#D9FFFF">COBOL</td>
+          <td align="center" bgcolor="#D9FFFF"> PHP</td>
+        </tr>
+        <tr>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#D9FFFF">SAP</td>
+          <td align="center" bgcolor="#D9FFFF">ABAP</td>
+          <td align="center" bgcolor="#D9FFFF">Shell</td>
+          <td align="center" bgcolor="#D9FFFF">Struts</td>
+          <td align="center" bgcolor="#D9FFFF">EJB</td>
+          <td align="center" bgcolor="#D9FFFF">Intra-mart</td>
+          <td align="center" bgcolor="#D9FFFF">Terasoruna</td>
+          <td align="center" bgcolor="#D9FFFF">&nbsp;</td>
+          <td align="center" bgcolor="#D9FFFF">&nbsp;</td>
+          <td align="center" bgcolor="#D9FFFF">その他</td>
+        </tr>
+        <tr>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <th rowspan="2" align="center" bgcolor="#D9FFFF">業務</th>
+          <td align="center" bgcolor="#D9FFFF">証券</td>
+          <td align="center" bgcolor="#D9FFFF">銀行</td>
+          <td align="center" bgcolor="#D9FFFF">保険</td>
+          <td align="center" bgcolor="#D9FFFF">流通</td>
+          <td align="center" bgcolor="#D9FFFF">人事</td>
+          <td align="center" bgcolor="#D9FFFF">経理</td>
+          <td align="center" bgcolor="#D9FFFF">携帯</td>
+          <td align="center" bgcolor="#D9FFFF">&nbsp;</td>
+          <td align="center" bgcolor="#D9FFFF">&nbsp;</td>
+          <td align="center" bgcolor="#D9FFFF">その他</td>
+        </tr>
+        <tr>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+      </table>
+	</div>
+	<div class="resume_base_info">
+	  <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#000000" class="tab_resume">
+        <tr>
+          <th width="35" rowspan="2" align="center" bgcolor="#D9FFFF">No.</th>
+          <th width="81" rowspan="2" align="center" bgcolor="#D9FFFF">期間</th>
+          <th width="310" rowspan="2" align="center" bgcolor="#D9FFFF">業務内容</th>
+          <th width="89" rowspan="2" align="center" bgcolor="#D9FFFF">機種ＯＳ</th>
+          <th width="87" rowspan="2" align="center" bgcolor="#D9FFFF">言語ＤＢ</th>
+          <th width="70" rowspan="2" align="center" bgcolor="#D9FFFF">役割</th>
+          <td colspan="12" align="center" bgcolor="#D9FFFF">作業範囲</td>
+        </tr>
+        <tr>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">マ<br />
+          ネ<br />
+          ジ<br />
+          メ<br />
+          ン<br />
+          ト</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">業<br />
+          務<br />
+          分<br />
+          析</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">要<br />
+          件<br />
+          定<br />
+          義</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">基<br />
+          本<br />
+          設<br />
+          計</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">DB<br />
+          設<br />
+          計</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">詳<br />
+          細<br />
+          設<br />
+          計</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">製<br />
+          造</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">単<br />
+          体<br />
+          テ<br />
+          ス<br />
+          ト</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">結<br />
+          合<br />
+          テ<br />
+          ス<br />
+          ト</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">総<br />
+          合<br />
+          テ<br />
+          ス</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">問<br />
+          合<br />
+          せ</td>
+          <td width="30" align="center" valign="top" bgcolor="#D9FFFF" class="text_vertical">運<br />
+          用<br />
+          保<br />
+          守</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">1</td>
+          <td align="center" valign="bottom" bgcolor="#FFFFFF"><p align="left">2005/7</p><p align="right">～2006/10</p><p class="day_num">共16 个月</p></td>
+          <td align="left" bgcolor="#FFFFFF" class="conU">SMARTシステム<br />
+          【システム概要】MEDIASTAFF端末を利用し、カードキーの発行、回収、現金管理などのフロント業務を代行する</td>
+          <td align="center" bgcolor="#FFFFFF">WIN2000</td>
+          <td align="center" bgcolor="#FFFFFF">Oracle<br />
+            9iVB6<br />
+          0PL/SQL</td>
+          <td align="center" bgcolor="#FFFFFF">PG</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF" class="f20">●</td>
+          <td align="center" bgcolor="#FFFFFF" class="f20">●</td>
+          <td align="center" bgcolor="#FFFFFF" class="f20">●</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">2</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+      </table>
+	</div>
+	<div class="info_confirm">上面的信息是否正确？</div>
+	<div class="btn_os">
+		<img src="/img/default/front/<?=$auth->locale?>/btn_alter.jpg" width="80" height="30" class="btn_marR" />
+		<a href="/front_apply/apply" target="_blank">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_offer.jpg" width="80" height="30" class="btn_marR" />
+		</a>
+	</div>
+  </form>
+</div>

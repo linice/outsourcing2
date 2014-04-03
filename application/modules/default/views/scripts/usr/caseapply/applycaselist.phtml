@@ -1,0 +1,129 @@
+<link href="/css/default/lp/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<div id="tab1">
+	<div class="search_right">
+		<a href="javascript:void(0)">
+			<span class="case_lie_list" id="cases_expend"></span>
+		</a>
+		<span class="fblue"></span>
+	</div>
+	<h3 class="msg_title"><?=$this->tr('apply_case_list')?></h3>
+</div>
+<div class="user_case_list">
+	<div id="caselist"></div>
+</div>
+<div class="btn_os">
+	<a href="javascript:void(0)" id="cancelBtn">
+		<img src="/img/default/usr/<?=$auth->locale?>/btn_apply_dis.jpg" width="80" height="30" class="btn_marR" />
+	</a>
+</div></div>
+<form id="dynForm" method="post" target="_blank">
+<input type="hidden" id="ids" name="ids" />
+<input type="hidden" id="caseCode" name="caseCode" />
+<input type="hidden" id="applyId" name="applyId" />
+<input type="hidden" id="btnlist" name="btnlist" />
+</form>
+<script type="text/javascript">
+$(function() {
+	var url = "/usr_caseapply/searchapplycaselist";
+
+    $("#caselist").ligerGrid({
+		checkbox: true,
+		checkboxColWidth: 30,
+        columns: [{display: CASE_ID, name: 'code', width:62, render: CaseCodeFunction},
+                  {display: CASE_NAME, name: 'name', render: CaseNameFunction},
+                  {display: COL_A_APPLY_TIME, name: 'apply_date', width:73},
+                  {display: case_end_range, name: 'period', width:110},
+                  {display: WORKPLACE, name: 'workingPlaceValue', width:101},
+                  {display: PRICE_UNIT_MONTHLY, name: 'unitPriceValueView', width:101},
+                  {display: COL_A_CASE_STATE, name: 'applyStatusValue', width:75},
+                  {display: COL_A_REMARK, render: opFunction, width:110}],
+        url: url,
+        width: "100%",
+        columnWidth: 260,
+        isScroll: false, frozen:false,
+        detail: {onShowDetail: showDetail, height: "auto"},
+        pageSize: 20
+    });
+
+    var manager = $("#caselist").ligerGetGridManager();
+
+    function CaseNameFunction(rowData, rowIndex) {
+		return CaseNameFormatFunction(rowData, 'name', 'code');
+	}
+	function CaseCodeFunction(rowData, rowIndex) {
+		return CaseCodeFormatFunction(rowData, 'code');
+	}
+	function opFunction(rowData, rowIndex) {
+		return rowData['apply_remark']//+'|'+rowData['apply_reason']
+	}
+
+	function showDetail(rowData, detailPanel) {
+		adjustCaseDetail(rowData);
+		$("#detail").find("#cancelBtn").hide();
+		$(detailPanel).append($("#detail").html());
+		$(detailPanel).find("#viewDetail").click(function() {
+			viewCase(rowData.code, "cancelApply", null, rowData.apply_id);
+		});
+	}
+
+	$("#cancelBtn").click(function() {
+		var rows = manager.getSelecteds();
+		cancelApplyCaseForUsr(rows, manager, $("#dynForm"));
+    	return false;
+	})
+	
+	$("#cases_expend").toggle(function() {
+		$(this).removeClass("case_lie_list").addClass("case_lie");
+		expendDetailAll(manager, manager.getData().length);
+	}, function() {
+		$(this).removeClass("case_lie").addClass("case_lie_list");
+		collapseDetailAll(manager, manager.getData().length);
+	})
+});
+</script>
+
+<div id="detail" style="display: none;">
+<div class="case_search_expand">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><span id="viewers"></span><?=$this->tr("unit_person")?></span><span id="name"></span></h2>
+<ul class="case_lie02_time">
+<li><?=$this->tr("UPDATE_DATE")?>：<span id="last_modify_time" format="date"></span></li>
+<li><?=$this->tr("case_timeliness")?>：<span id="timeliness"></span></li>
+</ul>
+<div class="case_lie02_con">
+	<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_business_req")?>】</td>
+		<td colspan="4"><span id="business_req"></span></td>
+	</tr><tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_technical_req")?>】</td>
+		<td colspan="4"><span id="technical_req"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_jpl")?>】</td>
+		<td width="31%"><span id="jplValue"></span></td>
+		<td width="9%" align="left">【<?=$this->tr("case_interview")?>】</td>
+		<td width="37%"><span id="interviewerValue"></span></td>
+		<td width="13%" rowspan="5" align="center">
+		<a href="javascript:void(0)" id="cancelApplyBtn" style="display:none">
+			<img src="/img/default/usr/<?=$auth->locale?>/btn_apply_dis.jpg" width="80" height="30" border="0" class="marB" />
+		</a><br />
+		<a href="javascript:void(0)" id="viewDetail">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_look_detail.jpg" width="80" height="30" border="0" />
+		</a></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><span id="caseRangeValue"></span></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><span id="ageReqValue"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><span id="period"></span></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><span id="countryReqValue"></span> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><span id="delayValue"></span></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><span id="unitPriceValueView"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><span id="workingPlaceValue"></span> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><span id="overtimePayValue"></span></td>
+	</tr>
+</table>
+</div></div></div>
+<script type="text/javascript" src="/js/default/front/case/caseutil.js"></script>

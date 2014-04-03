@@ -1,0 +1,40 @@
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<h3 class="msg_title_bg"><?=$this->tr('DEPOSIT_AKB_QUERY')?></h3>
+	<form id="form_depositAkb" method="post" action="/akb/getdepositakb">
+		<div class="rujin_info_search">
+			<ul>
+				<li class="w01"><?=$this->tr('SECTION')?>：</li>
+				<li class="w02"><input type="text" name="minAmt" class="myinput" /></li>
+				<li> ～</li>
+				<li class="w02"><input type="text" name="maxAmt" class="myinput" /></li>
+				<li class="w01"><?=$this->tr('SERVICE')?>：</li>
+				<li class="w02">
+					<select name="svc" class="myselect">
+						<option value=""><?=$this->tr('ALL')?></option>
+					<?php foreach ($this->svcs as $svc):?>
+						<option value="<?=$svc?>"><?=$this->tr($svc)?></option>
+					<?php endforeach;?>
+					</select>
+				</li>
+				<li>
+					<a href="javascript:void(0);" id="btn_searchAkb">
+						<img alt="Search" src="/img/default/front/<?=$auth->locale?>/btn_cx.gif" />
+					</a>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<div class="search_result_lie01" id="depositAkbList"></div>
+</div>
+
+
+<script type="text/javascript">
+	var DATE = '<?=$this->tr('DATE')?>';
+	var DEPOSIT_AMT = '<?=$this->tr('DEPOSIT_AMT')?>';
+	var PURPOSE = '<?=$this->tr('PURPOSE')?>';
+	var SERVICE_TAKE_EFFECT_DATE = '<?=$this->tr('SERVICE_TAKE_EFFECT_DATE')?>';
+	var SERVICE_DEADLINE = '<?=$this->tr('SERVICE_DEADLINE')?>';
+	var BUY_POINTS = '<?=$this->tr('BUY_POINTS')?>';
+</script>
+<script src="/js/default/akb/depositakb.js" type="text/javascript"></script>

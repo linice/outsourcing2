@@ -1,0 +1,102 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top">
+		<span class="login_inter"><input name="" type="checkbox" value="" /> 营业员</span>
+	<?=$this->tr('add_lp');?></h3>
+	<div class="marB">
+	<form id="form_register" name="form_register" method="post" action="">
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_edit_case">
+	<tr>
+		<td width="41%" align="right" bgcolor="#FFFFFF">
+			<span class="fred">*</span><?=$this->tr("lp_companyName")?>：
+		</td><td width="59%" bgcolor="#FFFFFF">
+			<label>
+				<input name="companyName" id="companyName" type="text" class="myinput" size="40" />
+			</label> 
+			<span style="display:none;"></span>
+		</td>
+	</tr><tr>
+		<td align="right" bgcolor="#FFFFFF"><?=$this->tr("lp_adress")?>：</td>
+		<td bgcolor="#FFFFFF" class="fblue">
+			<input type="text" id="address" name="address" class="myinput" size="40" />
+		</td>
+	</tr><tr>
+		<td align="right" bgcolor="#FFFFFF"><?=$this->tr("lp_website")?>：</td>
+		<td bgcolor="#FFFFFF" class="fblue">
+			<input type="text" name="website" id="website" class="myinput" size="40"/>
+		</td>
+	</tr><tr>
+		<td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_linkman")?>：</td>
+		<td bgcolor="#FFFFFF" class="fblue">
+			<label>
+			    <input type="text" name="linkman" id="linkman" class="myinput" />
+		    </label>
+			<span style="display:none;"></span>
+		</td>
+	</tr><tr>
+		<td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_telephone")?>：</td>
+		<td bgcolor="#FFFFFF" class="fblue">
+			<label>
+			    <input type="text" name="telephone" id="telephone" class="myinput" />
+		    </label>
+		    <span></span>
+			<span class="input_info_note"><?=$this->tr("lpreg_tel_format")?></span>
+		</td>
+	</tr>
+	<tr>
+		<td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_email")?>：</td>
+		<td bgcolor="#FFFFFF" class="fblue">
+			<label>
+			    <input type="text" id="email" name="email" class="myinput" />
+		    </label>
+			<span style="display:none;"></span>  
+		</td>
+	</tr>
+	<tr>
+		<td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_passwd")?>：</td>
+		<td bgcolor="#FFFFFF" class="fblue">
+			<label>
+			    <input type="password" name="passwd" id="passwd" class="myinput" />
+		    </label>
+			<span style="display:none;"></span>
+		</td>
+	</tr>
+	<tr>
+		<td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_passwd2")?>：</td>
+		<td bgcolor="#FFFFFF" class="fblue">
+			<label>
+			    <input type="password" name="passwd2" id="passwd2" class="myinput" />
+		    </label>
+			<span style="display:none;"></span>
+		</td>
+	</tr>
+	<tr>
+		<td align="right" bgcolor="#FFFFFF">&nbsp;</td>
+		<td bgcolor="#FFFFFF" class="fred"><?=$this->tr("lpreg_nodify")?></td>
+	</tr>
+</table>
+</form>
+</div>
+<div class="btn_os">
+<a href="javascript:void(0);" id="btn_register"><img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_qd.jpg"></a>
+</div>
+</div>
+
+<script type="text/javascript">
+var err = {"email_can_not_be_empty": '<?=$this->tr('email_can_not_be_empty')?>',
+		"email_is_not_real" : '<?=$this->tr('email_is_not_real')?>',
+		"password_can_not_be_empty" : '<?=$this->tr('password_can_not_be_empty')?>',
+		"passwords_are_not_equal" : '<?=$this->tr('passwords_are_not_equal')?>',
+		"email_already_exists" : '<?=$this->tr('EMAIL_ALREADY_EXIST')?>',
+		"linkman_can_not_be_empty" : '<?=$this->tr('linkman_can_not_be_empty')?>',
+		"companyName_already_exists" : '<?=$this->tr('companyName_already_exists')?>',
+		"telephone_can_not_be_empty" : '<?=$this->tr('telephone_can_not_be_empty')?>',
+		"companyName_can_not_be_empty" : '<?=$this->tr('companyName_can_not_be_empty')?>',
+		"password_style_error" : '<?=$this->tr('password_style_error')?>',
+		"telephone_style_error" : '<?=$this->tr('telephone_style_error')?>'
+		}
+var regConfirmInfo = <?=json_encode($this->registerInfo);?>
+</script>
+<script type="text/javascript" src="/js/admin/admin/lp/lpreg.js"></script>

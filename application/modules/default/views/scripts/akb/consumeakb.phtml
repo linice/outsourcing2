@@ -1,0 +1,42 @@
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<h3 class="msg_title_bg"><?=$this->tr('HISTORY_CONSUME_DETAIL_QUERY')?></h3>
+	<form id="form_consumeAkb" method="post" action="">
+		<div class="rujin_info_search">
+			<ul>
+				<li class="w01"><?=$this->tr('SECTION')?>：</li>
+				<li class="w02"><input type="text" name="minPoints" class="myinput" /></li>
+				<li> ～</li>
+				<li class="w02"><input type="text" name="maxPoints" class="myinput" /></li>
+				<li class="w01"><?=$this->tr('CLASSIFICATION')?>：</li>
+				<li class="w02">
+					<select name="svc" class="myselect">
+					  	<option value=""><?=$this->tr('ALL')?></option>
+					<?php foreach ($this->svcs as $svc):?>
+						<option value="<?=$svc?>"><?=$this->tr($svc)?></option>
+					<?php endforeach;?>
+					</select>
+				</li>
+				<li>
+				  	<a href="javascript:void(0);" id="btn_searchAkb">
+						<img alt="Search" src="/img/default/front/<?=$auth->locale?>/btn_cx.gif" />
+					</a>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<div class="search_result_lie01" id="consumeAkbList"></div>
+	
+</div> <!-- End: <div id="wraper"> -->
+
+
+<script type="text/javascript">
+	var DATE = '<?=$this->tr('DATE')?>';
+	var CLASSIFICATION = '<?=$this->tr('CLASSIFICATION')?>';
+	var POINTS = '<?=$this->tr('POINTS')?>';
+	var REST = '<?=$this->tr('REST')?>';
+	var PURPOSE = '<?=$this->tr('PURPOSE')?>';
+	var REMARK = '<?=$this->tr('REMARK')?>';
+	var OPERATOR = '<?=$this->tr('OPERATOR')?>';
+</script>
+<script src="/js/default/akb/consumeakb.js" type="text/javascript"></script>

@@ -1,0 +1,143 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#div_reg_confirm table {border-collapse: collapse; width: 100%;}
+	#div_reg_confirm table tr th {background-color: lightgray; border: 1px solid lightgray; font-weight: bold; height: 30px; padding: 0;}
+	#div_reg_confirm table tr td {background-color: whitesmoke; border: 1px solid lightgray; height: 30px; padding-left: 10px;}
+	#div_reg_confirm #td_experiences table tr th {text-align: center;}
+	#div_reg_confirm #td_experiences table tr td {border:0;}
+</style>
+
+<div id="wraper">
+<h3 class="tbg_grey"><span class="fr">
+	<a href="/front_lpreg/lpreg" target="_blank">
+		<img src="/img/default/front/<?=$auth->locale?>/btn_register_faren.jpg" width="99" height="24" />
+	</a></span><?=$this->tr('MEMBER_LOGIN')?>
+</h3>
+<div class="register_intr_c">
+  <p><?=$this->tr('REGISTER_ILLUSTRATE_1')?></p>
+  <p><?=$this->tr('REGISTER_ILLUSTRATE_2')?></p>
+  <p><?=$this->tr('REGISTER_ILLUSTRATE_3')?></p>
+  <p><?=$this->tr('REGISTER_ILLUSTRATE_4')?></p>
+  <p><?=$this->tr('REGISTER_ILLUSTRATE_5')?></p>
+</div>
+  <!--利用規約-->
+  <div class="register_left">
+		<h3 class="tbg_01 marB"><?=$this->tr('USAGE_TERMS')?></h3>
+	    <textarea name="textarea" class="register_convention" style="background-color: gray;">
+	    	<?php include_once 'protocol.phtml';?>
+	    </textarea>
+	</div>
+	<!--会員登録-->
+	<div class="register_right" id="div_reg_confirm">
+		<h3 class="tbg_01"><?=$this->tr('MEMBER_LOGIN')?></h3>
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd" class="tab_register">
+			<tr>
+			<th width="20%" align="right" bgcolor="#FFFFFF"><?=$this->tr('EMAIL_ADDR')?></th>
+			<td width="80%" bgcolor="#FFFFFF">
+			<p><?=$this->registerInfo['email']?>
+			</p></td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('PASSWORD')?></th>
+				<td bgcolor="#FFFFFF">
+					<p><?=$this->registerInfo['passwd']?></p>
+				</td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('NICKNAME')?></th>
+				<td bgcolor="#FFFFFF"><?=$this->registerInfo['nickname']?></td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('PRONOUNCE')?></th>
+				<td bgcolor="#FFFFFF"><?=$this->tr('LASTNAME')?>：<?=$this->registerInfo['lastname_p']?>
+					&nbsp;&nbsp;<?=$this->tr('FIRSTNAME')?>： <?=$this->registerInfo['firstname_p']?>
+				</td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('NAME')?></th>
+				<td bgcolor="#FFFFFF"><?=$this->tr('LASTNAME')?>：<?=$this->registerInfo['lastname']?>
+					&nbsp;&nbsp;<?=$this->tr('FIRSTNAME')?>：<?=$this->registerInfo['firstname']?>
+				</td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('TEL')?></th>
+				<td bgcolor="#FFFFFF"><?=$this->registerInfo['tel']?></td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('BIRTHDAY')?></th>
+				<td bgcolor="#FFFFFF"><?=$this->tr('GREGORIAN_CALENDAR')?> <?=$this->registerInfo['birthday']?></td>
+				</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('SEX__')?></th>
+				<td bgcolor="#FFFFFF">
+				<?=$this->tr($this->registerInfo['sex'])?>
+				</td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('ACTUAL_RESIDENCE')?></th>
+				<td bgcolor="#FFFFFF"><?=$this->tr($this->registerInfo['country'])?>
+				&nbsp;
+				<?=$this->tr($this->registerInfo['province'])?></td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('CAREER_AND_SKILL')?></th>
+				<td bgcolor="#FFFFFF" id="td_experiences">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<th align="center"><?=$this->tr('PROUD_OS')?></th>
+							<th align="center"><?=$this->tr('YEARS')?></th>
+							<th align="center"><?=$this->tr('PROUD_INDUSTRY')?></th>
+							<th align="center"><?=$this->tr('YEARS')?></th>
+							<th align="center"><?=$this->tr('PROUD_LANG')?></th>
+							<th align="center"><?=$this->tr('YEARS')?></th>
+						</tr>
+					<?php
+						$maxBizsCnt =  max(count($this->registerInfo['oss']), 
+						count($this->registerInfo['bizs']), count($this->registerInfo['fws'])); 
+						for ($i = 0; $i < $maxBizsCnt; $i++):?>
+						<tr>
+							<td align="center"><?=isset($this->registerInfo['oss'][$i])?$this->tr($this->registerInfo['oss'][$i]):''?></td>
+							<td align="center"><?=isset($this->registerInfo['ossYears'][$i])?$this->registerInfo['ossYears'][$i]:''?></td>
+							<td align="center"><?=isset($this->registerInfo['bizs'][$i])?$this->tr($this->registerInfo['bizs'][$i]):''?></td>
+							<td align="center"><?=isset($this->registerInfo['bizsYears'][$i])?$this->registerInfo['bizsYears'][$i]:''?></td>
+							<td align="center"><?=isset($this->registerInfo['fws'][$i])?$this->tr($this->registerInfo['fws'][$i]):''?></td>
+							<td align="center"><?=isset($this->registerInfo['fwsYears'][$i])?$this->registerInfo['fwsYears'][$i]:''?></td>
+						</tr>
+					<?php endfor;?>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('MSG_EMAIL')?></th>
+				<td bgcolor="#FFFFFF">
+					<?=$this->tr($this->registerInfo['isReceiveNews'])?>
+				</td>
+			</tr>
+			<tr id="tr_referee">
+				<th align="right" bgcolor="#FFFFFF"><?=$this->tr('REFEREE')?></th>
+				<td bgcolor="#FFFFFF"><span id="referee"><?=$this->registerInfo['referee']?></span></td>
+			</tr>
+		</table>
+		
+		<div class="btn_os">
+			<a href="javascript: void(0);" id="btn_register">
+				<img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_register.jpg" />
+			</a>
+			<a href="javascript: void(0);" id="btn_backReg">
+				<img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" />
+			</a>
+		</div>
+	</div>
+	<br class="cls" />
+</div>
+
+<!-- 用户注册信息，用于用户注册确认页面 -->
+<form id="form_register" name="form_register" action="" method="post" style="display:none;" target="_blank">
+	<input id="registerInfo" name="registerInfo" type="hidden" value='<?=json_encode($this->registerInfo);?>' />
+</form>
+
+<script type="text/javascript" src="/js/default/front/register/registerconfirm.js"></script>

@@ -1,0 +1,78 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+<h3 class="t_top"><?=$this->tr("apply_mgt")?></h3>
+<!--start-->
+<div class="apply_detail">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><?=$this->case['viewers']?><?=$this->tr("unit_person")?></span><?=$this->case['name']?></h2>
+<ul class="case_lie02_time">
+	<li><?=$this->tr("case_release_date")?>：<?=substr($this->case["release_date"],0,10)?></li>
+	<li><?=$this->tr("case_timeliness")?>：<?=$this->case["timeliness"]?></li>
+	<li><?=$this->tr("case_lp_code")?>：<?=$this->case["lp_code"]?></li>
+	<li><?=$this->tr("case_lp_name")?>：<?=$this->case["lp_name"]?></li>
+</ul>
+<div class="case_lie02_con">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr valign="top">
+		<td>【<?=$this->tr("case_business_req")?>】</td><td colspan="3"><?=nl2br($this->case["business_req"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_technical_req")?>】</td><td colspan="3"><?=nl2br($this->case["technical_req"])?></td>
+	</tr><tr>
+		<td width="9%">【<?=$this->tr("case_jpl")?>】</td><td width="31%"><?=$this->case["jplValue"]?></td>
+		<td width="9%">【<?=$this->tr("case_interview")?>】</td><td width="51%"><?=$this->case["interviewerValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><?=$this->case["caseRangeValue"]?></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><?=$this->case["ageReqValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><?=$this->case["period"]?></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><?=$this->case["countryReqValue"]?> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><?=$this->case["delayValue"]?></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><?=$this->case["unitPriceValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><?=$this->case["workingPlaceValue"]?> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><?=$this->case["overtimePayValue"]?></td>
+	</tr>
+</table>
+</div></div>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_judge">
+	<thead>
+		<tr>
+			<th width="44%" align="left"><?=$this->tr("baseinfo")?></th>
+			<th width="10%" style="text-align:center"><?=$this->tr("caseapple_cancel_person")?></th>
+			<th width="11%" style="text-align:center"><?=$this->tr("caseapple_cancel_state")?></th>
+			<th width="15%" style="text-align:center"><?=$this->tr("caseapple_cancel_reason")?></th>
+			<th width="20%" align="left"><?=$this->tr("caseapple_cancel_other")?></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php if (isset($this->usrInfoList)): foreach ($this->usrInfoList as $usr): ?>
+		<tr><td align="left"><?=$usr["baseinfo"]?></td>
+		<td style="text-align:center"><?=$this->tr("caseapple_cancel_admin")?></td>
+		<td style="text-align:center"><?=$usr["statusValue"]?></td>
+		<td style="text-align:center"><label><select name="lackReason" class="cancel_select">
+			<?php if (isset ($this->cancelReasons)) : foreach ($this->cancelReasons as $reasonName => $reasonValue) : ?>
+	          	<option value="<?=$reasonName?>" <?if(isset($usr['cancel_lackReason']) && $usr['cancel_lackReason']==$reasonName):?>selected<?endif;?>><?=$reasonValue?></option>
+            <?php endforeach; endif; ?>
+		</select> </label></td>
+		<td align="left">
+			<input type="hidden" name="applyId" value="<?=$usr['apply_id']?>"/>
+			<label><input type="text" name="remark" class="cancel_input" value="<?=isset($usr['cancel_remark'])?$usr['cancel_remark']:''?>"/></label>
+		</td></tr>
+	<?php endforeach;endif;?>
+	</tbody>
+</table>
+
+<div class="btn_os">
+	<input type="image" id="btn_confirm" src="/img/default/front/<?=$auth->locale?>/btn_qd.jpg" class="btn_marR" /> 
+</div>
+</div>
+
+<form action="" method="post" target="_self" style="display: none;" id="dynForm">
+<input id="usrInfoList" name="usrInfoList"/>
+<input id="usrList" name="usrList" value="<?=$this->usrList;?>"/>
+<input type="hidden" id="case" name="case" value='<?=json_encode($this->case)?>'/>
+</form>
+<script src="/js/admin/admin/caseapply/caseapplycancel.js" type="text/javascript"></script>

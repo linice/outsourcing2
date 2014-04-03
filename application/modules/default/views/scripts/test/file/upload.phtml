@@ -1,0 +1,37 @@
+<div>
+	<form id="form_file" action="" method="post" enctype="multipart/form-data" target="_blank">
+		<div id="tip_file" class="tip"></div>
+		<div><input name="file" type="file" value="" /></div>
+		<div><button id="btn_upload" type="submit">上传</button></div>
+	</form>
+</div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	/**
+	 * 上传简历
+	 */
+	$('#btn_upload').click(function(){
+		$('#form_file').ajaxSubmit({
+			url: '/test_file/handleupload',
+			dataType: 'json',
+			success: function(data, status, xhr, $form) {
+				if (data['err'] == 0) {
+					$('#tip_file').html(data['msg']);
+					setTimeout("$('#tip_file').html('')", 5000);
+				} else {
+					$('#tip_file').html(data['msg']);
+				}
+			}
+		});
+		return false;
+	});
+});
+</script>
+
+
+
+
+

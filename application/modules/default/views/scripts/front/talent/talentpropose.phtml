@@ -1,0 +1,60 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<h3 class="add_user_t">新增人才</h3>
+<form id="form1" name="form1" method="post" action="">
+<div class="mail_info_enter">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_mail">
+    <tr>
+      <td width="16%" align="right">收件人地址：</td>
+      <td width="84%">
+        <label>
+          <input type="text" name="textfield" class="mail_input" />
+          </label>
+      
+      </td>
+    </tr>
+    <tr>
+      <td align="right">BCC：</td>
+      <td><label>
+        <input type="text" name="textfield2" class="mail_input" />
+      </label></td>
+    </tr>
+    <tr>
+      <td align="right">CC：</td>
+      <td><label>
+        <input type="text" name="textfield3" class="mail_input" />
+      </label></td>
+    </tr>
+    <tr>
+      <td align="right">邮件名：</td>
+      <td><label>
+        <input type="text" name="textfield4" class="mail_input" />
+      </label></td>
+    </tr>
+  </table>
+</div>
+</form>
+<div class="mail_con">
+	<h4 class="title"><strong>方案1：</strong>ID，性别,年龄，经验（日本经验），技术的前三中，日语，稼动日，单价</h4>
+	<p class="detail">备注：Usr0001，男，29，经验8年（日本5年），java 3年，cobol 2年，c 0.5年，日语1级相当，稼动<br />
+日：4月1日开始 预定，单价：20万日元 <br />
+备注：性格开朗，做事认真 <br />
+htto'//www.jizai-anken.com/user_id=1090….. </p>
+	<h4 class="title"><strong>方案2：</strong></h4>
+	<p class="detail">【员工ID】Usr0001 <br />
+	  【性  别】男 <br />
+	  【年  龄】29 <br />
+	  【经  验】8年（日本5年） <br />
+	  【技  术】java 3年，cobol 2年，c 0.5年 <br />
+	  【日  语】日语1级相当 <br />
+	  【稼动日】4月1日开始 预定 <br />
+	  【单  价】20万日元 <br />
+	  【其  他】性格开朗，做事认真 <br />
+    htto'//www.jizai-anken.com/user_id=1090….. </p>
+</div>
+<div class="btn_os"><a href="#" target="_blank"><img src="/img/default/front/<?=$auth->locale?>/btn_send.jpg" width="80" height="30" border="0" /></a></div>
+</div>
+

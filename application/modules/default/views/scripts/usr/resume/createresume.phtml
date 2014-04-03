@@ -1,0 +1,62 @@
+<?php $auth = new Zend_Session_Namespace('AUTH');?>
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<a name="baseinfo"></a>
+	<?php include_once 'createresumebaseinfo.phtml';?>
+	<a name="biz"></a>
+	<?php include_once 'createresumebiz.phtml';?>
+	<a name="prj"></a>
+	<?php include_once 'createresumeprj.phtml';?>
+	<a name="other"></a>
+	<?php include_once 'createresumeother.phtml';?>
+	<!-- 隐藏信息 -->
+	<input id="resumeCode" name="resumeCode" type="hidden" value="<?=$this->resumeCode?>" />
+</div>
+
+<script type="text/javascript">
+	//简历信息
+	var usr = <?=json_encode($auth->usr)?>;
+	var resume = <?=json_encode($this->resume)?>;
+	var resumeBizs = <?=json_encode($this->resumeBizs)?>;
+	var resumePrjs = <?=json_encode($this->resumePrjs)?>;
+
+	//本地化国家及省（中国）或县（日本）
+	var counties = <?=json_encode($this->counties)?>;
+	var provinces = <?=json_encode($this->provinces)?>;
+
+	//本地化个人、法人或管理员信息：用于管理员代替个人、法人（为其员工）或为自己的员工创建简历时，选择个人、法人或管理员
+	var INVIDIDUAL = '<?=$this->tr('INVIDIDUAL')?>';
+	var LP = '<?=$this->tr('LP')?>';
+	var ADMIN = '<?=$this->tr('admin')?>';
+	
+	var MEMBER_CODE = '<?=$this->tr('MEMBER_CODE')?>';
+	var EMAIL = '<?=$this->tr('email')?>';
+	var FULLNAME = '<?=$this->tr('FULLNAME')?>';
+
+	var LP_CODE = '<?=$this->tr('LP_CODE')?>';
+	var LP_NAME = '<?=$this->tr('LP_NAME')?>';
+
+	var ADMIN_CODE = '<?=$this->tr('ADMIN_CODE')?>';
+	var ADMIN_NAME = '<?=$this->tr('ADMIN_NAME')?>';
+
+	//本地化员工推荐度表头
+	var PERSONNEL_ID = '<?=$this->tr('PERSONNEL_ID')?>';
+	var SEX = '<?=$this->tr('SEX__')?>';
+	var AGE = '<?=$this->tr('AGE')?>';
+	var EXPERIENCE = '<?=$this->tr('EXPERIENCE')?>';
+	var WORK_DATE = '<?=$this->tr('WORK_DATE')?>';
+	var UNIT_PRICE = '<?=$this->tr('UNIT_PRICE')?>';
+	var UNIT_PRICE_WITH_UNIT = '<? echo $this->tr('UNIT_PRICE'), '(', $this->tr('TEN_THOUSAND'), $this->tr('YEN'), '/', $this->tr('MONTH') . ')' ?>';
+	var SORT_PRICE_YEN = '<?=$this->tr('SORT_PRICE_YEN')?>';
+	var POINTS = '<?=$this->tr('POINTS')?>';
+
+	//本地化员工推荐度提示信息
+	var point_set_can_not_be_larger_than_balance_point = '<?=$this->tr('point_set_can_not_be_larger_than_balance_point')?>';
+
+	//other
+	var BEING_SAVED = '<?=$this->tr('BEING_SAVED')?>';
+</script>
+<script type="text/javascript" src="/js/default/usr/resume/createresumebaseinfo.js"></script>
+<script type="text/javascript" src="/js/default/usr/resume/createresumebiz.js"></script>
+<script type="text/javascript" src="/js/default/usr/resume/createresumeprj.js"></script>
+<script type="text/javascript" src="/js/default/usr/resume/createresumeother.js"></script>

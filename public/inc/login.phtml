@@ -1,0 +1,67 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<style>
+#loginDiv {width:632px; margin-left:auto; margin-right:auto; text-align:left;}
+#loginDiv .login_item{ width:280px; zoom:1; height:35px; margin-bottom:5px; margin:0 auto;}
+#loginDiv .login_item .t_name{ float:left; width:80px; text-align:center; height:30px; line-height:30px; font-size:14px;}
+#loginDiv .login_item .myinput{width:152px; height:20px; line-height:20px; padding-left:5px; padding-right:5px; border:1px solid #7e9db9;}
+#loginDiv .login_item .myselect{width:165px; height:20px; line-height:20px; }
+</style>
+<div id="loginDiv" style="display:none">
+	<form id="loginDiv_form_login" name="loginDiv_form_login" method="post" action="">
+		<!-- 提示 -->
+		<div id="loginDiv_tip_login" class="tip" style="text-align: center;"></div>
+		<!-- 用户名 -->
+		<div class="login_item t_name">
+			<?=$this->tr('USERNAME');?>：
+			<input type="text" name="email" id="loginDiv_email" class="myinput" />
+		</div>
+		<!-- 密码 -->
+		<div class="login_item t_name">
+			<?=$this->tr('password');?>：
+			<input type="password" id="loginDiv_passwd" name="passwd" class="myinput" />
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+function valLogin() {
+	var hasLogin = '<?=isset($auth->usr) ? true : false;?>'
+	if(!hasLogin) {
+		$('#loginDiv').dialog({
+			autoOpen: true,
+			modal: true,
+			width: 400,
+			buttons: {
+				"<?=$this->tr('SURE')?>": function() {
+					var loginDialog = $(this);
+					$.ajax({
+						url: '/login/login',
+						type: 'post',
+						async: true,
+						dataType: 'json', //xml, json, script or html
+						data: $('#loginDiv_form_login').serializeArray(),
+						success: function(data, textStatus, jqXHR) {
+							if (data['err'] == 0) {
+								$("#loginDiv_tip_login").html('');
+								$("#loginDiv_passwd").val('');
+								//$("div.header").
+								loginDialog.dialog('close');
+							} else {
+								$('#loginDiv_tip_login').html(data['msg']);
+								$("#loginDiv_passwd").val('');
+							}
+						}
+					});
+				},
+				"<?=$this->tr('CANCEL')?>": function(){
+					$("#loginDiv_passwd").val('');
+					$(this).dialog('close');
+				}
+			}
+		});
+	}
+	return hasLogin;
+}
+</script>

@@ -1,0 +1,75 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+<h3 class="t_top"><?=$this->tr('emp_apply_case_mgt')?></h3>
+<div id="tablist1">
+	<div class="srcoll_case_search">
+	<div class="search_left">
+		<img src="/img/admin/<?=$auth->locale?>/icon_search.gif" width="28" height="23" class="icon_search" />
+		<select name="range" class="myselect" id="range">
+			<option value="lp_code"><?=$this->tr('EMP_CODE')?></option>
+			<option value="lp_name"><?=$this->tr('EMP_NAME')?></option>
+		</select>
+		<label><input type="text" name="sValue" id="sValue" class="myinput" /></label>
+		<input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+	</div>
+	</div>
+</div>
+<div id="lplist"></div>
+<script type="text/javascript">
+var manager;
+$(function() {
+	$("#lplist").ligerGrid({
+		columns: [{display: EMP_CODE, name: 'code', width:80, render: UsrCodeFunction},
+				  {display: COL_A_BASEINFO, name: 'baseinfolong', render: infoFunction},
+				  {display: COUNT_INVITE, name: 'count_invite', render: inviteFunction, width:70},
+				  {display: COUNT_APPLY_TOTAL, name: 'count_apply', render: applyFunction, width:70},
+				  {display: COUNT_INTERVIEW_ADJUST, name: 'count_adjust', render: adjustFunction, width:70},
+				  {display: COUNT_OK, name: 'count_ok', render: okFunction, width:70}],
+		url: '/admin/admin_usr/searchapplycasemgt',
+		//height: "auto", 
+		width: "100%",
+		columnWidth: 594,
+		isScroll: false, frozen:false,
+		//rowHeight: 
+		//headerRowHeight: 
+		pageSize: 20
+	});
+	manager = $("#lplist").ligerGetGridManager();
+
+	function UsrCodeFunction(rowData, rowIndex) {
+		return UsrCodeFormatFunction(rowData, 'code');
+	}
+	function infoFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewResume(\""+rowData.code+"\")'>"+rowData.baseinfolong+"</a>";
+	}
+	function inviteFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_invite+"</a>";
+	}
+	function applyFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_apply+"</a>";
+	}
+	function adjustFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_adjust+"</a>";
+	}
+	function okFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_ok+"</a>";
+	}
+
+	$("#searchBtn").click(function() {
+		var sValue = $("#sValue").val();
+		var range = $("#range").val();
+		manager.setOptions({parms: {"sValue": sValue, "range": range}})
+		manager.loadData();
+	})
+})
+function viewApply(code) {
+	//TODO 没有页面可以显示，应该显示该员工应聘过的案件列表
+	//window.open("admin/admin_applymgt/applymgt/caseCode/"+code)
+}
+function viewResume(code) {
+	window.open("/usr_resume/previewresume/resumeCode/"+code);
+}
+</script>
+</div>

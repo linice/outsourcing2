@@ -1,0 +1,14 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+
+<div id="wraper">
+<div class="register_successful">
+	<h3 class="register_successful_t"><img src="/img/default/front/<?=$auth->locale?>/msg_send_success.gif" width="168" height="44" /></h3>
+	<div class="register_successful_c">
+		<p>您的请求已经发送,我们会尽快与您取得联系</p>
+		<p><a href="/" target="_blank" class="aback">&lt;&lt;返回首页</a></p>
+	</div>
+</div>
+</div>

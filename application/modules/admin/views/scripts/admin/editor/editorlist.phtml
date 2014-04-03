@@ -1,0 +1,126 @@
+<?php $auth = new Zend_Session_Namespace('AUTH');?>
+
+<div id="wraper">
+	<h3 class="t_top"><?=$this->tr('editor_list')?></h3>
+	<div id="tip_edt" class="tip"></div>
+	<div id="editorlist"></div>
+	<div class="btn_os">
+		<a href="javascript:void(0)" id="editBtn"> 
+			<img src="/img/default/front/<?=$auth->locale?>/btn_modify.jpg" class="marR" /> 
+		</a>
+		<a href="javascript:void(0)" id="delBtn">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" class="marR" />
+		</a>
+	</div>
+</div> <!-- <div id="wraper"> -->
+
+
+<form id="form_modifyEdt" style="display:none;" method="post" target="_blank">
+	<input id="edtCode" name="edtCode" type="hidden" value="" />
+	<input id="modify" name="modify" type="hidden" value="" />
+</form>
+
+
+<script type="text/javascript">
+var NICKNAME = '<?=$this->tr('NICKNAME')?>';
+var manager;
+
+$(document).ready(function() {
+	$('#editorlist').ligerGrid({
+		checkbox: true,
+		checkboxColWidth: 30,
+		url: '/admin/admin_editor/searcheditorlist',
+		//height: 'auto', 
+		width: '100%',
+		columnWidth: 150,
+		isScroll: false,
+		frozen:false,
+		//rowHeight: 
+		//headerRowHeight: 
+		pageSize: 20,
+		columns: [{display: 'ID', name: 'code', width:'50%'},
+				  {display: NICKNAME, name: 'nickname', width:'47%'}]
+	});
+
+	manager = $('#editorlist').ligerGetGridManager();
+
+	
+	$('#editBtn').click(function() {
+		var rows = manager.getSelecteds();
+		if (!rows || rows.length == 0) {
+			alert('请选择需要修改的录入人员!');
+			return false;
+		}
+		if (rows.length > 1) {
+			alert('只能选择一个录入人员进行修改!');
+			return false;
+		}
+		editEditor(rows[0]['code']);
+	});
+
+	
+	$('#delBtn').click(function() {
+		var rows = manager.getSelecteds();
+    	delEditor(rows);
+    	return false;
+	});
+});
+
+
+/**
+ * 修改Editor
+ */
+function editEditor(edtCode) {
+	$('#form_modifyEdt').attr('action', '/admin/admin_editor/addeditor');
+	$('#form_modifyEdt #edtCode').val(edtCode);
+	$('#form_modifyEdt #modify').val('Y');
+	$('#form_modifyEdt').submit();
+}
+
+
+/**
+ * 删除Editor
+ */
+function delEditor(rows, code, name) {
+	if ((!rows || rows.length == 0) && !code && !name) {
+		alert('请选择需要删除的录入人员!');
+		return false;
+	}
+	rows = rows || [{code: code, fullname: name}];
+	var html = ['<div style="width:500px;"><div class="notice_con">你确定要删除选中的人员？</div>'];
+	html.push('<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_del">');
+	html.push('<tr>');
+	html.push('<th width="25%">ID</th>');
+	html.push('<th width="75%" align="left">' + NICKNAME + '</th>');
+	html.push('</tr>');
+	$.each(rows, function(i, v) {
+		html.push('<tr>');
+		html.push('<td width="25%">' + v.code + '</td>');
+		html.push('<td width="75%" align="left">' + v.nickname + '</td>');
+		html.push('</tr>');
+	});
+	html.push('</table>');
+	html.push('</div>');
+	html = html.join("");
+	ligerConfirm("录入人员删除", html, {width: 550}, function() {
+		var edtCodes = new Array();
+		$.each(rows, function(k, v) {
+			edtCodes.push(v);
+		});
+		$.ajax({
+			url: '/admin/admin_editor/deleditor',
+			type: 'post',
+			async: false,
+			dataType: 'json', //xml, json, script or html
+			data: {'edtCodes': edtCodes},
+			success: function(data, textStatus, jqXHR) {
+				if (data['err'] == 0) {
+					manager.loadData();
+				} else {
+					$('#tip_edt').html(data['msg']);
+				}
+			}
+		});
+	});
+}
+</script>

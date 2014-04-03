@@ -1,0 +1,216 @@
+<link href="/css/default/usr/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+  <div class="con_user_center">
+		<div class="news_note_num"><?=$this->tr('YOU_HAVE_NEW_NEWS')?>
+			<span class="fred">
+				(<a href="/msg_msg/msg" target="_blank"><?=$this->msgsCnt?><?=$this->tr('ITEM')?></a>)
+			</span>
+		</div>
+		<h3 class="note_t"><?=$this->tr('LOGIN_EMAIL')?></h3>	
+	    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#e6e6f4" class="tab_info">
+          <tr>
+            <td style="text-align: right; background-color: #f7f7ff; width: 22%;"><?=$this->tr('EMAIL')?>：</td>
+            <td style="text-align: left; background-color: #f7f7ff; width: 78%;" class="fgrey">
+            	<span class="btn_bg"><a href="/usr_usr/chgemail" target="_blank"><?=$this->tr('ALTER')?></a></span>
+            	<?=$auth->usr['email']?>
+            </td>
+          </tr>
+        </table>
+		<h3 class="note_t"><?=$this->tr('MEMBER_BASEINFO_SETTING')?></h3>	
+	    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#e6e6f4" class="tab_info">
+          <tr>
+            <td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr('MEMBER_ID')?>：</td>
+            <td width="78%" bgcolor="#f7f7ff" class="fblue"><?=$this->usr['code']?>
+            	<span class="fgrey"><?=$this->tr('usr_id_cannot_modify')?></span>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#f7f7ff"><?=$this->tr('member_baseinfo')?>：</td>
+            <td bgcolor="#f7f7ff" class="fgrey">
+            	<span class="btn_bg">
+            		<a href="/usr_usr/baseinfo" target="_blank"><?=$this->tr('ALTER')?></a>
+            	</span>
+            	<?=$this->tr('NAME_SEX_EMAIL_PASSWORD_ETC_REVISE')?>
+            </td>
+          </tr>
+        </table>
+		<h3 class="note_t"><?=$this->tr('RESUME_SETTING')?></h3>	
+	    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#e6e6f4" class="tab_info">
+		<tr>
+            <td colspan="2" align="right" bgcolor="#f7f7ff">
+            <?php if (!empty($this->resume)):?>
+            	<span class="resume_pre">
+            		<a href="/usr_resume/previewresume/resumeCode/<?=$this->resume['code']?>" target="_blank"><?=$this->tr('resume_preview')?></a>
+            	</span>
+            <?php endif;?>
+            </td>
+          </tr>
+          <tr>
+            <td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr('create_resume')?>：</td>
+            <td width="78%" bgcolor="#f7f7ff" class="fgrey">
+            	<?php if (empty($this->resume)):?>
+	            	<?=$this->tr('YOU_HAVE_NOT_ADDED_RESUME')?>，<?=$this->tr('CLICK')?>
+	            	<a href="/usr_resume/createresume" target="_blank"><?=$this->tr('create_resume')?></a> 
+	            	<?=$this->tr('COME_TO_ENTER_YOUR_FIRST_RESUME_OR_CLICK')?>
+	            	<a href="/usr_resume/uploadresume" target="_blank"><?=$this->tr('upload_resume')?></a> 
+	            	<?=$this->tr('TO_ADD_RESUME')?>
+	           	<?php else:?>
+	           		<?=$this->tr('YOU_HAVE_ALREADY_OWN_A_RESUME')?>
+	           		<a href="/usr_resume/previewresume/resumeCode/<?=$this->resume['code']?>" target="_blank"><?=$this->tr('preview')?></a>
+	           		<?=$this->tr('OR')?>
+	           		<a href="/usr_resume/modifyresume/resumeCode/<?=$this->resume['code']?>" target="_blank">
+	           			<?php if ($this->resume['ok_base'] == 'Y' && $this->resume['ok_biz'] == 'Y'
+	           				&& $this->resume['ok_prj'] == 'Y' && $this->resume['ok_other'] == 'Y'
+	           			) {
+							echo $this->tr('COMPLETE');	
+	           			} else {
+	           				echo $this->tr('MODIFY');
+	           			}?>
+	           		</a>。
+	           		<?=$this->tr('OR')?><a href="/file_resume/uploadresume" target="_blank"><?=$this->tr('UPLOAD_NEW_RESUME')?></a>。
+	           	<?php endif;?>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#f7f7ff"><?=$this->tr('BASE_INFO')?>：</td>
+            <td bgcolor="#f7f7ff" class="fgrey">
+            	<span class="btn_bg"><a href="/usr_resume/modifyresume/resumeCode/<?=$this->resume['code']?>/anchor/baseinfo" target="_blank"><?=$this->tr('ALTER')?></a>
+	            	</span><?=$this->tr('BIRTH_YEAR_MONTH_DAY__RESIDENCE__FINAL_DEGREE__ETC__MODIFY')?>
+                <?php if (!empty($this->resume)):?>
+	                
+            	<?php endif;?>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#f7f7ff"><?=$this->tr('EXPERIENCE_LANGUAGE')?>：</td>
+            <td bgcolor="#f7f7ff" class="fgrey">
+            	<span class="btn_bg">
+	            		<a href="/usr_resume/modifyresume/resumeCode/<?=$this->resume['code']?>/anchor/biz" target="_blank"><?=$this->tr('ALTER')?></a>
+	            	</span><?=$this->tr('SKILL_EXPERIENCE_MODIFY')?>
+            	<?php if (!empty($this->resume)):?>
+	            	
+	            <?php endif;?>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#f7f7ff"><?=$this->tr('PRJ_EXPERIENCE')?>：</td>
+            <td bgcolor="#f7f7ff" class="fgrey">
+            	<span class="btn_bg">
+	            		<a href="/usr_resume/modifyresume/resumeCode/<?=$this->resume['code']?>/anchor/prj" target="_blank"><?=$this->tr('ALTER')?></a>
+	            	</span><?=$this->tr('PRJ_EXPERIENCE_MODIFY')?>
+            	<?php if (!empty($this->resume)):?>
+	            	
+            	<?php endif;?>
+            </td>
+          </tr>          
+        </table>
+        
+        <!-- 其它设定 -->
+		<h3 class="note_t"><?=$this->tr('OTHER_SETTING')?></h3>	
+	    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#e6e6f4" class="tab_info">
+          <tr>
+            <td width="22%" align="right" bgcolor="#f7f7ff"><?=$this->tr('OTHER_INFO')?>：</td>
+            <td width="78%" bgcolor="#f7f7ff" class="fgrey">
+			<span class="btn_bg">
+	            		<a href="/usr_resume/modifyresume/resumeCode/<?=$this->resume['code']?>/anchor/other" target="_blank"><?=$this->tr('ALTER')?></a>
+	            	</span>
+            	<?php if (!empty($this->resume)):?>
+	            	
+            	<?php endif;?>
+            	  <?=$this->tr('ABLE_WORK_DATE')?>：
+            	  <?php if (!empty($this->resume)) {
+            	  	if ($this->resume['able_work_date_choice'] == 'SPECIFY_DATE') {
+            	  		echo $this->resume['able_work_date_choice'];
+            	  	} else {
+            	  		echo $this->tr($this->resume['able_work_date_choice']);
+            	  	}
+            	  }
+            	  ?>
+            	  <br />
+			      <?=$this->tr('current_biz_state')?>：
+			      <?php if (!empty($this->resume)):?>
+			      	<?=$this->tr('IS_APPLY_PRJ_' . $this->resume['is_apply_prj'])?>
+			      <?php endif;?>	
+				<br />
+			     <?=$this->tr('exp_unit_price')?>：
+			     <?php if (!empty($this->resume)):?>
+			     	<?=$this->resume['salary_exp']?>
+			      <?php endif;?>	
+			     <br />
+			     <?=$this->tr('min_propose_price')?>：
+			     <?php if (!empty($this->resume)):?>
+				     <?=$this->resume['salary_min']?>
+			      <?php endif;?>
+			     <br />
+			     <?=$this->tr('exp_workplace')?>：
+			     <?php 
+			     	if (!empty($this->resume)) {
+				     	$expWorkplaces = json_decode($this->resume['exp_workplace'], true);
+				     	if (!empty($expWorkplaces)) {
+					     	foreach ($expWorkplaces as $expWorkplace) {
+					     		echo $this->tr($expWorkplace) . '&nbsp;&nbsp;';
+					     	}
+				     	}
+			     	}
+			     ?>
+			     <br />
+			     <?=$this->tr('exp_prj_form')?>：.
+			     <?php if (!empty($this->resume)):?>
+				     <?=$this->tr($this->resume['exp_prj_form'])?>
+			      <?php endif;?>
+			     <br />
+			</td>
+          </tr>
+        </table>
+		<h3 class="note_t"><?=$this->tr('EMAIL_NOTIFY_SET')?></h3>
+		<div class="tip" id="tip_isReceiveNews"></div>
+	    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#e6e6f4" class="tab_info">
+          <tr>
+            <td width="22%" align="right" bgcolor="#f7f7ff">			
+				<?=$this->tr('new_case_notice_setting')?>：
+			</td>
+            <td width="78%" bgcolor="#f7f7ff">
+				<span class="btn_bg"><a href="javascript:void(0);" id="btn_modifyIsReceiveNews"><?=$this->tr('ALTER')?></a></span>
+				<input type="radio" name="isReceiveNews" value="Y" /><?=$this->tr('NOTIFY')?>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="isReceiveNews" value="N" /><?=$this->tr('NO_NOTIFY')?>
+			</td>
+          </tr>
+        </table>
+		<?php if (!empty($this->resume)):?>
+		<h3 class="note_t"><?=$this->tr('RESUME_OPEN_SET')?></h3>
+		<div class="tip" id="tip_isOpenResume"></div>
+		    <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+	          <tr>
+	            <td width="22%" align="right" bgcolor="#f7f7ff">			
+				<?=$this->tr('IS_OPEN')?>：</td>
+	            <td width="78%" bgcolor="#f7f7ff">
+					<span class="btn_bg"><a href="javascript:void(0);" id="btn_modifyIsOpenResume"><?=$this->tr('ALTER')?></a></span>
+					<input type="radio" name="isOpenResume" value="Y" /><?=$this->tr('YES')?>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="isOpenResume" value="N" /><?=$this->tr('NO')?>
+				</td>
+	          </tr>
+	        </table>
+	    <?php endif;?>
+		<h3 class="note_t"><?=$this->tr('quit_setting')?></h3>
+		<div class="tip" id="tip_unsubscribe"></div>	
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+          <tr>
+            <td width="22%" align="left" bgcolor="#f7f7ff">
+            	<span class="btn_bg"><a href="javascript:void(0);" id="btn_unsubscribe"><?=$this->tr('quit_procedure')?></a></span><?=$this->tr('AFTER_WITHDRAW_THE_MEMBERSHIP__WILL_DEL_YOUR_INFO')?>
+            	
+            </td>
+          </tr>
+        </table>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+var isReceiveNews = '<?=$this->usr['is_receive_news']?>';
+var isOpenResume = '<?=isset($this->resume['is_open'])?$this->resume['is_open']:'Y'?>';
+var CONFIRM_UNSUBSCRIBE = '<?=$this->tr('CONFIRM_UNSUBSCRIBE')?>';
+</script>
+<script type="text/javascript" src="/js/default/usr/usr/usr.js"></script>

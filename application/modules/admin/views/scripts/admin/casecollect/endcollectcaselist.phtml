@@ -1,0 +1,140 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top">发送消息</h3>
+	<form id="form1" name="form1" method="post" action="">
+	
+	  <div id="tab1">
+	<ul>
+	<li><a href="admin-case-collecting-list" target="_self">募集中案件列表</a></li>
+	<li class="now">募集终了案件列表</li>
+	</ul>
+	</div>
+	<div id="tablist1">
+		<div class="srcoll_case_search"><div class="search_left"><img src="/img/admin/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" /><select name="select" class="myselect">
+     <option>全部</option>
+   </select>
+   <input type="text" name="textfield" class="myinput" />
+   <input type="checkbox" name="checkbox" value="checkbox" />
+   应聘有
+   <input type="image" name="imageField4" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+   </div>
+   <div class="search_right">共 <span class="fred">10</span> 个案件</div>
+   <br class="cls" />
+  </div>
+  
+  <!--search end-->
+  
+  <!--search list-->
+  <div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_lie01">
+    <tr>
+      <td width="53" align="center"><strong>案件ID</strong></td>
+      <td width="110" align="center"><strong>案件名</strong></td>
+      <td width="77" align="center"><strong>发布公司ID</strong></td>
+      <td width="157" align="center"><strong>技术要求</strong></td>
+      <td width="65" align="center"><strong>开始时间</strong></td>
+      <td width="84" align="center"><strong>勤务地</strong></td>
+      <td width="88" align="center"><strong>单价/月</strong></td>
+      <td width="40"  align="center" class="w40">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_title">
+        <tr>
+          <td width="29" align="center">浏览<br />人数</td>
+          <td width="11" valign="middle"><img src="/img/admin/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></td>
+        </tr>
+      </table>	  </td>
+      <td width="40" align="center" class="w40">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_title">
+        <tr>
+          <td width="29" align="center"><p>应聘<br />
+            中</p></td>
+          <td width="11"><img src="/img/admin/<?=$auth->locale?>/line_down.gif" width="11" height="10" /></td>
+        </tr>
+      </table>	  </td>
+      <td width="40" align="center" class="w40">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_title">
+        <tr>
+          <td width="29" align="center"><p>未处<br />
+            理</p></td>
+          <td width="11"><img src="/img/admin/<?=$auth->locale?>/line_down.gif" width="11" height="10" /></td>
+        </tr>
+      </table>	  </td>
+      <td width="46" align="center" class="w40">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_title">
+        <tr>
+          <td width="29" align="center">推荐<br />
+            判定</td>
+          <td width="11"><img src="/img/admin/<?=$auth->locale?>/line_down.gif" width="11" height="10" /></td>
+        </tr>
+      </table></td>
+      <td width="40" align="center" class="w40">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_title">
+        <tr>
+          <td width="29" align="center">面试<br />
+            通知</td>
+          <td width="12"><img src="/img/admin/<?=$auth->locale?>/line_down.gif" width="11" height="10" /></td>
+        </tr>
+      </table>	  </td>
+	  <td width="40" align="center" class="w40">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_title">
+        <tr>
+          <td width="74%" align="center">面试<br />
+            决定</td>
+          <td width="26%" align="left"><img src="/img/admin/<?=$auth->locale?>/line_down.gif" width="11" height="10" /></td>
+        </tr>
+      </table></td>
+      <td width="40" align="center" class="w40">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_title">
+        <tr>
+          <td width="74%" align="center">面试<br />
+            合格</td>
+          <td width="26%" align="left"><img src="/img/admin/<?=$auth->locale?>/line_down.gif" width="11" height="10" /></td>
+        </tr>
+      </table>
+	  </td>
+    </tr>
+    <tr>      
+      <td align="center">0001</td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">COM12345</td>
+      <td align="center">JAVA  COBOL</td>
+      <td align="center">20120101</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">100</td>
+      <td align="center"><a href="#" target="_self">10</a></td>
+      <td align="center"><a href="#" target="_self">2</a></td>
+      <td align="center"><a href="#" target="_self">2</a></td>
+      <td align="center"><a href="#" target="_self">1</a></td>
+	  <td align="center"><a href="#" target="_self">2</a></td>
+      <td align="center"><a href="#" target="_self">2</a></td>
+    </tr>
+	<tr>      
+      <td align="center">0001</td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">COM12345</td>
+      <td align="center">JAVA  COBOL</td>
+      <td align="center">20120101</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">100</td>
+      <td align="center"><a href="#" target="_self">10</a></td>
+      <td align="center"><a href="#" target="_self">2</a></td>
+      <td align="center"><a href="#" target="_self">2</a></td>
+      <td align="center"><a href="#" target="_self">1</a></td>
+	  <td align="center"><a href="#" target="_self">2</a></td>
+      <td align="center"><a href="#" target="_self">2</a></td>
+    </tr>
+  </table>
+  
+</div>
+<div class="btn_os">
+<div class="page"><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+
+<!--search list end-->
+	
+	</div>
+    </form>
+</div>

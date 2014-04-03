@@ -1,0 +1,23 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top"><? echo $this->tr('EMAIL_TPL'), $this->tr('LIST')?></h3>
+	<div id="tip_emailTplList" class="tip"></div>
+	<div id="emailTplList"></div>
+	
+	<div style="margin-top: 20px; text-align: center;">
+		<a href="javascript:void(0);" id="btn_delEmailTpl">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_msg_del.jpg" width="48" height="25" />
+		</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var TPL_NAME = '<?=$this->tr('TPL_NAME')?>';
+	var TPL_TITLE = '<?=$this->tr('TPL_TITLE')?>';
+	var OPERATION = '<?=$this->tr('OPERATION')?>';
+	var MODIFY = '<?=$this->tr('MODIFY')?>';
+	var CONFIRM_DEL = '<?=$this->tr('CONFIRM_DEL')?>';
+</script>
+<script src="/js/admin/admin/email/emailtpllist.js" type="text/javascript"></script>

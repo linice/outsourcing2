@@ -1,0 +1,208 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#tbl_talentDetail tr th {height:32px;}
+</style>
+<div id="wraper">
+	<div class="tip" id="tip_talent"></div>
+	<!-- 检索条件 -->
+	<div>
+		<span><?=$this->tr('YOUR_CURR_SEARCH_COND_ARE')?>：</span>
+		<span style="margin: 0 0 0 20px;">
+			<a id="btn_changeAdvancedSearchParms" href="javascript:void(0);">
+				<?=$this->tr('modify_search_filter')?>
+			</a>
+		</span>
+	</div>
+	<div class="fblue" style="line-height: 24px;">
+		<div><?=$this->tr('PEOPLE_KIND')?>：
+			<?=$this->tr('TALENT_TYPE_RECMD') . $this->advancedSearchParms['talentType']?>
+		</div>
+	<?php if (!empty($this->advancedSearchParms['oss'])):?>
+		<div>OS：
+			<?php 
+				foreach ($this->advancedSearchParms['oss'] as $os) {
+					echo $this->tr($os);
+				}
+			?>
+		</div>
+	<?php endif;?>
+	<?php 
+		$fws = '';
+		foreach ($this->fws as $fw) {
+			if (in_array($fw . '_fw_age', $this->advancedSearchParmsKeys) && !empty($this->advancedSearchParms[$fw . '_fw_age'])) {
+				$fws .= $this->tr($fw) . ' ' . $this->advancedSearchParms[$fw . '_fw_age'] . $this->tr('YEAR') . '; ';
+			}
+		}
+		if (!empty($fws)):
+	?>
+		<div><?=$this->tr('EXPERIENCE_LANGUAGE')?>/FrameWork：
+			<?=$fws;?>
+		</div>
+	<?php endif;?>
+	<?php 
+		$bizs = '';
+		foreach ($this->bizs as $biz) {
+			if (in_array($biz . '_biz_age', $this->advancedSearchParmsKeys) && !empty($this->advancedSearchParms[$biz . '_biz_age'])) {
+				$bizs .= $this->tr($biz) . ' ' . $this->advancedSearchParms[$biz . '_biz_age'] . $this->tr('YEAR') . '; ';
+			}
+		}
+		if (!empty($bizs)):
+	?>
+		<div><?=$this->tr('industries')?>：
+			<?=$bizs?>
+		</div>
+	<?php endif;?>
+	<?php 
+		$expWps = '';
+		if (!empty($this->advancedSearchParms['expWps_jp'])) {
+			foreach ($this->advancedSearchParms['expWps_jp'] as $expWp_jp) {
+				$expWps .= $this->tr($expWp_jp);
+			}
+		}
+		if (!empty($this->advancedSearchParms['expWps_os'])) {
+			foreach ($this->advancedSearchParms['expWps_os'] as $expWp_os) {
+				$expWps .= $this->tr($expWp_os);
+			}
+		}
+		if (!empty($expWps)):
+	?>
+		<div><?=$this->tr('WORKPLACE')?>：
+			<?=$expWps?>
+		</div>
+	<?php endif;?>
+	<?php if (!empty($this->advancedSearchParms['sex']) 
+		|| !empty($this->advancedSearchParms['fullageMin'])
+		|| !empty($this->advancedSearchParms['fullageMax'])
+		|| !empty($this->advancedSearchParms['jaAbility'])):
+	?>
+		<div><?=$this->tr('OTHER_COND')?>：
+		<?php if (!empty($this->advancedSearchParms['sex'])):?>
+			<?=$this->tr('SEX__')?>：<?=$this->tr($this->advancedSearchParms['sex'])?>
+			&nbsp;&nbsp;
+		<?php endif;?>
+		<?php if (!empty($this->advancedSearchParms['fullageMin'])
+			|| !empty($this->advancedSearchParms['fullageMax'])):?>
+			<?=$this->tr('AGE')?>：<?=$this->tr($this->advancedSearchParms['fullageMin'])?> ~ <?=$this->tr($this->advancedSearchParms['fullageMax'])?>
+			&nbsp;&nbsp;
+		<?php endif;?>
+		<?php if (!empty($this->advancedSearchParms['jaAbility'])):?>
+			<?=$this->tr('JAPANESE')?>：<?=$this->tr('JA_ABILITY_' . $this->advancedSearchParms['jaAbility'])?>
+		<?php endif;?>
+		</div>
+	<?php endif;?>
+	<?php if (!empty($this->advancedSearchParms['ableWorkDateChoice'])):?>
+		<div><?=$this->tr('ABLE_WORK_DATE')?>：
+			<?php 
+				if ($this->advancedSearchParms['ableWorkDateChoice'] == 'SPECIFY_DATE') {
+	    			echo $this->advancedSearchParms['ableWorkDateBegin'], ' ~ ', $this->advancedSearchParms['ableWorkDateEnd'];
+		    	} else {
+			    	echo $this->tr($this->advancedSearchParms['ableWorkDateChoice']);
+		    	}
+			?>
+		</div>
+	<?php endif;?>
+	<?php if (!empty($this->advancedSearchParms['salaryMin'])):?>
+		<div><?=$this->tr('UNIT_PRICE')?>：
+			<?=$this->advancedSearchParms['salaryMin']?>
+			<?=$this->tr('YEN')?>
+		</div>
+	<?php endif;?>
+	</div>
+
+	<!-- 检索结果：人才列表 -->
+	<div id="talentList" style="margin: 10px 0 0;"></div>
+
+	<!-- 按钮 -->
+<!--	<div class="btn_os">-->
+<!--	  <input alt="Invite" type="image" id="btn_invite" src="/img/default/front/<?=$auth->locale?>/btn_select_invite.jpg" class="btn_marR" />-->
+<!--	</div>-->
+</div>
+
+
+<!-- 隐藏信息：人才高级检索条件 -->
+<form id="form_advancedSearchParms" action="/front_talent/talent" method="post">
+	<input name="advancedSearchParms" type="hidden" value='<?=json_encode($this->advancedSearchParms)?>' />
+</form>
+
+
+<form id="dynForm" method="post" style="display:none">
+	<input name="ids" id="ids" />
+</form>
+
+
+<!-- 人才详情 -->
+<div id="talentDetail" style="display:none;">
+	<ul class="case_lie02_time">
+		<li><?=$this->tr('USR_NAME')?>：<span class="fblue" id='fullname'></span></li>
+		<li><?=$this->tr('SEX__')?>：<span class="fblue" id='tr_sex'></span></li>
+		<li><?=$this->tr('AGE')?>：<span class="fblue" id='age'></span></li>
+		<li><?=$this->tr('CONTACT_WAY')?>：<span class="fblue" id='tel'></span></li>
+		<li><?=$this->tr('UPDATE_DATE')?>：<span class="fblue" id='update_date'></span></li>
+	</ul>
+	<div style="clear: both;"></div>
+	<table id="tbl_talentDetail" style="width:100%;">
+		<tr>
+			<th><?=$this->tr('EXPERIENCE_AND_JP_EXPERIENCE')?>：</th>
+			<td><span id="experience_prefix"></span>
+			</td>
+			<th><?=$this->tr('BIZ')?>：</th><td> <span id="biz"></span> </td>
+			<th><?=$this->tr('SKILL')?>：</th><td> <span id="skill"></span> </td>
+		</tr>
+		<tr>
+			<th><?=$this->tr('JAPANESE')?>：</th>
+			<td><span id="ja_ability"></span> </td>
+			<th><?=$this->tr('ABLE_WORK_DATE')?>：</th>
+			<td><span id="adjust_able_work_date"></span></td>
+			<th><?=$this->tr('ACCEPT_UNIT_PRICE_RANGE')?>：</th>
+			<td><span id="salary_min"></span> ~ <span id="salary_exp"></span></td>
+		</tr>
+		<tr>
+			<th><?=$this->tr('REMARK')?>：</th>
+			<td colspan="5"><span id="remark_lp"></span></td>
+		</tr>
+		<tr>
+			<td colspan="6">
+				<input type="hidden" name="resumeCodeHiddenValue" value="" />
+				<a href="javascript:void(0);" id="btn_invite">
+			    	<img src="/img/admin/<?=$auth->locale?>/btn_invite.gif" width="80" height="30" class="marR" />
+			    </a>
+				<a href="javascript:void(0);" id="btn_perview">
+					<img src="/img/default/lp/<?=$auth->locale?>/btn_preview.jpg" width="80" height="30" class="marR" />
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+<script type="text/javascript">
+	var advancedSearchParms = '<?=json_encode($this->advancedSearchParms)?>';
+
+	var USR_CODE = "<?=$this->tr('USR_CODE')?>";
+	var USR_NAME = "<?=$this->tr('USR_NAME')?>";
+	var SEX = "<?=$this->tr('SEX__')?>";
+	var AGE = "<?=$this->tr('AGE')?>";
+	var TEL = "<?=$this->tr('TEL')?>";
+	var UPDATE_DATE = "<?=$this->tr('UPDATE_DATE')?>";
+
+	var YEAR = "<?=$this->tr('YEAR')?>";
+	var JP = "<?=$this->tr('JP')?>";
+	var EXPERIENCE_AND_JP_EXPERIENCE = "<?=$this->tr('EXPERIENCE_AND_JP_EXPERIENCE')?>";
+	var BIZ = "<?=$this->tr('BIZ')?>";
+	var SKILL = "<?=$this->tr('SKILL')?>";
+	var JAPANESE = "<?=$this->tr('JAPANESE')?>";
+	var ABLE_WORK_DATE = "<?=$this->tr('ABLE_WORK_DATE')?>";
+	var ACCEPT_UNIT_PRICE_RANGE = "<?=$this->tr('ACCEPT_UNIT_PRICE_RANGE')?>";
+	var REMARK = "<?=$this->tr('REMARK')?>";
+
+	var PLEASE_SELECT_ROW = "<?=$this->tr('PLEASE_SELECT_ROW')?>";
+	var CONFIRM_DEL = "<?=$this->tr('CONFIRM_DEL')?>";
+	var PLEASE_CHOISE_INVITE_EMP = "<?=$this->tr('PLEASE_CHOISE_INVITE_EMP')?>";
+	var TITLE_LP_INVITE = "<?=$this->tr('TITLE_LP_INVITE')?>";
+	var SURE_CHOISE_INVITE_EMP = "<?=$this->tr('SURE_CHOISE_INVITE_EMP')?>";
+	var INVATE_LP_EMP_SELF = "<?=$this->tr('invate_lp_emp_self')?>";
+</script>
+<script src="/js/default/front/talent/talentsearchresult.js" type="text/javascript"></script>

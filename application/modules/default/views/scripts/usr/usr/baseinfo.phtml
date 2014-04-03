@@ -1,0 +1,62 @@
+<style type="text/css">
+	table {background-color: #f7f7ff; width: 100%; border: 0; cellpadding: 0; cellspacing: 1px;}
+	table tr th {border: 0; text-align: right; width: 22%; padding-left:10px; padding-right:10px; line-height:30px;}
+	table tr td {border: 0; text-align: left; width: 78%; padding-left:10px; padding-right:10px; line-height:30px;}
+	.myinput {width:150px; height:20px; line-height:20px;}
+</style>
+
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+<form id="form_memberRegInfo" name="form_memberLoginInfo" method="post" action="">
+	<div id="tip_memberRegInfo" class="tip"></div>
+	<h3 class="msg_title"><?=$this->tr('MEMBER_LOGIN_INFO_CHANGE')?></h3>
+	<table>
+      <tr>
+        <th><span style="color: red;">*&nbsp;</span><?=$this->tr('PRONOUNCE')?>：</th>
+        <td>
+        	<label id="label_lastname_p"><?=$this->tr('LASTNAME')?></label>
+        	<input type="text" id="lastname_p" name="lastname_p" class="myinput" size="10" value="<?=substr($this->usr['fullname_p'], 0, strpos($this->usr['fullname_p'], ' '))?>" />
+			<label id="label_firstname_p"><?=$this->tr('FIRSTNAME')?></label>
+			<input type="text" id="firstname_p" name="firstname_p" class="myinput" size="10" value="<?=substr($this->usr['fullname_p'], strpos($this->usr['fullname_p'], ' ') + 1)?>" />
+		 </td>
+      </tr>
+      <tr>
+        <th><span style="color: red;">*&nbsp;</span><label id="label_fullname"><?=$this->tr('NAME')?>：</label></th>
+        <td><input type="text" id="fullname" name="fullname" class="myinput" value="<?=$this->usr['fullname']?>" /></td>
+      </tr>
+      <tr>
+        <th><?=$this->tr('NICKNAME')?>：</th>
+        <td>
+			<input type="text" id="nickname" name="nickname" class="myinput" value="<?=$this->usr['nickname']?>" />
+		</td>
+      </tr>
+      <tr>
+        <th><span style="color: red;">*&nbsp;</span><label id="label_sex"><?=$this->tr('SEX__')?>：</label></th>
+        <td>
+			<input type="radio" name="sex" value="M" /><?=$this->tr('M')?>
+			<input type="radio" name="sex" value="F" /> <?=$this->tr('F')?>
+		</td>
+      </tr>
+      <tr><td colspan="2" class="fblue" bgcolor="#f7f7ff"><?=$this->tr("IF_NEED_TO_MODIFY_PASSWD__PLEASE_INPUT_NEW_PASSWD__OR_LEAVE_IT")?></td></tr>
+      <tr>
+        <th valign="top">パスワード：</th>
+        <td>
+			<input type="password" id="passwd" name="passwd" class="myinput" /><br />
+				<?=$this->tr('PLEASE_CONFIRM_ONCE_AGAIN')?><br />
+			<input type="password" id="passwd2" name="passwd2" class="myinput" />
+		</td>
+      </tr>
+    </table>
+	<div class="btn_center">
+		<a href="javascript: saveMemberRegInfo();">
+			<img alt="submit" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" />
+		</a>
+	</div>
+</form>
+</div>
+
+
+<script type="text/javascript">
+	var usr = <?=json_encode($this->usr)?>;
+</script>
+<script type="text/javascript" src="/js/default/usr/usr/baseinfo.js"></script>

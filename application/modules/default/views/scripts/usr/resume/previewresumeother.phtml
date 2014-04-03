@@ -1,0 +1,94 @@
+<form id="form_resumeOther" name="form_resumeOther" method="post" action="">
+ <h3 class="msg_title">创建简历 第四步  其他设定追加</h3>
+<div class="resume_base_info">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_resume" align="center">
+    <tr>
+      <td width="15%" height="30" align="right" bgcolor="#ccffff">稼动状态&nbsp;</td>
+      <td width="85%" >&nbsp;<label>
+        <select id="isAbleWork" name="isAbleWork" class="myinput_w100">
+          <option value="Y">稼动可</option>
+          <option value="N">稼动否</option>
+        </select>
+      </label>
+	  <input id="ableWorkDate" name="ableWorkDate" type="text" value="" /></td>
+    </tr>
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">当前营业状态&nbsp;</td>
+      <td >&nbsp;<label>
+        <select id="isApplyPrj" name="isApplyPrj" class="myinput_w100">
+            <option value="N">营业否</option>
+        	<option value="Y">营业中</option>
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">希望单价&nbsp;</td>
+      <td >&nbsp;<label>
+        <select id="salaryExp" name="salaryExp" class="myinput_w100">
+        	<option value="1000">1000</option>
+        	<option value="2000">2000</option>
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">最低提案单价&nbsp;</td>
+      <td >&nbsp;<label>
+        <select id="salaryMin" name="salaryMin" class="myinput_w100">
+        	<option value="1000">1000</option>
+        	<option value="2000">2000</option>
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ccffff">期望工作地点&nbsp;</td>
+      <td ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th width="6%" rowspan="2" align="left" valign="top">&nbsp;日本：</th>
+          <?php for ($i = 0; $i < 5; $i++): ?>
+          	<td>
+          		<input type="checkbox" name="<?=$this->expWorkplaces_jp[$i]?>" value="<?=$this->expWorkplaces_jp[$i]?>" />
+          		<?=$this->tr($this->expWorkplaces_jp[$i])?>
+          	</td>
+          <?php endfor;?>
+        </tr>
+        <tr>
+          <?php for ($i = 5; $i < count($this->expWorkplaces_jp); $i++): ?>
+          	<td>
+          		<input type="checkbox" name="<?=$this->expWorkplaces_jp[$i]?>" value="<?=$this->expWorkplaces_jp[$i]?>" />
+          		<?=$this->tr($this->expWorkplaces_jp[$i])?>
+          	</td>
+          <?php endfor;?>
+        </tr>
+        <tr>
+          <th align="left">&nbsp;海外：</th>
+          <?php for ($i = 0; $i < count($this->expWorkplaces_oversea); $i++): ?>
+          	<td>
+          		<input type="checkbox" name="<?=$this->expWorkplaces_oversea[$i]?>" value="<?=$this->expWorkplaces_oversea[$i]?>" />
+          		<?=$this->tr($this->expWorkplaces_oversea[$i])?>
+          	</td>
+          <?php endfor;?>
+        </tr>
+      </table></td>
+    </tr>
+    <tr>
+      <td height="30" align="right" bgcolor="#ccffff">期望项目形态&nbsp;</td>
+      <td >&nbsp;<label>
+        <select id="expPrjDuration" name="expPrjDuration" class="myinput_w100">
+          <option>6个月</option>
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td height="100" align="right" valign="top" bgcolor="#ccffff">备注&nbsp;</td>
+      <td valign="top" ><label>
+        <textarea id="remark" name="remark" class="else_detail"><?=$this->resume['remark']?></textarea>
+      </label></td>
+    </tr>
+  </table>
+</div>
+	<div class="btn_center">
+	<a href="javascript:void(0);" id="btn_previewResume">
+		<img src="/img/default/front/<?=$auth->locale?>/btn_print.jpg" width="79" height="28" class="btn_marR" />
+	</a>
+	</div>
+  </form>

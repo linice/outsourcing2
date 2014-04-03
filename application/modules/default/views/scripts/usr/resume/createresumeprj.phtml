@@ -1,0 +1,98 @@
+<form id="form_resumePrj" name="form_resumePrj" method="post" action="">
+<div class="resume_t"><?=$this->tr('PRJ_EXPERIENCE')?></div>
+<div class="resume_base_info">
+  <table id="tbl_prj" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#000000" class="tab_resume03">
+    <tr>
+      <td width="42" rowspan="2" align="center" bgcolor="#ccffff"></td>
+      <td width="83" rowspan="2" align="center" bgcolor="#ccffff"><?=$this->tr('TIME_PERIOD')?></td>
+      <td width="238" rowspan="2" align="center" bgcolor="#ccffff"><?=$this->tr('BIZ_CONTENT')?></td>
+      <td width="50" rowspan="2" align="center" bgcolor="#ccffff"><?=$this->tr('MACHINE_OS')?></td>
+      <td width="50" rowspan="2" align="center" bgcolor="#ccffff"><?=$this->tr('LANG_DB')?></td>
+      <td width="50" rowspan="2" align="center" bgcolor="#ccffff"><?=$this->tr('POSITION')?></td>
+      <td colspan="12" style="padding: 3px; text-align: center; background-color: #ccffff"><?=$this->tr('JOB_RANGE')?></td>
+    </tr>
+    <tr>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_MGT')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_BIZ_ANALY')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_CMPNT_DEF')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_PRELIMINARY_DESIGN')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_DB_DESIGN')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_DETAIL_DESIGN')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_CODING')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_UNIT_TEST')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_MODULE_TEST')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_INTEGRATION_TEST')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_ADVISORY')?>
+      </td>
+      <td class="w30" style="width: 30px; padding-top: 3px; text-align: center; vertical-align: top; background-color: #ccffff">
+      	<?=$this->tr('SEG_MAINTENANCE')?>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#FFFFFF"><?=$this->tr('EG')?></td>
+      <td valign="bottom" bgcolor="#FFFFFF" class="line24">
+		  <p>2005/7</p>
+	      <p align="right">～2006/10</p>
+		  <p class="day_num"><?=$this->tr('TOGETHER')?>16<?=$this->tr('GE')?><?=$this->tr('MONTH')?></p>
+	  </td>
+      <td bgcolor="#FFFFFF" class="conU">SMART<?=$this->tr('SYSTEM')?><br />
+        <?=$this->tr('EG_PRJ_CONTENT')?>
+      </td>
+      <td align="center" bgcolor="#FFFFFF">WIN2000</td>
+      <td align="center" bgcolor="#FFFFFF">Oracle<br />
+        9iVB6<br />
+        0PL/SQL
+      </td>
+      <td align="center" bgcolor="#FFFFFF" class="w30">PG</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">●</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">●</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">●</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+      <td align="center" valign="middle" bgcolor="#FFFFFF" class="w30">&nbsp;</td>
+    </tr>
+  </table>
+</div>
+	<div id="tip_resumePrj" class="tip"></div>
+	<div class="btn_page">
+		<a href="javascript:void(0);" id="btn_saveResumePrj">
+		  <img src="/img/default/front/<?=$auth->locale?>/btn_keep.jpg" width="79" height="28" class="btn_marR" />
+		</a>
+	  <div class="add_resum_stept3">
+	      <a href="javascript:void(0);" id="btn_addPrj">
+	      	<img src="/img/default/usr/<?=$auth->locale?>/btn_add.jpg" width="62" height="22" border="0" align="middle" />
+	      </a>
+	      &nbsp;&nbsp;
+	      <a href="javascript:void(0);" id="btn_delPrj">
+	      	<img src="/img/default/front/<?=$auth->locale?>/btn_del_little.jpg" width="62" height="22" border="0" align="middle" />
+	      </a>
+      </div>
+	</div>
+  </form>

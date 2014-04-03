@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="/js/jquery/uploadify/uploadify.css" />
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<?php if ($auth->usr['role_code'] == 'ADMIN'):?>
+		<!-- 如果是管理员显示：查询简历 -->
+		<div class="search_top"><?=$this->tr('RESUME_NAME')?>：
+			<input type="text" id="resumeName" class="myinput" style="width:260px; height:20px; line-height:20px;" />
+			<a href="javascript:void(0);" id="btn_searchResumeFile"><img alt="" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" /></a>
+			<input type="checkbox" id="onlyDisplayUnhandled" name="onlyDisplayUnhandled" value="Y" /><?=$this->tr('ONLY_DISPLAY_UNHANDLED')?>
+		</div>
+	<?php else:?>
+		<!-- 如果不是管理员（如普通用户或法人）显示：上传简历 -->
+		<form action="" id="form_uploadResume" name="form_uploadResume" method="post" enctype="multipart/form-data" target="_blank">
+			<h3 class="msg_title"><?=$this->tr('PLEASE_SELECT_RESUME__THEN_CLICK_UPLOAD')?></h3>
+			<div class="tip" id="tip_uploadResume"></div>
+			<div>
+			  <input type="file" id="resumeFile" name="resumeFile" />
+			</div>
+			<div class="notice_con"><?=$this->tr('REMARK')?>:<?=$this->tr('UPLOAD_RESUME_REMARK')?></div>
+		</form>
+	<?php endif;?>
+	<!-- 简历列表 -->
+	<div style="margin-top: 10px;">
+		<h3 class="msg_title"><?=$this->tr('RESUME_LIST')?></h3>
+		<div class="tip" id="tip_resumeFileList"></div>
+		<div id="resumeFileList"></div>
+	</div>
+	
+	<!-- 按钮 -->
+	 <div class="btn_center">
+	 	<?php if ($auth->usr['role_code'] == 'ADMIN'):?>
+		 	<a href="javascript:void(0);" id="btn_handleResumeFile">
+		 		<img src="/img/default/front/<?=$auth->locale?>/btn_deal_over.jpg" width="80" height="30" />
+		 	</a>
+		<?php endif;?>
+	 	<?php if ($auth->usr['role_code'] != 'LP'):?>
+		 	<a href="javascript:void(0);" id="btn_dlResumeFile">
+		 		<img src="/img/default/front/<?=$auth->locale?>/btn_download.jpg" width="80" height="30" />
+		 	</a>
+		<?php endif;?>
+	 	<a href="javascript:void(0);" id="btn_delResumeFile">
+	 		<img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" />
+	 	</a>
+	</div>
+</div>
+
+
+<SCRIPT type="text/javascript">
+	var RESUME_NAME = '<?=$this->tr('RESUME_NAME')?>';
+	var UPLOAD_DATE = '<?=$this->tr('UPLOAD_DATE')?>';
+	var STATUS = '<?=$this->tr('STATUS')?>';
+	var PLEASE_SELECT_ROW = '<?=$this->tr('PLEASE_SELECT_ROW')?>';
+	var EMP_NAME = '<?=$this->tr('EMP_NAME')?>';
+	var BROWSE_RESUME_FILE = '<?=$this->tr('BROWSE') . $this->tr('RESUME') . $this->tr('FILE')?>';
+	
+	//登陆用户角色
+	var usrRoleCode = '<?=$auth->usr['role_code']?>';
+	var TALENT_CODE = '<?=$this->tr('TALENT_CODE')?>';
+	var LP_CODE = '<?=$this->tr('LP_CODE')?>';
+	var ADMIN_CODE = '<?=$this->tr('ADMIN_CODE')?>';
+</SCRIPT>
+<script src="/js/jquery/uploadify/jquery.uploadify.js" type="text/javascript"></script>
+<script src="/js/default/file/resume/uploadresume.js" type="text/javascript"></script>

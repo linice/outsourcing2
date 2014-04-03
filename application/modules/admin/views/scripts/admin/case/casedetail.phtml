@@ -1,0 +1,200 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+<h3 class="t_top"><?=$this->tr('CASE_DETAIL_VIEW')?></h3>
+<div class="search_result_lie02">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><?=$this->case['viewers']?><?=$this->tr("unit_person")?></span><?=$this->case['name'];?></h2>
+
+<ul class="case_lie02_time">
+<li><?=$this->tr("UPDATE_DATE")?>：<?=substr($this->case["last_modify_time"], 0, 10)?></li>
+<li><?=$this->tr("case_timeliness")?>：<?=$this->case["timeliness"]?></li>
+<li><?=$this->tr("case_lp_code")?>：<?=$this->case["lp_code"]?></li>
+<li><?=$this->tr("case_lp_name")?>：<?=$this->case["lp_name"]?></li>
+</ul>
+<div class="case_lie02_con">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr valign="top">
+		<td>【<?=$this->tr("case_careers")?>】</td><td colspan="3"><?=nl2br($this->case["careersValue"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_languages")?>】</td><td colspan="3"><?=nl2br($this->case["languagesValue"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_industries")?>】</td><td colspan="3"><?=nl2br($this->case["industriesValue"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_business_req")?>】</td><td colspan="3"><?=nl2br($this->case["business_req"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_technical_req")?>】</td><td colspan="3"><?=nl2br($this->case["technical_req"])?></td>
+	</tr><tr>
+		<td width="9%">【<?=$this->tr("case_jpl")?>】</td><td width="31%"><?=$this->case["jplValue"]?></td>
+		<td width="9%">【<?=$this->tr("case_interview")?>】</td><td width="51%"><?=$this->case["interviewerValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><?=$this->case["caseRangeValue"]?></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><?=$this->case["ageReqValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>】</td><td><?=$this->case["period"]?></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><?=$this->case["countryReqValue"]?> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><?=$this->case["delayValue"]?></td>
+		<td>【<?=$this->tr("case_unit_price")?>】</td><td><?=$this->case["unitPriceValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><?=$this->case["workingPlaceValue"]?> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>】</td><td><?=$this->case["overtimePayValue"]?></td>
+	</tr>
+</table>
+</div></div>
+<?if(in_array('submit', $this->btnList)):?>
+<div style="text-align:center"><br/><?=$this->tr('are_you_really_apply_this_case')?></div>
+<?endif;?>
+<div class="btn_os">
+	<!--	复制		-->
+	<input type="image" id="copyBtn" src="/img/default/front/<?=$auth->locale?>/btn_aj_copy.jpg" class="btn_marR" />
+	<!--	应聘		-->
+	<? $btnList = $this->btnList; if($this->case['type']=='R'):?>
+	<input type="image" id="applyBtn" src="/img/default/front/<?=$auth->locale?>/btn_offer.jpg" class="btn_marR" />
+	<!--	关注		-->
+	<? endif;if (in_array('attention', $btnList) && $this->case['type']=='R'):?>
+	<input type="image" id="attentionBtn" src="/img/default/front/<?=$auth->locale?>/btn_select_on.jpg" class="btn_marR" />
+	<!--	取消关注		-->
+	<? endif;if (in_array('cancelAttention', $btnList) && $this->case['type']=='R'):?>
+	<input type="image" id="cancelAttentionBtn" src="/img/default/front/<?=$auth->locale?>/btn_dis_attention.jpg" class="btn_marR" />
+	<!--	编辑		-->
+	<!--<? endif;if ($this->case['type']=='R' || $this->case['type']=='C'):?>-->
+	<? endif;if ($this->case['type']=='R'):?>
+	<input type="image" id="editBtn" src="/img/default/front/<?=$auth->locale?>/btn_case_edit.jpg" class="btn_marR" />
+	<!--	应聘管理		-->
+	<? endif;if ($this->case['type']=='R' || $this->case['type']=='C'):?>
+	<input type="image" id="caseApplyMgtBtn" src="/img/default/front/<?=$auth->locale?>/btn_manage.jpg" class="btn_marR" />
+	<!--	关闭		-->
+	<? endif;if ($this->case['type']=='R'):?>
+	<input type="image" id="closeBtn" src="/img/admin/<?=$auth->locale?>/btn_close.jpg" class="btn_marR" />
+	<!--	删除	-->
+	<? endif;if ($this->case['type']=='U'):?>
+	<input type="image" id="deleteBtn" src="/img/default/front/<?=$auth->locale?>/btn_case_del.jpg" class="btn_marR" />
+	<? endif;?>
+</div>
+</div>
+
+<form action="" method="post" id="dynform">
+	<input type="hidden" id="ids" name="ids"/>
+	<input type="hidden" id="applyId" name="applyId" value="<?=isset($this->case['apply_id'])?$this->case['apply_id'] : ''?>"/>
+	<input type="hidden" id="caseId" name="caseId" value="<?=$this->case['id']?>"/>
+	<input type="hidden" id="caseCode" name="caseCode" value="<?=$this->case['code']?>"/>
+</form>
+<form action="/admin/admin_case/createcase" method="post" id="copyForm">
+	<input id="copyCase" name="copyCase" type="hidden" value='<?=json_encode($this->orgCase)?>' />
+</form>
+<script>
+var TITLE_LP_CLOSE_CASE = "<?=$this->tr('TITLE_LP_CLOSE_CASE')?>";
+var TITLE_LP_DELETE_CASE = "<?=$this->tr('TITLE_LP_DELETE_CASE')?>";
+var TITLE_CANCEL_INTEREST = "<?=$this->tr('TITLE_CANCEL_INTEREST')?>";
+var TITLE_INTEREST = "<?=$this->tr('TITLE_INTEREST')?>";
+var TITLE_APPLY_CASE = "<?=$this->tr('TITLE_APPLY_CASE')?>";
+var SURE_CLOSE_CURRENT_CASE = "<?=$this->tr('SURE_CLOSE_CURRENT_CASE')?>";
+var SURE_DELETE_CURRENT_CASE = "<?=$this->tr('SURE_DELETE_CURRENT_CASE')?>";
+var SURE_CANCEL_INTEREST_CURRENT_CASE = "<?=$this->tr('SURE_CANCEL_INTEREST_CURRENT_CASE')?>";
+var SURE_INTEREST_CURRENT_CASE = "<?=$this->tr('SURE_INTEREST_CURRENT_CASE')?>";
+var SURE_APPLY_CURRENT_CASE = "<?=$this->tr('SURE_APPLY_CURRENT_CASE')?>";
+$(function() {
+	var url = "/"
+	$("#applyBtn").click(function() {
+		$.ligerDialog.confirm(SURE_APPLY_CURRENT_CASE, TITLE_APPLY_CASE, function(e) {
+			if (!e) return false;
+			window.open("/admin/admin_caseapply/talentsearch/caseCode/<?=$this->case['code']?>")
+		});
+	});
+	$("#editBtn").click(function() {
+		window.location.href = "/admin/admin_case/editcase/caseCode/<?=$this->case['code']?>";
+	})
+	$('#caseApplyMgtBtn').click(function(){
+		window.location.href = "/admin/admin_applymgt/applymgt/caseCode/<?=$this->case['code']?>";
+	});
+	$('#closeBtn').click(function(){
+		$.ligerDialog.confirm(SURE_CLOSE_CURRENT_CASE, TITLE_LP_CLOSE_CASE, function(r) {
+			if (!!r) {
+				$.ajax({
+					url: '/lp_case/caseclose',
+					type: 'post',
+					async: false,
+					dataType: 'json', //xml, json, script or html
+					data: {ids: $("#caseId").val()},
+					success: function(data, textStatus, jqXHR) {
+						if (data['err'] == 0) {
+							url = "/admin/admin_casesearch/casesearch";
+							alert(data['msg'], null, null, function() {window.location.href = url});
+						} else {
+							alert(data['msg']);
+						}
+					}
+				});
+			}
+		});
+	});
+	$("#deleteBtn").click(function() {
+		$.ligerDialog.confirm(SURE_DELETE_CURRENT_CASE, TITLE_LP_DELETE_CASE, function(r) {
+			if (!!r) {
+				$.ajax({
+					url: '/lp_case/casedelete',
+					type: 'post',
+					async: false,
+					dataType: 'json', //xml, json, script or html
+					data: {ids: $("#caseId").val()},
+					success: function(data, textStatus, jqXHR) {
+						if (data['err'] == 0) {
+							url = "/admin/admin_caseunpublish/unpublishcaselist";
+							alert(data['msg'], null, null, function() {window.location.href = url});
+						} else {
+							alert(data['msg']);
+						}
+					}
+				});
+			}
+		});
+	})
+	$("#cancelAttentionBtn").click(function() {
+		$.ligerDialog.confirm(SURE_CANCEL_INTEREST_CURRENT_CASE, TITLE_CANCEL_INTEREST, function(r) {
+			if (!!r) {
+				$.ajax({
+					url: '/front_case/cancelattention',
+					type: 'post',
+					async: false,
+					dataType: 'json', //xml, json, script or html
+					data: {ids: $("#caseCode").val()},
+					success: function(data, textStatus, jqXHR) {
+						if (data['err'] == 0) {
+							url = "/admin/admin_caseinterest/interestcaselist";
+							alert(data['msg'], null, null, function() {window.location.href = url});
+						} else {
+							alert(data['msg']);
+						}
+					}
+				});
+			}
+		});
+	})
+	$("#attentionBtn").click(function() {
+		$.ligerDialog.confirm(SURE_INTEREST_CURRENT_CASE, TITLE_INTEREST, function(r) {
+			if (!!r) {
+				$.ajax({
+					url: '/front_case/attention',
+					type: 'post',
+					async: false,
+					dataType: 'json', //xml, json, script or html
+					data: {ids: $("#caseCode").val()},
+					success: function(data, textStatus, jqXHR) {
+						if (data['err'] == 0) {
+							url = "/admin/admin_caseinterest/interestcaselist";
+							alert(data['msg'], null, null, function() {window.location.href = url});
+						} else {
+							alert(data['msg']);
+						}
+					}
+				});
+			}
+		});
+	})
+	$("#copyBtn").click(function() {
+		$("#copyForm").submit();
+	})
+	
+})
+</script>

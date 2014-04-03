@@ -1,0 +1,69 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<h3 class="tbg_grey marB"><span class="fr">
+		<a href="/front_register/register" target="_blank">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_register_person.jpg" width="99" height="24" />
+		</a></span><?=$this->tr("lp_register")?>
+	</h3>
+	<form id="form_register" name="form_register" method="post" action="">
+	<table width="100%" border="1" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_reg">
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_companyName")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="text" id="companyName" name="companyName" class="input_c w200" /></td>
+	</tr>
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><?=$this->tr("lp_adress")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="text" id="address" name="address" class="input_c w200" /></td>
+	</tr>
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><?=$this->tr("lp_website")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="text" name="website" id="website" class="input_c w200" /></td>
+	</tr>
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_linkman")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="text" name="linkman" id="linkman" class="input_c w200" /></td>
+	</tr>
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_telephone")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="text" name="telephone" id="telephone" class="input_c w200" /><span class="input_info_note"><?=$this->tr("lpreg_tel_format")?></span></td>
+	</tr>
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_email")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="text" id="email" name="email" class="input_c w200" /></td>
+	</tr>
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><span class="fred">* </span><?=$this->tr("lp_passwd")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="password" name="passwd" id="passwd" class="input_c w200" /></td>
+	</tr>
+	<tr>
+        <th width="30%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr("lp_passwd2")?>：</th>
+        <td width="70%" bgcolor="#FFFFFF"><input type="password" name="passwd2" id="passwd2" class="input_c w200" /></td>
+	</tr>
+	</table>
+	<div class="btn_center"><a href="javascript:void(0);" id="btn_register"><img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg"></a></div>
+</form>
+</div>
+
+<!-- 法人注册信息，用于法人注册确认页面 -->
+<form id="c_form_register" name="c_form_register" action="/front_lpreg/regconfirm" method="post" target="_blank" style="display:none;">
+	<input id="registerInfo" name="registerInfo" type="hidden" value="" />
+</form>
+<script type="text/javascript">
+var err = {"email_can_not_be_empty": '<?=$this->tr('email_can_not_be_empty')?>',
+		"email_is_not_real" : '<?=$this->tr('email_is_not_real')?>',
+		"password_can_not_be_empty" : '<?=$this->tr('password_can_not_be_empty')?>',
+		"passwords_are_not_equal" : '<?=$this->tr('passwords_are_not_equal')?>',
+		"email_already_exists" : '<?=$this->tr('EMAIL_ALREADY_EXIST')?>',
+		"linkman_can_not_be_empty" : '<?=$this->tr('linkman_can_not_be_empty')?>',
+		"companyName_already_exists" : '<?=$this->tr('companyName_already_exists')?>',
+		"telephone_can_not_be_empty" : '<?=$this->tr('telephone_can_not_be_empty')?>',
+		"companyName_can_not_be_empty" : '<?=$this->tr('companyName_can_not_be_empty')?>',
+		"password_style_error" : '<?=$this->tr('password_style_error')?>',
+		"telephone_style_error" : '<?=$this->tr('telephone_style_error')?>'
+		}
+var regConfirmInfo = <?=json_encode($this->registerInfo);?>
+</script>
+<script type="text/javascript" src="/js/default/front/lpreg/lpreg.js"></script>

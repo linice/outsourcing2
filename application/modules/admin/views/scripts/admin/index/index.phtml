@@ -1,0 +1,157 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<style type="text/css">
+	table tr th {padding-left: 6px;}
+</style>
+
+<div id="wraper">
+	<!-- 左侧，数据统计 -->
+	<div class="left">
+		<h3 class="tbg01"><?=$this->tr('COUNT_STATISTICS')?></h3>
+		<ul class="c_12_01">
+			<li><?=$this->tr('COUNT_EFFECTIVE_CASE')?>：
+				<a href="/admin/admin_caselist/caselist" target="_blank"><?=$this->casesCnt?><?=$this->tr('unit_a')?></a>
+			</li>
+			<li><?=$this->tr('COUNT_LP_EMP')?>：
+				<a href="/admin/admin_lp/lplist" target="_blank"><?=$this->lpsCnt;?><?=$this->tr('unit_a')?></a>
+			</li>
+			<li><?=$this->tr('COUNT_USR')?>：
+				<a href="/admin/admin_usr/searchusrresult/searchType/SIMPLE/searchKey/talent_code/searchVal/" target="_blank"><?=$this->mbrsCnt;?><?=$this->tr('unit_a')?></a>
+			</li>
+			<li><?=$this->tr('COUNT_ASST')?>：
+				<?=$this->assistsCnt;?><?=$this->tr('unit_a')?>
+			</li>
+			<li><?=$this->tr('COUNT_EDIT')?>：
+				<a href="/admin/admin_editor/editorlist" target="_blank"><?=$this->editorsCnt;?><?=$this->tr('unit_a')?></a>
+			</li>
+			<li><?=$this->tr('COUNT_EVENT')?>：
+				<a href="/admin/admin_event/eventlist" target="_blank"><?=$this->eventsCnt . $this->tr('unit_a')?></a>
+			</li>
+		</ul>
+		<h3 class="tbg01"><?=$this->tr('CURR_ONLINE_NUM_OF_PEOPLE')?></h3>
+		<ul class="c_12_01">
+			<li><?=$this->tr('ONLINE_LP_COUNT')?>：
+				<?=$this->onlineLpsCnt.$this->tr('unit_a')?>
+			</li>
+			<li><?=$this->tr('ONLINE_MEMBER_COUNT')?>：
+				<?=$this->onlineMbrsCnt.$this->tr('unit_a')?>
+			</li>
+			<li><?=$this->tr('ONLINE_GUEST_COUNT')?>：
+				<?=$this->onlineGuestsCnt.$this->tr('unit_a')?>
+			</li>
+		</ul>
+	</div>
+	
+	
+	<!-- 右侧，新增案件、未承认法人用户、新增普通用户列表 -->
+	<div class="right">
+		<!-- 新增案件列表 -->
+		<h3 class="tbg02">
+			<span class="more">
+				<a href="/admin/admin_casesearch/casesearchresult/casetype/cases_new"><?=$this->tr('VIEW_CASE')?>&gt;&gt;</a>
+			</span>
+			<span class="title"><?=$this->tr('NEW_CASE')?></span>（<?=$this->addCaseNum;?>件）
+		</h3>
+		<div class="cbg02">
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_01">
+            <tr>
+              <th align="center" class="pal" ><?=$this->tr('case_id')?></th>
+              <th align="center"><?=$this->tr('CASE_NAME')?></th>
+              <th align="center"><?=$this->tr('BEGIN_TIME')?></th>
+              <th align="center"><?=$this->tr('DURATION')?></th>
+              <th align="center"><?=$this->tr('PLACE')?></th>
+              <th align="center"><?=$this->tr('UNIT_PRICE')?></th>
+              <th align="center"><?=$this->tr('DEADLINE')?></th>
+              <!-- <th align="center"><?=$this->tr('RELEASE_TIME')?></th> -->
+            </tr>
+	    <?php if(isset($this->casesList) && !empty($this->casesList)):foreach($this->casesList as $cases):?>
+            <tr>
+              <td class="case_name w_9"><?=$cases['code'];?></td>
+              <td class="case_name w_15"><?=$cases['name'];?></td>
+              <td><?=$cases['startDateValue'];?></td>
+              <td><?=$cases['endDateValue'];?></td>
+              <td><?=$cases['workingPlaceValue'];?> </td>
+              <td><?=$cases['unitPriceValue'];?></td>
+              <td><?=$cases['timeliness'];?></td>
+              <!-- <td><?=substr($cases['release_date'],0,10);?></td> -->
+            </tr>
+	    <?php endforeach;endif; ?>
+          </table>
+		</div>
+
+
+		<!-- 未承认法人用户列表 -->
+		<h3 class="tbg02">
+			<span class="more"><a href="/admin/admin_lplist/unacklplist"target="_blank"><?=$this->tr('VIEW_CASE')?>&gt;&gt;</a></span>
+			<span class="title"><?=$this->tr('UNACK_LP')?></span>（<?=$this->unAckLpsCnt;?><?=$this->tr('unit_a')?>）
+		</h3>
+		<div class="cbg02">
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_01">
+            <tr>
+              <th align="center" class="pal" width="73"><?=$this->tr('COM_ID')?></th>
+              <th align="center"><?=$this->tr('COM_NAME')?></th>
+              <th align="center"><?=$this->tr('CONTACT')?></th>
+              <th align="center"><?=$this->tr('TEL_NUM')?></th>
+              <th align="center"><?=$this->tr('EMAIL_ADDR')?></th>
+              <th align="center"><?=$this->tr('OPERATION')?></th>
+              <th align="center" style="text-align: center"><?=$this->tr('REG_TIME')?></th>
+            </tr>
+	    <?php if(!empty($this->unAckLps)):foreach($this->unAckLps as $lp):?>
+            <tr>
+              <td class="pal"><?=$lp['code']?></td>
+              <td><?=$lp['fullname']?></td>
+              <td> <?=$lp['lp_linkman']?></td>
+              <td><?=$lp['tel']?></td>
+              <td><?=$lp['email']?></td>
+              <td>
+              	<a href="javascript:void(0);" name="ackLp" id="<?=$lp['code']?>">
+              		<?=$this->tr('ACK')?>
+              	</a>
+              </td>
+              <td><?=substr($lp['create_time'], 0, 10)?></td>
+            </tr>
+	    <?php endforeach;endif;?>
+          </table>
+		</div>
+		
+
+		<!-- 新增普通用户 -->
+		<h3 class="tbg02">
+			<span class="more"><a href="/admin/admin_usrlist/newusrlist" target="_blank"><?=$this->tr('MORE')?>&gt;&gt;</a></span>
+			<span class="title"><?=$this->tr('NEW_MEMBER')?></span>（<?=$this->newMbrsCnt;?><?=$this->tr('unit_a')?>）
+		</h3>
+		<div class="cbg02">
+		  <table style="width: 100%; border: 0;" class="tab_01">
+            <tr>
+              <th align="center" class="pal"><?=$this->tr('USR_CODE')?></th>
+              <th align="center"><?=$this->tr('USR_NAME')?></th>
+              <th align="center"><?=$this->tr('SEX')?></th>
+              <th align="center"><?=$this->tr('AGE')?></th>
+              <th align="center"><?=$this->tr('EXPERIENCE_YEARS')?></th>
+              <th align="center"><?=$this->tr('SKILL')?></th>
+              <th align="center"><?=$this->tr('JA_LEVEL')?></th>
+              <th align="center"><?=$this->tr('ABLE_WORK_DATE')?></th>
+              <th align="center"><?=$this->tr('last_login_time')?></th>
+            </tr>
+		<?php if(!empty($this->newMbrs)): foreach($this->newMbrs as $newMbr):?>
+            <tr>
+              <td class="pal"><?=$newMbr['talent_code'];?> </td>
+              <td><?=$newMbr['fullname'];?></td>
+              <td><?=$this->tr($newMbr['tr_sex']);?></td>
+              <td><?=$newMbr['age'];?></td>
+              <td><?=$newMbr['experience_admin']?></td>
+              <td><?=$newMbr['fw'];?></td>
+              <td><?=$newMbr['ja_ability']?></td>
+              <td><?=$newMbr['adjust_able_work_date']?></td>
+              <td><?=substr($newMbr['last_login_time'], 0, 10);?></td>
+            </tr>
+		<?endforeach; endif;?>
+          </table>
+		</div>
+	</div>
+	<br class="cls" />
+</div>
+
+
+<script src="/js/admin/admin/index/index.js" type="text/javascript"></script>

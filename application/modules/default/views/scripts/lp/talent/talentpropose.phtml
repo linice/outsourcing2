@@ -1,0 +1,100 @@
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<h3 class="msg_title"><?=$this->tr('LP_TALENT_PROPOSE')?></h3>
+<form id="form1" name="form1" method="post" action="">
+	<input type="hidden" name="emailContent" id="emailContent" value="" />
+	<div class="con_send_mail">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_send_mail">
+			<tr>
+				<td width="21%" align="right"><?=$this->tr('LP_EMAIL_TO_ADDRESS')?>：</td>
+				<td width="79%">
+					<input type="text" name="emailAddress" class="myinput" />
+				</td>
+			</tr><tr>
+				<td align="right"><?=$this->tr('LP_EMAIL_TO_BCC')?>：</td>
+				<td>
+					<input type="text" name="emailBcc" class="myinput" />
+				</td>
+			</tr><tr>
+				<td align="right"><?=$this->tr('LP_EMAIL_TO_CC')?>：</td>
+				<td>
+					<input type="text" name="emailCc" class="myinput" />
+				</td>
+			</tr><tr>
+				<td align="right"><?=$this->tr('LP_EMAIL_TITLE')?>：</td>
+				<td>
+					<input type="text" name="emailTitle" class="myinput" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="mailContent">
+		<div class="con_send_mytextarea">
+			<pre><?=isset($this->emailHeader) ? $this->emailHeader : ''?></pre>
+			<?if (isset($this->resumes) && !empty($this->resumes)): foreach ($this->resumes as $resume):?>
+				<?if($auth->usr['lp_propose_temp'] == 'temp1'):?>
+					<div class="item">
+						<div class="info_c">
+							<? echo $resume['talent_code'], '，', $resume['tr_sex'], '，', 
+								$resume['experience'], '，', $resume['skill'], '，',
+								$resume['ja_ability'], '，', 
+								$this->tr('LP_EMP_WORK_DATE'), '：', $resume['adjust_able_work_date'], '，',
+								$this->tr('LP_EMP_UNIT_PRICE'), '：', $resume['salary_min'], ' ~ ', $resume['salary_exp'];
+							?><br />
+							<? if(!empty($resume['remark_lp'])) :?>
+								<?=$this->tr('REMARK')?>：<?=$resume['remark_lp']?><br />
+							<?endif;?>
+						</div>
+					</div>
+					<?elseif (($auth->usr['lp_propose_temp'] == 'temp2')):?>
+					<div class="item">
+						<div class="info_c">
+						  【<?=$this->tr('LP_EMP_ID')?>】<?=$resume['talent_code']?> <br />
+						  【<?=$this->tr('LP_EMP_SEX')?>】<?=$resume['tr_sex']?> <br />
+						  【<?=$this->tr('LP_EMP_AGE')?>】<?=$resume['age']?> <br />
+						  【<?=$this->tr('LP_EMP_EXPERIENCE')?>】<?=$resume['experience']?> <br />
+						  【<?=$this->tr('LP_EMP_TECH')?>】<?=$resume['skill']?> <br />
+						  【<?=$this->tr('LP_EMP_JPL')?>】<?=$resume['ja_ability']?> <br />
+						  【<?=$this->tr('LP_EMP_WORK_DATE')?>】<?=$resume['adjust_able_work_date']?> <br />
+						  【<?=$this->tr('LP_EMP_UNIT_PRICE')?>】<?=$resume['salary_display']?> <br />
+						  【<?=$this->tr('LP_EMP_OTHER')?>】<?=$resume['remark_lp']?> <br /><br />
+						</div>
+					</div>
+				<?endif;?>
+			<?endforeach;endif;?>
+			<pre><?=isset($this->emailFooter) ? $this->emailFooter : ''?></pre>
+		</div>
+	</div>
+	
+	<div class="btn_os">
+		<a href="javascript:void(0);" id="btn_send">
+			<img alt="Send" src="/img/default/front/<?=$auth->locale?>/btn_send.jpg" />
+		</a>
+	</div>
+</form>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#btn_send").click(function() {
+		var email = $("div.con_send_mail").find("input[name='emailAddress']").val();
+		if (!email) {
+			alert("收件人地址不能为空!");
+			return false;
+		} else if (!isEmail(email)) {
+			alert("收件人地址格式不对!");
+			return false;
+		}
+		var emailTitle = $("div.con_send_mail").find("input[name='emailTitle']").val();
+		if (!emailTitle) {
+			alert("邮件名不能为空!");
+			return false;
+		}
+		$("#emailContent").val($("#mailContent").html());
+		$("#form1").attr("action", "/lp_talent/sendtalentpropose");
+		$("#form1").submit();
+	});
+});
+</script>

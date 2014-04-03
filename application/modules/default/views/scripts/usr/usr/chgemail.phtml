@@ -1,0 +1,41 @@
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<form id="form_chgEmail" method="get" action="">
+		<div id="tip_chgEmail" class="tip"></div>
+		<h3 class="msg_title"><?=$this->tr('MODIFY_LOGIN_EMAIL')?></h3>
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd" class="tab_login">
+	      <tr>
+	        <th width="26%" align="right" valign="top" bgcolor="#FFFFFF">
+	        	<?=$this->tr('MODIFY_OLD_EMAIL')?>：
+	        </th>
+	        <td width="74%" bgcolor="#FFFFFF">
+				<?=$this->usr['email']?>
+			</td>
+	      </tr>
+	      <tr>
+	        <th width="26%" align="right" valign="top" bgcolor="#FFFFFF">
+	        	<?=$this->tr('MODIFY_NEW_EMAIL')?>：
+	        </th>
+	        <td width="74%" bgcolor="#FFFFFF">
+				<input type="text" id="email" name="email" class="myinput" value="" />
+			</td>
+	      </tr>
+	      <tr>
+	        <th width="26%" align="right" valign="top" bgcolor="#FFFFFF">
+	        	<?=$this->tr('MODIFY_NEW_EMAIL_CONFIRM')?>：
+	        </th>
+	        <td width="74%" bgcolor="#FFFFFF">
+				<input type="text" id="email2" name="email2" class="myinput" value="" />
+			</td>
+	      </tr>
+	    </table>
+		<div class="btn_center">
+			<a href="javascript:void(0);" id="btn_chgEmail" class="DISABLED_N">
+				<img alt="submit" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" />
+			</a>
+		</div>
+	</form>
+</div>
+
+
+<script type="text/javascript" src="/js/default/usr/usr/chgemail.js"></script>

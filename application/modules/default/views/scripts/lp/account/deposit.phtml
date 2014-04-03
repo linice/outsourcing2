@@ -1,0 +1,64 @@
+<SCRIPT LANGUAGE="JavaScript">
+window.onload = function() {
+    doubleBgColor(document.getElementById("tab_list"),"#f3f3f3","#FFFFFF");
+	doubleBgColor(document.getElementById("tab_list_end"),"#f3f3f3","#FFFFFF");
+}
+
+function doubleBgColor(Table,Bg1,Bg2) {
+    for (var i=0;i<Table.rows.length;i++) Table.rows[i].bgColor=i%2?Bg2:Bg1;
+}
+</SCRIPT>
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+	<h3 class="msg_title_bg">法人入金查询界面</h3>
+	<form id="form1" name="form1" method="post" action="">
+	<div class="rujin_info_search">
+	<ul>
+	<li class="w01">区间：</li>
+	<li class="w02"><label><input type="text" name="textfield" class="myinput" /></label></li>
+	<li> ～</li>
+	<li class="w02"><label><input type="text" name="textfield" class="myinput" /></label></li>
+	<li class="w01">服务：</li>
+	<li class="w02">
+	<label>
+	  <select name="select" class="myselect">
+	    </select>
+	  </label>
+	</li>
+	<li>
+	  <label>
+	  <input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_cx.gif" />
+	  </label>
+	</li>
+	</ul>
+  </div>
+  <div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_search_list">
+    <tr>
+      <th width="12%" align="center">日期</th>
+      <th width="15%" align="center">入金金额</th>
+      <th width="28%" align="left">用途</th>
+      <th width="16%" align="center">服务生效日期</th>
+      <th width="16%" align="center">服务截止日期</th>
+      <th width="13%" align="center">购买点数</th>
+      </tr>
+    <tr>
+      <td align="center">2011/1/1</td>
+      <td align="center">3000</td>
+      <td align="left">用户信息查看服务</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">100</td>
+      </tr>
+	  <tr>
+      <td align="center">2011/1/1</td>
+      <td align="center">3000</td>
+      <td align="left">点数购买</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">2011/1/1</td>
+      <td align="center">100</td>
+      </tr>
+	</table>
+	</div>
+  </form>
+</div>

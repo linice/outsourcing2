@@ -1,0 +1,19 @@
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<h3 class="msg_title"><?=$this->tr("unpublishcaselist")?></h3>
+<div class="search_result_lie01">
+<div id="caselist"></div>
+</div>
+<div class="btn_os">
+  <a href="javascript:void(0)" id="delBtn">
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_select_del.jpg" width="80" height="30" class="btn_marR" />
+  </a>
+</div>
+</div>
+
+<form id="dynForm" style="display:none;" method="post" target="_blank">
+<input id="caseCode" name="caseCode"/>
+<input id="btnlist" name="btnlist"/>
+</form>
+
+<script type="text/javascript" src="/js/default/lp/case/unpubcaselist.js"></script>

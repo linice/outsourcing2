@@ -1,0 +1,69 @@
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+<form id="form_mod" name="form_mod" method="post" action="">
+	<h3 class="msg_title"><?=$this->tr("lp_baseinfo_setting")?></h3>
+	<div class="tip" id="tip_baseinfo"></div>
+	<div class="notice_con"><?=$this->tr("lp_modify_confirm_nodify")?>
+		<a href="/lp_lp/lp" target="_self"><?=$this->tr("goback")?></a>
+	</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6e6f4" class="tab_info">
+		<tr>
+			<td width="22%" align="right" bgcolor="#f7f7ff"><span class="fred">*</span> <?=$this->tr("lp_companyName")?>：</td>
+			<td width="78%" bgcolor="#f7f7ff" class="fblue">
+				<input type="hidden" name="id" id="id" value="<?=$this->lp["id"]?>"/>
+				<input type="text" name="companyName" id="companyName" class="input_c w200" value="<?=$this->lp["fullname"]?>"/>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("lp_adress")?>：</td>
+			<td bgcolor="#f7f7ff" class="fgrey"><input type="text" name="address" id="address" class="input_c w200" value="<?=$this->lp["lp_address"]?>"/></td>
+		</tr>
+		<tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr('lp_website')?>：</td>
+			<td bgcolor="#f7f7ff" class="fblue"><input type="text" name="website" id="website" class="input_c w200" value="<?=$this->lp["website"]?>"/></td>
+		</tr>
+		<tr>
+			<td align="right" bgcolor="#f7f7ff"><span class="fred">*</span> <?=$this->tr("lp_linkman")?>：</td>
+			<td bgcolor="#f7f7ff" class="fblue">
+				<input type="text" name="linkman" id="linkman" class="input_c w200" value="<?=$this->lp["lp_linkman"]?>"/>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" bgcolor="#f7f7ff"><span class="fred">*</span> <?=$this->tr("lp_telephone")?>：</td>
+			<td bgcolor="#f7f7ff" class="fblue"><input type="text" name="telephone" id="telephone" class="input_c w200" value="<?=$this->lp["tel"]?>"/></td>
+		</tr>
+		<tr>
+			<td bgcolor="#f7f7ff" class="fblue" colspan="2"><?=$this->tr("lp_baseinfo_modify_passwd")?>：</td>
+		</tr>
+		<tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("lp_passwd")?>：</td>
+			<td bgcolor="#f7f7ff" class="fblue"><input type="password" id="passwd" name="passwd" class="input_c w200" /></td>
+		</tr>
+		<tr>
+			<td align="right" bgcolor="#f7f7ff"><?=$this->tr("lp_passwd2")?>：</td>
+			<td bgcolor="#f7f7ff" class="fblue"><input type="password" id="passwd2" name="passwd2" class="input_c w200" /></td>
+		</tr>
+	</table>
+	<div class="btn_submit">
+		<a href="javascript:void(0);" id="btn_confirm">
+			<img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg">
+		</a>
+	</div>
+</form>
+</div>
+<script type="text/javascript">
+var err = {'email_can_not_be_empty' : '<?=$this->tr('email_can_not_be_empty')?>',
+		'email_is_not_real' : '<?=$this->tr('email_is_not_real')?>',
+		'password_can_not_be_empty' : '<?=$this->tr('password_can_not_be_empty')?>',
+		'passwords_are_not_equal' : '<?=$this->tr('passwords_are_not_equal')?>',
+		'email_already_exists' : '<?=$this->tr('EMAIL_ALREADY_EXIST')?>',
+		'linkman_can_not_be_empty' : '<?=$this->tr('linkman_can_not_be_empty')?>',
+		'companyName_already_exists' : '<?=$this->tr('companyName_already_exists')?>',
+		'telephone_can_not_be_empty' : '<?=$this->tr('telephone_can_not_be_empty')?>',
+		'companyName_can_not_be_empty' : '<?=$this->tr('companyName_can_not_be_empty')?>',
+		'password_style_error' : '<?=$this->tr('password_style_error')?>',
+		'telephone_style_error' : '<?=$this->tr('telephone_style_error')?>'
+};
+
+</script>
+<script src="/js/default/lp/lp/modbaseinfo.js" type="text/javascript"></script>

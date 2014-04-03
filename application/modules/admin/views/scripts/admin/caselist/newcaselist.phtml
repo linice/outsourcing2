@@ -1,0 +1,52 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<div class="search_term">
+		<a href="/admin/admin_caselist/newcaselistex" target="_blank">
+			<span class="case_lie_list">案件展开</span>
+		</a>
+	</div>
+<form id="form1" name="form1" method="get" action="">
+<div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_lie01">
+    <tr>
+      <th align="center">操作</th>
+      <th align="center">案件ID</th>
+      <th align="left">案件名</th>
+      <th>业务要求</th>
+      <th>技术要求</th>
+      <th align="center">开始时间</th>
+      <th align="center">期间</th>
+      <th align="center">勤务地</th>
+      <th align="center">单价/月</th>
+      <th align="center">时效性</th>
+      <th align="center">相关操作</th>
+      </tr>
+      <?foreach($this->casesList as $cases):?>
+    <tr>
+      <td align="center"><input type="checkbox" name="checkbox" value="checkbox" /></td>
+      <td align="center"><?=$cases['code']?></td>
+      <td><?=$cases['name']?></td>
+      <td><?=$cases['business_req']?></td>
+      <td><?=$cases['technical_req']?></td>
+      <td><?=$cases['startDateValue']?></td>
+      <td><?=$cases['end_range']?></td>
+      <td align="center"><?=$cases['working_place']?></td>
+      <td align="center"><?=$cases['unit_price']?></td>
+      <td align="center"><?=$cases['timeliness']?></td>
+      <td align="center"><a href="javascript:void(0);" >关注此案件</a> 
+      	| <a href="/admin/admin_case/casedetail/id/<?=$cases['id'];?>" class="caseMain" target="_blank" >案件维护</a> 
+      	| <a href="/admin/admin_applymgt/applymgt" target="_blank">应聘管理</a>
+      </td>
+      </tr>
+      <?endforeach;?>
+  </table>
+  
+</div>
+<div class="btn_os">
+  <img src="/img/default/front/<?=$auth->locale?>/btn_select_on.jpg" class="btn_marR" />
+  <div class="page"><span class="current">1</span>|<a href="#">2</a>|<a href="#" >3</a>|<a href="#" >4</a>|<a href="#">5</a>|<a href="#">次へ→</a></div>
+</div>
+</form>
+</div>

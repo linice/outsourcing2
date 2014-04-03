@@ -1,0 +1,115 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+<h3 class="t_top"><?=$this->tr('ADMIN_CASE_STATISTICS')?></h3>
+<div class="apply_detail bord">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><?=$this->case['viewers']?><?=$this->tr("unit_person")?></span><?=$this->case['name']?></h2>
+<ul class="case_lie02_time">
+	<li><?=$this->tr("case_release_date")?>：<?=$this->case["release_date"]?></li>
+	<li><?=$this->tr("case_timeliness")?>：<?=$this->case["timeliness"]?></li>
+	<li><?=$this->tr("case_lp_code")?>：<?=$this->case["lp_code"]?></li>
+	<li><?=$this->tr("case_lp_name")?>：<?=$this->case["lp_name"]?></li>
+</ul>
+<div class="case_lie02_con">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr valign="top">
+		<td>【<?=$this->tr("case_business_req")?>】</td><td colspan="3"><?=nl2br($this->case["business_req"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_technical_req")?>】</td><td colspan="3"><?=nl2br($this->case["technical_req"])?></td>
+	</tr><tr>
+		<td width="9%">【<?=$this->tr("case_jpl")?>】</td><td width="31%"><?=$this->case["jplValue"]?></td>
+		<td width="9%">【<?=$this->tr("case_interview")?>】</td><td width="51%"><?=$this->case["interviewerValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><?=$this->case["caseRangeValue"]?></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><?=$this->case["ageReqValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><?=$this->case["period"]?></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><?=$this->case["countryReqValue"]?> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><?=$this->case["delayValue"]?></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><?=$this->case["unitPriceValueView"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><?=$this->case["workingPlaceValue"]?> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><?=$this->case["overtimePayValue"]?></td>
+	</tr>
+</table>
+</div></div>
+  
+<div class="t_base_info_confirm"><?=$this->tr('use_these_emps_apply_this_case')?></div>
+<ul class="c_base_info_confirm">
+	<?$i=1;if(isset($this->resumeList)): foreach ($this->resumeList as $resume) :?>
+	<li id="<?='li'.$i?>"><div class="left_c">
+		<p><?=$i?>.<span class="fname"><?=$resume['talent_code']?></span><?='，'.$resume['baseinfolong']?></p>
+		<p class="fgrey"><?=empty($resume['remark_lp']) ? '' : $this->tr('REMARK').':'.$resume['remark_lp']?></p>
+		<?if(!empty($resume['apply_id'])):?>
+		<p class="fred"><?=$this->tr('apply_case_already')?></p>
+		<?endif;?>
+		<?if($resume['enabled']!='Y' || $resume['ok_base']!='Y' || $resume['ok_biz']!='Y' || $resume['ok_prj']!='Y' || $resume['ok_other']!='Y'):?>
+		<p class="fred"><?=$this->tr('lp_emp_resume_is_no_comp')?></p>
+		<?endif;?>
+	</div>
+	<div class="right_c">
+		<a href='javascript:void(0)' name='deleteBtn'>
+			<img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" />
+		</a>
+		<input type="hidden" name="resumeCode" value="<?=$resume['code']?>">
+	</div></li>
+	<?$i++;endforeach;endif;?>
+</ul>
+<div class="btn_base_info_confirm">
+	<input type="image" id="applyBtn" src="/img/default/front/<?=$auth->locale?>/btn_offer.jpg"/>
+</div>
+</div>
+
+<form action="" method="post" id="dynform">
+	<input type="hidden" id="caseId" name="caseId" value="<?=$this->case['id']?>"/>
+	<input type="hidden" id="caseCode" name="caseCode" value="<?=$this->case['code']?>"/>
+</form>
+
+<script>
+$(function() {
+	$("a[name='deleteBtn']").click(function(){
+		var btn = $(this);
+		$.ligerMessageBox.confirm("删除应聘员工", "确定要删除选中员工?", function(r) {
+			if (!!r) {
+				btn.parent().parent().remove();
+			}
+		});
+	});
+	$("#applyBtn").click(function() {
+		var resumeCodes = '';
+		var flag = true;
+		$.each($("ul.c_base_info_confirm").children(), function(i,v) {
+			if ($(this).find("p.fred").length > 0) {
+				alert("请删除不适合的员工（已用红字标识），再进行应聘!")
+				flag = false;
+				return false;
+			}
+			resumeCodes = !!resumeCodes ? resumeCodes+',' : resumeCodes;
+			var resumeCode = $(this).find("input[name='resumeCode']").val();
+			resumeCodes = resumeCodes + resumeCode;
+		})
+		if (!flag) return false;
+		if (!resumeCodes) {
+			alert("没有可应聘的员工，不能进行应聘操作!")
+			return false;
+		}
+		$.ajax({
+			url: '/admin/admin_caseapply/applycaseforadmin',
+			type: 'post',
+			async: false,
+			dataType: 'json', //xml, json, script or html
+			data: {caseCode: $("#caseCode").val(), resumeCodes: resumeCodes},
+			success: function(data, textStatus, jqXHR) {
+				if (data['err'] == 0) {
+					var url = "/admin/admin_casecollect/incollectcaselist"
+					alert(data['msg'], null, null, function() {window.location.href = url});
+				} else {
+					alert(data['msg']);
+				}
+			}
+		});
+	})
+});
+</script>

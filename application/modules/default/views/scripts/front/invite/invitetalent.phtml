@@ -1,0 +1,73 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<form id="form1" name="form1" method="post" action="">
+<!--start-->
+<div class="search_result_lie02">
+<h2 class="case_lie02_t"><span class="skim_num">浏览人数40人</span>JAVA人员紧急募集</h2>
+<ul class="case_lie02_time">
+<li>发布时间：2012-1-2</li>
+<li>实效性：2012-1-2为止</li>
+<li>发布公司：ID1234</li>
+<li>发布公司名称：红星股份</li>
+</ul>
+<div class="case_lie02_con">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+    <tr>
+      <td colspan="3">【业务要求】证券经验必须</td>
+      </tr>
+    <tr>
+      <td colspan="3">【技术要求】JAVA5年以上经验</td>
+      </tr>
+    <tr>
+      <td width="36%">【日语要求】1级以上水平</td>
+      <td width="28%">【面谈次数】2回</td>
+      <td width="36%" rowspan="5" align="center"></td>
+    </tr>
+    <tr>
+      <td>【担当范围】基本设计开始</td>
+      <td>【年龄要求】40以下</td>
+      </tr>
+    <tr>
+      <td>【期间　　】2012/1/2～2012/12/30</td>
+      <td>【国籍要求】无 </td>
+      </tr>
+    <tr>
+      <td>【延长可能】有</td>
+      <td>【单价　　】35万-45万日元</td>
+      </tr>
+    <tr>
+      <td>【工作地点】东京 </td>
+      <td>【精算　　】有</td>
+      </tr>
+  </table>
+</div>  
+  
+</div>
+<!--end-->
+<div class="t_base_info_confirm">你是否邀请以以下人员应聘此案件？</div>
+<ul class="c_base_info_confirm">
+	<li>
+	<div class="left_c">
+	<p>1.<span class="fname">Usr0001</span>，男，29，经验8年（日本5年），java 3年，cobol 2年，c 0.5年，日语1级相当，稼动日：4月1日开始 预定，单价：20万日元</p>
+	<p class="fgrey">备注：性格开朗，做事认真</p>
+	</div>
+	<div class="right_c"><img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" /></div>
+	</li>
+	<li>
+	<div class="left_c">
+	<p>2.<span class="fname">Usr0002</span>，男，29，经验8年（日本5年），java 3年，cobol 2年，c 0.5年，日语1级相当，稼动日：4月1日开始 预定，单价：20万日元</p>
+	<p class="fgrey">备注：性格开朗，做事认真</p>
+	</div>
+	<div class="right_c"><img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" /></div>
+	</li>
+</ul>
+<div class="btn_base_info_confirm">
+	<a href="/lp_caselist/collectcaselist" target="_blank">
+		<img src="/img/default/front/<?=$auth->locale?>/btn_collection_invite.jpg" width="80" height="30" class="btn_marR" />
+	</a>
+</div>
+</form>
+</div>

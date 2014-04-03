@@ -1,0 +1,67 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+	<h3 class="t_top">首页广告一览</h3>
+	<div class="top_search_nobg">
+	<form id="form2" name="form2" method="post" action="">
+	<ul>
+	<li><img src="/img/admin/<?=$auth->locale?>/icon_search.gif" width="28" height="23" /></li>
+	<li><select name="select" class="myselect"><option>全部</option></select></li>
+	<li><select name="select" class="myselect"><option>全部</option></select></li>
+	<li><input type="image" name="imageField3" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+	</li>
+	</ul>
+	</form>
+  </div>
+  <form id="form1" name="form1" method="post" action="">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_ad">
+    <tr>
+      <th width="5%" align="left">操作</th>
+      <th width="9%" align="center">状态</th>
+      <th width="13%" align="left">标题</th>
+      <th width="5%">排序<img src="/img/default/front/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></th>
+      <th width="15%">说明</th>
+      <th width="11%">图片</th>
+      <th width="14%">代码嵌入</th>
+      <th width="10%">位置</th>
+      <th width="10%">显示期限<img src="/img/default/front/<?=$auth->locale?>/line_down.gif" width="11" height="10" /></th>
+      <th width="8%">登陆时间<img src="/img/default/front/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></th>
+    </tr>
+    <tr>
+      <td align="left"><input type="checkbox" name="checkbox" value="checkbox" /> </td>
+      <td align="center"> 发布完</td>
+      <td align="left"> 永和不动产公司</td>
+      <td align="center">1</td>
+      <td align="center">不动产公司公告</td>
+      <td align="center"><img src="/img/admin/<?=$auth->locale?>/ad.jpg" width="42" height="27" /></td>
+      <td align="center">google代码</td>
+      <td align="center">边框一</td>
+      <td align="center">2012/10/20</td>
+      <td align="center">2012/10/20</td>
+    </tr>
+	<tr>
+      <td align="left"><input type="checkbox" name="checkbox" value="checkbox" /> </td>
+      <td align="center"> 发布完</td>
+      <td align="left"> 永和不动产公司</td>
+      <td align="center">1</td>
+      <td align="center">不动产公司公告</td>
+      <td align="center"><img src="/img/admin/<?=$auth->locale?>/ad.jpg" width="42" height="27" /></td>
+      <td align="center">google代码</td>
+      <td align="center">边框一</td>
+      <td align="center">2012/10/20</td>
+      <td align="center">2012/10/20</td>
+    </tr>
+  </table>
+  <div class="btn_os">
+  	<a href="" target="_blank">
+  		<img src="/img/default/front/<?=$auth->locale?>/btn_release.jpg" width="80" height="30" class="marR" />
+  	</a>
+	  	<img src="/img/default/front/<?=$auth->locale?>/btn_add.jpg" width="80" height="30" class="marR" />
+	  	<img src="/img/default/front/<?=$auth->locale?>/btn_edit.jpg" width="80" height="30" class="marR" />
+	  	<img src="/img/default/front/<?=$auth->locale?>/btn_preview.gif" width="80" height="30" class="marR" />
+	  	<img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" class="marR" />
+  </div>
+</form>
+</div>

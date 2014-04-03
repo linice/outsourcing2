@@ -1,0 +1,106 @@
+<?php $auth = new Zend_Session_Namespace ('AUTH');
+if ($auth->usr['role_code'] != 'MEMBER'):?>
+<link href="/css/default/usr/css.css" rel="stylesheet" type="text/css" />
+<? endif?>
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<h3 class="msg_title"><?=$this->tr('cancel_apply_case')?></h3>
+<div class="user_case_list">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_user_case">
+	<thead><tr>
+		<th width="9%" align="center"><?=$this->tr("case_id")?></th>
+		<th width="33%" align="left"><?=$this->tr("case_name")?></th>
+		<th width="10%" align="center"><?=$this->tr("caseapple_cancel_person")?></th>
+		<th width="9%"><?=$this->tr("caseapple_cancel_state")?></th>
+		<th width="15%"><?=$this->tr("caseapple_cancel_reason")?></th>
+		<th width="24%" align="left"><?=$this->tr("caseapple_cancel_other")?></th>
+	</tr></thead>
+	<tbody>
+	<?php if (isset($this->applyList)): foreach ($this->applyList as $caseApply): ?>
+		<tr><td align="center"><?=$caseApply["code"]?></td>
+		<td style="text-align:left"><?=$caseApply["name"]?></td>
+		<td style="text-align:center"><?=$auth->usr['role_code']=='LP' ? $this->tr('caseapple_cancel_emp') : $this->tr("caseapple_cancel_usr")?></td>
+		<td style="text-align:center"><?=$caseApply["statusValue"]?></td>
+		<td style="text-align:center"><label><select name="lackReason" class="cancel_select">
+		<?php if (isset ($this->cancelReasons)) : foreach ($this->cancelReasons as $reasonName => $reasonValue) : ?>
+		  	<option value="<?=$reasonName?>" <?if(isset($caseApply['cancel_reason']) && $caseApply['cancel_reason'] == $reasonName):?>selected<?endif;?>><?=$reasonValue?></option>
+		<?php endforeach; endif; ?>
+		</select> </label></td>
+		<td align="left">
+			<input type="hidden" name="applyId" value="<?=$caseApply['apply_id']?>"/>
+			<label><input type="text" name="remark" class="cancel_input" value="<?=isset($caseApply['cancel_other']) ? $caseApply['cancel_other'] : NULL?>"/></label>
+		</td></tr>
+	<?php endforeach;endif;?>
+	</tbody>
+</table>
+</div>
+<div class="btn_os"><a href="javascript:void(0)" id="submitBtn"> 
+	<img src="/img/default/front/<?=$auth->locale?>/btn_qd.jpg" width="80" height="30" class="btn_marR" /> </a>
+</div>
+</div>
+<form action="" method="post" style="display: none;" id="dynForm">
+<input id="applyList" name="applyList"/>
+<input id="ids" name="ids" value="<?=$this->ids;?>"/>
+</form>
+<script>
+$(function() {
+	$("#submitBtn").click(function() {
+		if (valTable()) {
+			$("#dynForm").attr("action", "/usr_caseapply/cancelapplycaseconfirm");
+			$("#dynForm #applyList").val(tableToJson());
+			$("#dynForm").submit();
+		}
+		return false;
+	})
+
+	function valTable() {
+		return true;
+	}
+
+	function tableToJson() {
+		var str = ["["];
+		$("#tab_list").find("tbody tr").each(function() {
+			str.push("{");
+			$.each($(this).children(), function(i) {
+				if (i === 0) {
+					str.push("\"caseCode\":\"");
+					str.push($(this).text());
+					str.push("\",");
+				} else if (i === 1) {
+					str.push("\"caseName\":\"");
+					str.push($(this).text());
+					str.push("\",");
+				} else if (i === 2) {
+					str.push("\"cancelBody\":\"");
+					str.push($(this).text());
+					str.push("\",");
+				} else if (i === 3) {
+					str.push("\"currentStatus\":\"")
+					str.push($(this).text());
+					str.push("\",");
+				} else if (i === 4) {
+					var s = $(this).find("select[name='lackReason'] option:selected");
+					str.push("\"lackReasonValue\":\"");
+					str.push(s.text());
+					str.push("\",");
+					str.push("\"lackReason\":\"");
+					str.push(s.val());
+					str.push("\",");
+				} else if (i === 5) {
+					str.push("\"applyId\":\"");
+					str.push($(this).find("input[name='applyId']").val());
+					str.push("\",");
+					str.push("\"remark\":\"");
+					str.push($(this).find("input[name='remark']").val());
+					str.push("\"");
+				}
+			});
+			str.push("}");
+			str.push(",");
+		});
+		str.pop();
+		str.push("]");
+		return str.join("");
+	}
+});
+</script>

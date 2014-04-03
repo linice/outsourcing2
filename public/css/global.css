@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+/*div {border:1px solid black;}*/
+
+.title4 {font-weight:bold;}
+
+.tip {color: red; height: 24px;}
+
+.tr_odd {background: "#f3f3f3"}
+
+.tr_even {background: "#FFFFFF"}
+
+.tr_on {background: "#f3f3f3"}

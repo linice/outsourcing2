@@ -1,0 +1,53 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+  <!--search list-->
+  <div class="search_result_lie01">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_lie01">
+    <tr>
+      <th width="53" align="center">操作</th>
+      
+      <th width="53" align="center">案件ID</th>
+      <th width="110" align="center">案件名</th>
+      <th width="77" align="center">应聘时间</th>
+      <th width="157" align="center">开始时间</th>
+      <th width="65" align="center">期间</th>
+      <th width="84" align="center">勤务地</th>
+      <th width="88" align="center">单价/月</th>
+      <th width="88" align="center">案件状态</th>
+      <th width="88" align="center">备考</th>
+    </tr>
+    <tr>
+      <td align="center"><input type="checkbox" name="checkbox" value="checkbox" /></td>      
+      <td align="center">0001</td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">20120101</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">入场决定</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+	<tr>
+      <td align="center"><input type="checkbox" name="checkbox" value="checkbox" /></td>      
+      <td align="center">0001</td>
+      <td align="center">JAVA人员募集</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">2012/1/2</td>
+      <td align="center">20120101</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">入场决定</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+  </table>
+  
+</div>
+<div class="btn_os">
+	<a href="/admin/admin_caseapply/applycancel" target="_blank">
+		<img src="/img/default/front/<?=$auth->locale?>/btn_select_del.jpg" class="marR" />
+	</a>
+<div class="page"><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+<!--search list end-->

@@ -1,0 +1,118 @@
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<h3 class="msg_title"><?=$this->tr("apply_mgt")?></h3>
+<div class="faren-apply_detail">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><?=$this->case['viewers']?><?=$this->tr("unit_person")?></span><?=$this->case['name']?></h2>
+<ul class="case_lie02_time">
+<li><?=$this->tr("case_release_date")?>：<?=substr($this->case["release_date"],0,10)?></li>
+<li><?=$this->tr("case_timeliness")?>：<?=$this->case["timeliness"]?></li>
+<li><?=$this->tr("case_lp_code")?>：<?=$this->case["lp_code"]?></li>
+<li><?=$this->tr("case_lp_name")?>：<?=$this->case["lp_name"]?></li>
+</ul>
+<div class="case_lie02_con">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr valign="top">
+		<td>【<?=$this->tr("case_business_req")?>】</td><td colspan="3"><?=nl2br($this->case["business_req"])?></td>
+	</tr><tr valign="top">
+		<td>【<?=$this->tr("case_technical_req")?>】</td><td colspan="3"><?=nl2br($this->case["technical_req"])?></td>
+	</tr><tr>
+		<td width="9%">【<?=$this->tr("case_jpl")?>】</td><td width="31%"><?=$this->case["jplValue"]?></td>
+		<td width="9%">【<?=$this->tr("case_interview")?>】</td><td width="51%"><?=$this->case["interviewerValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><?=$this->case["caseRangeValue"]?></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><?=$this->case["ageReqValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><?=$this->case["period"]?></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><?=$this->case["countryReqValue"]?> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><?=$this->case["delayValue"]?></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><?=$this->case["unitPriceValue"]?></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><?=$this->case["workingPlaceValue"]?> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><?=$this->case["overtimePayValue"]?></td>
+	</tr>
+</table>
+</div>
+  
+</div>
+<div id="tab2">
+	<ul><li onclick="setTab(2,0)" class="now"><?=$this->tr("caseapple_all_person")?><span class="fnum">(<span name="count"></span>)</span></li>
+		<li onclick="setTab(2,1)"><p><?=$this->tr("caseapple_no_vote")?>(<span name="count"></span>)&#13;</p></li>
+		<li onclick="setTab(2,2)"><?=$this->tr("caseapple_operating")?><span class="fnum">(<span name="count"></span>)</span></li>
+		<li onclick="setTab(2,3)"><?=$this->tr("caseapple_interview_ok")?><span class="fnum">(<span name="count"></span>)</span></li>
+		<li onclick="setTab(2,4)"><?=$this->tr("caseapple_lose")?><span class="fnum">(<span name="count"></span>)</span></li>
+	</ul>
+</div>
+<div id="tablist2">
+	<div class="tablist block">
+		<div id="userList_all" name="0"></div>
+		<div class="btn_os">
+			<input type="image" id="btn_interview" src="/img/default/lp/<?=$auth->locale?>/btn_apply_modify.gif" class="btn_marR" />
+			<?if(isset($this->usr) && $this->usr["role_code"] == "ADMIN"):?>
+				<input type="image" id="btn_edit" src="/img/default/lp/<?=$auth->locale?>/btn_apply_info_editor.gif" class="btn_marR" />
+			<?endif;?>
+			<input type="image" id="btn_interviewinform" src="/img/default/lp/<?=$auth->locale?>/btn_apply_notice.gif" class="btn_marR" />
+			<input type="image" id="btn_cancel" src="/img/default/lp/<?=$auth->locale?>/btn_apply_dis.jpg" class="btn_marR" />
+<!--			<input type="image" id="btn_disqualify" src="/img/default/front/<?=$auth->locale?>/btn_unqualified.jpg" />-->
+		</div>
+	</div>
+	<div class="tablist">
+		<div id="userList_noVote" name="1"></div>
+		<div class="btn_os">
+			<input type="image" id="btn_interview" src="/img/default/lp/<?=$auth->locale?>/btn_apply_modify.gif" class="btn_marR" />
+			<?if(isset($this->usr) && $this->usr["role_code"] == "ADMIN"):?>
+				<input type="image" id="btn_edit" src="/img/default/lp/<?=$auth->locale?>/btn_apply_info_editor.gif" class="btn_marR" />
+			<?endif;?>
+<!--			<input type="image" id="btn_interviewinform" src="/img/default/lp/<?=$auth->locale?>/btn_apply_notice.gif" class="btn_marR" />-->
+			<input type="image" id="btn_cancel" src="/img/default/lp/<?=$auth->locale?>/btn_apply_dis.jpg" class="btn_marR" />
+<!--			<input type="image" id="btn_disqualify" src="/img/default/front/<?=$auth->locale?>/btn_unqualified.jpg" />-->
+		</div>
+	</div>
+	<div class="tablist">
+		<div id="userList_voteList" name="2"></div>
+		<div class="btn_os">
+<!--			<input type="image" id="btn_interview" src="/img/default/lp/<?=$auth->locale?>/btn_apply_modify.gif" class="btn_marR" />-->
+			<?if(isset($this->usr) && $this->usr["role_code"] == "ADMIN"):?>
+				<input type="image" id="btn_edit" src="/img/default/lp/<?=$auth->locale?>/btn_apply_info_editor.gif" class="btn_marR" />
+			<?endif;?>
+			<input type="image" id="btn_interviewinform" src="/img/default/lp/<?=$auth->locale?>/btn_apply_notice.gif" class="btn_marR" />
+<!--			<input type="image" id="btn_cancel" src="/img/default/lp/<?=$auth->locale?>/btn_apply_dis.jpg" class="btn_marR" />-->
+<!--			<input type="image" id="btn_disqualify" src="/img/default/front/<?=$auth->locale?>/btn_unqualified.jpg" />-->
+		</div>
+	</div>
+	<div class="tablist">
+		<div id="userList_okList" name="3"></div>
+		<div class="btn_os">
+<!--			<input type="image" id="btn_interview" src="/img/default/lp/<?=$auth->locale?>/btn_apply_modify.gif" class="btn_marR" />-->
+			<?if(isset($this->usr) && $this->usr["role_code"] == "ADMIN"):?>
+<!--				<input type="image" id="btn_edit" src="/img/default/lp/<?=$auth->locale?>/btn_apply_info_editor.gif" class="btn_marR" />-->
+			<?endif;?>
+<!--			<input type="image" id="btn_interviewinform" src="/img/default/lp/<?=$auth->locale?>/btn_apply_notice.gif" class="btn_marR" />-->
+<!--			<input type="image" id="btn_cancel" src="/img/default/lp/<?=$auth->locale?>/btn_apply_dis.jpg" class="btn_marR" />-->
+<!--			<input type="image" id="btn_disqualify" src="/img/default/front/<?=$auth->locale?>/btn_unqualified.jpg" />-->
+		</div>
+	</div>
+	<div class="tablist">
+		<div id="userList_loseList" name="4"></div>
+		<div class="btn_os">
+<!--			<input type="image" id="btn_interview" src="/img/default/lp/<?=$auth->locale?>/btn_apply_modify.gif" class="btn_marR" />-->
+			<?if(isset($this->usr) && $this->usr["role_code"] == "ADMIN"):?>
+<!--				<input type="image" id="btn_edit" src="/img/default/lp/<?=$auth->locale?>/btn_apply_info_editor.gif" class="btn_marR" />-->
+			<?endif;?>
+<!--			<input type="image" id="btn_interviewinform" src="/img/default/lp/<?=$auth->locale?>/btn_apply_notice.gif" class="btn_marR" />-->
+<!--			<input type="image" id="btn_cancel" src="/img/default/lp/<?=$auth->locale?>/btn_apply_dis.jpg" class="btn_marR" />-->
+<!--			<input type="image" id="btn_disqualify" src="/img/default/front/<?=$auth->locale?>/btn_unqualified.jpg" />-->
+		</div>
+	</div>
+	</div>
+</div>
+
+<form id="dynForm" method="post" target="_blank">
+<input type="hidden" id="case" name="case" value='<?=json_encode($this->case)?>'/>
+<input type="hidden" id="usrList" name="usrList" value=''/>
+</form>
+<script>
+var pTab = "<?=$this->tab?>";
+var userList = <?=json_encode($this->userList)?>;
+</script>
+<script src="/js/default/lp/caseapply/caseapplymgt.js" type="text/javascript"></script>

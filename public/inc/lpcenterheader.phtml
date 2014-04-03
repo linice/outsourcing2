@@ -1,0 +1,37 @@
+<? $auth = new Zend_Session_Namespace('AUTH'); ?>
+<link href="/css/default/lp/css.css" rel="stylesheet" type="text/css" />
+<div class="subnav">
+	<a href="/lp_lp/lp" target="_self">
+		<img src="/img/default/lp/<?=$auth->locale?>/subnav_t.jpg" width="164" height="41" class="subnav_t" />
+	</a>
+	<div class="subnav_c"><ul class="dropdown">
+		<li><a href="/lp_lp/baseinfo" target="_self" class="on"><?=$this->tr("lp_baseinfo_setting")?></a></li>
+		<li><a href="/msg_msg/msg" target="_self"><?=$this->tr("message_center")?></a></li>
+		<li><a href="javascript:void(0);"><?=$this->tr("case_mgt")?></a>
+			<ul class="sub_menu">
+				<li><a href="/lp_casecollect/incollectcaselist" target="_self"><?=$this->tr("cases_view")?></a></li>
+				<li><a href="/lp_case/createcase" target="_self"><?=$this->tr("add_new_case")?></a></li>
+				<li><a href="/lp_case/casemgt" target="_self"><?=$this->tr("case_apply_status_mgt")?></a></li>
+				<li><a href="/lp_caseunpublish/unpublishcaselist" target="_self"><?=$this->tr("unpublishcaselist")?></a></li>
+				<li><a href="/lp_caseinterest/interestcaselist" target="_self"><?=$this->tr("interestcaselist")?></a></li>
+			</ul>
+		</li>
+		<li><a href="javascript:void(0);"><?=$this->tr ("emp_mgt")?></a>
+			<ul class="sub_menu">
+				<li><a href="/lp_emp/emplist" target="_self"><?=$this->tr("emp_view")?></a></li>
+				<li><a href="/lp_caselist/collectcaselist" target="_self">法人员工案件一览</a></li>
+				<li><a href="/usr_resume/createresume" target="_self"><?=$this->tr("emp_login")?></a></li>
+				<li><a href="/lp_emp/empapplystatus" target="_self"><?=$this->tr("emp_apply_status_mgt")?></a></li>
+				<li><a href="/file_resume/uploadresume" target="_self"><?=$this->tr("upload_emp_resume_menu")?></a></li>
+			</ul>
+		</li>
+		<li><a href="javascript:void(0);"><?=$this->tr("SERVICE_GENERAL_VIEW")?></a>
+			<ul class="sub_menu">
+				<li><a href="/akb/depositakb" target="_self"><?=$this->tr("akb_view_list")?></a></li>
+				<li><a href="/akb/consumeakb" target="_self"><?=$this->tr("akb_view_detail_list")?></a></li>
+			</ul>
+		</li>
+	</ul></div>
+</div>
+
+<script src="/js/default/lp/lpcenterheader.js" type="text/javascript"></script>

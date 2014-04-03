@@ -1,0 +1,100 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<style type="text/css">
+th {text-align: right; color: grey;}
+</style>
+
+
+<div id="wraper">
+	<div class="tip" id="tip_newMember"></div>
+	
+	<div class="case_search_con">
+	  <select id="searchKey" class="select_w160">
+	    <option value="talent_code"><?=$this->tr('USR_CODE')?></option>
+	    <option value="fullname"><?=$this->tr('NAME')?></option>
+	    <option value="tel"><?=$this->tr('TEL')?></option>
+      </select>
+	  <input type="text" id="searchVal" class="myinput_w360" />
+	  <a href="javascript:void(0);" id="btn_search">
+		<img alt="Search" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+	  </a>
+	</div>
+	
+	<!-- 新增普通用户列表 -->
+	<div id="newMemberList"></div>
+	
+	<div class="btn_os">
+		<a href="/admin/admin_casecollect/collectcasesearch" target="_blank">
+			<img alt="" src="/img/admin/<?=$auth->locale?>/btn_invite.gif" class="marR" />
+		</a>
+		<a href="javascript:void(0);" id="btn_dlResumes">
+			<img alt="" src="/img/default/front/<?=$auth->locale?>/btn_sel_download.gif" />
+		</a>
+	</div>
+</div> <!-- End: <div id="wraper"> -->
+
+
+<!-- expand: 扩展，员工详情 -->
+<div id="talentDetail" style="display: none;">
+	<style type="text/css">
+		#tbl_talentDetail tr th {height:32px;}
+	</style>
+	<table id="tbl_talentDetail" style="width: 100%;">
+		<tr><th><?=$this->tr('EXPERIENCE_AND_JP_EXPERIENCE')?>：</th><td><span id="experience_prefix"></span></td>
+			<th><?=$this->tr('BIZ')?>：</th><td><span id="biz"></span> </td>
+			<th><?=$this->tr('SKILL')?>：</th><td><span id="skill"></span> </td>
+		</tr>
+		<tr><th><?=$this->tr('JAPANESE')?>：</th><td><span id="ja_ability"></span> </td>
+			<th><?=$this->tr('ABLE_WORK_DATE')?>：</th><td><span id="adjust_able_work_date"></span> </td>
+			<th><?=$this->tr('ACCEPT_UNIT_PRICE_RANGE')?>：</th><td><span id="salary_display"></span></td>
+		</tr>
+		<tr><th><?=$this->tr('REMARK')?>：</th>
+			<td colspan="5"><span id="remark_lp"></span></td>
+		</tr>
+		<tr>
+			<td colspan="6">
+				<a href="javascript:void(0);" id="btn_invite">
+					<img src="/img/admin/<?=$auth->locale?>/btn_invite.gif" width="80" height="30" class="marR" />
+				</a>
+				<a href="javascript:void(0);" id="btn_preview">
+					<img src="/img/default/lp/<?=$auth->locale?>/btn_preview.jpg" width="80" height="30" class="marR" />
+				</a>
+				<a href="javascript:void(0);" id="btn_look">
+					<img src="/img/default/lp/<?=$auth->locale?>/btn_look.jpg" width="104" height="30" />
+				</a>
+				<a href="javascript:void(0);" id="btn_edit">
+					<img src="/img/admin/<?=$auth->locale?>/btn_case_edit.gif" width="110" height="30" class="marR" />
+				</a>
+				<a href="javascript:void(0);" id="btn_del">
+					<img src="/img/admin/<?=$auth->locale?>/btn_stop.gif" width="80" height="30" class="marR" />
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+
+<script type="text/javascript">
+var USR_CODE  = '<?=$this->tr('USR_CODE')?>';
+var NAME  = '<?=$this->tr('NAME')?>';
+var SEX  = '<?=$this->tr('SEX__')?>';
+var AGE  = '<?=$this->tr('AGE')?>';
+var TEL  = '<?=$this->tr('TEL')?>';
+var UPDATE_DATE  = '<?=$this->tr('UPDATE_DATE')?>';
+
+var YEAR = '<?=$this->tr('YEAR')?>';
+var JP = '<?=$this->tr('JP')?>';
+var EXPERIENCE_AND_JP_EXPERIENCE = '<?=$this->tr('EXPERIENCE_AND_JP_EXPERIENCE')?>';
+var BIZ = '<?=$this->tr('BIZ')?>';
+var SKILL = '<?=$this->tr('SKILL')?>';
+var JAPANESE = '<?=$this->tr('JAPANESE')?>';
+var ABLE_WORK_DATE = '<?=$this->tr('ABLE_WORK_DATE')?>';
+var ACCEPT_UNIT_PRICE_RANGE = '<?=$this->tr('ACCEPT_UNIT_PRICE_RANGE')?>';
+var REMARK = '<?=$this->tr('REMARK')?>';
+
+var PLEASE_SELECT_ROW = '<?=$this->tr('PLEASE_SELECT_ROW')?>';
+var CONFIRM_DEL = '<?=$this->tr('CONFIRM_DEL')?>';
+</script>
+<script src="/js/admin/admin/usrlist/newusrlist.js" type="text/javascript"></script>

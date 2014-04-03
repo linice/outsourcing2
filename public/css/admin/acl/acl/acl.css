@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+table {border-collapse:collapse;}
+table, tr, th, td {border: 1px solid black;}
+th {font-weight:bold; height:24px;}
+.column1 {width:300px;}
+.column2 {width:100px;}
+.column3 {width:200px;}
+.column4 {width:200px;}
+
+ul {list-style-type: none;}
+li {float: left; border: 1px solid black;}
+
+#resourceName {color:gray;}
+
+#module {width: 100px}
+#controller {width: 200px}

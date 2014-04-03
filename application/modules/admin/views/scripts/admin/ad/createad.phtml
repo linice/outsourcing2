@@ -1,0 +1,67 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top">广告添加\编辑页面</h3>
+	<!--start-->
+	<form id="form1" name="form1" method="post" action="">
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_edit_case">
+	<tr>
+        <th width="22%" align="right" bgcolor="#FFFFFF">标题</th>
+		<td bgcolor="#FFFFFF"><label><input name="textfield6" type="text" class="myinput" size="30"  /></label></td>
+	</tr>
+      <tr>
+        <th width="22%" align="right" bgcolor="#FFFFFF">排序</th>
+        <td width="78%" bgcolor="#FFFFFF"><select name="select15" class="myselect"></select></td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">广告来源</th>
+        <td bgcolor="#FFFFFF"><select name="select15" class="myselect"></select></td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">广告分类</th>
+        <td bgcolor="#FFFFFF"><select name="select15" class="myselect"></select></td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">返金额</th>
+        <td bgcolor="#FFFFFF"><label><input name="textfield" type="text" class="myinput" size="30" /></label></td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">活动期间</th>
+        <td bgcolor="#FFFFFF"><label><input type="text" class="Wdate" onClick="WdatePicker()" ></label></td>
+      </tr>
+	  <tr>
+        <th align="right" bgcolor="#FFFFFF">获得方法</th>
+        <td bgcolor="#FFFFFF"><label><input name="textfield" type="text" class="myinput" size="30" /></label></td>
+      </tr>
+	  <tr>
+        <th align="right" bgcolor="#FFFFFF">显示期限</th>
+        <td bgcolor="#FFFFFF"><label><input type="text" class="Wdate" onClick="WdatePicker()" ></label></td>
+      </tr>
+	  <tr>
+        <th align="right" bgcolor="#FFFFFF">图片上传</th>
+        <td bgcolor="#FFFFFF"><img src="/img/default/front/<?=$auth->locale?>/btn_upload.jpg" width="50" height="23" align="middle" class="marR" />图片链接 
+        <label><input name="textfield" type="text" class="myinput" size="30" /></label></td>
+      </tr>
+	  <tr>
+        <th align="right" valign="top" bgcolor="#FFFFFF">代码嵌入</th>
+        <td bgcolor="#FFFFFF"><label><textarea name="textarea2" class="mytextarea"></textarea></label></td>
+      </tr>
+	  <tr>
+        <th align="right" valign="top" bgcolor="#FFFFFF">详细介绍</th>
+        <td bgcolor="#FFFFFF"><label><img src="/img/default/front/<?=$auth->locale?>/event_intr.jpg" width="788" height="334" /></label></td>
+      </tr>
+    </table>
+	<div class="btn_center">
+	  <label>
+	  <input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_add.gif" class="marR" />
+	  </label>	  
+	  <label>
+	  <input type="image" name="imageField2" src="/img/admin/<?=$auth->locale?>/btn_keep.jpg" />
+
+	  </label>
+	  
+	</div>
+  </form>
+<!--end-->
+</div>

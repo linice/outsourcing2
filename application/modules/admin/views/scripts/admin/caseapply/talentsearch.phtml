@@ -1,0 +1,165 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+<div class="search_term">
+<select name="range" id="range" class="seltalent">
+	<option value="usr_code"><?=$this->tr('USR_CODE')?></option>
+	<option value="usr_name"><?=$this->tr('NAME')?></option>
+	<option value="tel"><?=$this->tr('TEL')?></option>
+	<option value="OS"><?=$this->tr('OS')?></option>
+	<option value="DB"><?=$this->tr('DB')?></option>
+	<option value="FRAMEWORK"><?=$this->tr('LANGUAGE_FRAMEWORK')?></option>
+	<option value="BIZ"><?=$this->tr('BIZ')?></option>
+</select>
+<input type="text" name="sValue" id="sValue" class="myinput_w360" /> 
+<input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+</div>
+<div class="search_result_lie01">
+	<div id="caselist"></div>
+	<div class="btn_os">
+		<input id="applyBtn" type="image" src="/img/default/front/<?=$auth->locale?>/btn_select.jpg"/>
+		<!-- <a href="javascript:void(0)" id="viewBtn">
+			<img src="/img/default/lp/<?=$auth->locale?>/btn_preview.jpg" width="76" height="30" />
+		</a> -->
+	</div>
+</div>
+</div>
+
+<script>
+var manager;
+$(function() {
+	var caseCode = $('#form1').find("input[name='case_code']").val();
+	$("#caselist").ligerGrid({
+		checkbox: true,
+		checkboxColWidth: 30,
+        columns: [{display: USR_CODE, name: 'code', width:90},
+                  {display: USR_NAME, name: 'fullname'},
+                  {display: SEX, name: 'sexValue'},
+                  {display: AGE, name: 'age', width:90},
+                  {display: TEL_NUM, name: 'tel'},
+                  {display: UPDATE_DATE, render: DateFunction, name: 'update_time'},
+                  {display: RELATION_OPERATE, render: opFunction, align: "center", width:73}],
+        url: '/admin/admin_caseapply/searchtalentsearch?case_code='+caseCode,
+        //height: "auto", 
+        width: "100%",
+        columnWidth: 160,
+        isScroll: false, frozen:false,
+        //rowHeight: 
+        //headerRowHeight: 
+        detail: {onShowDetail: showDetail, height: "auto"},
+        pageSize: 20
+    });
+	manager = $("#caselist").ligerGetGridManager();
+	
+	$("a[name='applyBtn']").click(function() {
+		$("input[name='resume_code']").val($(this).parent().prevAll("td.code").text());
+		$("#form1").submit();
+	})
+	
+	function DateFunction(rowData, rowIndex) {
+		return DateFormatFunction(rowData, 'update_time');
+	}
+
+	function opFunction(rowData, rowIndex) {
+		return '<a href="javascript:void(0)" onclick="applyCase(null,\''+rowData.code+'\',\''+rowData.fullname+'\')">应聘</a>';
+	}
+
+	function showDetail(rowData, detailPanel){
+		$("#detail").find("span[id]").each(function() {
+			if ($(this).attr("format") == 'date' && !!rowData[$(this).attr("id")]) {
+				$(this).text(rowData[$(this).attr("id")].substr(0, 10));
+			} else {
+				$(this).text(rowData[$(this).attr("id")]);
+			}
+		});
+		$(detailPanel).append($("#detail").html());
+		$(detailPanel).find("#applyBtn").click(function() {
+			doApplyCase([rowData]);
+		});
+		$(detailPanel).find("#viewBtn").click(function() {
+			window.open("/usr_resume/previewresume/resumeCode/"+rowData.code);
+		});
+	}
+
+	$("#searchBtn").click(function() {
+		var sValue = $("#sValue").val();
+		var range = $("#range").val();
+		manager.setOptions({parms: {"searchFields": '{"range":"'+range+'","sValue":"'+sValue+'"}'}});
+    	manager.loadData();
+	});
+
+	$("#applyBtn").click(function() {
+		var rows = manager.getSelecteds();
+		doApplyCase(rows);
+    	return false;
+	})
+})
+function doApplyCase(rows, empCode, empName) {
+	if ((!rows || rows.length == 0) && !empCode && !empName) {
+		alert(PLEASE_CHOISE_APPLY_EMP);
+		return false;
+	}
+	rows = rows || [{code: empCode, fullname: empName}];
+	var html = ['<div style="width:500px;"><div class="notice_con">'+SURE_CHOISE_APPLE_CASE+'</div>'];
+	html.push('<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_del">');
+	html.push('<tr>');
+	html.push('<th width="25%">'+EMP_CODE+'</th>');
+	html.push('<th width="75%" align="left"> '+EMP_NAME+'</th>');
+	html.push('</tr>');
+	$.each(rows, function(i, v) {
+		html.push('<tr>');
+		html.push('<th width="25%">'+v.code+'</th>');
+		html.push('<th width="75%" align="left"> '+v.fullname+' </th>');
+		html.push('</tr>');
+	});
+	html.push('</table>');
+	html.push('</div>');
+	html = html.join("");
+	ligerConfirm(TITLE_APPLY_CASE, html, {width: 550}, function() {
+		var ids = "";
+		$.each(rows, function(i, v) {
+			ids += v.code;
+			ids += ",";
+		});
+		ids = ids.substring(0, ids.length-1);
+		window.location.href = "/admin/admin_caseapply/talentapplycase/caseCode/<?=$this->caseCode?>/resumes/"+ids;
+	});
+}
+</script>
+
+<div id="detail" style="display: none;">
+<div class="search_result_lie02">
+<ul class="case_lie02_time">
+	<li><?=$this->tr('USR_NAME')?>：<span class="fblue" id='fullname'></span></li>
+	<li><?=$this->tr('SEX__')?>：<span class="fblue" id='sexValue'></span></li>
+	<li><?=$this->tr('AGE')?>：<span class="fblue" id='age'></span></li>
+	<li><?=$this->tr('CONTACT_WAY')?>：<span class="fblue" id='tel'></span></li>
+	<li><?=$this->tr('UPDATE_DATE')?>：<span class="fblue" id='update_time' format="date"></span></li>
+</ul>
+<div class="case_lie02_con">
+	<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_case">
+	<tr>
+		<td width="36%"><strong><?=$this->tr('EXPERIENCE_AND_JP_EXPERIENCE')?>：</strong><span id='experienceValue'></span></td>
+		<td width="28%"><strong><?=$this->tr('BIZ')?>：</strong><span id='BIZ'></span></td>
+		<td width="36%"><strong><?=$this->tr('SKILL')?>：</strong><span id='FRAMEWORK'></span> </td>
+	</tr><tr>
+		<td><strong><?=$this->tr('JPL')?>：</strong><span id='ja_ability'></span></td>
+		<td><strong><?=$this->tr('able_work_status')?>：</strong><span id='ableWorkDateChoiceValue'></span></td>
+		<td><strong><?=$this->tr('ACCEPT_UNIT_PRICE_RANGE')?>：</strong><span id='salary_min_display'></span> </td>
+	</tr><tr>
+		<td colspan="3"><strong><?=$this->tr('REMARK')?>：</strong><span id='pr'></span></td>
+	</tr><tr><td colspan="3">
+		<a href="javascript:void(0)" id="applyBtn">
+			<img  src="/img/default/front/<?=$auth->locale?>/btn_apply.jpg" width="80" height="27" class="marR" />
+		</a><a href="javascript:void(0)" id="viewBtn">
+			<img src="/img/default/lp/<?=$auth->locale?>/btn_preview.jpg" width="80" height="30" class="marR" />
+		</a>
+	</td></tr></table>
+</div>
+</div>
+</div>
+<form id="form1" name="form1" method="post" action="/front_apply/applycase" style="display:none">
+	<input type="hidden" name="case_code" value="<?=$this->caseCode?>"/>
+	<input type="hidden" name="emp_list" value='<?=json_encode($this->empList)?>'/>
+</form>

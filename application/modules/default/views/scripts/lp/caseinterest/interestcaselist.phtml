@@ -1,0 +1,255 @@
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<div id="tab1">
+	<ul><li class="now"><a href="javascript:void(0);" id="tb1">
+			<?=$this->tr("in_collect_case_list")?>
+	</a></li><li><a href="javascript:void(0);" id="tb2">
+		<?=$this->tr("end_collect_case_list")?>
+	</a></li></ul>
+</div>
+<div id="tablist1">
+	<div class="case_search">
+	<div class="search_left">
+		<img src="/img/default/lp/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" />
+		<select id="range" name="range" class="myselect">
+			<option value="all"><?=$this->tr("case_all")?></option>
+			<option value="code"><?=$this->tr("case_id")?></option>
+			<option value="name"><?=$this->tr("case_name")?></option>
+		</select>
+		<label><input type="text" id="caseName" class="myinput" /></label>
+		<label><input type="checkbox" name="checkbox" value="checkbox" /> <?=$this->tr("interview_has")?></label>
+		<input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+	</div>
+	<div class="search_right">
+		<a href="javascript:void(0)">
+			<span class="case_lie_list" id="cases_expend"></span>
+		</a>
+	</div>
+	<br class="cls" />
+	</div>
+</div>
+
+<div id="tbl1" class="search_result_lie01">
+	<div id="caseinlist"></div>
+	<div class="btn_os">
+		<a href="javascript:void(0)" id="cancelBtn1">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_dis_attention.jpg" width="80" height="30" class="btn_marR" />
+		</a>
+	</div>
+</div>
+
+<div id="tbl2" style="display:none" class="search_result_lie01">
+	<div id="caseendlist"></div>
+	<div class="btn_os">
+		<a href="javascript:void(0)" id="cancelBtn2">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_dis_attention.jpg" width="80" height="30" class="btn_marR" />
+		</a>
+	</div>
+</div>
+</div>
+
+<script>
+var inmanager, endmanager; 
+$(function() {
+	$("#tb1").click(function() {
+		if ($(this).parent().attr("class") == 'now') return false;
+		$(this).parent().addClass("now");
+		$(this).parent().next().removeClass("now");
+		$("#tbl1").show();
+		$("#tbl2").hide();
+		if (!$("#caseinlist").text()) {
+			loadTab1();
+		}
+	})
+	$("#tb2").click(function() {
+		if ($(this).parent().attr("class") == 'now') return false;
+		$(this).parent().addClass("now");
+		$(this).parent().prev().removeClass("now");
+		$("#tbl2").show();
+		$("#tbl1").hide();
+		if (!$("#caseendlist").text()) {
+			loadTab2();
+		}
+	})
+	
+	var inurl = "/lp_caseinterest/searchattentioncase";
+	var endurl = "/lp_caseinterest/searchendattentioncase";
+
+	function loadTab1() {
+	    $("#caseinlist").ligerGrid({
+			checkbox: true,
+	        columns: [{display: CASE_ID, name: 'code', width:72, render: CaseCodeFunction},
+	                  {display: CASE_NAME, name: 'name', render: CaseNameFunction},
+	                  {display: case_business_req, name: 'businessReqValue'},
+	                  {display: case_technical_req, name: 'technicalReqValue'},
+	                  {display: case_end_range, name: 'period', width:100},
+	                  {display: WORKPLACE, name: 'workingPlaceValue', width:100},
+	                  {display: PRICE_UNIT_MONTHLY, name: 'unitPriceValueView', width:95},
+	                  {display: case_timeliness, name: 'timeliness', width:75}/*,
+	                  {display: '相关操作', render: opFunction, align: "center", width:95}*/],
+	        url: inurl,
+	        //height: "auto", 
+	        width: "100%",
+	        columnWidth: 150,
+	        isScroll: false, frozen:false,
+	        //rowHeight: 
+	        //headerRowHeight: 
+	        detail: {onShowDetail: showDetail, height: "auto"},
+	        pageSize: 20
+	    });
+	    inmanager = $("#caseinlist").ligerGetGridManager();
+	}
+	loadTab1();
+
+	function loadTab2() {
+	    $("#caseendlist").ligerGrid({
+			checkbox: true,
+	        columns: [{display: CASE_ID, name: 'code', width:72, render: CaseCodeFunction},
+	                  {display: CASE_NAME, name: 'name', render: CaseNameFunction},
+	                  {display: case_business_req, name: 'businessReqValue'},
+	                  {display: case_technical_req, name: 'technicalReqValue'},
+	                  {display: case_end_range, name: 'period', width:100},
+	                  {display: WORKPLACE, name: 'workingPlaceValue', width:100},
+	                  {display: PRICE_UNIT_MONTHLY, name: 'unitPriceValueView', width:95},
+	                  {display: case_timeliness, name: 'timeliness', width:75}/*,
+	                  {display: '相关操作', render: opFunction2, align: "center", width: 76}*/],
+	        url: endurl,
+	        //height: "auto", 
+	        width: "100%",
+	        columnWidth: 150,
+	        isScroll: false, frozen:false,
+	        //rowHeight: 
+	        //headerRowHeight: 
+	        detail: {onShowDetail: showDetail, height: "auto"},
+	        pageSize: 20
+	    });
+	    endmanager = $("#caseendlist").ligerGetGridManager();
+	}
+
+	function CaseNameFunction(rowData, rowIndex) {
+		return CaseNameFormatFunction(rowData, 'name', 'code');
+	}
+	function CaseCodeFunction(rowData, rowIndex) {
+		return CaseCodeFormatFunction(rowData, 'code');
+	}
+	function opFunction(rowData, rowIndex) {
+		return '<a href="javascript:void(0)" onclick="applyCase('+null+',\''+rowData.code+'\',\''+rowData.name+'\')">应聘</a>|<a href="javascript:void(0)" onclick="cancelCase('+null+',\''+rowData.code+'\',\''+rowData.name+'\')">取消关注</a>';
+	}
+	function opFunction2(rowData, rowIndex) {
+		return '<a href="javascript:void(0)" onclick="cancelCase('+null+',\''+rowData.code+'\',\''+rowData.name+'\')">取消关注</a>';
+	}
+
+	function showDetail(rowData, detailPanel) {
+		adjustCaseDetail(rowData);
+		if($("#tbl2:hidden").length > 0) 
+			$("#detail").find("#applyBtn").show();
+		else 
+			$("#detail").find("#applyBtn").hide();
+		
+		$(detailPanel).append($("#detail").html());
+		$(detailPanel).find("#viewDetail").click(function() {
+			if($("#tbl2:hidden").length > 0) 
+				var btn = "cancelAttention,apply";
+			else	
+				var btn = "cancelAttention";
+			viewCase(rowData.code, btn);
+		});
+		$(detailPanel).find("#cancelAttentionBtn").click(function() {
+			var manager = $("#tbl2:hidden").length > 0 ? inmanager : endmanager;
+			cancelAttentionCase([rowData], manager);
+		});
+		$(detailPanel).find("#applyBtn").click(function() {
+			applyCase(rowData);
+		});
+	}
+
+	$("#searchBtn").click(function() {
+		var caseName = $("#caseName").val();
+		var range = $("#range").val();
+		if ($("#tbl2:hidden").length > 0) {
+			inmanager.setOptions({parms: {"casename": caseName, "range": range}})
+			inmanager.loadData();
+		} else {
+			endmanager.setOptions({parms: {"casename": caseName, "range": range}})
+			endmanager.loadData();
+		}
+    });
+	
+	$("#cancelBtn1").click(function() {
+    	var rows = inmanager.getSelecteds();
+    	cancelAttentionCase(rows, inmanager);
+    	return false;
+    });
+	
+	$("#cancelBtn2").click(function() {
+    	var rows = endmanager.getSelecteds();
+    	cancelAttentionCase(rows, endmanager);
+    	return false;
+    });
+
+	$("#cases_expend").toggle(function() {
+		var manager = $("#tbl2:hidden").length > 0 ? inmanager : endmanager;
+		$(this).removeClass("case_lie_list").addClass("case_lie");
+		expendDetailAll(manager, manager.getData().length);
+	}, function() {
+		var manager = $("#tbl2:hidden").length > 0 ? inmanager : endmanager;
+		$(this).removeClass("case_lie").addClass("case_lie_list");
+		collapseDetailAll(manager, manager.getData().length);
+	})
+});
+</script>
+
+<div id="detail" style="display: none;">
+<div class="case_search_expand">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><span id="viewers"></span><?=$this->tr("unit_person")?></span><span id="name"></span></h2>
+<ul class="case_lie02_time">
+<li><?=$this->tr("UPDATE_DATE")?>：<span id="last_modify_time" format="date"></span></li>
+<li><?=$this->tr("case_timeliness")?>：<span id="timeliness"></span></li>
+</ul>
+<div class="case_lie02_con">
+	<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_business_req")?>】</td>
+		<td colspan="4"><span id="business_req"></span></td>
+	</tr><tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_technical_req")?>】</td>
+		<td colspan="4"><span id="technical_req"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_jpl")?>】</td>
+		<td width="31%"><span id="jplValue"></span></td>
+		<td width="9%" align="left">【<?=$this->tr("case_interview")?>】</td>
+		<td width="37%"><span id="interviewerValue"></span></td>
+		<td width="13%" rowspan="5" align="center">
+		<a href="javascript:void(0)" id="applyBtn">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_offer.jpg" width="80" height="30" border="0" class="marB" />
+		</a><br />
+		<a href="javascript:void(0)" id="cancelAttentionBtn" >
+			<img src="/img/default/front/<?=$auth->locale?>/btn_dis_attention.jpg" width="80" height="30" border="0" class="marB" />
+		</a>
+<!--		<a href="javascript:void(0)" id="attentionBtn">-->
+<!--			<img src="/img/default/front/<?=$auth->locale?>/btn_select_on.jpg" width="80" height="30" border="0" class="marB" />-->
+<!--		</a>--><br />
+		<a href="javascript:void(0)" id="viewDetail">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_look_detail.jpg" width="80" height="30" border="0" />
+		</a></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><span id="caseRangeValue"></span></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><span id="ageReqValue"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><span id="period"></span></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><span id="countryReqValue"></span> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><span id="delayValue"></span></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><span id="unitPriceValueView"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><span id="workingPlaceValue"></span> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><span id="overtimePayValue"></span></td>
+	</tr>
+</table>
+</div></div></div>
+
+<form id="dynForm" style="display:none;" method="post" target="_blank">
+<input id="caseId" name="caseId"/>
+<input id="btnlist" name="btnlist"/>
+</form>
+<script type="text/javascript" src="/js/default/front/case/caseutil.js"></script>

@@ -1,0 +1,86 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="login">
+	<form id="form_login" name="form_login" method="post" action="">
+		<!-- 提示 -->
+		<div id="tip_login" class="tip" style="text-align: center;"></div>
+		<!-- 用户名 -->
+		<div class="login_item" class="t_name">
+			<?=$this->tr('USERNAME');?>：
+			<input type="text" id="nickname" name="nickname" class="myinput" value="Admin" />
+		</div>
+		<!-- 密码 -->
+		<div class="login_item" class="t_name">
+			<?=$this->tr('password');?>：
+			<input type="password" id="passwd" name="passwd" class="myinput" value="" />
+		</div>
+		<!-- 角色 -->
+		<!--<div class="login_item" class="t_name">
+			<?=$this->tr('ROLE__');?>：
+			<select id="roleCode" name="roleCode" style="width: 160px; height: 24px;">
+				<option value="ADMIN"><?=$this->tr('ADMIN')?></option>
+				<option value="EDITOR"><?=$this->tr('EDITOR')?></option>
+			</select>
+		</div>
+		--><!-- 按钮 -->
+		<div class="login_item" class="t_name">
+			<a href="javascript:void(0);" id="btn_admin_login">
+				<img alt="Login" src="/img/admin/<?=$auth->locale?>/btn_login.jpg" />
+			</a>
+		</div>
+	</form>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	/**
+	 * 初始化定位到用户名输入框
+	 */
+	$('#nickname').focus();
+	 
+	
+	/**
+	 * 登陆：通过在密码输入框按Enter键
+	 */
+	$('#passwd').keydown(function(event){
+		if (event.which == 13) {
+			adminLogin();
+		}
+	});
+
+
+	/**
+	 * 登陆：通过点击登陆按钮
+	 */
+	$('#btn_admin_login').click(function(){
+		adminLogin();
+	});
+}); //End: $(document).ready
+
+
+/**
+ * admin login
+ */
+function adminLogin() {
+	$.ajax({
+		url: '/admin/login/login',
+		type: 'post',
+		async: true,
+		dataType: 'json', //xml, json, script or html
+		data: $('#form_login').serializeArray(),
+		success: function(data, textStatus, jqXHR) {
+			if (data['err'] == 0) {
+				$('#tip_login').html('');
+				location.href = '/admin/admin_index/index';
+			} else {
+				$('#tip_login').html(data['msg']);
+			}
+		}
+	});
+}
+</script>
+
+
+

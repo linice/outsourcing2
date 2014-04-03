@@ -1,0 +1,124 @@
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<div id="tablist1">
+	<div class="case_search">
+	<div class="search_left">
+		<img src="/img/default/lp/<?=$auth->locale?>/icon_list_search.jpg" width="28" height="23" class="icon_search" />
+		<select id="range" name="range" class="myselect">
+			<option value="all"><?=$this->tr("EMP_ALL")?></option>
+			<option value="code"><?=$this->tr("EMP_CODE")?></option>
+			<option value="name"><?=$this->tr("EMP_NAME")?></option>
+		</select>
+		<label><input type="text" id="caseName" class="myinput" /></label>
+		<input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+	</div>
+	<br class="cls" />
+	</div>
+</div>
+<div class="search_result_lie01">
+	<div id="caselist"></div>
+</div>
+
+</div>
+<script type="text/javascript">
+$(function() {
+	$("#caselist").ligerGrid({
+		columns: [{display: EMP_CODE, name: 'talent_code', width:70, render:UsrCodeFunction},
+				  {display: COL_A_BASEINFO, name: 'baseinfolong', render: infoFunction},
+				  {display: COUNT_INVITE, name: 'count_invite', render: inviteFunction, width:50},
+				  {display: COUNT_APPLY_TOTAL, name: 'count_apply', render: applyFunction, width:50},
+				  {display: COUNT_INTERVIEW_ADJUST, name: 'count_adjust', render: adjustFunction, width:50},
+				  {display: COUNT_OK, name: 'count_ok', render: okFunction, width:50}],
+		url: '/lp_emp/searchempapplystatus',
+		//height: "auto", 
+		width: "100%",
+		columnWidth: 654,
+		isScroll: false, frozen:false,
+		//rowHeight: 
+		//headerRowHeight: 
+		detail: {onShowDetail: showDetail, height: "auto"},
+		pageSize: 20
+	});
+
+	function UsrCodeFunction(rowData, rowIndex) {
+		return UsrCodeFormatFunction(rowData, 'code');
+	}
+	function infoFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewResume(\""+rowData.code+"\")'>"+rowData.baseinfolong+"</a>";
+	}
+	function inviteFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_invite+"</a>";
+	}
+	function applyFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_apply+"</a>";
+	}
+	function adjustFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_adjust+"</a>";
+	}
+	function okFunction(rowData, rowIndex) {
+		return "<a href='javascript:void(0)' onclick='viewApply(\""+rowData.code+"\")'>"+rowData.count_ok+"</a>";
+	}
+
+	function showDetail(rowData, detailPanel){
+		$("#detail").find("span[id]").each(function() {
+			$(this).text(rowData[$(this).attr("id")]);
+		});
+		$(detailPanel).append($("#detail").html());
+		$(detailPanel).find("#viewApplyBtn").click(function() {
+			viewApply(rowData.code);
+		});
+		$(detailPanel).find("#viewBtn").click(function() {
+			viewResume(rowData.code);
+		});
+	}
+});
+
+function viewApply(code) {
+	$("#dynForm").attr("action", "/lp_caselist/collectcaselist");
+	$("#dynForm").attr("target", "_blank");
+	$("#dynForm input[name='code']").val(code);
+	$("#dynForm").submit();
+}
+function viewResume(code) {
+	window.open("/usr_resume/previewresume/resumeCode/"+code);
+}
+</script>
+
+<form id="dynForm" style="display: none" method="post">
+	<input name="code" /> 
+	<input name="ids" />
+</form>
+
+<div id="detail" style="display: none;">
+	<div class="search_result_lie02">
+		<ul class="case_lie02_time">
+			<li><?=$this->tr('USR_NAME')?>：<span class="fblue" id='fullname'></span></li>
+			<li><?=$this->tr('SEX__')?>：<span class="fblue" id='tr_sex'></span></li>
+			<li><?=$this->tr('AGE')?>：<span class="fblue" id='age'></span></li>
+			<li><?=$this->tr('CONTACT_WAY')?>：<span class="fblue" id='tel'></span></li>
+			<li><?=$this->tr('UPDATE_DATE')?>：<span class="fblue" id='update_date'></span></li>
+		</ul>
+		<div class="case_lie02_con">
+			<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_case">
+				<tr>
+					<td width="36%"><strong><?=$this->tr('EXPERIENCE_AND_JP_EXPERIENCE')?>：</strong><span id='experience'></span></td>
+					<td width="28%"><strong><?=$this->tr('BIZ')?>：</strong><span id='biz'></span></td>
+					<td width="36%"><strong><?=$this->tr('SKILL')?>：</strong><span id='skill'></span> </td>
+				</tr><tr>
+					<td><strong><?=$this->tr('JPL')?>：</strong><span id='ja_ability'></span></td>
+					<td><strong><?=$this->tr('able_work_status')?>：</strong><span id='adjust_able_work_date'></span></td>
+					<td><strong><?=$this->tr('ACCEPT_UNIT_PRICE_RANGE')?>：</strong><span id='salary_display'></span> </td>
+				</tr><tr>
+					<td colspan="3"><strong><?=$this->tr('REMARK')?>：</strong><span id='pr'></span></td>
+				</tr><tr><td colspan="3">
+					<a href="javascript:void(0)" id="viewBtn">
+						<img src="/img/default/lp/<?=$auth->locale?>/btn_preview.jpg" width="80" height="30" class="marR" />
+					</a><a href="javascript:void(0)" id="viewApplyBtn">
+						<img  src="/img/default/lp/<?=$auth->locale?>/btn_look.jpg" width="110" height="30" />
+					</a>
+				</td></tr>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script type="text/javascript">
+  function sub(){
+  	$("#result").submit();
+  }
+</script>
+
+<div id="wraper">
+	<div class="search_term"><a href="javascript:void(0);" onclick="sub();">
+		<span class="case_lie">列表显示</span></a>
+	</div>
+<form id="result" name="form1" method="get" action="/admin/admin_casesearch/casesearchresult">
+
+<input type="hidden" name="hideids" value="<?=$this->hideids;?>"/>
+<input type="hidden" name="ids" value="<?=$this->ids;?>"/>
+<input type="hidden" name="disp" value="<?=$this->disp;?>"/>
+<? if(!empty($this->resultex)): ?>
+<?foreach($this->resultex as $resultList):?>
+<!--start-->
+<div class="search_result_lie02">
+<h2 class="case_lie02_t"><span class="skim_num">浏览人数：<?=$resultList['viewers']?></span><?=$resultList['name']?></h2>
+<ul class="case_lie02_time">
+<li>发布时间：<?=$resultList['release_date']?></li>
+<li>实效性：<?=$resultList['timeliness']?></li>
+<li>发布公司：<?=$resultList['lp_code']?></li>
+<li>发布公司名称：<?=$resultList['lp_code']?></li>
+</ul>
+<div class="case_lie02_con">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+    <tr>
+      <td colspan="3">【业务要求】<?=$resultList['industries']?></td>
+      </tr>
+    <tr>
+      <td colspan="3">【技术要求】<?=$resultList['technical_req']?></td>
+      </tr>
+    <tr>
+      <td width="36%">【日语要求】<?=$resultList['jpl']?></td>
+      <td width="28%">【面谈次数】<?=$resultList['interviewer']?></td>
+      <td width="36%" rowspan="5" align="center">
+      	<a href="/admin/admin_caseapply/talentsearch" target="_blank">
+      		<img src="/img/default/front/<?=$auth->locale?>/btn_offer.jpg" width="80" height="30" class="marB" /><br />
+      	</a>
+        <!--<img src="/img/default/front/<?=$auth->locale?>/btn_dis_attention.jpg" width="80" height="30" class="marB" /><br />-->
+		<a href="/admin/admin_applymgt/applymgt" target="_blank">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_manage.jpg" width="80" height="30" border="0" class="marB" /><br />
+		</a>
+		<a href="/admin/admin_case/casedetail" target="_blank">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_defend.jpg" width="80" height="30" border="0" />
+		</a>
+	  </td>
+    </tr>
+    <tr>
+      <td>【担当范围】<?=$resultList['case_range_start'];?><?=$resultList['case_range_end'];?></td>
+      <td>【年龄要求】<?=$resultList['age_req_begin'];?>以上<?=$resultList['age_req_end'];?>以下</td>
+      </tr>
+    <tr>
+      <td>【期间　　】<?=$resultList['end_range']?></td>
+      <td>【国籍要求】<?=$resultList['country_req']?> </td>
+      </tr>
+    <tr>
+      <td>【延长可能】<?if($resultList['delay']=="Y"):?><? echo "有";?><?else:?><?echo "无";?><?endif;?></td>
+      <td>【单价　　】<?=$resultList['unit_price']?></td>
+      </tr>
+    <tr>
+      <td>【工作地点】<?=$resultList['working_place_detail']?> </td>
+      <td>【精算　　】<?if($resultList['overtime_pay']=="Y"):?><? echo "有";?><?else:?><?echo "无";?><?endif;?></td>
+      </tr>
+  </table>
+</div>
+
+</div>
+<?endforeach;?>
+<?endif;?>
+<!--end-->
+
+<div class="btn_os"><div class="page"><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+
+</form>
+</div>

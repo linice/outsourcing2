@@ -1,0 +1,129 @@
+<?php
+	$auth = new Zend_Session_Namespace('AUTH');
+	$fields = $this->searchFields;
+	$idx = 0;
+?>
+<div id="wraper">
+<div id="tab1">
+	<ul><li class="now"><a href="javascript:void(0);" id="tb1">
+			<?=$this->tr("effectivecaselist")?>
+	</a></li><li><a href="javascript:void(0);" id="tb2">
+		<?=$this->tr("historycaselist")?>
+	</a></li></ul>
+</div>
+<div class="search_term">
+	<a href="javascript:void(0)">
+		<span class="case_lie_list" id="cases_expend"></span>
+	</a>
+	<?=$this->tr("current_search_fields")?>：<span class="fblue">   
+	<? if (isset($fields["casetype"]) && !empty($fields["casetype"])):?>
+		<?=$this->tr('case_type')?>:<?=$this->tr($fields["casetype"])?> 
+	<? $idx = 1;endif;?>
+	<? if (isset($fields["casename"]) && !empty($fields["casename"])):?>
+		<?=$this->tr($fields["range"])?>:<?=$fields["casename"]?> 
+	<? $idx = 1;endif;?>
+	<? if (isset($fields["careers"]) && !empty($fields["careers"])):?>
+		<?if ($idx == 1):?></br><script>$("div.search_term").height(34*(parseInt('<?=$idx++?>')+1))</script><?endif;?>
+		<?=$this->tr("careers")?>:<? foreach ($fields["careers"] as $career):?>
+		<?=$this->tr($career)?> 
+		<?endforeach;?> 
+	<? endif;?>
+	<? if (isset($fields["languages"]) && !empty($fields["languages"])):?>
+		<?if ($idx >= 1):?></br><script>$("div.search_term").height(34*(parseInt('<?=$idx++?>')+1))</script><?endif;?>
+		<?=$this->tr("languages")?>:<? foreach ($fields["languages"] as $language):?>
+		<?=$this->tr($language)?> 
+		<?endforeach;?> 
+	<? endif;?>
+	<? if (isset($fields["industries"]) && !empty($fields["industries"])):?>
+		<?if ($idx >= 1):?></br><script>$("div.search_term").height(34*(parseInt('<?=$idx++?>')+1))</script><?endif;?>
+		<?=$this->tr("industries")?>:<? foreach ($fields["industries"] as $industry):?>
+		<?=$this->tr($industry)?> 
+		<?endforeach;?> 
+	<? endif;?>
+	<? if (isset($fields["workplace"]) && !empty($fields["workplace"])):?>
+		<?if ($idx >= 1):?></br><script>$("div.search_term").height(34*(parseInt('<?=$idx++?>')+1))</script><?endif;?>
+		<?=$this->tr("WORKPLACE")?>:<? foreach ($fields["workplace"] as $workplace):?>
+		<?=$this->tr($workplace)?> 
+		<?endforeach;?> 
+	<? endif;?>
+	</span>
+	<a href="javascript:void(0)" class="search_criteria" id="backBtn"><?=$this->tr("modify_search_filter")?></a></div>
+
+<div id="tbl1" class="search_result_lie01">
+	<div id="caseinlist"></div>
+	<div class="btn_os">
+		<a href="javascript:void(0)" id="attentionBtn1">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_select_on.jpg" width="80" height="30" class="btn_marR" />
+		</a>
+	</div>
+</div>
+
+<div id="tbl2" style="display:none" class="search_result_lie01">
+	<div id="caseendlist"></div>
+	<div class="btn_os">
+		<a href="javascript:void(0)" id="attentionBtn2">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_select_on.jpg" width="80" height="30" class="btn_marR" />
+		</a>
+	</div>
+</div>
+</div>
+
+<div id="detail" style="display: none;">
+<div class="search_result_lie02">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><span id="viewers"></span><?=$this->tr("unit_person")?></span><span id="name"></span></h2>
+<ul class="case_lie02_time">
+<li><?=$this->tr("UPDATE_DATE")?>：<span id="last_modify_time" format="date"></span></li>
+<li><?=$this->tr("case_timeliness")?>：<span id="timeliness"></span></li>
+<li><?=$this->tr("COMPANY_INFO")?>：<span id="lp_name"></span>(<span id="lp_code"></span>)</li>
+<li><?=$this->tr("CONTACT_INFO")?>：<span id="lp_linkman"></span>(<span id="lp_tel"></span>)</li>
+</ul>
+<div class="case_lie02_con">
+	<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_business_req")?>】</td>
+		<td colspan="4"><span id="business_req"></span></td>
+	</tr><tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_technical_req")?>】</td>
+		<td colspan="4"><span id="technical_req"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_jpl")?>】</td>
+		<td width="31%"><span id="jplValue"></span></td>
+		<td width="9%" align="left">【<?=$this->tr("case_interview")?>】</td>
+		<td width="37%"><span id="interviewerValue"></span></td>
+		<td width="13%" rowspan="5" align="center">
+		<a href="javascript:void(0)" id="applyBtn">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_offer.jpg" width="80" height="30" border="0" class="marB" />
+		</a><br />
+		<a href="javascript:void(0)" id="applyManagerBtn">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_manage.jpg" width="80" height="30" border="0" class="marB" />
+		</a><br />
+		<a href="javascript:void(0)" id="cancelAttentionBtn" style="display:none">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_dis_attention.jpg" width="80" height="30" border="0" class="marB" />
+		</a>
+		<a href="javascript:void(0)" id="attentionBtn">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_select_on.jpg" width="80" height="30" border="0" class="marB" />
+		</a><br />
+		<a href="javascript:void(0)" id="viewDetail">
+			<img src="/img/default/front/<?=$auth->locale?>/btn_look_detail.jpg" width="80" height="30" border="0" />
+		</a></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><span id="caseRangeValue"></span></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><span id="ageReqValue"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><span id="period"></span></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><span id="countryReqValue"></span> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><span id="delayValue"></span></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><span id="unitPriceValue"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><span id="workingPlaceValue"></span> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><span id="overtimePayValue"></span></td>
+	</tr></table>
+</div></div></div>
+<form id="dynForm" style="display:none;" method="post">
+<input id="caseId" name="caseId"/>
+<input id="btnlist" name="btnlist"/>
+<input type="hidden" id="searchFields" name="searchFields" value='<?=json_encode($this->searchFields)?>'/>
+</form>
+<script type="text/javascript" src="/js/admin/admin/case/caseutil.js"></script>
+<script type="text/javascript" src="/js/admin/admin/case/casesearchresult.js"></script>

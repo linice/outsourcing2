@@ -1,0 +1,23 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top"><?=$this->tr('lp_emp_list')?></h3>
+	<div id="tablist1">
+		<div class="srcoll_case_search">
+			<div class="search_left">
+				<img src="/img/admin/<?=$auth->locale?>/icon_search.gif" width="28" height="23" class="icon_search" />
+				<select name="range" class="myselect" id="range">
+					<option value="lp_code"><?=$this->tr('LPID')?></option>
+					<option value="lp_name"><?=$this->tr('lp_companyName')?></option>
+				</select>
+				<input type="text" name="sValue" id="sValue" class="myinput" />
+				<input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" />
+			</div>
+		</div>
+	</div>
+	<div id="lplist"></div>
+</div>
+
+
+<script src="/js/admin/admin/lp/lplist.js" type="text/javascript"></script>

@@ -1,0 +1,78 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+  <h3 class="t_top"><?=$this->tr('create_envent_list_p_menu')?></h3>
+  <div id="eventlist"></div>
+  <div style="text-align: center;">
+  	<img alt="Delete" id="delBtn" src="/img/default/front/<?=$auth->locale?>/btn_select_del.jpg" />
+  </div>
+</div>
+<script>
+$(function() {
+	var url1 = "/front_event/searchactiveeventlist";
+	var url2 = "/front_event/searchhistoryeventlist";
+	
+	$("#eventlist").ligerGrid({
+		checkbox: true,
+		columns: [{display: EVENT_TIME, name: 'deadline', width:75},
+				  {display: EVENT_SUBJECT, name: 'subject', render: EventFunction},
+				  {display: EVENT_NUMBER, name: 'num', width: 71},
+				  {display: EVENT_ORGANIZER, name: 'fullname', width: 150},
+				  {display: EVENT_PLACE, name: 'place', width: 179}],
+		url: url1,
+		//height: "auto", 
+		width: "100%",
+		columnWidth: 450,
+		isScroll: false, frozen:false,
+		//rowHeight: 
+		//headerRowHeight: 
+		//detail: {onShowDetail: showDetail, height: "auto"},
+		pageSize: 20
+	});
+	manager = $("#eventlist").ligerGetGridManager();
+	
+	function EventFunction(rowData) {
+		return "<a href='/admin/admin_event/eventdetail/fid/"+rowData['id']+"'>"+rowData['subject']+"</a>";
+	}
+
+	$("#delBtn").click(function() {
+		var data = getData();
+		if (!data) return false;
+		$.ligerDialog.confirm("确定要删除选中的活动?", "活动删除", function(e) {
+			if (!e) return false;
+			$.ajax({
+				url: '/front_event/delete',
+				type: 'post',
+				async: false,
+				dataType: 'json', //xml, json, script or html
+				data: data,
+				success: function(data, textStatus, jqXHR) {
+					if (data['err'] == 0) { //用户注册信息通过验证
+						alert(data['msg']);
+						manager.loadServerData();
+					} else { //用户注册信息不合法
+						alert(data['msg']);
+					}
+				}
+			});
+		});
+	})
+
+	function getData() {
+		var rows = manager.getSelecteds();
+		if (!rows || rows.length == 0) {
+			alert(PLEASE_CHOISE_DELETE_EVENT);
+			return false;
+		}
+		var ids = "";
+		$.each(rows, function(i, v) {
+			ids += v.id;
+			ids += ",";
+		});
+		ids = ids.substring(0, ids.length-1);
+		return {ids: ids};
+	}
+})
+</script>

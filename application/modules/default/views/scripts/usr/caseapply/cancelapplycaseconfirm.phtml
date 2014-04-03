@@ -1,0 +1,64 @@
+<?php $auth = new Zend_Session_Namespace ('AUTH');
+if ($auth->usr['role_code'] != 'MEMBER'):?>
+<link href="/css/default/usr/css.css" rel="stylesheet" type="text/css" />
+<? endif?>
+<div id="wraper">
+<?php include_once 'inc/centerheader.phtml';?>
+<h3 class="msg_title"><?=$this->tr('cancel_apply_case')?></h3>
+<div class="user_case_list">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_user_case">
+	<tr>
+		<th width="9%" align="center"><?=$this->tr("case_id")?></th>
+		<th width="33%" align="left"><?=$this->tr("case_name")?></th>
+		<th width="10%" align="center"><?=$this->tr("caseapple_cancel_person")?></th>
+		<th width="9%"><?=$this->tr("caseapple_cancel_state")?></th>
+		<th width="15%"><?=$this->tr("caseapple_cancel_reason")?></th>
+		<th width="24%" align="left"><?=$this->tr("caseapple_cancel_other")?></th>
+	</tr>
+</table>
+</div>
+<div class="btn_os">
+	<a href="javascript:void(0)" id="btn_confirm"> 
+		<img src="/img/default/front/<?=$auth->locale?>/btn_qd.jpg" width="80" height="30" class="btn_marR" /> 
+	</a><a href="javascript:void(0)" id="btn_back"> 
+		<img src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" width="80" height="30" /> 
+	</a>
+</div>
+</div>
+
+<form action="" method="post" id="dynForm" style="display: none;">
+<input id="applyList" name="applyList" value='<?=$this->applyList?>'/>
+<input id="ids" name="ids" value="<?=$this->ids;?>"/>
+</form>
+<script>
+$(function() {
+	var applyList = $("#applyList").val();
+	applyList = applyList ? eval(applyList) : [];
+	function addRows(rows) {
+		var t = $("#tab_list").find("tbody");
+		$.each(rows, function(i, v) {
+			var tr = ['<tr><td align="left">'+v.caseCode+'</td>'];
+			tr.push('<td style="text-align:left">'+v.caseName+'</td>');
+			tr.push('<td style="text-align:center">'+v.cancelBody+'</td>');
+			tr.push('<td style="text-align:center">'+v.currentStatus+'</td>');
+			tr.push('<td style="text-align:center">'+v.lackReasonValue+'</td>');
+			tr.push('<td align="left">'+v.remark);
+			tr.push('<input type="hidden" name="usrId" value="'+v.usrId+'"/>');
+			tr.push('</td></tr>');
+			t.append(tr.join(""));
+		})
+	}
+	
+	addRows(applyList);
+	
+	$('#btn_back').click(function(){
+		$("#dynForm").attr("action", "/usr_caseapply/cancelapplycase");
+		$("#dynForm").submit()
+	});
+	
+	$("#btn_confirm").click(function() {
+		$("#dynForm").attr("action", "/usr_caseapply/savecasecancel");
+		$("#dynForm").submit()
+	})
+});
+</script>

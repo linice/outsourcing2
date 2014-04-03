@@ -1,0 +1,32 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top">关闭案件</h3>
+	<div class="t_info">你确定是否关闭下面的案件？</div>
+	<form id="form1" name="form1" method="post" action="">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_judge">
+    <tr>
+      <th width="9%" align="left">案件ID</th>
+      <th width="27%">案件名</th>
+      </tr>
+    <tr>
+      <td align="left">A000001 </td>
+      <td align="center">JAVA人员募集</td>
+      </tr>
+	 <tr>
+      <td align="left">A000001 </td>
+      <td align="center">JAVA人员募集</td>
+      </tr>
+  </table>
+  <div class="btn_os">
+  <label>
+  <input type="image" name="imageField" src="/img/admin/<?=$auth->locale?>/btn_close.jpg" class="marR" />
+  </label>
+  <label>
+  <input type="image" name="imageField2" src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" />
+  </label>    
+</div>
+	  
+    </form>
+</div>

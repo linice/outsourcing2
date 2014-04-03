@@ -1,0 +1,62 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<form id="form1" name="form1" method="post" action="">
+<div class="search_term">
+	<a href="/admin/admin_caseapply/talentsearch" target="_blank" class="marR50">更改检索条件</a>
+</div>
+<!--start-->
+<?if(!empty($this->talentInfo)):?>
+<?foreach($this->talentInfo as $talentList):?>
+<div class="search_result_lie02">
+<ul class="case_lie02_time">
+<li><input type="checkbox" name="checkbox" value="checkbox" />  用户ID：<span class="fblue"><?=$talentList['usr_code']?></span></li>
+<li>用户名：<span class="fblue"><?=$talentList['name']?></span></li>
+<li>性别：<span class="fblue"><?=$talentList['sex']?></span></li>
+<li>出生日期：<span class="fblue"><?=$talentList['birthday']?></span></li>
+<li>联络方式：<span class="fblue"><?=$talentList['tel']?></span></li>
+<li>更新日：<span class="fblue"><?=$talentList['update_time']?></span></li>
+</ul>
+<div class="case_lie02_con">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_01">
+    <tr>
+      <td width="27%"><span class="f_b">经验：</span> 5年</td>
+      <td width="29%"><span class="f_b">业务：</span><?=$talentList['industry']?> <?=$talentList['industry_years']?></td>
+      <td width="44%" align="left"><span class="f_b">技术：</span><?=$talentList['language']?> <?=$talentList['language_years']?></td>
+    </tr>
+    <tr>
+      <td><span class="f_b">日语水平：</span><?=$talentList['jp_level']?></td>
+      <td><span class="f_b">可移动日：</span>20111201～</td>
+      <td width="44%" align="left"><span class="f_b">可接受单价范围：</span>40万～45万 </td>
+    </tr>
+    <tr>
+      <td colspan="3"><span class="f_b">备注：</span></td>
+      </tr>
+    <tr>
+      <td colspan="3">
+      	<img src="/img/default/front/<?=$auth->locale?>/btn_apply.jpg" width="76" height="24" class="marR" />
+      	<a href="/admin/admin_resume/previewresume" target="_blank">
+      		<img src="/img/default/front/<?=$auth->locale?>/btn_look.jpg" width="76" height="24" />
+      	</a>
+      </td>
+      </tr>
+  </table>
+</div>
+
+</div>
+<?endforeach;?>
+<?endif;?>
+<!--end-->
+
+<div class="btn_os">
+	<a href="/admin/admin_caseapply/talentapplycase" target="_blank">
+  		<img src="/img/default/front/<?=$auth->locale?>/btn_select.jpg" class="marR" />
+  	</a>
+	<img src="/img/default/front/<?=$auth->locale?>/btn_sel_download.gif" />
+
+  <div class="page"><span class="page_num">共888条记录   3/24</span><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+</form>
+
+</div>

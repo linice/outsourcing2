@@ -1,0 +1,149 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<div class="event_left">
+	<div class="marB"><a href="/front_event/initiateevent">
+		<img src="/img/default/front/<?=$auth->locale?>/event_msg.jpg" width="218" height="130" />
+	</a></div>
+	<h3 class="event_sort_t"><?=$this->tr('EVENT_CLASSIFY')?></h3>
+	<div class="event_sort_c">
+	<ul>
+	<?
+	  $imageMap = array('EVENT_TYPE_LEARN'=>'study', 'EVENT_TYPE_SPORT'=>'sports', 'EVENT_TYPE_TRAVEL'=>'travel', 'EVENT_TYPE_MEET'=>'friend', 'EVENT_TYPE_OTHER'=>'else_event'); 
+	  if (!empty($this->result)): foreach ($this->result as $count):?>
+		<li class="<?=isset($imageMap[$count['type']]) ? $imageMap[$count['type']] : 'else_event'?>">
+			<a href="javascript:void(0)" class="eventtypetitle" id="<?=$count['type']?>">
+				<?=$count['name']?><span class="fgrey">(<?=$count['count'].$this->tr('unit_piece')?>)</span></a></li>
+	<? endforeach;endif;?>
+	</ul>
+	</div>
+</div>
+<div class="event_right">
+
+<div id="tab1">
+<ul>
+	<li class="now" id="t1"><?=$this->tr('EVENT')?></li>
+	<li id="t2"><?=$this->tr('EVENT_HISTORY')?></li>
+</ul>
+<div class="event_search"><?=$this->tr('SEARCH')?>
+	<label><input type="text" name="searchVal" id="searchVal" class="mysearch" />
+	</label><label>
+	<input type="image" id="searchBtn" src="/img/default/front/<?=$auth->locale?>/btn_event_search.jpg" class="mybtnsearch" />
+	</label>
+</div>
+</div>
+<div id="tablist1">
+	<div id="eventlist"></div>
+</div>
+<div id="tablist2">
+	<div id="eventHistorylist"></div>
+</div>
+</div>
+<br class="cls" />
+</div>
+<script type="text/javascript">
+<!--
+var EVENT_TIME = "<?=$this->tr('EVENT_DATE_RANGE')?>";
+var EVENT_SUBJECT = "<?=$this->tr('EVENT_SUBJECT')?>";
+var EVENT_NUMBER = "<?=$this->tr('EVENT_NUMBER')?>";
+var EVENT_ORGANIZER = "<?=$this->tr('EVENT_ORGANIZER')?>";
+var manager2, manager1;
+$(function() {
+	$("#t1").click(function() {
+		if ($(this).attr("class") == 'now') return false;
+		$("#t1").addClass("now");
+		$("#t2").removeClass("now");
+		$("#tablist1").show();
+		$("#tablist2").hide();
+		if (!$("#eventlist").text()) {
+			loadTab1();
+		}
+	});
+	$("#t2").click(function() {
+		if ($(this).attr("class") == 'now') return false;
+		$("#t2").addClass("now");
+		$("#t1").removeClass("now");
+		$("#tablist2").show();
+		$("#tablist1").hide();
+		if (!$("#eventHistorylist").text()) {
+			loadTab2();
+		}
+	});
+	var url1 = "/front_event/searchactiveeventlist";
+	var url2 = "/front_event/searchhistoryeventlist";
+
+	function loadTab1() {
+		$("#eventlist").ligerGrid({
+			checkbox: true,
+			columns: [{display: EVENT_TIME, name: 'deadline', width:75},
+					  {display: EVENT_SUBJECT, name: 'subject', render: EventFunction},
+					  {display: EVENT_NUMBER, name: 'num', width: 71},
+					  {display: EVENT_ORGANIZER, name: 'fullname', width: 150}],
+			url: url1,
+			//height: "auto", 
+			width: "100%",
+			columnWidth: 400,
+			isScroll: false, frozen:false,
+			//rowHeight: 
+			//headerRowHeight: 
+			//detail: {onShowDetail: showDetail, height: "auto"},
+			pageSize: 20
+		});
+		manager1 = $("#eventlist").ligerGetGridManager();
+	}
+	loadTab1();
+
+	function loadTab2() {
+		$("#eventHistorylist").ligerGrid({
+			checkbox: true,
+			columns: [{display: EVENT_TIME, name: 'deadline', width:75},
+					  {display: EVENT_SUBJECT, name: 'subject', render: EventFunction},
+					  {display: EVENT_NUMBER, name: 'num', width: 71},
+					  {display: EVENT_ORGANIZER, name: 'fullname', width: 150}],
+			url: url2,
+			//height: "auto", 
+			width: "100%",
+			columnWidth: 400,
+			isScroll: false, frozen:false,
+			//rowHeight: 
+			//headerRowHeight: 
+			//detail: {onShowDetail: showDetail, height: "auto"},
+			pageSize: 20
+		});
+		manager2 = $("#eventHistorylist").ligerGetGridManager();
+	}
+
+	function EventFunction(rowData) {
+		return "<a href='/front_event/eventdetail/fid/"+rowData['id']+"'>"+rowData['subject']+"</a>";
+	}
+
+	$("a.eventtypetitle").click(function() {
+		$("a.eventtypetitle").css("font-weight", "normal");
+		$(this).css("font-weight", "bold");
+		var searchVal = $("#searchVal").val();
+		manager1.setOptions({parms: {"type": $(this).attr("id"), "searchVal": searchVal}})
+		manager1.loadData();
+		$("#t1").click();
+	});
+
+	$("#searchBtn").click(function() {
+		$("a.eventtypetitle").css("font-weight", "normal");
+		var searchVal = $("#searchVal").val();
+		if (getTabIndex() == 2) {
+			manager1.setOptions({parms: {"searchVal": searchVal}})
+			manager1.loadData();
+		} else {
+			manager2.setOptions({parms: {"searchVal": searchVal}})
+			manager2.loadData();
+		}
+	});
+
+	function getTabIndex() {
+		var currTab = $("#tab1 li.now").attr("id");
+		return currTab == 't2' ? 1 : 2;
+	}
+});
+//-->
+</script>

@@ -1,0 +1,76 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/lp/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+<h3 class="msg_title">推荐案件竞价排名条款</h3>
+<div class="recommdation_info">
+<dl>
+<dt>设定方法：</dt>
+<dd>此项设置为首页推荐案件排序设定，您可以自由选择您发布的案件在首页的排序位置。 </dd>
+<dd>参照以下排序金额，在右面的文本框中输入你要使用的金额。</dd>
+</dl>
+<dl>
+<dt>注意事项：</dt>
+<dd>本设定有效期为案件发布后7天，设定后不可更改设置，7天后自动清零，可以再次参与竞价。</dd>
+<dd>本竞价开始金额为3千日元，3千日元以下不可竞价。</dd>
+<dd>输入价钱如果相同，您将排到相同竞价的后面。</dd>
+</dl>
+</div>
+<form id="form1" name="form1" method="post" action="">
+<div class="recommdation_set">
+
+<h4><span class="money">余额：51000日元</span>设定</h4>
+<div class="item"><label class="mytitle">设定金额：</label><label><input type="text" name="textfield" class="myinput" /></label>日元</div>
+<div class="item fred"><label class="mytitle">&nbsp;</label>* 输入单位，1千日元</div>
+<div class="item fred"><label class="mytitle">&nbsp;</label>
+  <label>
+  <input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" />
+  </label>
+</div>
+
+</div>
+</form>	
+<br class="cls" />
+<div class="tab_recommdation">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list">
+    <tr>
+      <th width="7%" align="center">案件ID</th>
+      <th width="15%" align="center">案件名</th>
+      <th width="14%" align="center">业务要求</th>
+      <th width="11%" align="center">技术要求</th>
+      <th width="9%" align="center">开始时间</th>
+      <th width="7%" align="center">期间</th>
+      <th width="10%" align="center"> 勤务地</th>
+      <th width="7%" align="center">单价/月</th>
+      <th width="8%" align="center">时效性</th>
+      <th width="12%" align="center">排序价格(千元)</th>
+    </tr>
+    <tr>
+      <td align="center">A000001 </td>
+      <td align="center" class="case_name">JAVA人员募集</td>
+      <td align="center">金融 证券</td>
+      <td align="center">JAVA  COBOL</td>
+      <td align="center">2012-1-2 </td>
+      <td align="center">3个月</td>
+      <td align="center">东京，木场</td>
+      <td align="center">40万</td>
+      <td align="center">2012-1-2 </td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">A000001 </td>
+      <td align="center" class="case_name">JAVA人员募集</td>
+      <td align="center">金融 证券</td>
+      <td align="center">JAVA  COBOL</td>
+      <td align="center">2012-1-2 </td>
+      <td align="center">3个月</td>
+      <td align="center">东京，木场</td>
+      <td align="center">40万</td>
+      <td align="center">2012-1-2 </td>
+      <td align="center">&nbsp;</td>
+    </tr>
+  </table>
+  
+</div>
+</div>

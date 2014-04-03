@@ -1,0 +1,133 @@
+<?php
+$auth = new Zend_Session_Namespace ( 'AUTH' );
+?>
+<div id="wraper">
+<h3 class="t_top"><?=$this->tr('initiate_event')?></h3>
+<form id="form1" name="form1" method="post" action="">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_event">
+  <tr>
+    <td width="18%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr('EVENT_SUBJECT')?>：</td>
+    <td width="35%" bgcolor="#FFFFFF"><input type="text" name="subject" id="subject" class="myinput w200" value="<?=htmlentities($this->event['subject'], ENT_COMPAT, 'utf-8')?>"/></td>
+    <td width="12%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr('EVENT_TYPE')?>：</td>
+    <td width="35%" bgcolor="#FFFFFF">
+      <select class="myselect w200" id="type" name="type">
+		<?php if (isset ($this->eventType)) : 
+			foreach ($this->eventType as $eventType => $eventTypeValue) : ?>
+			<option value="<?=$eventType?>" <?if($eventType == $this->event['type']):?>selected<?endif;?>><?=$eventTypeValue?></option>
+		<?php endforeach; endif; ?>
+	  </select>
+    </td>
+  </tr><tr>
+    <td align="right" bgcolor="#FFFFFF"><span class="fred">*</span> <?=$this->tr('EVENT_PLACE')?>：</td>
+    <td bgcolor="#FFFFFF"><input type="text" name="place" id="place" class="myinput w200" value="<?=htmlentities($this->event['place'], ENT_COMPAT, 'utf-8')?>"/></td>
+    <td align="right" bgcolor="#FFFFFF"><?=$this->tr('EVENT_NUMBER')?>：</td>
+    <td bgcolor="#FFFFFF"><input type="text" name="num" id="num" class="myinput w200" value="<?=htmlentities($this->event['num'], ENT_COMPAT, 'utf-8')?>"/></td>
+  </tr><tr>
+    <td align="right" bgcolor="#FFFFFF"><?=$this->tr('EVENT_CITY')?>：</td>
+    <td bgcolor="#FFFFFF"><input type="text" name="city" id="city" class="myinput w200" value="<?=htmlentities($this->event['city'], ENT_COMPAT, 'utf-8')?>"/></td>
+    <td align="right" bgcolor="#FFFFFF"><?=$this->tr('EVENT_COST')?>：</td>
+	<td bgcolor="#FFFFFF"><input type="text" name="cost" id="cost" class="myinput w200" value="<?=htmlentities($this->event['cost'], ENT_COMPAT, 'utf-8')?>"/></td>
+  </tr><tr bgcolor="#FFFFFF">
+    <td align="right" bgcolor="#FFFFFF"><?=$this->tr('EVENT_DEADLINE')?>：</td>
+    <td bgcolor="#FFFFFF"><input type="text" class="Wdate" id="deadline" name="deadline" value="<?=htmlentities($this->event['deadline'], ENT_COMPAT, 'utf-8')?>"/></td>
+    <td bgcolor="#FFFFFF"></td><td bgcolor="#FFFFFF"></td>
+  </tr><tr bgcolor="#FFFFFF">
+    <td align="right" valign="top" bgcolor="#FFFFFF"><?=$this->tr('EVENT_CONTENT')?>:</td>
+	<td colspan="3">
+    	<span id="contentValue" style="display: none"><?=$this->event['content']?></span>
+	    <textarea rows="30" cols="50" name="content"></textarea>
+		<script type="text/javascript">CKEDITOR.replace('content');</script>
+	</td>
+  </tr><tr>
+    <td colspan="4" align="center" bgcolor="#FFFFFF">
+      <a href="javascript:void(0)" id="submitBtn"> 
+        <img src="/img/default/front/<?=$auth->locale?>/btn_start_event.jpg" /> 
+      </a>
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+<script type="text/javascript">
+<!--
+$(function() {
+	function init() {
+		CKEDITOR.instances.content.setData($("#contentValue").html());
+	}
+	init();
+	
+	$("#submitBtn").click(function() {
+		saveEvent(true);
+	})
+
+	$('#deadline').datepicker({
+		changeYear: true,
+		changeMonth: true,
+		dateFormat: 'yy-mm-dd',
+		minDate: new Date(),
+		yearRange: "1970:2222"
+	});
+
+	function saveEvent(flag) {
+		if (flag) {
+			if (valForm()) {
+				$.ajax({
+					url: '/admin/admin_event/publishevent',
+					type: 'post',
+					async: false,
+					dataType: 'json', //xml, json, script or html
+					data: getData(),
+					success: function(data, textStatus, jqXHR) {
+						if (data['err'] == 0) { //用户注册信息通过验证
+							window.location.href="/admin/admin_event/eventlist";
+						} else { //用户注册信息不合法
+							alert(data['msg']);
+						}
+					}
+				});
+			}
+		} else {
+			$.ajax({
+				url: '/admin/admin_event/saveeventasdraft',
+				type: 'post',
+				async: false,
+				dataType: 'json', //xml, json, script or html
+				data: getData(),
+				success: function(data, textStatus, jqXHR) {
+					if (data['err'] == 0) { //用户注册信息通过验证
+						alert(data['msg']);
+					} else { //用户注册信息不合法
+						alert(data['msg']);
+					}
+				}
+			});
+		}
+	}
+
+	function valForm() {
+		if (!$("#subject").val()) {
+			alert('<?=$this->tr('EVENT_SUBJECT').'不能为空'?>');
+			return false;
+		} else if (!$("#type").val()) {
+			alert('<?=$this->tr('EVENT_TYPE').'不能为空'?>');
+			return false;
+		} else if (!$("#place").val()) {
+			alert('<?=$this->tr('EVENT_PLACE').'不能为空'?>');
+			return false;
+		}
+		return true;
+	}
+
+	function getData() {
+		var data = $('#form1').serializeArray();
+		$.each(data, function(i, d) {
+			if (d.name == 'content') {
+				d.value = CKEDITOR.instances.content.getData();
+				return false;
+			}
+		})
+		return data;
+	}
+});
+//-->
+</script>

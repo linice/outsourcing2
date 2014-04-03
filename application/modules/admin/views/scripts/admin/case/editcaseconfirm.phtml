@@ -1,0 +1,223 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+	<h3 class="t_top">添加新案件确认</h3>
+	<!--start-->
+	<form id="form1" name="form1" method="post" action="">
+	<div class="t_info"><span class="case_no">案件ID ：001</span>请确认案件信息</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_edit_case">
+      <tr>
+        <th width="22%" align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  选择职种</th>
+        <td width="78%" bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+          <tr>
+            <td width="24%"><label>
+              <input name="checkbox" type="checkbox" value="checkbox" checked="checked" disabled />
+            应用开发(手机）</label></td>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            基盘</label></td>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            应用开发（Web,open）</label></td>
+            <td width="28%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            运用，监视</label></td>
+          </tr>
+          <tr>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            应用开发（嵌入式）</label></td>
+            <td><label>
+              <input name="checkbox" type="checkbox" value="checkbox" checked="checked" disabled />
+            咨询，分析</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            应用开发（大型机）</label></td>
+            <td><input type="checkbox" name="checkbox" value="checkbox" disabled />
+              PM，PL </td>
+          </tr>
+          <tr>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            应用开发（package）</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+              SE，PG            </label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            其他</label></td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  选择经验语言</th>
+        <td bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+          <tr>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            JAVA</label></td>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            C，C++ </label></td>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            PHP，Perl，Ruby</label></td>
+            <td width="28%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            COBOL </label></td>
+          </tr>
+          <tr>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            NET(C#,VB,ASP等)</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            SAP</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            数据库相关</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            組込</label></td>
+          </tr>
+          <tr>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            其他 </label></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  业务领域</th>
+        <td bgcolor="#FFFFFF">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+
+          <tr>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            财务，会计类</label></td>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            制造</label></td>
+            <td width="24%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            官厅，公共关联</label></td>
+            <td width="28%"><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            金融 </label></td>
+          </tr>
+          <tr>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            营业，贩卖类</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            医疗</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            生产管理类</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            旅游，服务 </label></td>
+          </tr>
+          <tr>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            人事，薪水，劳务类</label></td>
+            <td><label>
+              <input type="checkbox" name="checkbox" value="checkbox" disabled />
+            其它</label></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  案件名</th>
+        <td bgcolor="#FFFFFF">JAVA人员紧急募</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">业务要求</th>
+        <td bgcolor="#FFFFFF">证券经验必须</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">技术要求</th>
+        <td bgcolor="#FFFFFF">JAVA5年以上经验</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  日语要求</th>
+        <td bgcolor="#FFFFFF">1级以上水平</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">担当范围</th>
+        <td bgcolor="#FFFFFF">基本设计开始</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  开始时间</th>
+        <td bgcolor="#FFFFFF">2012/1/2～2012/12/30</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  结束时间</th>
+        <td bgcolor="#FFFFFF">2012/12/30</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">延长可能</th>
+        <td bgcolor="#FFFFFF">有</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  工作地点</th>
+        <td bgcolor="#FFFFFF">东京</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">单价 </th>
+        <td bgcolor="#FFFFFF">35万-45万日元</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">加班费</th>
+        <td bgcolor="#FFFFFF">有</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">面谈次数</th>
+        <td bgcolor="#FFFFFF">2回</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">年龄要求</th>
+        <td bgcolor="#FFFFFF">40以下</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">国籍要求</th>
+        <td bgcolor="#FFFFFF">无</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  时效性</th>
+        <td bgcolor="#FFFFFF">2012/1/2</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">可见度</th>
+        <td bgcolor="#FFFFFF">可见</td>
+      </tr>
+      <tr>
+        <th align="right" bgcolor="#FFFFFF">备注</th>
+        <td bgcolor="#FFFFFF">经验丰富</td>
+      </tr>
+	  <tr>
+        <th align="right" bgcolor="#FFFFFF">推荐度</th>
+        <td bgcolor="#FFFFFF">1</td>
+      </tr>
+    </table>
+	<div class="btn_center">
+	  <label>
+	  <input type="image" name="imageField" src="/img/default/front/<?=$auth->locale?>/btn_release.jpg" class="marR" />
+	  </label>
+	  <label>
+	  <input type="image" name="imageField3" src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" />
+	  </label>
+	</div>
+  </form>
+<!--end-->
+</div>

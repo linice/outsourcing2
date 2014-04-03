@@ -1,0 +1,86 @@
+<SCRIPT LANGUAGE="JavaScript">
+window.onload = function() {
+    doubleBgColor(document.getElementById("tab_list"),"#f3f3f3","#FFFFFF");
+}
+
+function doubleBgColor(Table,Bg1,Bg2) {
+    for (var i=0;i<Table.rows.length;i++) Table.rows[i].bgColor=i%2?Bg2:Bg1;
+}
+</SCRIPT>
+<div id="wraper">
+	<?php include_once 'inc/centerheader.phtml';?>
+  <form id="form1" name="form1" method="post" action="">
+	<div id="tab1">
+	<div class="search_right">
+		<a href="/usr_casecollect/endcollectcaselistex" target="_blank">
+			<span class="case_lie_list">案件展开</span>
+		</a>
+		共 <span class="fred">10</span> 个案件</div>
+	<ul>
+	<li><a href="/usr_casecollect/incollectcaselist" target="_blank">募集中案件列表</a> </li>
+	<li class="now">募集终了案件列表</li>
+	</ul>
+	</div>
+	<div id="tablist1">
+	<!--search list-->
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab_list" class="tab_user_case">
+    <tr>
+      <th align="center">操作</th>
+      <th align="center">案件ID</th>
+      <th align="left">案件名</th>
+      <th>业务要求</th>
+      <th>技术要求</th>
+      <th align="center">开始时间</th>
+      <th align="center">期间</th>
+      <th align="center">勤务地</th>
+      <th align="center">单价/月</th>
+      <th align="center">时效性</th>
+      <th align="center">相关操作</th>
+      </tr>
+    <tr>
+      <td align="center"><label>
+      <input type="checkbox" name="checkbox" value="checkbox" />
+      </label></td>
+      <td align="center">0001</td>
+      <td>JAVA人员募集</td>
+      <td>金融 证券</td>
+      <td>JAVA  COBOL</td>
+      <td align="center">20120101</td>
+      <td align="center">3个月</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">20120112</td>
+      <td align="center"><a href="#" target="_blank">应聘</a>
+      	|<a href="#" target="_blank">取消关注</a>
+      </td>
+      </tr>
+    <tr>
+      <td align="center"><label>
+      <input type="checkbox" name="checkbox" value="checkbox" />
+      </label></td>
+      <td align="center">0001</td>
+      <td>JAVA人员募集</td>
+      <td>金融 证券</td>
+      <td>JAVA  COBOL</td>
+      <td align="center">20120101</td>
+      <td align="center">3个月</td>
+      <td align="center">东京木场</td>
+      <td align="center">35万-40万</td>
+      <td align="center">20120112</td>
+      <td align="center"><a href="#" target="_blank">应聘</a>
+      	|<a href="#" target="_blank">取消关注</a>
+      </td>
+      </tr>
+  </table>
+<!--search list end-->
+<div class="btn_os">
+  <a href="#">
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_dis_attention.jpg" width="80" height="30" class="btn_marR" />
+  </a>
+  <div class="page"><span class="current">1</span>|<a href="#" target="_blank">2</a>|<a href="#" target="_blank">3</a>|<a href="#" target="_blank">4</a>|<a href="#" target="_blank">5</a>|<a href="#" target="_blank">次へ→</a></div>
+</div>
+
+	
+	</div>
+  </form>
+</div>

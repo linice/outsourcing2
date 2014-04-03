@@ -1,0 +1,169 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<div id="wraper">
+<h3 class="msg_title"><?=$this->tr("unpublishcaselist")?></h3>
+<div class="search_result_lie01">
+<div id="caselist"></div>
+</div>
+<div class="btn_os">
+  <a href="javascript:void(0)" id="delBtn">
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_select_del.jpg" width="80" height="30" class="btn_marR" />
+  </a>
+</div>
+</div>
+
+<script>
+var manager;
+$(function(){
+	var url = "/admin/admin_caseunpublish/searchunpublishcaselist";
+	
+	$("#caselist").ligerGrid({
+		checkbox: true,
+        columns: [{display: CASE_ID, name: 'code', width:70, render: CaseCodeFunction},
+                  {display: CASE_NAME, name: 'name', render: CaseNameFunction},
+                  {display: case_business_req, name: 'businessReqValue'},
+                  {display: case_technical_req, name: 'technicalReqValue'},
+                  {display: case_startdate, name: 'startDateValue', width:73},
+                  {display: case_end_range, name: 'period', width:73},
+                  {display: WORKPLACE, name: 'workingPlaceValue', width:100},
+                  {display: PRICE_UNIT_MONTHLY, name: 'unitPriceValue', width:97},
+                  {display: case_timeliness, name: 'timeliness', width:73}/*,
+                  {display: '相关操作', render: opFunction, align: "center", width:80}*/],
+        url: url,
+        //height: "auto", 
+        width: "100%",
+        columnWidth: 135,
+        isScroll: false, frozen:false,
+        //rowHeight: 
+        //headerRowHeight: 
+        detail: {onShowDetail: showDetail, height: "auto"},
+        pageSize: 20
+    });
+
+	function CaseNameFunction(rowData, rowIndex) {
+		return CaseNameFormatFunction(rowData, 'name', 'code');
+	}
+	function CaseCodeFunction(rowData, rowIndex) {
+		return CaseCodeFormatFunction(rowData, 'code');
+	}
+	function opFunction(rowData, rowIndex) {
+		return '<a onclick="editCase('+rowData.id+')" href="javascript:void(0)">案件编辑</a>|<a onclick="delCase('+null+',\''+rowData.code+'\',\''+rowData.name+'\',\''+rowData.id+'\')" href="javascript:void(0)">删除</a>';
+	}
+
+	function showDetail(rowData, detailPanel) {
+		adjustCaseDetail(rowData);
+		$(detailPanel).append($("#detail").html());
+		$(detailPanel).find("#viewDetail").click(function() {
+			editCase(rowData.code)
+		});
+		$(detailPanel).find("#cancelBtn").click(function() {
+			delCase([rowData]);
+		});
+	}
+	
+	manager = $("#caselist").ligerGetGridManager();
+	
+	$("#delBtn").click(function(){
+		var rows = manager.getSelecteds();
+		delCase(rows);
+	});
+});
+
+function editCase(code) {
+	window.open("/admin/admin_case/editcase/caseCode/"+code);
+}
+
+function delCase(rows, caseCode, caseName, caseId) {
+	if ((!rows || rows.length == 0) && !caseCode && !caseName && !caseId) {
+		alert(case_delete_selected_null);
+		return false;
+	}
+	rows = rows || [{code: caseCode, name: caseName, id: caseId}];
+	var html = ['<div style="width:500px;"><div class="notice_con">'+SURE_DELETE_CHOOSE_CASE+'</div>'];
+	html.push('<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab_del">');
+	html.push('<tr>');
+	html.push('<th width="25%">'+CASE_ID+'</th>');
+	html.push('<th width="75%" align="left"> '+CASE_NAME+' </th>');
+	html.push('</tr>');
+	$.each(rows, function(i, v) {
+		html.push('<tr>');
+		html.push('<th width="25%">'+v.code+'</th>');
+		html.push('<th width="75%" align="left"> '+v.name+' </th>');
+		html.push('</tr>');
+	});
+	html.push('</table>');
+	html.push('</div>');
+	html = html.join("");
+	ligerConfirm(TITLE_LP_DELETE_CASE, html, {width: 550}, function() {
+		var ids = "";
+		$.each(rows, function(i, v) {
+			ids += v.id;
+			ids += ",";
+		});
+		ids = ids.substring(0, ids.length-1);
+		$.ajax({
+			url: '/lp_case/casedelete',
+			type: 'post',
+			async: false,
+			dataType: 'json', //xml, json, script or html
+			data: {ids: ids},
+			success: function(data, textStatus, jqXHR) {
+				if (data['err'] == 0) {
+					alert(data['msg']);
+					var manager = $("#caselist").ligerGetGridManager();
+					manager.loadServerData({"casename": $("#caseName").val()});
+				} else {
+					alert(data['msg']);
+				}
+			}
+		});
+	});
+}
+</script>
+<div id="detail" style="display: none;">
+<div class="search_result_lie02">
+<h2 class="case_lie02_t"><span class="skim_num"><?=$this->tr("viewers")?><span id="viewers"></span><?=$this->tr("unit_person")?></span><span id="name"></span></h2>
+<ul class="case_lie02_time">
+<li><?=$this->tr("UPDATE_DATE")?>：<span id="last_modify_time" format="date"></span></li>
+<li><?=$this->tr("case_timeliness")?>：<span id="timeliness"></span></li>
+<li><?=$this->tr("COMPANY_INFO")?>：<span id="lp_name"></span>(<span id="lp_code"></span>)</li>
+<li><?=$this->tr("CONTACT_INFO")?>：<span id="lp_linkman"></span>(<span id="lp_tel"></span>)</li>
+</ul>
+<div class="case_lie02_con">
+	<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="tab_case_search_lie02">
+	<tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_business_req")?>】</td>
+		<td colspan="4"><span id="business_req"></span></td>
+	</tr><tr>
+		<td width="8%" align="left" valign="top">【<?=$this->tr("case_technical_req")?>】</td>
+		<td colspan="4"><span id="technical_req"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_jpl")?>】</td>
+		<td width="31%"><span id="jplValue"></span></td>
+		<td width="9%" align="left">【<?=$this->tr("case_interview")?>】</td>
+		<td width="37%"><span id="interviewerValue"></span></td>
+		<td width="13%" rowspan="5" align="center">
+		<a href="javascript:void(0)" id="viewDetail">
+			<img src="/img/default/lp/<?=$auth->locale?>/btn_defend.jpg" width="80" height="30" border="0" class="marB" />
+		</a><br />
+		<a href="javascript:void(0)" id="cancelBtn">
+			<img src="/img/default/lp/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" border="0" class="marB" />
+		</a></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_case_range")?>】</td><td><span id="caseRangeValue"></span></td>
+		<td>【<?=$this->tr("case_age_reg")?>】</td><td><span id="ageReqValue"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_end_range")?>　　】</td><td><span id="period"></span></td>
+		<td>【<?=$this->tr("case_country_req")?>】</td><td><span id="countryReqValue"></span> </td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_delay")?>】</td><td><span id="delayValue"></span></td>
+		<td>【<?=$this->tr("case_unit_price")?>　　】</td><td><span id="unitPriceValue"></span></td>
+	</tr><tr>
+		<td>【<?=$this->tr("case_working_place")?>】</td><td><span id="workingPlaceValue"></span> </td>
+		<td>【<?=$this->tr("case_overtime_pay")?>　　】</td><td><span id="overtimePayValue"></span></td>
+	</tr>
+</table>
+</div>
+</div>
+</div>

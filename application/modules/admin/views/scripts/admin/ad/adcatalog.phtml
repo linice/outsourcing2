@@ -1,0 +1,33 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+	<h3 class="t_top">广告目录分类页面</h3>
+	<div class="top_search_nobg">请维护下面留言</div>
+	<form id="form1" name="form1" method="post" action="">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_list">
+    <tr>
+      <th width="6%" align="center">操作</th>
+      <th width="10%" align="center">目录</th>
+    </tr>
+    <tr>
+      <td align="center"><label><input type="checkbox" name="checkbox" value="checkbox" /></label></td>
+      <td align="center">信用卡</td>
+    </tr>
+	<tr>
+      <td align="center"><label><input type="checkbox" name="checkbox" value="checkbox" /></label></td>
+      <td align="center">FX</td>
+    </tr>
+	<tr>
+      <td align="center"><label><input type="checkbox" name="checkbox" value="checkbox" /></label></td>
+      <td align="center">      永和不动产公司</td>
+    </tr>
+  </table>
+  <div class="btn_os">
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_add.gif" width="80" height="30" class="marR" />
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_edit.jpg" width="80" height="30" class="marR" />
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" class="marR" />
+  </div>
+</form>
+</div>

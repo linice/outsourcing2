@@ -1,0 +1,23 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<div class="tbg_grey"><?=$this->tr('EMAIL_PASSWD_NOTE')?></div>
+	<div class="pad20" style="min-height:300px;">
+		<div class="item">
+			<div id="tip_sendEmail" class="tip" style="margin-left: 200px;"></div>
+			<label class="input_t f14"><?=$this->tr('EMAIL')?>：</label>
+			<input type="text" id="email" value="" class="input_c w200" />
+		</div>
+		<div class="item">
+			<label class="input_t f14">&nbsp;</label>
+			<a href="javascript:void(0);" id="btn_sendEmail">
+				<img alt="Send" src="/img/default/front/<?=$auth->locale?>/btn_send.jpg" />
+			</a>
+		</div>
+	</div>
+</div>
+
+
+<script src="/js/default/front/passwd/passwd.js" type="text/javascript"></script>

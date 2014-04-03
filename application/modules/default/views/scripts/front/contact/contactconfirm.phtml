@@ -1,0 +1,51 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<div class="contactus_con">
+		<p><?=$this->tr('CONTACT_US_NOTIFICATION')?></p>
+		<p><?=$this->tr('CONTACT_US_PRIVACY_POLICY_NOTIFICATION')?><a href="#" target="_blank"><?=$this->tr('HERE')?></a>。</p>
+		<div class="item">
+			<label class="input_t"></label>
+			<input type="checkbox" name="isAgree" value="checkbox" checked="checked" onclick="javascript:return false;" />
+			<?=$this->tr('I_AGREE_WITH_PRIVACY_POLICY')?>
+		</div>
+		<div class="item">
+			<label class="input_t"><span class="fred">*</span> <?=$this->tr('YOUR_NAME')?>：</label>			
+			<?=$this->contactInfo['fullname']?>
+		</div>
+		<div class="item">
+			<label class="input_t"> <?=$this->tr('TEL_NUMBER')?>：</label>			
+			<?=$this->contactInfo['tel']?>
+		</div>
+		<div class="item">
+			<label class="input_t"><span class="fred">*</span> E-mail<?=$this->tr('ADDR')?>：</label>			
+			<?=$this->contactInfo['email']?>
+		</div>
+		<div class="item">
+			<label class="input_t"><span class="fred">*</span> <?=$this->tr('CONTENT')?>：</label>			
+			<?=$this->contactInfo['content']?>
+		</div>
+	
+		<!-- 按钮 -->
+		<div class="item" style="margin-top:20px;">
+			<label class="input_t">&nbsp;</label>
+			<a href="javascript:void(0);" id="btn_confirm">
+				<img alt="Confirm" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg" class="btn_marR" />
+			</a>
+			<a href="javascript:void(0);" id="btn_back">
+				<img alt="Back" src="/img/default/front/<?=$auth->locale?>/btn_back.jpg" />
+			</a>
+		</div>
+	</div>
+</div>
+
+
+<!-- 确认后的联系信息 -->
+<form id="form_contact_confirm" name="form_contact_confirm" action="" method="post" style="display:none;" target="_blank">
+	<input id="contactInfo" name="contactInfo" type="hidden" value='<?=json_encode($this->contactInfo)?>' />
+</form>
+
+
+<script language="javascript" type="text/javascript" src="/js/default/front/contact/contactconfirm.js"></script>

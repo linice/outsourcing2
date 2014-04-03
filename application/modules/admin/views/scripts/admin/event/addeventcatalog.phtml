@@ -1,0 +1,60 @@
+<?php
+$auth = new Zend_Session_Namespace ( 'AUTH' );
+?>
+<div id="wraper">
+<h3 class="t_top">活动目录添加\编辑</h3>
+<div class="marB">请输入目录名称</div>
+<form id="form1" name="form1" method="post" action="">
+<div class="info_modify">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_info_modify">
+	<tr>
+		<td width="137" align="right">简码：<input type="hidden" id="fid" name="id" value="<?=$this->event['id']?>"/></td>
+		<td width="313"><input name="code" type="text" class="myinput" size="30" value="<?=$this->event['code']?>"/></td>
+	</tr><tr>
+		<td width="137" align="right">目录名：</td>
+		<td width="313"><input name="name" type="text" class="myinput" size="30" value="<?=$this->event['name']?>"/></td>
+	</tr><tr>
+		<td>&nbsp;</td>
+		<td><a href="javascript:void(0)" id="submitBtn"> 
+			<img src="/img/default/front/zh_CN/btn_add.gif" class="marR" />
+		</a></td>
+	</tr>
+</table>
+</div>
+</form>
+</div>
+
+<script>
+$(function() {
+	var fid = $("#fid").val();
+	if (fid) {
+		$("input[name='code']").attr("disabled", true);
+	}
+	$("#submitBtn").click(function() {
+		var code = $("input[name='code']").val();
+		var name = $("input[name='name']").val();
+		if (!code) {
+			alert("简码不能为空!");
+			return false;
+		} if (!name) {
+			alert("目录名不能为空!");
+			return false;
+		} else {
+			$.ajax({
+				url: '/admin/admin_event/saveeventcatalog',
+				type: 'post',
+				async: false,
+				dataType: 'json', //xml, json, script or html
+				data: {fid: fid, code: code, name: name},
+				success: function(data, textStatus, jqXHR) {
+					if (data['err'] == 0) {
+						alert(data['msg'], null, null, function() {window.location.href="/admin/admin_event/eventcatalog"});
+					} else {
+						alert(data['msg']);
+					}
+				}
+			});
+		}
+	})
+})
+</script>

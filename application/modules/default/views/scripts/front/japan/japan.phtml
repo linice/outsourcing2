@@ -1,0 +1,58 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+	
+?>
+<link href="/css/default/front/css.css" rel="stylesheet" type="text/css" />
+<div id="wraper">
+	<div class="title_img">
+		<img src="/img/default/front/<?=$auth->locale?>/title_toJapan.jpg" width="960" height="148" />
+	</div>
+	
+	<h3 class="tbg_grey">
+		<span class="fr">
+			<a href="/front_register/register" target="_blank">
+				<img src="/img/default/front/<?=$auth->locale?>/btn_register_person.jpg" width="99" height="24" border="0" />
+			</a>
+		</span>
+		<?=$this->tr('TECHNICIST')?>
+	</h3>
+	<div class="c_aboutus">
+		<?=$this->tr('TECHNICIST_NOTIFICATION')?>
+	</div>
+	
+	<h3 class="tbg_grey">
+		<span class="fr">
+			<a href="/front_lpreg/lpreg" target="_blank">
+				<img src="/img/default/front/<?=$auth->locale?>/btn_register_faren.jpg" width="99" height="24" border="0" />
+			</a>
+		</span>
+		<?=$this->tr('COM')?>
+	</h3>
+	<div class="c_aboutus">
+		<p class="marB"><?=$this->tr('COM_NOTIFICATION')?></p>
+		<h4 class="c_aboutus_ul_t"><?=$this->tr('HOPE_TO_GO_TO_JP_PEOPLE_LIST')?></h4>
+		<ul class="c12_01">
+			<?php if (!empty($this->newTalents)): foreach ($this->newTalents as $newTalent):?>
+				<li>
+					<span class="w05">&nbsp;<?=$newTalent['talent_code']?></span>
+					<span class="w01">&nbsp;<?=$this->tr($newTalent['sex'])?></span>
+					<span class="w03">&nbsp;<? echo $newTalent['age'], $this->tr('YEARS_OLD')?></span>
+					<span class="w09">&nbsp;
+						<?=$newTalent['experience']?>
+					</span>
+					<span class="w09">&nbsp;<?=$newTalent['biz']?></span>
+					<span class="w09">&nbsp;<?=$this->tr('WORK_DATE')?>：<?=$newTalent['adjust_able_work_date']?></span>
+					<span class="w07" style="color: red;">
+						<?=$this->tr('UNIT_PRICE')?>：<?=$newTalent['salary_display']?>
+					</span>
+				</li>
+				<li style="clear:both;"></li>
+			<?php endforeach; endif;?>
+		</ul>
+		
+		<!-- 按钮 -->
+		<div class="c_aboutus_more" style="margin-top: 20px;">
+			<a href="/front_talent/talentsearchresult/talentType/ALL/actual_residence_cntry/CN" target="_blank"><?=$this->tr('MORE')?>&gt;&gt;</a>
+		</div>
+	</div>
+</div>

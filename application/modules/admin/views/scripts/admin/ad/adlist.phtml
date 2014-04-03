@@ -1,0 +1,85 @@
+<?php 
+	$auth = new Zend_Session_Namespace('AUTH');
+?>
+<script language="javascript" type="text/javascript" src="/js/default/hdm.js"></script>
+<div id="wraper">
+	<h3 class="t_top">广告大集合一览</h3>
+	<div class="top_search_nobg">
+	<form id="form2" name="form2" method="post" action="">
+	<ul>
+	<li><img src="/img/admin/<?=$auth->locale?>/icon_search.gif" width="28" height="23" /></li>
+	<li><label><select name="select" class="myselect"><option>草稿</option>
+	      <option>发布完了</option>
+	</select></label></li>
+	<li><label><select name="select" class="myselect">
+	  <option>来源</option>
+	  <option>发布完了</option>
+	</select></label></li>
+	<li><label><select name="select" class="myselect">
+	  <option>广告分类</option>
+	  <option>发布完了</option>
+	</select></label></li>
+	<li><label><input type="image" name="imageField3" src="/img/default/front/<?=$auth->locale?>/btn_jiansuo.jpg" /></label>
+	</li>
+	</ul>
+	</form>
+  </div>
+  <form id="form1" name="form1" method="post" action="">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_faren_list">
+    <tr>
+      <th width="4%" align="center">操作</th>
+      <th width="5%" align="center">状态</th>
+      <th width="10%">标题</th>
+      <th width="5%">排序<img src="/img/default/front/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></th>
+      <th width="11%">说明</th>
+      <th width="7%">来源</th>
+      <th width="7%">位置</th>
+      <th width="7%">广告分类</th>
+      <th width="7%">返金额</th>
+      <th width="15%">活动期间</th>
+      <th width="7%">获得方法</th>
+      <th width="7%">显示期限<img src="/img/default/front/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></th>
+      <th width="8%">登陆时间<img src="/img/default/front/<?=$auth->locale?>/line_up.gif" width="11" height="10" /></th>
+    </tr>
+    <tr>
+      <td align="center"><label><input type="checkbox" name="checkbox" value="checkbox" /></label></td>
+      <td align="center"> 发布完</td>
+      <td align="center">永和不动产公司</td>
+      <td align="center">1</td>
+      <td align="center">不动产公司公告</td>
+      <td align="center">google代码</td>
+      <td align="center">边框一</td>
+      <td align="center">信用卡</td>
+      <td align="center">1000</td>
+      <td align="center">2012/10/3 ～ 2012/10/5</td>
+      <td align="center">口座开设后</td>
+      <td align="center">2012/10/20</td>
+      <td align="center">2012/10/20</td>
+    </tr>
+	<tr>
+      <td align="center"><label><input type="checkbox" name="checkbox" value="checkbox" /></label></td>
+      <td align="center"> 发布完</td>
+      <td align="center">永和不动产公司</td>
+      <td align="center">1</td>
+      <td align="center">不动产公司公告</td>
+      <td align="center">google代码</td>
+      <td align="center">边框一</td>
+      <td align="center">信用卡</td>
+      <td align="center">1000</td>
+      <td align="center">2012/10/3 ～ 2012/10/5</td>
+      <td align="center">口座开设后</td>
+      <td align="center">2012/10/20</td>
+      <td align="center">2012/10/20</td>
+    </tr>
+  </table>
+  <div class="btn_os">
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_release.jpg" width="80" height="30" class="marR" />
+  	<a href="/admin/admin_event/initiateevent" target="_blank">
+  		<img src="/img/default/front/<?=$auth->locale?>/btn_add.gif" width="80" height="30" class="marR" />
+  	</a>
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_edit.jpg" width="80" height="30" class="marR" />
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_review.jpg" width="78" height="28" class="marR" />
+  	<img src="/img/default/front/<?=$auth->locale?>/btn_del.jpg" width="80" height="30" class="marR" />
+  </div>
+</form>
+</div>

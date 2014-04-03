@@ -1,0 +1,288 @@
+<div id="wraper">
+<?php include_once 'inc/lpcenterheader.phtml'; ?>
+<form id="form_case" name="form_case" method="post" action="">
+<h3 class="msg_title"><?=$this->tr("add_new_case")?></h3>
+<input type="hidden" id="caseId" name="caseId" />
+<input type="hidden" id="type" name="type" />
+<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#e5e5e5" class="tab_edit_case" style="border-collapse:separate;border-spacing: 1px;">
+	<tr>
+		<td colspan="2" align="left" bgcolor="#FFFFFF"><?=$this->tr("please_fill_in_case_baseinfo")?></td>
+	</tr><tr>
+		<th width="22%" align="right" bgcolor="#FFFFFF">
+			<span class="fred">*</span><?=$this->tr("please_choice_careers")?>
+		</th>
+		<td width="78%" bgcolor="#FFFFFF">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+			<tr>
+			<?php $idx = 1;
+          		if (isset ($this->careers)) : foreach ($this->careers as $careerName => $careerValue) : ?>
+          	<td width="24%"><label>
+          		<input type="checkbox" name="careers[]" value="<?=$careerName?>" />
+          		<?=$careerValue?>
+          	</label></td>
+          	<?php if ($idx ++ % 4 == 0) : ?>
+          		</tr><tr>
+          	<?php endif; endforeach; endif; ?>
+		</tr></table></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF">
+			<span class="fred">*</span><?=$this->tr("please_choice_languages")?>
+		</th>
+		<td bgcolor="#FFFFFF">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+			<tr>
+			<?php $idx = 1; if (isset ($this->languages)) : 
+            	foreach ($this->languages as $languagesName => $languagesValue) : ?>
+          	<td width="24%"><label>
+          		<input type="checkbox" name="languages[]" value="<?=$languagesName?>" />
+          		<?=$languagesValue?>
+          	</label></td>
+          	<?php if ($idx ++ % 4 == 0) : ?>
+          		</tr><tr>
+          	<?php endif; endforeach; endif;?>
+		</tr></table></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF">
+			<span class="fred">*</span><?=$this->tr("please_choice_industries")?>
+		</th>
+		<td bgcolor="#FFFFFF">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+			<tr>
+			<?php $idx = 1; if (isset ($this->industries)) : 
+            	foreach ($this->industries as $industriesName => $industriesValue) : ?>
+          	<td width="24%"><label>
+          		<input type="checkbox" name="industries[]" value="<?=$industriesName?>" />
+				<?=$industriesValue?>
+			</label></td>
+			<?php if ($idx ++ % 4 == 0) : ?>
+          		</tr><tr>
+          	<?php endif; endforeach; endif; ?>
+		</tr></table></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF">
+			<span class="fred">*</span>  <?=$this->tr("case_name")?></th>
+		<td bgcolor="#FFFFFF" class="item"><label>
+			<input type="text" class="myinput" size="50" id="caseName" name="caseName" />
+		</label><span></span></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_business_req")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<textarea class="mytextarea" id="businessReq" name="businessReq"></textarea>
+		</label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_technical_req")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<textarea class="mytextarea" id="technicalReq" name="technicalReq"></textarea>
+		</label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  <?=$this->tr("case_jpl")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<select name="jpl" class="myselect" id="jpl">
+			<?php if (isset ($this->jpl)) : foreach ($this->jpl as $jplName => $jplValue) : ?>
+	          	<option value="<?=$jplName?>"><?=$jplValue?></option>
+            <?php endforeach; endif; ?>
+		</select></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_case_range")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<select name="caseRange1" class="myselect" id="caseRange1">
+			<?php if (isset ($this->caseRange)) : 
+				foreach ($this->caseRange as $caseRangeName => $caseRangeValue) : ?>
+	          	<option value="<?=$caseRangeName?>"><?=$caseRangeValue?></option>
+            <?php endforeach; endif; ?>
+		</select></label> ～ 
+		<label><select name="caseRange2" class="myselect" id="caseRange2">
+		<?php if (isset ($this->caseRange)) : 
+			foreach ($this->caseRange as $caseRangeName => $caseRangeValue) : ?>
+          	<option value="<?=$caseRangeName?>"><?=$caseRangeValue?></option>
+          <?php endforeach; endif; ?>
+        </select></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  <?=$this->tr("case_startdate")?></th>
+		<td bgcolor="#FFFFFF">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+			<tr><td width="25%"><label>
+				<input type="radio" name="startDateCurrent" checked="checked" value="Y"/><?=$this->tr("case_current_date")?>
+			</label></td><td width="75%">
+				<input type="radio" name="startDateCurrent" id="startDateFlag" value="N"/> 
+				<input type="text" class="Wdate" id="startDate" name="startDate">
+			</td></tr>
+		</table></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  <?=$this->tr("case_enddate")?></th>
+		<td bgcolor="#FFFFFF">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_item">
+			<tr><td width="25%"><label>
+				<input type="radio" name="endDateFlag" checked="checked" />
+			</label><label>
+				<select name="endRange" class="myselect" id="endRange">
+					<option value=""><?=$this->tr("PLEASE_SELECT")?></option>
+					<?php if (isset ($this->endRange)) : 
+                  	foreach ($this->endRange as $endRangeName => $endRangeValue) : ?>
+		          		<option value="<?=$endRangeName?>"><?=$endRangeValue?></option>
+					<?php endforeach; endif; ?>
+				</select>
+			</label></td><td width="75%">
+				<input type="radio" name="endDateFlag" /> 
+				<input type="text" class="Wdate" name="endDate" id="endDate" readonly>
+			</td></tr>
+		</table></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_delay")?></th>
+		<td bgcolor="#FFFFFF"><label><select class="myselect" id="delay" name="delay">
+			<?php if (isset ($this->caseDelay)) : 
+				foreach ($this->caseDelay as $delayName => $delayValue) : ?>
+				<option value="<?=$delayName?>"><?=$delayValue?></option>
+			<?php endforeach; endif; ?>
+		</select></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  <?=$this->tr("case_working_place")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<select name="workingPlace" class="myselect" id="workingPlace">
+				<option value=""><?=$this->tr("PLEASE_SELECT")?></option>
+				<?php if (isset ($this->workingPlace)) : 
+					foreach ($this->workingPlace as $placeName => $placeValue) : ?>
+					<option value="<?=$placeName?>"><?=$placeValue?></option>
+				<?php endforeach; endif; ?>
+			</select></label>
+			<input type="text" class="myinput" size="50" id="workingPlaceDetail" name="workingPlaceDetail" />
+		</td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_unit_price")?> </th>
+		<td bgcolor="#FFFFFF"><label>
+			<select name="unitPrice" class="myselect" id="unitPrice">
+			<?php if (isset ($this->unitPrice)) : 
+				foreach ($this->unitPrice as $unitPriceName => $unitPriceValue) : ?>
+				<option value="<?=$unitPriceName?>"><?=$unitPriceValue?></option>
+			<?php endforeach; endif; ?>
+			</select></label> 
+		<span id="unitPriceDetail">
+			<input type="text" name="unitPriceDetail1" class="myinput" id="unitPriceDetail1" format="int"/> ～
+			<input type="text" name="unitPriceDetail2" class="myinput" id="unitPriceDetail2" format="int"/>
+			<select name="unitPriceUnit" id="unitPriceUnit" class="myselect">
+				<?php if (isset ($this->unitPriceUnit)) : 
+				foreach ($this->unitPriceUnit as $unitPriceName => $unitPriceValue) : ?>
+				<option value="<?=$unitPriceName?>"><?=$unitPriceValue?></option>
+				<?php endforeach; endif; ?>
+			</select>
+		</span></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_over_pay")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<select name="overtimePay" class="myselect" id="overtimePay">
+			<?php if (isset ($this->overtimePay)) : 
+				foreach ($this->overtimePay as $overtimePayName => $overtimePayValue) : ?>
+				<option value="<?=$overtimePayName?>"><?=$overtimePayValue?></option>
+			<?php endforeach; endif; ?>
+			</select></label>
+		<label id="overtimePayLabel"><input type="text" name="overtimePayDetail" class="myinput" id="overtimePayDetail" />
+		<?=$this->tr('over_pay_label')?></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_interview")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<select name="interviewer" class="myselect" id="interviewer">
+			<?php if (isset ($this->interviewer)) : 
+				foreach ($this->interviewer as $interviewerName => $interviewerValue) : ?>
+				<option value="<?=$interviewerName?>"><?=$interviewerValue?></option>
+			<?php endforeach; endif; ?>
+		</select></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_age_reg")?></th>
+		<td bgcolor="#FFFFFF"><label><select name="ageReq" class="myselect" id="ageReq">
+			<?php if (isset ($this->ageReq)) : 
+				foreach ($this->ageReq as $ageReqName => $ageReqValue) : ?>
+				<option value="<?=$ageReqName?>"><?=$ageReqValue?></option>
+			<?php endforeach; endif; ?>
+		</select></label>
+		<span id="ageReqDetail">
+		<input type="text" name="ageReqDetail1" class="myinput" id="ageReqDetail1" format="int"/> 
+		 ～ 
+		<input type="text" name="ageReqDetail2" class="myinput" id="ageReqDetail2" format="int"/> 
+		</span>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_country_req")?></th>
+		<td bgcolor="#FFFFFF"><label><select name="countryReq" class="myselect" id="countryReq">
+			<?php if (isset ($this->countrieReq)) : 
+				foreach ($this->countrieReq as $countriesName => $countriesValue) : ?>
+				<option value="<?=$countriesName?>"><?=$countriesValue?></option>
+			<?php endforeach; endif; ?>
+		</select></label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><span class="fred">*</span>  <?=$this->tr("case_timeliness")?></th>
+		<td bgcolor="#FFFFFF">
+			<input type="text" class="Wdate" style="margin-left: 0;" id="timeliness" name="timeliness" readonly></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_visibility")?></th>
+		<td bgcolor="#FFFFFF"><label> <select name="visibility" class="myselect" id="visibility">
+			<?php if (isset ($this->visibility)) : 
+            	foreach ($this->visibility as $visibilityName => $visibilityValue) : ?>
+            	<option value="<?=$visibilityName?>"><?=$visibilityValue?></option>
+            <?php endforeach; endif; ?>
+		</select> </label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_remark")?></th>
+		<td bgcolor="#FFFFFF"><label>
+			<textarea name="remark" class="mytextarea" id="remark"></textarea>
+		</label></td>
+	</tr><tr>
+		<th align="right" bgcolor="#FFFFFF"><?=$this->tr("case_recommend")?></th>
+		<td bgcolor="#FFFFFF">
+			<label><input type="text" id="akb" name="akb" readonly></label>
+		<a href="javascript:void(0)" id="akbSettingBtn"> 
+			<img src="/img/default/front/<?=$auth->locale?>/btn_sd.gif" width="43" height="20" border="0" align="middle" class="btn_marR" /></a> 
+		<span class="fgrey"><?=$this->tr("current_akb_count")?>:<?=$this->currUser["balance"]?><?=$this->tr("unit_point")?></span>
+		<input type="hidden" id="balance" value="<?=$this->currUser['balance']?>"/>	
+		</td>
+	</tr>
+</table>
+<div class="btn_center">
+	<label><a href="javascript:void(0);" id="btn_save"><img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_keep.jpg"></a>
+	</label>
+	<label> <a href="javascript:void(0);" id="btn_confirm"><img alt="Register" src="/img/default/front/<?=$auth->locale?>/btn_ok.jpg"></a>
+	</label>
+</div>
+</form>
+</div>
+<!-- 推荐度设定 -->
+<div id="dlg_recmdEmp" style="display: none;" title="<?=$this->tr('recmd_level_setting')?>">
+	<h3 class="msg_title"><?=$this->tr('recmd_case_bidding_rank_protocol')?>:</h3>
+	<div class="recommdation_info">
+		<dl>
+			<dt><?=$this->tr('setting_method')?>：</dt>
+			<dd><?=$this->tr('setting_method_1')?></dd>
+			<dd><?=$this->tr('setting_method_2')?></dd>
+		</dl>
+		<dl>
+			<dt><?=$this->tr('matters_need_attention')?>：</dt>
+			<dd><?=$this->tr('matters_need_attention_1')?></dd>
+			<dd><?=$this->tr('matters_need_attention_2')?></dd>
+			<dd><?=$this->tr('matters_need_attention_3')?></dd>
+		</dl>
+	</div>
+	<div class="recommdation_set">
+		<div id="tip_recmdEmp" class="tip"></div>
+		<h4><span class="money"><?=$this->tr('BALANCE')?>：<?=$this->currUser['balance']?><?=$this->tr('POINT')?></span></h4>
+		<div class="item"><span class="mytitle"><?=$this->tr('set_points')?>：</span>
+			<input type="text" id="point" class="myinput" /><?=$this->tr('POINT')?>
+		</div>
+	</div>
+	<br class="cls" />
+	<div class="tab_recommdation" id="recmdEmpList"></div>
+</div>
+
+<script type="text/javascript">
+var err = {"careers_can_not_be_empty" : '<?=$this->tr('careers_can_not_be_empty')?>',
+		"languages_can_not_be_empty" : '<?=$this->tr('languages_can_not_be_empty')?>',
+		"industries_can_not_be_empty" : '<?=$this->tr('industries_can_not_be_empty')?>',
+		"casename_can_not_be_empty" : '<?=$this->tr('casename_can_not_be_empty')?>',
+		"jpl_can_not_be_empty" : '<?=$this->tr('jpl_can_not_be_empty')?>',
+		"startdate_can_not_be_empty" : '<?=$this->tr('startdate_can_not_be_empty')?>',
+		"enddate_can_not_be_empty" : '<?=$this->tr('enddate_can_not_be_empty')?>',
+		"workingplace_can_not_be_empty" : '<?=$this->tr('workingplace_can_not_be_empty')?>',
+		"timeliness_can_not_be_empty" : '<?=$this->tr('timeliness_can_not_be_empty')?>',
+		"enddate_less_than_startdate" : '<?=$this->tr('enddate_less_than_startdate')?>',
+		"timeliness_too_longer" : '<?=$this->tr('timeliness_too_longer')?>'
+}
+var orgCase = <?=json_encode($this->orgCase);?>
+</script>
+<script type="text/javascript" src="/js/default/lp/case/createcase.js"></script>
